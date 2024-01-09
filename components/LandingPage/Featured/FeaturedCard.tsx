@@ -17,8 +17,8 @@ export default function FeaturedCard({
   anime?: IAos;
 }) {
   const theme = useTheme();
-  const matchesLG = useMediaQuery(theme.breakpoints.up("lg"));
   const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
+  const matchesXXL = useMediaQuery(theme.breakpoints.up("xxl"));
   return (
     <Stack
       direction={"row"}
@@ -37,8 +37,8 @@ export default function FeaturedCard({
         src={product.mainImage}
         alt={product.name}
         // Responsive
-        width={matchesXL ? 152 * 1.3 : 152}
-        height={matchesXL ? 91 * 1.3 : 91}
+        width={matchesXXL ? 152 * 1.5 : matchesXL ? 152 * 1.3 : 152}
+        height={matchesXXL ? 91 * 1.5 : matchesXL ? 91 * 1.3 : 91}
         style={{
           position: "absolute",
           left: "-20%",
@@ -49,7 +49,9 @@ export default function FeaturedCard({
       />
       <Stack
         // Responsive
-        sx={{ fontSize: { xl: "1.3rem", lg: "1.2rem", md: "1rem" } }}
+        sx={{
+          fontSize: { xxl: "1.8rem", xl: "1.3rem", lg: "1.2rem", md: "1rem" },
+        }}
         ml={{ xl: "9.5rem", lg: "7rem" }}
       >
         <Tooltip title={product.name}>
