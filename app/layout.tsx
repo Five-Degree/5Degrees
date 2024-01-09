@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Alumni_Sans, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
+import AOSInit from "@/components/Utility/AOSInit";
 const alumniSans = Alumni_Sans({
   subsets: ["latin"],
   variable: "--font-as",
@@ -27,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${alumniSans.variable} ${bebasNeue.variable}`}>
+        <AOSInit />
         <ThemeClient>
           <Navbar />
           <AppRouterCacheProvider>{children}</AppRouterCacheProvider>

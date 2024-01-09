@@ -1,6 +1,56 @@
 import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
-  components: {},
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+          border: "1px solid var(--border-color)",
+          borderRadius: "var(--border-radius)",
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          borderRadius: "var(--border-radius)",
+          fontFamily: "var(--font-as)",
+          fontWeight: "bold",
+          background: "var(--white)",
+          height: "fit-content",
+          paddingBlock: "0.2em",
+        },
+      },
+    },
+    MuiDialogTitle: {
+      styleOverrides: {
+        root: {
+          fontFamily: "var(--font-as)",
+          fontSize: "2em",
+        },
+      },
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          fontSize: "1em",
+          width: "100%",
+          color: "var(--primary)",
+          "& .MuiInputBase-input": {
+            color: "var(--accent)",
+            paddingLeft: "0.5em",
+            "::placeholder": {
+              color: "var(--primary)",
+            },
+          },
+          boxShadow: "var(--inset-shadow)",
+          borderRadius: "var(--border-radius)",
+          paddingInline: "0.2em",
+        },
+      },
+    },
+  },
+
   typography: {
     fontFamily: [
       "Alumni Sans",
@@ -18,15 +68,16 @@ const theme = createTheme({
     body1: {
       color: "var(--body1, #281515)",
       fontFamily: "var(--font-as)",
-      fontSize: ".875rem",
+      fontSize: ".875em",
       fontStyle: "normal",
       fontWeight: "600",
       lineHeight: "normal",
+      letterSpacing: "0.0175rem",
     },
     body2: {
       color: "var(--body2, #9B9EAC)",
       fontFamily: "var(--font-as)",
-      fontSize: ".875rem",
+      fontSize: ".875em",
       fontStyle: "normal",
       fontWeight: "700",
       lineHeight: "normal",
@@ -36,13 +87,13 @@ const theme = createTheme({
       fontWeight: "600",
       fontFamily: "var(--font-bn)",
       margin: "0",
-      fontSize: "2.1875rem",
+      fontSize: "2.1875em",
       color: "var(--h1-color, #281515)",
     },
     h2: {
       color: "var(--h2-color, #281515)",
       fontFamily: "var(--font-as)",
-      fontSize: "1.5rem",
+      fontSize: "1.5em",
       fontStyle: "normal",
       fontWeight: "600",
       lineHeight: "normal",
@@ -50,7 +101,7 @@ const theme = createTheme({
     h3: {
       color: "var(--h3-color, #281515)",
       fontFamily: "var(--font-bn)",
-      fontSize: "1rem",
+      fontSize: "1em",
       fontStyle: "normal",
       fontWeight: "400",
       lineHeight: "normal",

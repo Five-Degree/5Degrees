@@ -5,6 +5,7 @@ import HeroText from "@/public/Images/HeroText.svg";
 import HeroBg from "@/public/Images/HeroBg.png";
 import HeroShoe from "@/public/Images/HeroShoe.png";
 import { Stack, Typography } from "@mui/material";
+import Featured from "./Featured/Featured";
 export default function Hero() {
   return (
     <Stack
@@ -17,6 +18,8 @@ export default function Hero() {
       }}
       direction={"row"}
       position="relative"
+      overflow={"hidden"}
+      data-aos="fade-right"
     >
       <Image
         src={HeroText}
@@ -36,6 +39,8 @@ export default function Hero() {
           minWidth: { xl: "65.3125rem", lg: "45rem" },
           height: "auto",
         }}
+        data-aos="slide-left"
+        data-aos-delay={500}
       >
         <Image
           src={HeroShoe}
