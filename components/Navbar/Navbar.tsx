@@ -7,7 +7,7 @@ import { Url } from "next/dist/shared/lib/router/router";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CustomIconButton from "../Custom/CustomIconButton";
 interface NavLink {
   title: string;
@@ -62,18 +62,21 @@ function UserControls() {
 }
 
 export default function Navbar() {
-  const navLinks: NavLink[] = [
-    { title: "Mens", href: "/" },
-    { title: "Womens", href: "/womens" },
-    { title: "Kids", href: "/kids" },
-    { title: "Custom", href: "/custom" },
-  ];
+  const navLinks = useMemo(
+    () => [
+      { title: "Mens", href: "/" },
+      { title: "Womens", href: "/womens" },
+      { title: "Kids", href: "/kids" },
+      { title: "Custom", href: "/custom" },
+    ],
+    []
+  );
   const [activeLink, setActiveLink] = useState(navLinks[0]);
   const pathname = usePathname();
   useEffect(() => {
     const currentLink = navLinks.find((l) => l.href == pathname);
     if (currentLink) setActiveLink(currentLink);
-  }, [pathname]);
+  }, [pathname, navLinks]);
   return (
     <Stack
       direction={"row"}
