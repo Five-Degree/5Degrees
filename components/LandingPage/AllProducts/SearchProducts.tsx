@@ -23,7 +23,7 @@ export default function SearchProducts() {
           <Input
             disableUnderline
             type="search"
-            placeholder="Search by product"
+            placeholder="Search for products"
             id="search-product"
             startAdornment={<SearchRoundedIcon />}
             sx={{ fontSize: "1em" }}

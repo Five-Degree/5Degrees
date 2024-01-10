@@ -21,6 +21,24 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+          fontWeight: "bold",
+          fontSize: "0.8em",
+          color: "var(--accent)",
+          borderRadius: "var(--border-radius)",
+        },
+        contained: {
+          background: "var(--primary)",
+          color: "var(--white)",
+          ":hover": {
+            background: "var(--accent)",
+          },
+        },
+      },
+    },
     MuiCard: {
       styleOverrides: {
         root: {

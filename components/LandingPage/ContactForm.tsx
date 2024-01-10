@@ -1,5 +1,5 @@
 "use client";
-import { Grid, Input, Stack, Typography } from "@mui/material";
+import { Button, Grid, Input, Stack, Typography } from "@mui/material";
 import React from "react";
 
 export default function ContactForm() {
@@ -7,7 +7,6 @@ export default function ContactForm() {
     <Stack
       direction={"row"}
       justifyContent={"center"}
-      alignItems={"center"}
       gap={5}
       //   Responsive
       sx={{ fontSize: { xl: "1.5rem", lg: "1rem", md: "0.8rem" } }}
@@ -17,7 +16,7 @@ export default function ContactForm() {
         <br />
         Feel Free To Send Us a Message!
       </Typography>
-      <Stack gap={2} data-aos="fade-right">
+      <Stack gap={2} data-aos="fade-right" alignItems={"center"}>
         <Stack direction={"row"} gap={2}>
           <Input
             type="text"
@@ -45,6 +44,7 @@ export default function ContactForm() {
             pt: 1,
           }}
         />
+        <Button>Send</Button>
       </Stack>
     </Stack>
   );

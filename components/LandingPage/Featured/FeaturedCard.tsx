@@ -1,11 +1,10 @@
+import { useResponsive } from "@/contexts/responsiveContext";
 import { FeaturedProducts } from "@/shared/interfaces/product";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import {
   Stack,
   Tooltip,
-  Typography,
-  useMediaQuery,
-  useTheme,
+  Typography
 } from "@mui/material";
 import { CldImage } from "next-cloudinary";
 
@@ -16,9 +15,7 @@ export default function FeaturedCard({
   product: FeaturedProducts;
   anime?: IAos;
 }) {
-  const theme = useTheme();
-  const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
-  const matchesXXL = useMediaQuery(theme.breakpoints.up("xxl"));
+  const { matchesXXL, matchesXL } = useResponsive();
   return (
     <Stack
       direction={"row"}

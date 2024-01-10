@@ -2,13 +2,14 @@
 import Logo from "@/public/Logos/Logo.svg";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import ShoppingCartCheckoutRoundedIcon from "@mui/icons-material/ShoppingCartCheckoutRounded";
-import { Stack, Typography } from "@mui/material";
+import { Input, Stack, Typography } from "@mui/material";
 import { Url } from "next/dist/shared/lib/router/router";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import CustomIconButton from "../Custom/CustomIconButton";
+import CartDrawer from "./CartDrawer";
 interface NavLink {
   title: string;
   href: Url;
@@ -49,14 +50,52 @@ function NavLinks({
 }
 
 function UserControls() {
+  const [searchSelected, setSearchSelected] = useState(false);
+  const [drawerState, setDrawerState] = useState(false);
+  const toggleDrawer =
+    (state: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event &&
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
+      setDrawerState(state);
+    };
   return (
     <Stack direction={"row"} gap={3}>
-      <CustomIconButton kind="highlight" aria-label="search">
-        <SearchRoundedIcon />
-      </CustomIconButton>
-      <CustomIconButton aria-label="checkout">
+      <Stack direction="row" position={"relative"}>
+        <Input
+          disableUnderline
+          type="search"
+          placeholder="Search for product"
+          id="search-product"
+          sx={{
+            fontSize: "1rem",
+            position: "absolute",
+            right: "70%",
+            pr: "40%",
+            top: "50%",
+            translate: "0 -50%",
+            transition: "all 0.3s ease",
+            width: searchSelected ? "30ch" : "0",
+            opacity: searchSelected ? "1" : "0",
+          }}
+        />
+        <CustomIconButton
+          onClick={() => setSearchSelected(!searchSelected)}
+          kind="highlight"
+          aria-label="search"
+        >
+          <SearchRoundedIcon />
+        </CustomIconButton>
+      </Stack>
+      <CustomIconButton aria-label="checkout" onClick={toggleDrawer(true)}>
         <ShoppingCartCheckoutRoundedIcon />
       </CustomIconButton>
+      <CartDrawer drawerState={drawerState} toggleDrawer={toggleDrawer} />
     </Stack>
   );
 }

@@ -1,4 +1,5 @@
 import CustomIconButton from "@/components/Custom/CustomIconButton";
+import { useResponsive } from "@/contexts/responsiveContext";
 import capitalize from "@/shared/functions/capitalize";
 import Product from "@/shared/interfaces/product";
 import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
@@ -7,17 +8,12 @@ import {
   CardActionArea,
   CardContent,
   Chip,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Skeleton,
   Tooltip,
-  Typography,
-  useMediaQuery,
-  useTheme,
+  Typography
 } from "@mui/material";
 import { CldImage } from "next-cloudinary";
-import React, { Suspense, useState } from "react";
+import React, { useState } from "react";
+import ImageModal from "./ImageModal";
 export default function ProductCard({
   product,
   ...anime
@@ -31,9 +27,7 @@ export default function ProductCard({
   const handleClose = () => {
     setShowImageModal(false);
   };
-  const theme = useTheme();
-  const matchesLG = useMediaQuery(theme.breakpoints.up("lg"));
-  const matchesXL = useMediaQuery(theme.breakpoints.up("xl"));
+  const { matchesXL, matchesLG } = useResponsive();
   return (
     <>
       <Card
@@ -101,26 +95,11 @@ export default function ProductCard({
         </CustomIconButton>
       </Card>
       {showImageModal && (
-        <Dialog
-          open={showImageModal}
-          onClose={handleClose}
-          aria-labelledby={product.name}
-          aria-describedby={product.availability}
-          maxWidth={matchesXL ? "xl" : matchesLG ? "lg" : "md"}
-        >
-          <DialogTitle id={product.name}>{product.name}</DialogTitle>
-          <DialogContent sx={{ width: "max-content" }}>
-            <CldImage
-              src={product.mainImage}
-              alt={product.name}
-              // Responsive
-              width={matchesXL ? 192 * 5 : matchesLG ? 192 * 4 : 192 * 2}
-              height={matchesXL ? 123 * 5 : matchesLG ? 123 * 4 : 123 * 2}
-              onClick={handleImageClick}
-              loading={"lazy"}
-            />
-          </DialogContent>
-        </Dialog>
+        <ImageModal
+          product={product}
+          showImageModal={showImageModal}
+          handleClose={handleClose}
+        />
       )}
     </>
   );
