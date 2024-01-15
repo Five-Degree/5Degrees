@@ -14,6 +14,7 @@ export default function CustomIconButton({
     background: "var(--accent)",
     "& .MuiSvgIcon-root": { color: "var(--white)" },
     ":hover": { "& .MuiSvgIcon-root": { color: "var(--accent)" } },
+    aspectRatio: "1 / 1",
   });
   const Shadow = styled(IconButton)({
     background: "var(--white)",
@@ -24,6 +25,7 @@ export default function CustomIconButton({
         color: "var(--white)",
       },
     },
+    aspectRatio: "1 / 1",
   });
   switch (kind) {
     case "shadow":

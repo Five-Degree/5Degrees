@@ -1,7 +1,7 @@
 "use client";
 import { Stack } from "@mui/material";
-import ProductsSidebar from "./ProductsSidebar";
-import ProductsView from "./ProductsView";
+import ProductsSidebar from "@/components/Products/ProductsSidebar";
+import ProductsView from "@/components/Products/ProductsView";
 
 export default function AllProducts() {
   return (

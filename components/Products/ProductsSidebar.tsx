@@ -19,6 +19,7 @@ export default function ProductsSidebar() {
     justifyContent: "flex-end",
     paddingBlock: "0",
     textTransform: "none",
+    textAlign: "right",
     color: "var(--primary)",
     width: "100%",
     borderRadius: "var(--border-radius) 0 0 var(--border-radius)",

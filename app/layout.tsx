@@ -5,7 +5,9 @@ import { Alumni_Sans, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import AOSInit from "@/components/Utility/AOSInit";
-import ResponsiveContextProvider from "@/contexts/responsiveContext";
+import ResponsiveContextProvider from "@/contexts/ResponsiveContext";
+import CartContextProvider from "@/contexts/CartContext";
+import { AuthContextProvider } from "@/contexts/AuthContext";
 const alumniSans = Alumni_Sans({
   subsets: ["latin"],
   variable: "--font-as",
@@ -29,13 +31,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${alumniSans.variable} ${bebasNeue.variable}`}>
-        <AOSInit />
-        <ThemeClient>
-          <ResponsiveContextProvider>
-            <Navbar />
-            <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
-          </ResponsiveContextProvider>
-        </ThemeClient>
+        <AuthContextProvider>
+          <AOSInit />
+          <ThemeClient>
+            <ResponsiveContextProvider>
+              <CartContextProvider>
+                <Navbar />
+                <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+              </CartContextProvider>
+            </ResponsiveContextProvider>
+          </ThemeClient>
+        </AuthContextProvider>
       </body>
     </html>
   );

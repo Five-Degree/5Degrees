@@ -5,7 +5,7 @@ import HeroText from "@/public/Images/HeroText.svg";
 import HeroBg from "@/public/Images/HeroBg.png";
 import HeroShoe from "@/public/Images/HeroShoe.png";
 import { Stack, Typography } from "@mui/material";
-import Featured from "./Featured/Featured";
+import Featured from "./Featured";
 export default function Hero() {
   return (
     <Stack

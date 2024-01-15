@@ -1,5 +1,5 @@
-import { useResponsive } from "@/contexts/responsiveContext";
-import Product from "@/shared/interfaces/product";
+import { useResponsive } from "@/contexts/ResponsiveContext";
+import Product from "@/shared/interfaces/Products";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { CldImage } from "next-cloudinary";
 import React from "react";

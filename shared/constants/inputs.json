@@ -1,0 +1,152 @@
+{
+  "login": [
+    {
+      "id": 1,
+      "name": "email",
+      "type": "text",
+      "placeholder": "Email",
+      "label": "Email",
+      "required": true,
+      "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+    },
+    {
+      "id": 2,
+      "name": "password",
+      "type": "password",
+      "placeholder": "Password",
+      "label": "Password",
+      "required": true,
+      "pattern": "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,16}$"
+    }
+  ],
+  "resetPass": [
+    {
+      "id": 1,
+      "name": "email",
+      "type": "text",
+      "placeholder": "Email",
+      "label": "Email",
+      "helperText": "Invalid Email",
+      "required": true,
+      "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+    }
+  ],
+  "signup": [
+    {
+      "id": 1,
+      "name": "email",
+      "type": "text",
+      "placeholder": "Email",
+      "label": "Email",
+      "helperText": "Invalid Email",
+      "required": true,
+      "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+    },
+    {
+      "id": 2,
+      "name": "password",
+      "type": "password",
+      "placeholder": "Password",
+      "label": "Password",
+      "helperText": "Passwords should be 8-20 characters and include atleast 1 letter, 1 number and 1 special character",
+      "required": true,
+      "pattern": "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,16}$"
+    },
+    {
+      "id": 3,
+      "name": "confirmPassword",
+      "type": "password",
+      "placeholder": "Confirm Password",
+      "label": "Confirm Password",
+      "helperText": "Passwords should be 8-20 characters and include atleast 1 letter, 1 number and 1 special character",
+      "required": true,
+      "pattern": "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,16}$"
+    }
+  ],
+  "accountInfo": [
+    {
+      "id": 1,
+      "name": "bedrijfsnaam",
+      "type": "text",
+      "placeholder": "Bedrijfsnaam",
+      "label": "Bedrijfsnaam"
+    },
+    {
+      "id": 2,
+      "name": "straat",
+      "type": "text",
+      "placeholder": "Straat",
+      "label": "Straat"
+    },
+    {
+      "id": 3,
+      "name": "postcode",
+      "type": "text",
+      "placeholder": "Postcode",
+      "label": "Postcode"
+    },
+    {
+      "id": 4,
+      "name": "plaats",
+      "type": "text",
+      "placeholder": "Plaats",
+      "label": "Plaats"
+    },
+    {
+      "id": 5,
+      "name": "kvkNummer",
+      "type": "text",
+      "placeholder": "KVK Nummer",
+      "label": "KVK Nummer"
+    },
+    {
+      "id": 6,
+      "name": "telefoonnummer",
+      "type": "text",
+      "placeholder": "Telefoonnummer",
+      "label": "Telefoonnummer"
+    },
+    {
+      "id": 7,
+      "name": "voornaam",
+      "type": "text",
+      "placeholder": "Voornaam",
+      "label": "Voornaam"
+    },
+    {
+      "id": 8,
+      "name": "achternaam",
+      "type": "text",
+      "placeholder": "Achternaam",
+      "label": "Achternaam"
+    },
+    {
+      "id": 9,
+      "name": "emailTBVFactuur",
+      "type": "text",
+      "placeholder": "Email t.b.v. factuur",
+      "label": "Email t.b.v. factuur",
+      "helperText": "Invalid email",
+      "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+    },
+    {
+      "id": 10,
+      "name": "email",
+      "type": "text",
+      "placeholder": "Uw email",
+      "label": "Uw email",
+      "helperText": "Invalid Email",
+      "required": true,
+      "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+    }
+  ],
+  "collaborate": [
+    {
+      "id": 1,
+      "name": "id",
+      "type": "text",
+      "placeholder": "Id",
+      "helperText": "Invalid Id"
+    }
+  ]
+}

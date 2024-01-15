@@ -1,14 +1,10 @@
-import { useResponsive } from "@/contexts/responsiveContext";
-import { FeaturedProducts } from "@/shared/interfaces/product";
+import { useResponsive } from "@/contexts/ResponsiveContext";
+import { FeaturedProducts } from "@/shared/interfaces/Products";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import {
-  Stack,
-  Tooltip,
-  Typography
-} from "@mui/material";
+import { ButtonBase, Stack, Tooltip, Typography } from "@mui/material";
 import { CldImage } from "next-cloudinary";
 
-export default function FeaturedCard({
+export default function FeaturedProductCard({
   product,
   anime,
 }: {
@@ -34,8 +30,8 @@ export default function FeaturedCard({
         src={product.mainImage}
         alt={product.name}
         // Responsive
-        width={matchesXXL ? 152 * 1.5 : matchesXL ? 152 * 1.3 : 152}
-        height={matchesXXL ? 91 * 1.5 : matchesXL ? 91 * 1.3 : 91}
+        width={matchesXL ? 152 * 1.3 : 152}
+        height={matchesXL ? 91 * 1.3 : 91}
         style={{
           position: "absolute",
           left: "-20%",
@@ -62,7 +58,7 @@ export default function FeaturedCard({
             {product.name}
           </Typography>
         </Tooltip>
-        <Typography variant="h1">${product.price}</Typography>
+        <Typography variant="h1">${product.defaultPrice}</Typography>
         <Stack direction={"row"} gap={1}>
           <Typography variant="body2" textTransform={"uppercase"}>
             {product.variants.length ?? 5}{" "}
@@ -75,19 +71,16 @@ export default function FeaturedCard({
         </Stack>
       </Stack>
       <Tooltip title={"Add to cart"}>
-        <Stack
+        <ButtonBase
           sx={{
             position: "absolute",
             bottom: 0,
             right: 0,
             borderTop: "1px solid var(--border-color)",
             borderLeft: "1px solid var(--border-color)",
-            borderBottom: "none",
-            borderRight: "none",
             borderRadius: "60px 0 0 0",
             padding: "1em 0.5em 0.5em 1em",
             background: "none",
-            cursor: "pointer",
           }}
           aria-label="button"
           component={"button"}
@@ -98,7 +91,7 @@ export default function FeaturedCard({
               fontSize: { xl: "2em", md: "1.5em" },
             }}
           />
-        </Stack>
+        </ButtonBase>
       </Tooltip>
     </Stack>
   );

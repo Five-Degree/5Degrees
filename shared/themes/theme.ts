@@ -26,7 +26,8 @@ const theme = createTheme({
         root: {
           textTransform: "none",
           fontWeight: "bold",
-          fontSize: "0.8em",
+          fontSize: "1em",
+          fontFamily: "var(--font-as)",
           color: "var(--accent)",
           borderRadius: "var(--border-radius)",
         },
@@ -87,8 +88,59 @@ const theme = createTheme({
         },
       },
     },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: "1em",
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          boxShadow: "none",
+          border: "1px solid var(--border-color)",
+        },
+      },
+    },
+    MuiPopover: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: "var(--border-radius)",
+        },
+      },
+    },
+    MuiSnackbarContent: {
+      styleOverrides: {
+        root: {
+          fontSize: "1.5em",
+          background: "var(--primary)",
+          borderRadius: "var(--border-radius)",
+        },
+      },
+    },
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          paddingInline: "1em",
+          paddingBlock: "0",
+          fontSize: "1em",
+          fontFamily: "var(--font-as)",
+          "&.Mui-selected": {
+            fontWeight: "700",
+            color: "var(--accent)",
+          },
+        },
+      },
+    },
   },
-
   typography: {
     fontFamily: [
       "Alumni Sans",

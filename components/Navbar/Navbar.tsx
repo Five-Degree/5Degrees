@@ -2,7 +2,13 @@
 import Logo from "@/public/Logos/Logo.svg";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import ShoppingCartCheckoutRoundedIcon from "@mui/icons-material/ShoppingCartCheckoutRounded";
-import { Input, Stack, Typography } from "@mui/material";
+import {
+  Badge,
+  ClickAwayListener,
+  Input,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Url } from "next/dist/shared/lib/router/router";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +16,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import CustomIconButton from "../Custom/CustomIconButton";
 import CartDrawer from "./CartDrawer";
+import { useCart } from "@/contexts/CartContext";
+import UserMenuControls from "./UserMenuControls";
+import { useAuth } from "@/contexts/AuthContext";
 interface NavLink {
   title: string;
   href: Url;
@@ -51,6 +60,12 @@ function NavLinks({
 
 function UserControls() {
   const [searchSelected, setSearchSelected] = useState(false);
+  const [cartQuantity, setCartQuantity] = useState(0);
+  const { user } = useAuth();
+  const { cart } = useCart();
+  useEffect(() => {
+    setCartQuantity(cart.length);
+  }, [cart]);
   const [drawerState, setDrawerState] = useState(false);
   const toggleDrawer =
     (state: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -84,6 +99,7 @@ function UserControls() {
             opacity: searchSelected ? "1" : "0",
           }}
         />
+
         <CustomIconButton
           onClick={() => setSearchSelected(!searchSelected)}
           kind="highlight"
@@ -92,8 +108,13 @@ function UserControls() {
           <SearchRoundedIcon />
         </CustomIconButton>
       </Stack>
+
+      {user && <UserMenuControls />}
+
       <CustomIconButton aria-label="checkout" onClick={toggleDrawer(true)}>
-        <ShoppingCartCheckoutRoundedIcon />
+        <Badge badgeContent={cartQuantity} color="error">
+          <ShoppingCartCheckoutRoundedIcon />
+        </Badge>
       </CustomIconButton>
       <CartDrawer drawerState={drawerState} toggleDrawer={toggleDrawer} />
     </Stack>

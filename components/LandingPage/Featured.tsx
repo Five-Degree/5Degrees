@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import FeaturedCard from "./FeaturedCard";
+import FeaturedProductCard from "@/components/Products/FeaturedProductCard";
 export default function Featured() {
   const featureSlider = useRef<Slider>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -116,7 +116,7 @@ export default function Featured() {
         <Slider {...sliderSettings} ref={featureSlider}>
           {mockFeaturedProducts.map((product) => {
             return (
-              <FeaturedCard
+              <FeaturedProductCard
                 anime={{ "data-aos": "zoom-in" }}
                 product={product}
                 key={product.id}

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import ProductCard from "./ProductCard";
+import ProductCard from "@/components/Products/ProductCard";
 import mockProducts from "@/shared/constants/mockProducts";
 import { Grid, Pagination, Stack } from "@mui/material";
-import SearchProducts from "./SearchProducts";
+import SearchProducts from "@/components/Products/SearchProducts";
 
 export default function ProductsView() {
   const [currentPage, setCurrentPage] = useState(1);

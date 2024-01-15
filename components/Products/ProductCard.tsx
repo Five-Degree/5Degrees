@@ -1,7 +1,8 @@
 import CustomIconButton from "@/components/Custom/CustomIconButton";
-import { useResponsive } from "@/contexts/responsiveContext";
+import ImageModal from "@/components/Products/ImageModal";
+import { useResponsive } from "@/contexts/ResponsiveContext";
 import capitalize from "@/shared/functions/capitalize";
-import Product from "@/shared/interfaces/product";
+import Product from "@/shared/interfaces/Products";
 import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
 import {
   Card,
@@ -9,11 +10,12 @@ import {
   CardContent,
   Chip,
   Tooltip,
-  Typography
+  Typography,
 } from "@mui/material";
 import { CldImage } from "next-cloudinary";
-import React, { useState } from "react";
-import ImageModal from "./ImageModal";
+import React, { useEffect, useRef, useState } from "react";
+import AddToCartModal from "./AddToCartModal";
+import { useCart } from "@/contexts/CartContext";
 export default function ProductCard({
   product,
   ...anime
@@ -21,12 +23,22 @@ export default function ProductCard({
   product: Product;
 } & IAos) {
   const [showImageModal, setShowImageModal] = useState(false);
-  const handleImageClick = (e: React.SyntheticEvent) => {
-    setShowImageModal(true);
-  };
-  const handleClose = () => {
+  const [showAddToCartModal, setShowAddToCartModal] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false);
+  const productRef = useRef<HTMLDivElement>(null);
+  const { cart } = useCart();
+  const handleImageClose = () => {
     setShowImageModal(false);
   };
+
+  const handleAddToCartClose = () => {
+    setShowAddToCartModal(false);
+  };
+  useEffect(() => {
+    // Check if the product is in the cart
+    const isProductInCart = cart.findIndex((ci) => ci.id === product.id) !== -1;
+    setAddedToCart(isProductInCart);
+  }, [cart, product]);
   const { matchesXL, matchesLG } = useResponsive();
   return (
     <>
@@ -38,6 +50,7 @@ export default function ProductCard({
           fontSize: { xl: "1.5rem", md: "0.8rem" },
         }}
         {...anime}
+        ref={productRef}
       >
         <CldImage
           // Responsive
@@ -45,7 +58,7 @@ export default function ProductCard({
           height={matchesXL ? 123 * 1.6 : matchesLG ? 123 * 1.2 : 123}
           src={product.mainImage}
           alt={product.name}
-          onClick={handleImageClick}
+          onClick={() => setShowImageModal(true)}
           style={{ cursor: "pointer" }}
         />
         <Chip
@@ -75,7 +88,7 @@ export default function ProductCard({
             >
               {product.name}
             </Typography>
-            <Typography variant="h1">${product.price}</Typography>
+            <Typography variant="h1">${product.defaultPrice}</Typography>
             <Typography variant="body2" textTransform={"uppercase"}>
               {product.variants.length ?? 5}{" "}
               <span style={{ fontWeight: "lighter" }}>Variants</span>
@@ -86,19 +99,40 @@ export default function ProductCard({
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CustomIconButton
-          sx={{ position: "absolute", bottom: "5%", right: "5%" }}
-        >
-          <Tooltip title={"Add to Cart"}>
-            <AddShoppingCartRoundedIcon />
-          </Tooltip>
-        </CustomIconButton>
+        {addedToCart ? (
+          <Typography
+            sx={{ position: "absolute", bottom: "5%", right: "5%" }}
+            color={"var(--accent)"}
+          >
+            Added to Cart
+          </Typography>
+        ) : // "check"
+        product.availability == "available" ? (
+          <CustomIconButton
+            sx={{ position: "absolute", bottom: "5%", right: "5%" }}
+            onClick={() => setShowAddToCartModal(true)}
+          >
+            <Tooltip title={"Add to Cart"}>
+              <AddShoppingCartRoundedIcon />
+            </Tooltip>
+          </CustomIconButton>
+        ) : (
+          ""
+        )}
       </Card>
       {showImageModal && (
         <ImageModal
           product={product}
           showImageModal={showImageModal}
-          handleClose={handleClose}
+          handleClose={handleImageClose}
+        />
+      )}
+      {showAddToCartModal && (
+        <AddToCartModal
+          openAddToCart={showAddToCartModal}
+          product={product}
+          productRef={productRef}
+          handleAddToCartClose={handleAddToCartClose}
         />
       )}
     </>
