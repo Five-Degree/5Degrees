@@ -6,7 +6,11 @@ const mockFeaturedProducts: FeaturedProducts[] = [
     name: "Air Jordan 1 High Retro",
     defaultPrice: 190,
     mainImage: "featuredProducts/fyspwjoxpwcjoyhj4qys",
-    variants: ["high", "normal", "master"],
+    variants: [
+      { name: "high", price: 350 },
+      { name: "normal", price: 450 },
+      { name: "master", price: 750 },
+    ],
     colors: ["black", "red", "white", "blue"],
   },
   {
@@ -14,7 +18,11 @@ const mockFeaturedProducts: FeaturedProducts[] = [
     name: "Air Jordan 1 High Retro",
     defaultPrice: 250,
     mainImage: "featuredProducts/t5symwb8xmq123jk6dcy",
-    variants: ["high", "normal", "master"],
+    variants: [
+      { name: "high", price: 350 },
+      { name: "normal", price: 450 },
+      { name: "master", price: 750 },
+    ],
     colors: ["black", "red", "white", "blue"],
   },
   {
@@ -22,7 +30,11 @@ const mockFeaturedProducts: FeaturedProducts[] = [
     name: "Air Jordan 1 High Retro",
     defaultPrice: 360,
     mainImage: "featuredProducts/zlgr8ny139fgtgtbx97q",
-    variants: ["high", "normal", "master"],
+    variants: [
+      { name: "high", price: 350 },
+      { name: "normal", price: 450 },
+      { name: "master", price: 750 },
+    ],
     colors: ["black", "red", "white", "blue"],
   },
   {
@@ -30,7 +42,11 @@ const mockFeaturedProducts: FeaturedProducts[] = [
     name: "Air Jordan 1 High Retro",
     defaultPrice: 450,
     mainImage: "featuredProducts/onjfiohcapavbgiuktgy",
-    variants: ["high", "normal", "master"],
+    variants: [
+      { name: "high", price: 350 },
+      { name: "normal", price: 450 },
+      { name: "master", price: 750 },
+    ],
     colors: ["black", "red", "white", "blue"],
   },
   {
@@ -38,7 +54,11 @@ const mockFeaturedProducts: FeaturedProducts[] = [
     name: "Air Jordan 1 High Retro",
     defaultPrice: 450,
     mainImage: "featuredProducts/onjfiohcapavbgiuktgy",
-    variants: ["high", "normal", "master"],
+    variants: [
+      { name: "high", price: 350 },
+      { name: "normal", price: 450 },
+      { name: "master", price: 750 },
+    ],
     colors: ["black", "red", "white", "blue"],
   },
   {
@@ -46,7 +66,11 @@ const mockFeaturedProducts: FeaturedProducts[] = [
     name: "Air Jordan 1 High Retro",
     defaultPrice: 450,
     mainImage: "featuredProducts/onjfiohcapavbgiuktgy",
-    variants: ["high", "normal", "master"],
+    variants: [
+      { name: "high", price: 350 },
+      { name: "normal", price: 450 },
+      { name: "master", price: 750 },
+    ],
     colors: ["black", "red", "white", "blue"],
   },
   {
@@ -54,7 +78,11 @@ const mockFeaturedProducts: FeaturedProducts[] = [
     name: "Air Jordan 1 High Retro",
     defaultPrice: 450,
     mainImage: "featuredProducts/onjfiohcapavbgiuktgy",
-    variants: ["high", "normal", "master"],
+    variants: [
+      { name: "high", price: 350 },
+      { name: "normal", price: 450 },
+      { name: "master", price: 750 },
+    ],
     colors: ["black", "red", "white", "blue"],
   },
 ];
