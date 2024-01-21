@@ -1,13 +1,13 @@
+"use client";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-
+import MarkEmailReadOutlinedIcon from "@mui/icons-material/MarkEmailReadOutlined";
 export default function VerifyEmail() {
   const { sendEV } = useAuth();
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const countdownTime = 30;
   const [countdown, setCountdown] = useState(countdownTime);
-  const { logout } = useAuth();
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (isButtonDisabled) {
@@ -32,22 +32,29 @@ export default function VerifyEmail() {
   }
   return (
     <Stack
-      height={"100vh"}
+      width="100%"
+      position="absolute"
+      className="verify-email-layout"
+      top={"50%"}
+      sx={{ translate: "0 -50%" }}
       justifyContent={"space-evenly"}
       alignItems={"center"}
+      gap={7}
     >
+      <MarkEmailReadOutlinedIcon sx={{ fontSize: "120px" }} />
       <Typography
-        variant="h2"
+        variant="h1"
         fontWeight={"bold"}
         color={"var(--primary)"}
         maxWidth={"20ch"}
+        textAlign={"center"}
       >
         Verify your email address.
       </Typography>
       <Stack alignItems={"center"} gap={2}>
-        <Typography variant="body2" maxWidth={"80%"} textAlign={"center"}>
-          Have you not received a verification email? Please check your spam
-          folder or resend the email.
+        <Typography maxWidth={"80%"} textAlign={"center"}>
+          Did not recieve a verification email? Please check your spam folder or
+          resend the email.
         </Typography>
         <Button
           variant="contained"

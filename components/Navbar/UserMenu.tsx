@@ -25,6 +25,28 @@ export default function UserMenu({
       onClick={handleClose}
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      slotProps={{
+        paper: {
+          sx: {
+            overflow: "visible",
+            mt: 1.5,
+            "&::before": {
+              content: '""',
+              display: "block",
+              position: "absolute",
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              borderTop: "1px solid var(--border-color)",
+              borderLeft: "1px solid var(--border-color)",
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
+              zIndex: 0,
+            },
+          },
+        },
+      }}
     >
       {items.map((menuItem: any) => {
         if (pathname !== menuItem.goto)

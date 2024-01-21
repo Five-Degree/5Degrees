@@ -1,6 +1,6 @@
-import { FeaturedProducts } from "../interfaces/Products";
+import { FeaturedProduct } from "../interfaces/Products";
 
-const mockFeaturedProducts: FeaturedProducts[] = [
+const mockFeaturedProducts: FeaturedProduct[] = [
   {
     id: "1",
     name: "Air Jordan 1 High Retro",

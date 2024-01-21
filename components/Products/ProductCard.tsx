@@ -1,7 +1,9 @@
 import CustomIconButton from "@/components/Custom/CustomIconButton";
 import ImageModal from "@/components/Products/ImageModal";
+import { useCart } from "@/contexts/CartContext";
 import { useResponsive } from "@/contexts/ResponsiveContext";
 import capitalize from "@/shared/functions/capitalize";
+import useAddToCart from "@/shared/hooks/useAddToCart";
 import Product from "@/shared/interfaces/Products";
 import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
 import {
@@ -13,9 +15,8 @@ import {
   Typography,
 } from "@mui/material";
 import { CldImage } from "next-cloudinary";
-import React, { useEffect, useRef, useState } from "react";
-import AddToCartModal from "./AddToCartModal";
-import { useCart } from "@/contexts/CartContext";
+import { useEffect, useState } from "react";
+
 export default function ProductCard({
   product,
   ...anime
@@ -23,23 +24,20 @@ export default function ProductCard({
   product: Product;
 } & IAos) {
   const [showImageModal, setShowImageModal] = useState(false);
-  const [showAddToCartModal, setShowAddToCartModal] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
-  const productRef = useRef<HTMLDivElement>(null);
   const { cart } = useCart();
-  const handleImageClose = () => {
-    setShowImageModal(false);
-  };
+  const { matchesXL, matchesLG } = useResponsive();
+  const { showAddToCartModal, addToCartModal, handleAddToCartOpen } =
+    useAddToCart({ product });
 
-  const handleAddToCartClose = () => {
-    setShowAddToCartModal(false);
-  };
+  function handleImageClose() {
+    setShowImageModal(false);
+  }
   useEffect(() => {
     // Check if the product is in the cart
     const isProductInCart = cart.findIndex((ci) => ci.id === product.id) !== -1;
     setAddedToCart(isProductInCart);
   }, [cart, product]);
-  const { matchesXL, matchesLG } = useResponsive();
   return (
     <>
       <Card
@@ -50,7 +48,6 @@ export default function ProductCard({
           fontSize: { xl: "1.5rem", md: "0.8rem" },
         }}
         {...anime}
-        ref={productRef}
       >
         <CldImage
           // Responsive
@@ -110,7 +107,7 @@ export default function ProductCard({
         product.availability == "available" ? (
           <CustomIconButton
             sx={{ position: "absolute", bottom: "5%", right: "5%" }}
-            onClick={() => setShowAddToCartModal(true)}
+            onClick={handleAddToCartOpen}
           >
             <Tooltip title={"Add to Cart"}>
               <AddShoppingCartRoundedIcon />
@@ -127,14 +124,7 @@ export default function ProductCard({
           handleClose={handleImageClose}
         />
       )}
-      {showAddToCartModal && (
-        <AddToCartModal
-          openAddToCart={showAddToCartModal}
-          product={product}
-          productRef={productRef}
-          handleAddToCartClose={handleAddToCartClose}
-        />
-      )}
+      {showAddToCartModal && addToCartModal}
     </>
   );
 }

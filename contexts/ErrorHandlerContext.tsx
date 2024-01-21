@@ -1,3 +1,4 @@
+"use client";
 import { Typography } from "@mui/material";
 import React, { createContext, useContext, useEffect, useState } from "react";
 const ErrorHandlerContext = createContext<any>({});

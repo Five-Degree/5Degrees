@@ -1,24 +1,19 @@
 "use client";
+import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/contexts/CartContext";
 import Logo from "@/public/Logos/Logo.svg";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import ShoppingCartCheckoutRoundedIcon from "@mui/icons-material/ShoppingCartCheckoutRounded";
-import {
-  Badge,
-  ClickAwayListener,
-  Input,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Badge, Input, Stack, Typography } from "@mui/material";
 import { Url } from "next/dist/shared/lib/router/router";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import CustomIconButton from "../Custom/CustomIconButton";
 import CartDrawer from "./CartDrawer";
-import { useCart } from "@/contexts/CartContext";
 import UserMenuControls from "./UserMenuControls";
-import { useAuth } from "@/contexts/AuthContext";
+import { homeNavHrefMap, homeNavLinks } from "@/shared/constants/Links";
 interface NavLink {
   title: string;
   href: Url;
@@ -59,6 +54,8 @@ function NavLinks({
 }
 
 function UserControls() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [searchSelected, setSearchSelected] = useState(false);
   const [cartQuantity, setCartQuantity] = useState(0);
   const { user } = useAuth();
@@ -79,8 +76,16 @@ function UserControls() {
       }
       setDrawerState(state);
     };
+  function handleCheckoutAction() {
+    if (user) {
+      router.push("/checkout");
+    } else {
+      router.push("/auth/login?redirectTo=/checkout");
+    }
+    setDrawerState(false);
+  }
   return (
-    <Stack direction={"row"} gap={3}>
+    <Stack direction={"row"} gap={3} alignItems={"center"}>
       <Stack direction="row" position={"relative"}>
         <Input
           disableUnderline
@@ -95,6 +100,7 @@ function UserControls() {
             top: "50%",
             translate: "0 -50%",
             transition: "all 0.3s ease",
+            borderRight: "none",
             width: searchSelected ? "30ch" : "0",
             opacity: searchSelected ? "1" : "0",
           }}
@@ -111,28 +117,31 @@ function UserControls() {
 
       {user && <UserMenuControls />}
 
-      <CustomIconButton aria-label="checkout" onClick={toggleDrawer(true)}>
-        <Badge badgeContent={cartQuantity} color="error">
-          <ShoppingCartCheckoutRoundedIcon />
-        </Badge>
-      </CustomIconButton>
-      <CartDrawer drawerState={drawerState} toggleDrawer={toggleDrawer} />
+      {pathname != "/checkout" && (
+        <>
+          <CustomIconButton aria-label="checkout" onClick={toggleDrawer(true)}>
+            <Badge badgeContent={cartQuantity} color="error">
+              <ShoppingCartCheckoutRoundedIcon />
+            </Badge>
+          </CustomIconButton>
+          <CartDrawer
+            drawerState={drawerState}
+            toggleDrawer={toggleDrawer}
+            handleCheckoutAction={handleCheckoutAction}
+          />
+        </>
+      )}
     </Stack>
   );
 }
 
 export default function Navbar() {
-  const navLinks = useMemo(
-    () => [
-      { title: "Mens", href: "/" },
-      { title: "Womens", href: "/womens" },
-      { title: "Kids", href: "/kids" },
-      { title: "Custom", href: "/custom" },
-    ],
-    []
-  );
-  const [activeLink, setActiveLink] = useState(navLinks[0]);
   const pathname = usePathname();
+  const navLinks = useMemo(
+    () => (homeNavHrefMap.includes(pathname) ? homeNavLinks : []),
+    [pathname]
+  );
+  const [activeLink, setActiveLink] = useState({ title: "", href: "" });
   useEffect(() => {
     const currentLink = navLinks.find((l) => l.href == pathname);
     if (currentLink) setActiveLink(currentLink);
@@ -143,10 +152,12 @@ export default function Navbar() {
       component={"nav"}
       alignItems={"center"}
       justifyContent={"space-between"}
-      paddingInline={10}
+      paddingInline={"3%"}
       width={"100%"}
-      height={"5.3125rem"}
+      height={"8vh"}
       data-aos="fade-down"
+      minHeight={"5.3125rem"}
+      maxHeight={"6.25rem"}
     >
       <Link href={"/"}>
         <Image

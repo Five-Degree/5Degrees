@@ -21,6 +21,36 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+          border: "1px solid var(--border-color)",
+          borderRadius: "var(--border-radius)",
+          ":first-of-type , &:last-of-type": {
+            borderRadius: "var(--border-radius)",
+          },
+          "&.Mui-expanded": {
+            margin: 0,
+          },
+        },
+      },
+    },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: {
+          borderRadius: "var(--border-radius)",
+          ":hover": {
+            background: "var(--graylight)",
+          },
+        },
+        content: {
+          "&.Mui-expanded": {
+            margin: 0,
+          },
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -69,6 +99,14 @@ const theme = createTheme({
         },
       },
     },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontFamily: "var(--font-as)",
+          fontSize: "1em",
+        },
+      },
+    },
     MuiInput: {
       styleOverrides: {
         root: {
@@ -82,16 +120,20 @@ const theme = createTheme({
               color: "var(--primary)",
             },
           },
-          boxShadow: "var(--inset-shadow)",
+          outline: "1px solid var(--border-color)",
+          // boxShadow: "var(--inset-shadow)",
           borderRadius: "var(--border-radius)",
-          paddingInline: "0.2em",
         },
       },
     },
+
     MuiInputLabel: {
       styleOverrides: {
         root: {
           fontSize: "1em",
+          "&.Mui-focused": {
+            color: "var(--accent)",
+          },
         },
       },
     },
@@ -120,7 +162,7 @@ const theme = createTheme({
     MuiSnackbarContent: {
       styleOverrides: {
         root: {
-          fontSize: "1.5em",
+          fontSize: "1em",
           background: "var(--primary)",
           borderRadius: "var(--border-radius)",
         },
@@ -158,7 +200,7 @@ const theme = createTheme({
     body1: {
       color: "var(--body1, #281515)",
       fontFamily: "var(--font-as)",
-      fontSize: ".875em",
+      fontSize: "1em",
       fontStyle: "normal",
       fontWeight: "600",
       lineHeight: "normal",

@@ -9,19 +9,17 @@ import {
   Stack,
   ToggleButton,
   ToggleButtonGroup,
-  Typography
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import QuantityInput from "../Custom/CustomQuantityInput";
 export default function AddToCartPopover({
   product,
   openAddToCart,
-  productRef,
   handleAddToCartClose,
 }: {
   product: Product;
   openAddToCart: boolean;
-  productRef: React.RefObject<HTMLDivElement>;
   handleAddToCartClose: () => void;
 }) {
   const defaultVariant = "normal";
@@ -106,7 +104,7 @@ export default function AddToCartPopover({
         alignItems: "center",
         justifyContent: "center",
       }}
-      container={() => productRef.current!}
+      container={document.body}
     >
       <Card>
         <CardContent
@@ -117,7 +115,7 @@ export default function AddToCartPopover({
             fontSize: { xxl: "1.5rem", xl: "1.3rem", md: "1rem" },
           }}
         >
-          <Typography variant="h3">Add to cart</Typography>
+          <Typography variant="h1">Add to cart</Typography>
           <SectionWrapper>
             <Typography variant="body2" width={"100%"}>
               Select Variant:

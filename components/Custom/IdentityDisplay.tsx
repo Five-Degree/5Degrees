@@ -21,7 +21,10 @@ export default function IdentityDisplay({ avatar, name, title }: Props) {
         ""
       )}
       <Stack textOverflow="ellipsis" width={"15ch"} overflow="hidden">
-        <Typography sx={{ fontWeight: "bold", color: "var(--primary)" }} noWrap>
+        <Typography
+          sx={{ fontWeight: "bold", color: "var(--primary-text)" }}
+          noWrap
+        >
           {name}
         </Typography>
         {title && (

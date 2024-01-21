@@ -1,10 +1,16 @@
 "use client";
-import { CartProduct } from "@/shared/interfaces/Products";
-import { createContext, useContext, useEffect, useState } from "react";
-import Cookies from "js-cookie";
-import mergeArrayWithObject from "@/shared/functions/mergeArrayWithObject";
-import { Snackbar, Stack, Typography } from "@mui/material";
+import Loading from "@/components/Custom/Loading";
+import Product, { CartProduct } from "@/shared/interfaces/Products";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import { Snackbar, Stack } from "@mui/material";
+import Cookies from "js-cookie";
+import {
+  Suspense,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 const cartContext = createContext<any>({});
 export const useCart = (): ICartContext => useContext(cartContext);
@@ -24,8 +30,9 @@ export default function CartContextProvider({
   const [totalCost, setTotalCost] = useState(0);
   const [showSb, setShowSb] = useState(false);
   const [sbMessage, setSbMessage] = useState("");
+
   useEffect(() => {
-    Cookies.set("cart", JSON.stringify(cart));
+    Cookies.set("cart", JSON.stringify(cart), { sameSite: "Strict" });
     const newTotalCost = cart.reduce(
       (accumulator, product) =>
         accumulator + product.unitPrice * product.quantity,
@@ -35,48 +42,57 @@ export default function CartContextProvider({
   }, [cart]);
   const addToCart = (product: CartProduct) => {
     setCart((prev) => [...prev, product]);
-    handleShowSb("Item added to cart!");
+    handleShowSnackbar("Item added to cart!");
   };
   const removeFromCart = (product: CartProduct) => {
     const filteredCart = cart.filter((prod) => prod.id != product.id);
     setCart(filteredCart);
-    handleShowSb("Item removed from cart!");
+    handleShowSnackbar("Item removed from cart!");
   };
   const clearCart = () => {
     setCart([]);
-    handleShowSb("Cart cleared");
+    handleShowSnackbar("Cart cleared!");
   };
-  function handleShowSb(mssg: string) {
+
+  function handleShowSnackbar(mssg: string) {
     setSbMessage(mssg);
     setShowSb(true);
   }
-  const handleHideSb = (
+  const handleHideSnackbar = (
     event: React.SyntheticEvent | Event,
     reason?: string
   ) => {
     if (reason === "clickaway") {
       return;
     }
-
     setShowSb(false);
   };
+
   return (
     <cartContext.Provider
-      value={{ cart, totalCost, addToCart, removeFromCart, clearCart }}
+      value={{
+        cart,
+        totalCost,
+        addToCart,
+        removeFromCart,
+        clearCart,
+      }}
     >
-      {children}
-      <Snackbar
-        open={showSb}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        autoHideDuration={6000}
-        onClose={handleHideSb}
-        message={
-          <Stack direction="row" gap={2}>
-            <ShoppingCartRoundedIcon />
-            {sbMessage}
-          </Stack>
-        }
-      />
+      <Suspense fallback={<Loading />}>
+        {children}
+        <Snackbar
+          open={showSb}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          autoHideDuration={6000}
+          onClose={handleHideSnackbar}
+          message={
+            <Stack direction="row" gap={2} alignItems={"center"}>
+              <ShoppingCartRoundedIcon />
+              {sbMessage}
+            </Stack>
+          }
+        />
+      </Suspense>
     </cartContext.Provider>
   );
 }

@@ -1,3 +1,5 @@
+import { useCart } from "@/contexts/CartContext";
+import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import {
   Button,
@@ -8,20 +10,19 @@ import {
 } from "@mui/material";
 import React from "react";
 import CartDrawerCard from "../Products/CartDrawerCard";
-import { useCart } from "@/contexts/CartContext";
-import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
-import { useAuth } from "@/contexts/AuthContext";
 export default function CartDrawer({
   drawerState,
   toggleDrawer,
+  handleCheckoutAction,
 }: {
   drawerState: boolean;
   toggleDrawer: (
     state: boolean
   ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
+  handleCheckoutAction: () => void;
 }) {
-  const { user } = useAuth();
   const { cart, totalCost, clearCart } = useCart();
+
   return (
     <SwipeableDrawer
       anchor={"right"}
@@ -45,9 +46,6 @@ export default function CartDrawer({
           height={"80vh"}
           maxHeight={"80vh"}
           sx={{ overflowY: "auto", overflowX: "clip" }}
-          p={2}
-          border={"1px solid var(--border-color)"}
-          borderRadius={"var(--border-radius)"}
         >
           {cart.length == 0 && (
             <Stack
@@ -88,6 +86,7 @@ export default function CartDrawer({
           variant="contained"
           disabled={cart.length == 0}
           endIcon={<ExitToAppRoundedIcon />}
+          onClick={handleCheckoutAction}
         >
           Checkout
         </Button>

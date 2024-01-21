@@ -1,9 +1,11 @@
+"use client";
 import FormContainer from "@/components/Custom/FormComponents/FormContainer";
-import FormInput from "@/components/Custom/FormComponents/FormInput";
+import FormInput, {
+  FormCredentials,
+} from "@/components/Custom/FormComponents/FormInput";
 import { useAuth } from "@/contexts/AuthContext";
 import inputs from "@/shared/constants/inputs.json";
 import { GetRefinedFirebaseError } from "@/shared/functions/errorHandler";
-import { FormCredentials } from "@/shared/interfaces/FormInputs";
 import { Button, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
@@ -18,7 +20,7 @@ export default function ForgotPasswordForm() {
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [emailSent, setEmailSent] = useState<boolean>(false);
-  function handleEmailLogin(e: React.FormEvent<HTMLFormElement>) {
+  function handleResetPass(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     resetPass(values.email)
@@ -39,7 +41,7 @@ export default function ForgotPasswordForm() {
         fontSize={"2.25rem"}
         sx={{ color: "var(--black)", fontWeight: "bold" }}
       >
-        Wachtwoord vergeten?
+        Reset Password
       </Typography>
       <Stack
         justifyContent="center"
@@ -47,7 +49,7 @@ export default function ForgotPasswordForm() {
         gap="1.25rem"
         width={"100%"}
       >
-        <FormContainer onSubmit={handleEmailLogin} sx={{ gap: "2.5rem" }}>
+        <FormContainer onSubmit={handleResetPass} sx={{ gap: "2.5rem" }}>
           {inputs.resetPass.map((input) => (
             <FormInput
               key={input.id}
@@ -63,19 +65,18 @@ export default function ForgotPasswordForm() {
             variant="contained"
             fullWidth
           >
-            Wachtwoord resetten
+            Send reset email
           </Button>
         </FormContainer>
         <Stack alignItems={"center"}>
           {emailSent && (
             <Typography textAlign={"center"}>
-              Controleer uw e-mail voor de link om uw wachtwoord opnieuw in te
-              stellen!
+              Please check your email for the password reset link!
             </Typography>
           )}
           {errorAlert}
           <Typography>
-            <Link href={"/auth/login"}>Terug naar inloggen</Link>
+            <Link href={"/auth/login"}>Go back to Login!</Link>
           </Typography>
         </Stack>
       </Stack>

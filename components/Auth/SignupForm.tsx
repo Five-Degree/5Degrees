@@ -1,19 +1,22 @@
+"use client";
 import FormContainer from "@/components/Custom/FormComponents/FormContainer";
-import FormInput from "@/components/Custom/FormComponents/FormInput";
+import FormInput, { FormCredentials } from "@/components/Custom/FormComponents/FormInput";
 import { useAuth } from "@/contexts/AuthContext";
 import inputs from "@/shared/constants/inputs.json";
 import { GetRefinedFirebaseError } from "@/shared/functions/errorHandler";
-import { FormCredentials } from "@/shared/interfaces/FormInputs";
-import { Button, Stack } from "@mui/material";
+
+import { Button, Divider, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { useErrorHandler } from "../../contexts/ErrorHandlerContext";
+import google from "@/public/Logos/Google.svg";
+import Image from "next/image";
 
 export default function SignupForm() {
   const { handleError, errorAlert } = useErrorHandler();
-  const { signup, sendEV } = useAuth();
+  const { signup, sendEV, googleAccess } = useAuth();
   const router = useRouter();
   const [values, setValues] = useState<FormCredentials>({
     email: "",
@@ -22,6 +25,8 @@ export default function SignupForm() {
   });
   const [loading, setLoading] = useState<boolean>(false);
   // const newRegistration = httpsCallable(fun, "newRegistration");
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo");
 
   function handleSignUp(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -31,7 +36,7 @@ export default function SignupForm() {
         .then((userCred) => {
           sendEV();
         })
-        .then(() => router.replace("/auth/verifyEmail"))
+        .then(() => router.replace("/verifyEmail"))
         .catch((error: any) => handleError(GetRefinedFirebaseError(error)))
         .finally(() => setLoading(false));
     } else {
@@ -39,6 +44,14 @@ export default function SignupForm() {
     }
   }
 
+  function handleGoogleSignup(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+    googleAccess()
+      .then(() => router.replace(redirectTo ?? "/"))
+      .catch((error: any) => handleError(GetRefinedFirebaseError(error)))
+      .finally(() => setLoading(false));
+  }
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setValues({ ...values, [e.target.name]: e.target.value });
   }
@@ -51,6 +64,18 @@ export default function SignupForm() {
       >
         Sign up
       </Typography>
+      <FormContainer onSubmit={handleGoogleSignup}>
+        <Button
+          type="submit"
+          disabled={loading}
+          endIcon={<Image src={google} alt="google logo" />}
+          variant="contained"
+          fullWidth
+        >
+          Sign up with Google&nbsp;
+        </Button>
+      </FormContainer>
+      <Divider flexItem>or</Divider>
       <Stack
         justifyContent="center"
         alignItems="center"
@@ -77,10 +102,18 @@ export default function SignupForm() {
             Sign up
           </Button>
         </FormContainer>
+
         <Stack alignItems={"center"}>
           {errorAlert}
           <Typography>
-            Already have an account? <Link href={"/auth/login"}>Login</Link>
+            Already have an account?{" "}
+            <Link
+              href={`/auth/login${
+                redirectTo ? "?redirectTo=" + redirectTo : ""
+              }`}
+            >
+              Login
+            </Link>
           </Typography>
         </Stack>
       </Stack>

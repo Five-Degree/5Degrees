@@ -13,7 +13,6 @@ import {
   UserCredential,
 } from "firebase/auth";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase/config";
 
@@ -24,7 +23,6 @@ export const AuthContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const router = useRouter();
   const [user, setUser] = useState<User | null>();
   const [loading, setLoading] = useState<boolean>();
   //AuthState Change Use Effect
@@ -67,7 +65,6 @@ export const AuthContextProvider = ({
     Cookies.set("loggedin", "false");
     Cookies.remove("uid");
     setUser(null);
-    router.push("/");
   }
   //Password Reset Auth function
   function resetPass(email: string) {

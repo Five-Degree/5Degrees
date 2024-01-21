@@ -1,5 +1,5 @@
 import { useResponsive } from "@/contexts/ResponsiveContext";
-import { FeaturedProducts } from "@/shared/interfaces/Products";
+import { FeaturedProduct } from "@/shared/interfaces/Products";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { ButtonBase, Stack, Tooltip, Typography } from "@mui/material";
 import { CldImage } from "next-cloudinary";
@@ -7,9 +7,11 @@ import { CldImage } from "next-cloudinary";
 export default function FeaturedProductCard({
   product,
   anime,
+  handleActiveProduct,
 }: {
-  product: FeaturedProducts;
+  product: FeaturedProduct;
   anime?: IAos;
+  handleActiveProduct: (product: FeaturedProduct) => void;
 }) {
   const { matchesXXL, matchesXL } = useResponsive();
   return (
@@ -84,6 +86,7 @@ export default function FeaturedProductCard({
           }}
           aria-label="button"
           component={"button"}
+          onClick={() => handleActiveProduct(product)}
         >
           <AddRoundedIcon
             sx={{

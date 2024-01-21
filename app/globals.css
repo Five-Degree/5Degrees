@@ -1,12 +1,20 @@
 :root {
-  --gray: rgb(155, 158, 172);
-  --white: rgb(255, 255, 255);
-  --primary: rgb(40, 21, 21);
-  --accent: rgb(199, 48, 48);
-  --success: rgb(79, 173, 45);
-  --error: rgb(246, 73, 64);
-  --border-color: rgba(40, 21, 21, 0.3);
+  --graylight: hsl(0, 0%, 95%);
+  --gray: hsl(229, 9%, 64%);
+  --graydark: hsl(229, 9%, 25%);
+  --white: hsl(0, 0%, 100%);
+  --accentdark: hsl(0, 61%, 35%);
+  --accent: hsl(0, 61%, 48%);
+  --accentlight: hsl(0, 61%, 70%);
+  --primarydark: hsl(0, 31%, 5%);
+  --primary: hsl(0, 31%, 12%);
+  --primarylight: hsl(0, 31%, 30%);
+  --primarylighter: hsl(0, 31%, 45%);
+  --success: hsl(104, 59%, 43%);
+  --error: hsl(3, 91%, 61%);
+  --border-color: hsla(0, 31%, 12%, 0.3);
   --primary-text: var(--primary);
+  --secondary-text: var(--accent);
   --background: var(--white);
   --h1-color: var(--primary);
   --h2-color: var(--primary);
@@ -64,7 +72,9 @@ a:hover {
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 255, 255, 0.3);
 }
-
+nav {
+  z-index: 99;
+}
 /* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

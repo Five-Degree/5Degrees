@@ -1,15 +1,17 @@
+"use client";
 import FormContainer from "@/components/Custom/FormComponents/FormContainer";
-import FormInput from "@/components/Custom/FormComponents/FormInput";
+import FormInput, { FormCredentials } from "@/components/Custom/FormComponents/FormInput";
 import { useAuth } from "@/contexts/AuthContext";
 import inputs from "@/shared/constants/inputs.json";
 import { GetRefinedFirebaseError } from "@/shared/functions/errorHandler";
-import { FormCredentials } from "@/shared/interfaces/FormInputs";
-import { Button, Stack } from "@mui/material";
+import { Button, Divider, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
-import { useErrorHandler } from "../../contexts/ErrorHandlerContext";
+import google from "@/public/Logos/Google.svg";
+import { useErrorHandler } from "@/contexts/ErrorHandlerContext";
+import Image from "next/image";
 
 export default function LoginForm() {
   const { handleError, errorAlert } = useErrorHandler();
@@ -20,20 +22,29 @@ export default function LoginForm() {
   });
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo");
 
   function handleEmailLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     login(values.email, values.password)
       .then(() => {
-        router.replace("/dashboard");
+        router.replace(redirectTo ?? "/");
       })
       .catch((error: any) => {
         handleError(GetRefinedFirebaseError(error));
         setLoading(false);
       });
   }
-
+  function handleGoogleLogin(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+    googleAccess()
+      .then(() => router.replace(redirectTo ?? "/"))
+      .catch((error: any) => handleError(GetRefinedFirebaseError(error)))
+      .finally(() => setLoading(false));
+  }
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setValues({ ...values, [e.target.name]: e.target.value });
   }
@@ -41,15 +52,27 @@ export default function LoginForm() {
     <>
       <Typography
         variant="h1"
-        fontSize={"2.25rem"}
+        fontSize={"2.25em"}
         sx={{ color: "var(--black)", fontWeight: "bold" }}
       >
         Login
       </Typography>
+      <FormContainer onSubmit={handleGoogleLogin}>
+        <Button
+          type="submit"
+          disabled={loading}
+          endIcon={<Image src={google} alt="google logo" />}
+          variant="contained"
+          fullWidth
+        >
+          Log in with Google&nbsp;
+        </Button>
+      </FormContainer>
+      <Divider flexItem>or</Divider>
       <Stack
         justifyContent="center"
         alignItems="center"
-        gap="1.25rem"
+        gap={1.25}
         width={"100%"}
       >
         <FormContainer onSubmit={handleEmailLogin}>
@@ -63,7 +86,7 @@ export default function LoginForm() {
           ))}
           <Stack alignItems={"flex-end"} width={"100%"}>
             <Link href="/auth/forgotPassword">
-              <Typography fontSize={".875rem"} lineHeight={1}>
+              <Typography fontSize={".875em"} lineHeight={1}>
                 Forgot password?
               </Typography>
             </Link>
@@ -80,7 +103,14 @@ export default function LoginForm() {
         <Stack alignItems={"center"}>
           {errorAlert}
           <Typography>
-            Dont have an account? <Link href={"/auth/signup"}>Sign up</Link>
+            Dont have an account?{" "}
+            <Link
+              href={`/auth/signup${
+                redirectTo ? "?redirectTo=" + redirectTo : ""
+              }`}
+            >
+              Sign up
+            </Link>
           </Typography>
         </Stack>
       </Stack>

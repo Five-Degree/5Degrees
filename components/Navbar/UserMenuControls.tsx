@@ -70,9 +70,7 @@ export default function UserMenuControls() {
         aria-haspopup={true}
         aria-expanded={accountOpen ? true : undefined}
       >
-        <Tooltip title={"Account Settings"}>
-          <UserAvatar avatar={user?.photoURL} name={user?.email} />
-        </Tooltip>
+        <UserAvatar avatar={user?.photoURL} name={user?.email} />
       </CustomIconButton>
       <UserMenu
         accountOpenAnchor={accountOpenAnchor}

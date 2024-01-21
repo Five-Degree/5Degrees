@@ -7,18 +7,34 @@ import {
   IconButton,
   InputLabel,
   Skeleton,
+  InputProps,
 } from "@mui/material";
 import VisibilityOutlined from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlined from "@mui/icons-material/VisibilityOffOutlined";
 
-export default function FormInput(props: any) {
-  const { id, helperText, loading, ...inputProps } = props;
+export interface FormCredentials {
+  [key: string]: string;
+}
+
+export interface IFormInput extends InputProps {
+  id: string;
+  loading?: boolean;
+  helperText?: string;
+  pattern?: string;
+  label?: string;
+  width?: string;
+}
+export default function FormInput(props: IFormInput) {
+  const { id, helperText, loading, label, pattern, width, ...inputProps } =
+    props;
   const [wrongInput, setWrongInput] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   function handleFocus(e: React.FocusEvent<HTMLInputElement>) {
-    const pattern = new RegExp(inputProps.pattern);
-    setWrongInput(!pattern.test(e.target.value) && e.target.value != "");
+    if (pattern) {
+      const pat = new RegExp(pattern);
+      setWrongInput(!pat.test(e.target.value) && e.target.value != "");
+    }
   }
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const passwordAdornment = (
@@ -28,27 +44,28 @@ export default function FormInput(props: any) {
         onClick={handleClickShowPassword}
       >
         {showPassword ? (
-          <VisibilityOutlined sx={{ fontSize: "16px" }} />
+          <VisibilityOutlined sx={{ fontSize: "1em" }} />
         ) : (
-          <VisibilityOffOutlined sx={{ fontSize: "16px" }} />
+          <VisibilityOffOutlined sx={{ fontSize: "1em" }} />
         )}
       </IconButton>
     </InputAdornment>
   );
   return (
-    <FormControl sx={{ width: "100%" }}>
-      {inputProps.label && (
+    <FormControl sx={{ width: width ?? "100%" }}>
+      {label && (
         <InputLabel
           shrink
           htmlFor={id}
           disableAnimation
-          sx={
-            wrongInput
-              ? { color: "var(--error)" }
-              : { color: "var(--graydarker)" }
-          }
+          sx={{
+            color: wrongInput ? "var(--error)" : "var(--primary)",
+            fontSize: "1.15em",
+            top: "-10%",
+          }}
         >
-          {inputProps.label}
+          {label}
+          {inputProps.required && wrongInput && "*"}
         </InputLabel>
       )}
       {loading ? (
@@ -69,8 +86,8 @@ export default function FormInput(props: any) {
           endAdornment={inputProps.type == "password" ? passwordAdornment : ""}
           color="secondary"
           sx={{
-            background: "var(--graylighter)",
-            border: wrongInput ? "1px solid var(--error)" : "inherit",
+            background: "var(--white)",
+            border: wrongInput ? "1px solid var(--error)" : undefined,
           }}
         />
       )}

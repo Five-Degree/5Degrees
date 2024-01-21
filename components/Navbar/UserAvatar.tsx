@@ -11,7 +11,7 @@ export default function UserAvatar({
 }) {
   return avatar ? (
     <Avatar>
-      <Image alt="User Avatar" src={avatar} width={25} height={25} />
+      <Image alt="User Avatar" src={avatar} width={45} height={45} />
     </Avatar>
   ) : name ? (
     <Avatar {...stringAvatar(name)} />

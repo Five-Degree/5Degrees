@@ -1,5 +1,5 @@
 import { ErrorHandlerProvider } from "@/contexts/ErrorHandlerContext";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import React from "react";
 
 export default function AuthLayout({
@@ -13,10 +13,12 @@ export default function AuthLayout({
         direction={"row"}
         justifyContent="center"
         alignItems={"flex-start"}
-        height="100vh"
-        maxWidth="100%"
-        position="relative"
-        sx={{ overflowY: "scroll", background: "var(--graylighter)" }}
+        width="100%"
+        position="absolute"
+        className="auth-layout"
+        top={"50%"}
+        mt={3}
+        sx={{ translate: "0 -50%" }}
       >
         <Stack
           width={"34rem"}
@@ -24,12 +26,13 @@ export default function AuthLayout({
           alignItems={"flex-start"}
           gap={"2.5rem"}
           paddingBlock={"3rem 4rem"}
-          paddingInline={"3rem"}
+          paddingInline={{ md: "3rem", xs: "1.5rem" }}
           marginBlock={"auto"}
           sx={{
-            background: "var(--white)",
             borderRadius: "var(--border-radius)",
+            fontSize: { xl: "1.5rem", lg: "1rem" },
           }}
+          border={"1px solid var(--border-color)"}
         >
           {children}
         </Stack>
