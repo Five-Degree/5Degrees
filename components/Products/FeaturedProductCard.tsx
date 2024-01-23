@@ -1,10 +1,11 @@
 import { useCart } from "@/contexts/CartContext";
 import { useResponsive } from "@/contexts/ResponsiveContext";
-import { FeaturedProduct } from "@/shared/interfaces/Products";
+import Product from "@/shared/interfaces/Products";
 import { CheckRounded } from "@mui/icons-material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { ButtonBase, Stack, Tooltip, Typography } from "@mui/material";
 import { CldImage } from "next-cloudinary";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function FeaturedProductCard({
@@ -12,9 +13,9 @@ export default function FeaturedProductCard({
   anime,
   handleActiveProduct,
 }: {
-  product: FeaturedProduct;
+  product: Product & { featuredImage: string };
   anime?: IAos;
-  handleActiveProduct: (product: FeaturedProduct) => void;
+  handleActiveProduct: (product: Product) => void;
 }) {
   const { matchesXL } = useResponsive();
   const { cart, removeFromCart } = useCart();
@@ -40,7 +41,7 @@ export default function FeaturedProductCard({
       {...anime}
     >
       <CldImage
-        src={product.mainImage}
+        src={product.featuredImage}
         alt={product.name}
         // Responsive
         width={matchesXL ? 152 * 1.3 : 152}
@@ -68,7 +69,7 @@ export default function FeaturedProductCard({
             overflow={"hidden"}
             whiteSpace={"nowrap"}
           >
-            {product.name}
+            <Link href={`/product/${product.id}`}>{product.name}</Link>
           </Typography>
         </Tooltip>
         <Typography variant="h1">${product.defaultPrice}</Typography>

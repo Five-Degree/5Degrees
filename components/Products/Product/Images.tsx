@@ -26,6 +26,9 @@ export default function ProductImages({ product }: { product: Product }) {
       height={{ md: "40vh", xs: "auto" }}
       alignItems={"center"}
       gap={1}
+      sx={{
+        fontSize: { xxl: "1.5rem", xl: "1.3rem", md: "1rem" },
+      }}
     >
       <CldImage
         src={activeImage}
@@ -37,6 +40,7 @@ export default function ProductImages({ product }: { product: Product }) {
           borderRadius: "var(--border-radius)",
           width: "auto",
           height: "100%",
+          maxWidth: "37.5em",
         }}
       />
       <Stack

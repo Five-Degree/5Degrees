@@ -21,7 +21,7 @@ const bebasNeue = Bebas_Neue({
   subsets: ["latin"],
 });
 export const metadata: Metadata = {
-  title: "5 Degrees",
+  title: { template: "%s | 5 Degrees", default: "5 Degrees" },
   description: "Discover limited sneakers without limitations",
 };
 

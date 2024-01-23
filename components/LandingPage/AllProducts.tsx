@@ -5,7 +5,12 @@ import ProductsView from "@/components/Products/ProductsView";
 
 export default function AllProducts() {
   return (
-    <Stack overflow={"hidden"} direction={"row"}>
+    <Stack
+      overflow={"hidden"}
+      component={"section"}
+      id="AllProducts"
+      direction={"row"}
+    >
       <ProductsSidebar />
       <ProductsView />
     </Stack>

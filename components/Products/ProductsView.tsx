@@ -18,12 +18,14 @@ export default function ProductsView() {
       <Grid container gap={4}>
         {mockProducts.map((product, index) => (
           <Grid item key={product.id}>
-            <ProductCard
-              product={product}
-              data-aos="zoom-in"
-              data-aos-delay={index * 50}
-              data-aos-once={true}
-            />
+            {!product.featuredImage && (
+              <ProductCard
+                product={product}
+                data-aos="zoom-in"
+                data-aos-delay={index * 50}
+                data-aos-once={true}
+              />
+            )}
           </Grid>
         ))}
       </Grid>

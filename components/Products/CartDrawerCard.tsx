@@ -5,6 +5,7 @@ import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import { Card, CardContent, Stack, Tooltip, Typography } from "@mui/material";
 import { CldImage } from "next-cloudinary";
 import CustomIconButton from "../Custom/CustomIconButton";
+import Link from "next/link";
 export default function CartDrawerCard({ item }: { item: CartProduct }) {
   const { removeFromCart } = useCart();
 
@@ -18,8 +19,9 @@ export default function CartDrawerCard({ item }: { item: CartProduct }) {
           gap: 1,
         }}
       >
-        <Typography variant="h3">{item.name}</Typography>
-
+        <Typography variant="h3">
+          <Link href={`/product/${item.id}`}>{item.name}</Link>
+        </Typography>
         <Stack direction={"row"} gap={2}>
           <CldImage
             src={item.mainImage}

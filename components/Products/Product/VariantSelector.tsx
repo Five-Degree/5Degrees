@@ -1,6 +1,6 @@
 import Product, { VariantNames } from "@/shared/interfaces/Products";
 import { CheckRounded } from "@mui/icons-material";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { ToggleButton, ToggleButtonGroup, Tooltip } from "@mui/material";
 import React from "react";
 
 export default function VariantSelector({

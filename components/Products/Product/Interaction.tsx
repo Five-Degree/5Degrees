@@ -44,6 +44,7 @@ export default function ProductInteraction({ product }: { product: Product }) {
     });
     setAddedToCart(true);
   }
+
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (addedToCart) {
@@ -59,7 +60,6 @@ export default function ProductInteraction({ product }: { product: Product }) {
     <Stack
       gap={2}
       sx={{
-        // minWidth: "15.625rem",
         fontSize: { xxl: "1.5rem", xl: "1.3rem", md: "1rem" },
       }}
       paddingInline={3}
@@ -143,6 +143,11 @@ export default function ProductInteraction({ product }: { product: Product }) {
             ? "Modify cart item"
             : "Add to cart"}
         </Button>
+      </Stack>
+      <Stack gap={1}>
+        <Stack direction={"row"}>
+          <Typography>Ships Worldwide</Typography>
+        </Stack>
       </Stack>
     </Stack>
   );

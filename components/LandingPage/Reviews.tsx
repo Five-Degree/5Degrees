@@ -17,6 +17,8 @@ export default function Reviews() {
       justifyContent={"center"}
       gap={4}
       paddingInline={"10%"}
+      component={"section"}
+      id="Reviews"
     >
       {mockReviews.map((review, index) => (
         <Card

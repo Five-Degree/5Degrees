@@ -1,14 +1,14 @@
 "use client";
 import CustomIconButton from "@/components/Custom/CustomIconButton";
 import FeaturedProductCard from "@/components/Products/FeaturedProductCard";
-import mockFeaturedProducts from "@/shared/constants/mockFeaturedProducts";
+import mockProducts from "@/shared/constants/mockProducts";
 import useAddToCartModal from "@/shared/hooks/useAddToCartModal";
 import useSlickSlider from "@/shared/hooks/useSlickSlider";
-import { FeaturedProduct } from "@/shared/interfaces/Products";
+import Product from "@/shared/interfaces/Products";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { Stack, Typography } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
-import Slider, { Settings } from "react-slick";
+import { useState } from "react";
+import Slider from "react-slick";
 
 export default function Featured() {
   const {
@@ -19,7 +19,7 @@ export default function Featured() {
     handleNext,
     handlePrev,
   } = useSlickSlider();
-  const [activeProduct, setActiveProduct] = useState<FeaturedProduct>({
+  const [activeProduct, setActiveProduct] = useState<Product>({
     name: "",
     id: "",
     defaultPrice: 0,
@@ -32,7 +32,7 @@ export default function Featured() {
       product: activeProduct,
     });
 
-  function handleActiveProduct(product: FeaturedProduct) {
+  function handleActiveProduct(product: Product) {
     setActiveProduct(product);
     handleAddToCartOpen();
   }
@@ -59,16 +59,17 @@ export default function Featured() {
           height={"max-content"}
         >
           <Slider {...sliderSettings} ref={sliderRef}>
-            {mockFeaturedProducts.map((product) => {
-              return (
-                <FeaturedProductCard
-                  anime={{ "data-aos": "zoom-in" }}
-                  product={product}
-                  key={product.id}
-                  handleActiveProduct={handleActiveProduct}
-                />
-              );
-            })}
+            {mockProducts.map(
+              (product) =>
+                product.featuredImage && (
+                  <FeaturedProductCard
+                    anime={{ "data-aos": "zoom-in" }}
+                    product={product as Product & { featuredImage: string }}
+                    key={product.id}
+                    handleActiveProduct={handleActiveProduct}
+                  />
+                )
+            )}
           </Slider>
           {currentPage > 1 && (
             <CustomIconButton

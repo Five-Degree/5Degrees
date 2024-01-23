@@ -1,6 +1,8 @@
 "use client";
 import FormContainer from "@/components/Custom/FormComponents/FormContainer";
-import FormInput, { FormCredentials } from "@/components/Custom/FormComponents/FormInput";
+import FormInput, {
+  FormCredentials,
+} from "@/components/Custom/FormComponents/FormInput";
 import { useAuth } from "@/contexts/AuthContext";
 import inputs from "@/shared/constants/inputs.json";
 import { GetRefinedFirebaseError } from "@/shared/functions/errorHandler";
@@ -31,6 +33,7 @@ export default function LoginForm() {
     login(values.email, values.password)
       .then(() => {
         router.replace(redirectTo ?? "/");
+        setLoading(false);
       })
       .catch((error: any) => {
         handleError(GetRefinedFirebaseError(error));
@@ -41,9 +44,14 @@ export default function LoginForm() {
     e.preventDefault();
     setLoading(true);
     googleAccess()
-      .then(() => router.replace(redirectTo ?? "/"))
-      .catch((error: any) => handleError(GetRefinedFirebaseError(error)))
-      .finally(() => setLoading(false));
+      .then(() => {
+        router.replace(redirectTo ?? "/");
+        setLoading(false);
+      })
+      .catch((error: any) => {
+        handleError(GetRefinedFirebaseError(error));
+        setLoading(false);
+      });
   }
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setValues({ ...values, [e.target.name]: e.target.value });

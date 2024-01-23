@@ -1,13 +1,19 @@
 "use client";
 import { Stack } from "@mui/material";
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import DeliveryInformation from "./DeliveryInformation";
 import PaymentMethod from "./PaymentMethod";
 import OrderSummary from "./OrderSummary";
 import DeliverySchedule from "./DeliverySchedule";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useAuth } from "@/contexts/AuthContext";
+import { redirect } from "next/navigation";
 export default function Checkout() {
+  const { user } = useAuth();
+  useLayoutEffect(() => {
+    if (!user) redirect("/");
+  }, [user]);
   return (
     // mui date picker localisation
     <LocalizationProvider dateAdapter={AdapterDayjs}>

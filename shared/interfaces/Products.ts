@@ -16,20 +16,19 @@ export type ProductVariant = {
 
 export type NonNullColors = NonNullable<CSSProperties["color"]>;
 
-export default interface Product {
+type Product = {
   id: string;
   name: string;
   desc?: string;
   defaultPrice: number;
   mainImage: string;
+  featuredImage?: string;
+  images?: string[];
   variants: ProductVariant[];
   colors: NonNullColors | NonNullColors[];
   availability?: "available" | "out of stock";
-  images?: string[];
   reviews?: Review[];
-}
-
-export type FeaturedProduct = Omit<Product, "availability" | "images" | "desc">;
+};
 export interface CartProduct
   extends Omit<
     Product,
@@ -40,3 +39,5 @@ export interface CartProduct
   selectedColor: NonNullColors;
   unitPrice: number;
 }
+
+export default Product;

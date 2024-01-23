@@ -8,6 +8,8 @@ export default function ContactForm() {
       direction={"row"}
       justifyContent={"center"}
       gap={5}
+      component={"section"}
+      id="ContactForm"
       //   Responsive
       sx={{ fontSize: { xl: "1.5rem", lg: "1rem", md: "0.8rem" } }}
     >

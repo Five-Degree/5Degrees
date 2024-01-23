@@ -49,7 +49,12 @@ export default function ProductDetails({ product }: { product: Product }) {
     setActiveTab(newValue);
   };
   return (
-    <Stack pb={3}>
+    <Stack
+      pb={3}
+      sx={{
+        fontSize: { xxl: "1.5rem", xl: "1.3rem", md: "1rem" },
+      }}
+    >
       <Stack
         alignItems={"center"}
         sx={{ borderBottom: 1, borderColor: "divider" }}
@@ -75,7 +80,9 @@ export default function ProductDetails({ product }: { product: Product }) {
       </Stack>
       <CustomTabPanel value={activeTab} index={"Description"}>
         {product.desc ? (
-          <Typography maxWidth={"60ch"}>{product.desc}</Typography>
+          <Typography maxWidth={"60ch"} marginInline={"auto"}>
+            {product.desc}
+          </Typography>
         ) : (
           <Typography variant="h3" color={"var(--gray)"}>
             No Description
