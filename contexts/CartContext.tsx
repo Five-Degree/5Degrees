@@ -41,7 +41,22 @@ export default function CartContextProvider({
     setTotalCost(newTotalCost);
   }, [cart]);
   const addToCart = (product: CartProduct) => {
-    setCart((prev) => [...prev, product]);
+    setCart((prev) => {
+      // Check if the product is already in the cart
+      const existingProductIndex = prev.findIndex(
+        (item) => item.id === product.id
+      );
+
+      if (existingProductIndex !== -1) {
+        // If the product is already in the cart, replace the existing instance
+        const updatedCart = [...prev];
+        updatedCart[existingProductIndex] = product;
+        return updatedCart;
+      } else {
+        // If the product is not in the cart, add it to the cart
+        return [...prev, product];
+      }
+    });
     handleShowSnackbar("Item added to cart!");
   };
   const removeFromCart = (product: CartProduct) => {
@@ -52,6 +67,12 @@ export default function CartContextProvider({
   const clearCart = () => {
     setCart([]);
     handleShowSnackbar("Cart cleared!");
+  };
+  const getFromCart = (productId: Product["id"]) => {
+    const existingIndex = cart.findIndex((ci) => ci.id == productId);
+    if (existingIndex !== -1) {
+      return cart[existingIndex];
+    } else return null;
   };
 
   function handleShowSnackbar(mssg: string) {
@@ -74,6 +95,7 @@ export default function CartContextProvider({
         cart,
         totalCost,
         addToCart,
+        getFromCart,
         removeFromCart,
         clearCart,
       }}
@@ -100,6 +122,7 @@ interface ICartContext {
   cart: CartProduct[];
   totalCost: number;
   addToCart: (product: CartProduct) => void;
+  getFromCart: (productId: Product["id"]) => CartProduct | null;
   removeFromCart: (product: CartProduct) => void;
   clearCart: () => void;
 }

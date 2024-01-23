@@ -53,6 +53,7 @@ export default function Reviews() {
                     value={review.rating}
                     size="small"
                     readOnly
+                    precision={0.5}
                   />
                 </Stack>
               </Stack>

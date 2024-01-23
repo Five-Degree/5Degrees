@@ -6,7 +6,7 @@ interface Props {
   product: Product;
 }
 
-export default function useAddToCart({ product }: Props) {
+export default function useAddToCartModal({ product }: Props) {
   const [showAddToCartModal, setShowAddToCartModal] = useState(false);
   const handleAddToCartClose = () => {
     setShowAddToCartModal(false);

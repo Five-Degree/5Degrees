@@ -1,18 +1,27 @@
 import Product from "../interfaces/Products";
+import mockReviews from "./mockReviews";
 
 const mockProducts: Product[] = [
   {
     id: "1",
     name: "Air Jordan 1 High Retro",
+    desc: "Duis non libero sodales, blandit mi ac, hendrerit dolor. Fusce ut diam ligula. Donec eu quam non quam tristique fermentum in nec leo. In dapibus justo ut finibus facilisis. Nunc pulvinar blandit enim sed vestibulum. Sed commodo tellus ut massa fermentum, id fringilla justo elementum. Sed ut molestie nunc, condimentum gravida ex.",
     defaultPrice: 190,
     mainImage: "products/u0ebhsb9dsd2fjzdh2f1",
     variants: [
-      { name: "high", price: 350 },
       { name: "normal", price: 450 },
+      { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
     availability: "available",
+    images: [
+      "products/in010fkjxbdcmwmbsxhk",
+      "products/j9wwgzgv3erpk26rdniz",
+      "products/qx7kghsosy9gq08pczf9",
+      "products/w69cfuvhcijsvpcopo3g",
+    ],
+    reviews: mockReviews,
   },
   {
     id: "2",
@@ -20,11 +29,11 @@ const mockProducts: Product[] = [
     defaultPrice: 250,
     mainImage: "products/in010fkjxbdcmwmbsxhk",
     variants: [
-      { name: "high", price: 350 },
       { name: "normal", price: 450 },
+      { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
-    colors: ["black", "red", "white", "blue"],
+    colors: "blue",
     availability: "available",
   },
   {
@@ -33,8 +42,8 @@ const mockProducts: Product[] = [
     defaultPrice: 320,
     mainImage: "products/kmm7sjx17czvdqyu6sfs",
     variants: [
-      { name: "high", price: 350 },
       { name: "normal", price: 450 },
+      { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
@@ -46,8 +55,8 @@ const mockProducts: Product[] = [
     defaultPrice: 180,
     mainImage: "products/j9wwgzgv3erpk26rdniz",
     variants: [
-      { name: "high", price: 350 },
       { name: "normal", price: 450 },
+      { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
@@ -59,8 +68,8 @@ const mockProducts: Product[] = [
     defaultPrice: 160,
     mainImage: "products/qx7kghsosy9gq08pczf9",
     variants: [
-      { name: "high", price: 350 },
       { name: "normal", price: 450 },
+      { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
@@ -72,8 +81,8 @@ const mockProducts: Product[] = [
     defaultPrice: 3250,
     mainImage: "products/yx3xpow3narimw4qsjvi",
     variants: [
-      { name: "high", price: 350 },
       { name: "normal", price: 450 },
+      { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
@@ -85,8 +94,8 @@ const mockProducts: Product[] = [
     defaultPrice: 650,
     mainImage: "products/w69cfuvhcijsvpcopo3g",
     variants: [
-      { name: "high", price: 350 },
       { name: "normal", price: 450 },
+      { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
@@ -98,8 +107,8 @@ const mockProducts: Product[] = [
     defaultPrice: 185,
     mainImage: "products/h5bqo0txnk67arsnkcoj",
     variants: [
-      { name: "high", price: 350 },
       { name: "normal", price: 450 },
+      { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
@@ -111,8 +120,8 @@ const mockProducts: Product[] = [
     defaultPrice: 197,
     mainImage: "products/p5kj00yujdyki5qx0tfl",
     variants: [
-      { name: "high", price: 350 },
       { name: "normal", price: 450 },
+      { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
@@ -124,8 +133,8 @@ const mockProducts: Product[] = [
     defaultPrice: 276,
     mainImage: "products/u3m4bqr1boqcofi1tmp8",
     variants: [
-      { name: "high", price: 350 },
       { name: "normal", price: 450 },
+      { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
@@ -137,8 +146,8 @@ const mockProducts: Product[] = [
     defaultPrice: 435,
     mainImage: "products/n2siwivisv33vzqfd3g6",
     variants: [
-      { name: "high", price: 350 },
       { name: "normal", price: 450 },
+      { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
@@ -150,8 +159,8 @@ const mockProducts: Product[] = [
     defaultPrice: 186,
     mainImage: "products/vbhd5z6n4qvtpiuohqmr",
     variants: [
-      { name: "high", price: 350 },
       { name: "normal", price: 450 },
+      { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],

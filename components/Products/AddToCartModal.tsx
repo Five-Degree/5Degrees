@@ -1,19 +1,28 @@
 import { useCart } from "@/contexts/CartContext";
-import Product from "@/shared/interfaces/Products";
-import CircleIcon from "@mui/icons-material/Circle";
+import Product, {
+  NonNullColors,
+  VariantNames,
+} from "@/shared/interfaces/Products";
 import {
   Button,
   Card,
   CardContent,
   Modal,
   Stack,
-  ToggleButton,
-  ToggleButtonGroup,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import QuantityInput from "../Custom/CustomQuantityInput";
-export default function AddToCartPopover({
+import ColorSelector from "./Product/ColorSelector";
+import VariantSelector from "./Product/VariantSelector";
+import useAddToCartForm from "@/shared/hooks/useAddToCartForm";
+export interface AddToCartForm {
+  variant: VariantNames;
+  quantity: number;
+  color: NonNullColors;
+  unitPrice: number;
+}
+export default function AddToCartModal({
   product,
   openAddToCart,
   handleAddToCartClose,
@@ -22,44 +31,15 @@ export default function AddToCartPopover({
   openAddToCart: boolean;
   handleAddToCartClose: () => void;
 }) {
-  const defaultVariant = "normal";
-  const defaultColor =
-    (product.colors[0] as string) || (product.colors as string);
-
   const { addToCart } = useCart();
-  const [formValues, setFormValues] = useState({
-    variant: defaultVariant,
-    quantity: 1,
-    color: defaultColor,
-    unitPrice: product.defaultPrice,
-  });
+  const {
+    formValues,
+    handleVariantChange,
+    handleColorChange,
+    handleQuantityChange,
+  } = useAddToCartForm({ product });
 
-  function handleVariantChange(
-    event: React.MouseEvent<HTMLElement>,
-    value: string | null
-  ) {
-    setFormValues({
-      ...formValues,
-      variant: value as string,
-      unitPrice:
-        product.variants.find((v) => v.name == value)?.price ??
-        product.defaultPrice,
-    });
-  }
-  function handleColorChange(
-    event: React.MouseEvent<HTMLElement>,
-    value: string | null
-  ) {
-    setFormValues({ ...formValues, color: value as string });
-  }
-  function handleQuantityChange(
-    event: React.SyntheticEvent,
-    value: number | undefined
-  ) {
-    event.preventDefault();
-    setFormValues({ ...formValues, quantity: value ?? 0 });
-  }
-  const SectionWrapper = ({ children }: { children: React.ReactNode }) => {
+  const PartWrapper = ({ children }: { children: React.ReactNode }) => {
     return (
       <Stack
         direction={"row"}
@@ -116,61 +96,26 @@ export default function AddToCartPopover({
           }}
         >
           <Typography variant="h1">Add to cart</Typography>
-          <SectionWrapper>
+          <PartWrapper>
             <Typography variant="body2" width={"100%"}>
-              Select Variant:
+              Variants:
             </Typography>
-            <ToggleButtonGroup
-              value={formValues.variant}
-              exclusive
-              onChange={handleVariantChange}
-              id="variant"
-              aria-label="variants"
-            >
-              {product.variants.map((variant) => (
-                <ToggleButton
-                  key={variant.name}
-                  value={variant.name}
-                  aria-label={variant.name}
-                >
-                  {variant.name}
-                </ToggleButton>
-              ))}
-            </ToggleButtonGroup>
-          </SectionWrapper>
-          <SectionWrapper>
+            <VariantSelector
+              selectedVariant={formValues.variant}
+              handleVariantChange={handleVariantChange}
+              product={product}
+            />
+          </PartWrapper>
+          <PartWrapper>
             <Typography variant="body2" width={"100%"}>
-              Select Color:
+              Colors:
             </Typography>
-            <ToggleButtonGroup
-              value={formValues.color}
-              exclusive
-              id="color"
-              onChange={handleColorChange}
-              aria-label="color"
-            >
-              {typeof product.colors != "string" ? (
-                product.colors.map((color) => (
-                  <ToggleButton
-                    key={color}
-                    value={color}
-                    aria-label={color}
-                    sx={{ border: "none", paddingBlock: "0.5em" }}
-                  >
-                    <CircleIcon
-                      sx={{
-                        color: color,
-                        border: "1px solid var(--border-color)",
-                        borderRadius: "50%",
-                      }}
-                    />
-                  </ToggleButton>
-                ))
-              ) : (
-                <Typography>{product.colors}</Typography>
-              )}
-            </ToggleButtonGroup>
-          </SectionWrapper>
+            <ColorSelector
+              selectedColor={formValues.color}
+              handleColorChange={handleColorChange}
+              product={product}
+            />
+          </PartWrapper>
           <Stack alignItems={"flex-end"} mt={4}>
             <Typography>Unit Price</Typography>
             <Typography variant="h1">${formValues.unitPrice}</Typography>

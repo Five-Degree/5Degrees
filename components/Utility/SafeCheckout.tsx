@@ -4,6 +4,7 @@ import Image from "next/image";
 import React from "react";
 import StripeLogo from "@/public/Logos/Stripe.svg";
 import PaymentMethods from "@/public/Logos/PaymentMethods-row.svg";
+import PCIBadge from "@/public/Images/badge_pci_dss_compliant@2x.png";
 export default function SafeCheckout() {
   return (
     <Stack alignItems={"center"} marginBlock={2} gap={2}>
@@ -26,6 +27,11 @@ export default function SafeCheckout() {
             style={{ height: "1.5em", width: "auto" }}
           />
         </Stack>
+        <Image
+          src={PCIBadge}
+          alt="PCI Compliant"
+          style={{ height: "1.5em", width: "auto" }}
+        />
       </Stack>
       <Divider flexItem />
       <Image src={PaymentMethods} alt="All payment methods" />

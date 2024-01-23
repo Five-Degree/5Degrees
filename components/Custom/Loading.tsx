@@ -12,7 +12,7 @@ export default function Loading() {
       left={"50%"}
       sx={{ transform: "translate(-50%,-50%)" }}
     >
-      <CircularProgress sx={{ color: "var(--graylight)" }} />
+      <CircularProgress sx={{ color: "var(--primary)" }} />
     </Stack>
   );
 }

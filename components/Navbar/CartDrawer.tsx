@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import CartDrawerCard from "../Products/CartDrawerCard";
+import CartDrawerCard from "@/components/Products/CartDrawerCard";
 export default function CartDrawer({
   drawerState,
   toggleDrawer,

@@ -168,6 +168,26 @@ const theme = createTheme({
         },
       },
     },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          fontFamily: "var(--font-bn)",
+          color: "var(--primary)",
+          fontSize: "1.2em",
+          "&.Mui-selected": {
+            color: "var(--accent)",
+          },
+          minHeight: 0,
+        },
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          backgroundColor: "var(--accent)",
+        },
+      },
+    },
     MuiToggleButton: {
       styleOverrides: {
         root: {

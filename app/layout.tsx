@@ -46,7 +46,7 @@ export default function RootLayout({
                 {/* Cart Provider */}
                 <CartContextProvider>
                   {/* Top loading bar component */}
-                  <NextTopLoader color="var(--accent)" />
+                  <NextTopLoader showSpinner={false} color="var(--accent)" />
                   <Navbar />
                   {children}
                 </CartContextProvider>

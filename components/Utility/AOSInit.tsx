@@ -10,7 +10,7 @@ export default function AOSInit() {
       animatedClassName: "aos-animate",
       duration: 800,
       easing: "ease-in-out-back",
-      disable: window.innerWidth < 780,
+      // disable: window.innerWidth < 780,
     });
   }, []);
   return null;

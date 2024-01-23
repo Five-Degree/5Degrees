@@ -1,8 +1,11 @@
+import { useCart } from "@/contexts/CartContext";
 import { useResponsive } from "@/contexts/ResponsiveContext";
 import { FeaturedProduct } from "@/shared/interfaces/Products";
+import { CheckRounded } from "@mui/icons-material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { ButtonBase, Stack, Tooltip, Typography } from "@mui/material";
 import { CldImage } from "next-cloudinary";
+import { useEffect, useState } from "react";
 
 export default function FeaturedProductCard({
   product,
@@ -13,7 +16,15 @@ export default function FeaturedProductCard({
   anime?: IAos;
   handleActiveProduct: (product: FeaturedProduct) => void;
 }) {
-  const { matchesXXL, matchesXL } = useResponsive();
+  const { matchesXL } = useResponsive();
+  const { cart, removeFromCart } = useCart();
+  const [addedToCart, setAddedToCart] = useState(false);
+  useEffect(() => {
+    // Check if the product is in the cart
+    const isProductInCart = cart.findIndex((ci) => ci.id === product.id) !== -1;
+    setAddedToCart(isProductInCart);
+  }, [cart, product]);
+
   return (
     <Stack
       direction={"row"}
@@ -72,30 +83,41 @@ export default function FeaturedProductCard({
           </Typography>
         </Stack>
       </Stack>
-      <Tooltip title={"Add to cart"}>
-        <ButtonBase
-          sx={{
-            position: "absolute",
-            bottom: 0,
-            right: 0,
-            borderTop: "1px solid var(--border-color)",
-            borderLeft: "1px solid var(--border-color)",
-            borderRadius: "60px 0 0 0",
-            padding: "1em 0.5em 0.5em 1em",
-            background: "none",
-          }}
-          aria-label="button"
-          component={"button"}
-          onClick={() => handleActiveProduct(product)}
-        >
-          <AddRoundedIcon
-            sx={{
-              // Responsive
-              fontSize: { xl: "2em", md: "1.5em" },
-            }}
-          />
-        </ButtonBase>
-      </Tooltip>
+      <ButtonBase
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          borderTop: "1px solid var(--border-color)",
+          borderLeft: "1px solid var(--border-color)",
+          borderRadius: "60px 0 0 0",
+          padding: "1em 0.5em 0.5em 1em",
+          background: "none",
+        }}
+        aria-label="button"
+        component={"button"}
+        onClick={() => !addedToCart && handleActiveProduct(product)}
+      >
+        {addedToCart ? (
+          <Tooltip title={"In cart"}>
+            <CheckRounded
+              sx={{
+                // Responsive
+                fontSize: { xl: "2em", md: "1.5em" },
+              }}
+            />
+          </Tooltip>
+        ) : (
+          <Tooltip title={"Add to cart"}>
+            <AddRoundedIcon
+              sx={{
+                // Responsive
+                fontSize: { xl: "2em", md: "1.5em" },
+              }}
+            />
+          </Tooltip>
+        )}
+      </ButtonBase>
     </Stack>
   );
 }

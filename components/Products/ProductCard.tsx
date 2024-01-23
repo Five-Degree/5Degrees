@@ -3,7 +3,7 @@ import ImageModal from "@/components/Products/ImageModal";
 import { useCart } from "@/contexts/CartContext";
 import { useResponsive } from "@/contexts/ResponsiveContext";
 import capitalize from "@/shared/functions/capitalize";
-import useAddToCart from "@/shared/hooks/useAddToCart";
+import useAddToCartModal from "@/shared/hooks/useAddToCartModal";
 import Product from "@/shared/interfaces/Products";
 import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
 import {
@@ -15,6 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import { CldImage } from "next-cloudinary";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ProductCard({
@@ -23,12 +24,13 @@ export default function ProductCard({
 }: {
   product: Product;
 } & IAos) {
+  const router = useRouter();
   const [showImageModal, setShowImageModal] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const { cart } = useCart();
   const { matchesXL, matchesLG } = useResponsive();
   const { showAddToCartModal, addToCartModal, handleAddToCartOpen } =
-    useAddToCart({ product });
+    useAddToCartModal({ product });
 
   function handleImageClose() {
     setShowImageModal(false);
@@ -71,7 +73,7 @@ export default function ProductCard({
             fontSize: "0.8em",
           }}
         />
-        <CardActionArea>
+        <CardActionArea onClick={() => router.push(`product/${product.id}`)}>
           <CardContent
             // Responsive
             sx={{ fontSize: { xl: "1.5rem", lg: "1rem", md: "0.8rem" } }}

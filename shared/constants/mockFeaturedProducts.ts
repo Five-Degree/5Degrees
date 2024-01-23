@@ -2,7 +2,7 @@ import { FeaturedProduct } from "../interfaces/Products";
 
 const mockFeaturedProducts: FeaturedProduct[] = [
   {
-    id: "1",
+    id: "featured1",
     name: "Air Jordan 1 High Retro",
     defaultPrice: 190,
     mainImage: "featuredProducts/fyspwjoxpwcjoyhj4qys",
@@ -14,7 +14,7 @@ const mockFeaturedProducts: FeaturedProduct[] = [
     colors: ["black", "red", "white", "blue"],
   },
   {
-    id: "2",
+    id: "featured2",
     name: "Air Jordan 1 High Retro",
     defaultPrice: 250,
     mainImage: "featuredProducts/t5symwb8xmq123jk6dcy",
@@ -26,7 +26,7 @@ const mockFeaturedProducts: FeaturedProduct[] = [
     colors: ["black", "red", "white", "blue"],
   },
   {
-    id: "3",
+    id: "featured3",
     name: "Air Jordan 1 High Retro",
     defaultPrice: 360,
     mainImage: "featuredProducts/zlgr8ny139fgtgtbx97q",
@@ -38,7 +38,7 @@ const mockFeaturedProducts: FeaturedProduct[] = [
     colors: ["black", "red", "white", "blue"],
   },
   {
-    id: "4",
+    id: "featured4",
     name: "Air Jordan 1 High Retro",
     defaultPrice: 450,
     mainImage: "featuredProducts/onjfiohcapavbgiuktgy",
@@ -50,7 +50,7 @@ const mockFeaturedProducts: FeaturedProduct[] = [
     colors: ["black", "red", "white", "blue"],
   },
   {
-    id: "5",
+    id: "featured5",
     name: "Air Jordan 1 High Retro",
     defaultPrice: 450,
     mainImage: "featuredProducts/onjfiohcapavbgiuktgy",
@@ -62,7 +62,7 @@ const mockFeaturedProducts: FeaturedProduct[] = [
     colors: ["black", "red", "white", "blue"],
   },
   {
-    id: "6",
+    id: "featured6",
     name: "Air Jordan 1 High Retro",
     defaultPrice: 450,
     mainImage: "featuredProducts/onjfiohcapavbgiuktgy",
@@ -74,7 +74,7 @@ const mockFeaturedProducts: FeaturedProduct[] = [
     colors: ["black", "red", "white", "blue"],
   },
   {
-    id: "7",
+    id: "featured7",
     name: "Air Jordan 1 High Retro",
     defaultPrice: 450,
     mainImage: "featuredProducts/onjfiohcapavbgiuktgy",
