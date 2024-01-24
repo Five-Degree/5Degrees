@@ -13,9 +13,10 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import QuantityInput from "../Custom/CustomQuantityInput";
-import ColorSelector from "./Product/ColorSelector";
-import VariantSelector from "./Product/VariantSelector";
+import ColorSelector from "./Selectors/ColorSelector";
+import VariantSelector from "./Selectors/VariantSelector";
 import useAddToCartForm from "@/shared/hooks/useAddToCartForm";
+import SizeSelector from "./Selectors/SizeSelector";
 export interface AddToCartForm {
   variant: VariantNames;
   quantity: number;
@@ -37,6 +38,7 @@ export default function AddToCartModal({
     handleVariantChange,
     handleColorChange,
     handleQuantityChange,
+    handleSizeChange,
   } = useAddToCartForm({ product });
 
   const PartWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -64,6 +66,7 @@ export default function AddToCartModal({
       quantity: formValues.quantity,
       selectedVariant: formValues.variant,
       selectedColor: formValues.color,
+      selectedSize: formValues.size,
       unitPrice: formValues.unitPrice,
       name: product.name,
       mainImage: product.mainImage,
@@ -73,8 +76,6 @@ export default function AddToCartModal({
   return (
     <Modal
       disablePortal
-      // disableEnforceFocus
-      // disableAutoFocus
       open={openAddToCart}
       aria-labelledby={product.name}
       aria-describedby={product.name}
@@ -113,6 +114,16 @@ export default function AddToCartModal({
             <ColorSelector
               selectedColor={formValues.color}
               handleColorChange={handleColorChange}
+              product={product}
+            />
+          </PartWrapper>
+          <PartWrapper>
+            <Typography variant="body2" width={"100%"}>
+              Sizes:
+            </Typography>
+            <SizeSelector
+              selectedSize={formValues.size}
+              handleSizeChange={handleSizeChange}
               product={product}
             />
           </PartWrapper>

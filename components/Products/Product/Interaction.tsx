@@ -7,9 +7,10 @@ import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import SettingsSuggestRoundedIcon from "@mui/icons-material/SettingsSuggestRounded";
 import { Button, Rating, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import ColorSelector from "@/components/Products/Product/ColorSelector";
-import VariantSelector from "@/components/Products/Product/VariantSelector";
+import ColorSelector from "@/components/Products/Selectors/ColorSelector";
+import VariantSelector from "@/components/Products/Selectors/VariantSelector";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import SizeSelector from "../Selectors/SizeSelector";
 
 export default function ProductInteraction({ product }: { product: Product }) {
   const { addToCart, getFromCart, removeFromCart } = useCart();
@@ -20,6 +21,7 @@ export default function ProductInteraction({ product }: { product: Product }) {
     handleVariantChange,
     handleColorChange,
     handleQuantityChange,
+    handleSizeChange,
   } = useAddToCartForm({
     product,
     defaultColor: prodFromCart?.selectedColor,
@@ -38,6 +40,7 @@ export default function ProductInteraction({ product }: { product: Product }) {
       quantity: formValues.quantity,
       selectedVariant: formValues.variant,
       selectedColor: formValues.color,
+      selectedSize: formValues.size,
       unitPrice: formValues.unitPrice,
       name: product.name,
       mainImage: product.mainImage,
@@ -97,6 +100,14 @@ export default function ProductInteraction({ product }: { product: Product }) {
         <ColorSelector
           selectedColor={formValues.color}
           handleColorChange={handleColorChange}
+          product={product}
+        />
+      </Stack>
+      <Stack gap={1}>
+        <Typography variant="body2">Sizes:</Typography>
+        <SizeSelector
+          selectedSize={formValues.size}
+          handleSizeChange={handleSizeChange}
           product={product}
         />
       </Stack>

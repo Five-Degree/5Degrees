@@ -14,6 +14,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
     images: [
       "products/mens/shoes/2/qksxbq9bvy8t52gpkdpp",
@@ -34,6 +35,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: "blue",
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
   },
   {
@@ -47,6 +49,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
   },
   {
@@ -60,6 +63,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
   },
   {
@@ -73,6 +77,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "out of stock",
   },
   {
@@ -86,6 +91,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "out of stock",
   },
   {
@@ -99,6 +105,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "out of stock",
   },
   {
@@ -112,6 +119,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "out of stock",
   },
   {
@@ -125,6 +133,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "out of stock",
   },
   {
@@ -138,6 +147,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
   },
   {
@@ -151,6 +161,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
   },
   {
@@ -164,6 +175,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "out of stock",
   },
   {
@@ -178,6 +190,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
     reviews: mockReviews,
     images: ["products/mens/shoes/13/tdv0jzrqj5nfzieejxc7"],
@@ -195,6 +208,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
     reviews: mockReviews,
     images: ["products/mens/shoes/14/cyqz3fdwa9hruaiern1g"],
@@ -212,6 +226,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
     reviews: mockReviews,
     images: ["products/mens/shoes/15/hay8kbwdisaaq06lfsun"],
@@ -229,6 +244,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
     reviews: mockReviews,
     images: ["products/mens/shoes/16/nmktcdtdy7gszwibhvdy"],
@@ -246,6 +262,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
     reviews: mockReviews,
     images: ["products/mens/shoes/16/nmktcdtdy7gszwibhvdy"],
@@ -263,6 +280,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
     reviews: mockReviews,
     images: ["products/mens/shoes/16/nmktcdtdy7gszwibhvdy"],
@@ -280,6 +298,7 @@ const mockProducts: Product[] = [
       { name: "master", price: 750 },
     ],
     colors: ["black", "red", "white", "blue"],
+    sizes: [7.5, 8, 8.5, 9],
     availability: "available",
     reviews: mockReviews,
     images: ["products/mens/shoes/16/nmktcdtdy7gszwibhvdy"],

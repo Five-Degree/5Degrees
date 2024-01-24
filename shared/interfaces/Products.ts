@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 import { Review } from "../constants/mockReviews";
+import { ShoeSize } from "../constants/shoeSizes";
 
 export type VariantNames =
   | "normal"
@@ -26,17 +27,19 @@ type Product = {
   images?: string[];
   variants: ProductVariant[];
   colors: NonNullColors | NonNullColors[];
+  sizes: ShoeSize["USMen"][];
   availability?: "available" | "out of stock";
   reviews?: Review[];
 };
 export interface CartProduct
   extends Omit<
     Product,
-    "images" | "colors" | "variants" | "defaultPrice" | "availability"
+    "images" | "colors" | "variants" | "defaultPrice" | "availability" | "sizes"
   > {
   quantity: number;
   selectedVariant: VariantNames;
   selectedColor: NonNullColors;
+  selectedSize: ShoeSize["USMen"];
   unitPrice: number;
 }
 

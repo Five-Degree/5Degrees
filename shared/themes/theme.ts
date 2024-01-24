@@ -131,6 +131,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: "1em",
+          top: "-5%",
+
           "&.Mui-focused": {
             color: "var(--accent)",
           },
@@ -145,6 +147,22 @@ const theme = createTheme({
         },
       },
     },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontSize: "1.3em",
+          ":hover": {
+            backgroundColor: "var(--graylight)",
+          },
+          "&.Mui-selected": {
+            backgroundColor: "var(--accentalpha)",
+            ":hover": {
+              backgroundColor: "var(--graylight)",
+            },
+          },
+        },
+      },
+    },
     MuiPopover: {
       styleOverrides: {
         root: {
@@ -156,6 +174,19 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: "var(--border-radius)",
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "var(--accent)",
+          },
+        },
+        select: {
+          color: "var(--primary)",
+          padding: ".3125em .5em",
         },
       },
     },

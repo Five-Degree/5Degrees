@@ -20,10 +20,7 @@ export default function ColorSelector({
   ) => void;
   product: Product;
 }) {
-  const colorButtonFactory = (
-    color: NonNullColors,
-    disabled: boolean | undefined = false
-  ) => (
+  const colorButtonFactory = (color: NonNullColors) => (
     <Tooltip key={color} title={color}>
       <ToggleButton
         value={color}
@@ -35,7 +32,6 @@ export default function ColorSelector({
           // flexDirection: "column",
           paddingInline: "0.5em",
         }}
-        disabled={disabled}
       >
         <span
           style={{
@@ -74,7 +70,7 @@ export default function ColorSelector({
     >
       {typeof product.colors != "string"
         ? product.colors.map((color) => colorButtonFactory(color))
-        : colorButtonFactory(product.colors, true)}
+        : colorButtonFactory(product.colors)}
     </ToggleButtonGroup>
   );
 }
