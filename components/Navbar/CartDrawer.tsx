@@ -29,6 +29,12 @@ export default function CartDrawer({
       open={drawerState}
       onClose={toggleDrawer(false)}
       onOpen={toggleDrawer(true)}
+      PaperProps={{
+        sx: {
+          width: "30%",
+          minWidth: "330px",
+        },
+      }}
     >
       <Stack
         paddingInline={3}

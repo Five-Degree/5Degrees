@@ -105,12 +105,12 @@ export default function CartContextProvider({
         {children}
         <Snackbar
           open={showSb}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
           autoHideDuration={6000}
           onClose={handleHideSnackbar}
           message={
             <Stack direction="row" gap={2} alignItems={"center"}>
-              <ShoppingCartRoundedIcon />
+              <ShoppingCartRoundedIcon sx={{ color: "white" }} />
               {sbMessage}
             </Stack>
           }
