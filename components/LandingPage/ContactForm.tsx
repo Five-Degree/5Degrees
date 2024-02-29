@@ -9,11 +9,16 @@ export default function ContactForm() {
       justifyContent={"center"}
       gap={5}
       component={"section"}
+      flexWrap={"wrap"}
       id="ContactForm"
       //   Responsive
       sx={{ fontSize: { xl: "1.5rem", lg: "1rem", md: "0.8rem" } }}
     >
-      <Typography variant="h1" textAlign={"right"} data-aos="fade-left">
+      <Typography
+        variant="h1"
+        textAlign={{ xs: "center", sm: "right" }}
+        data-aos="fade-left"
+      >
         For <span style={{ color: "var(--accent)" }}>Custom Orders</span>
         <br />
         Feel Free To Send Us a Message!

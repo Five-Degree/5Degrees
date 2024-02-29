@@ -1,12 +1,10 @@
 import CustomIconButton from "@/components/Custom/CustomIconButton";
-import IdentityDisplay from "@/components/Custom/IdentityDisplay";
 import { useAuth } from "@/contexts/AuthContext";
 import { getPortalUrl } from "@/shared/functions/stripe/stripePayment";
 import { NavLinks } from "@/shared/interfaces/Links";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import ReceiptLongRoundedIcon from "@mui/icons-material/ReceiptLongRounded";
 import SpaceDashboardOutlinedIcon from "@mui/icons-material/SpaceDashboardOutlined";
-import { Tooltip } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import UserAvatar from "./UserAvatar";

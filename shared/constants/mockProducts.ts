@@ -6,7 +6,8 @@ const mockProducts: Product[] = [
     id: "1",
     name: "Air Jordan 1 High Retro",
     desc: "Duis non libero sodales, blandit mi ac, hendrerit dolor. Fusce ut diam ligula. Donec eu quam non quam tristique fermentum in nec leo. In dapibus justo ut finibus facilisis. Nunc pulvinar blandit enim sed vestibulum. Sed commodo tellus ut massa fermentum, id fringilla justo elementum. Sed ut molestie nunc, condimentum gravida ex.",
-    defaultPrice: 190,
+    defaultPrice: 450,
+    salePrice: 125,
     mainImage: "products/mens/shoes/1/tvycewdsdubwcxdohqup",
     variants: [
       { name: "normal", price: 450 },
@@ -30,7 +31,7 @@ const mockProducts: Product[] = [
     defaultPrice: 250,
     mainImage: "products/mens/shoes/2/qksxbq9bvy8t52gpkdpp",
     variants: [
-      { name: "normal", price: 450 },
+      { name: "normal", price: 250 },
       { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
@@ -44,7 +45,7 @@ const mockProducts: Product[] = [
     defaultPrice: 320,
     mainImage: "products/mens/shoes/3/blpvzklmbyvtx0pf8wjh",
     variants: [
-      { name: "normal", price: 450 },
+      { name: "normal", price: 320 },
       { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
@@ -58,7 +59,7 @@ const mockProducts: Product[] = [
     defaultPrice: 180,
     mainImage: "products/mens/shoes/4/sq7nhsboewq3mnq8adui",
     variants: [
-      { name: "normal", price: 450 },
+      { name: "normal", price: 180 },
       { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
@@ -72,7 +73,7 @@ const mockProducts: Product[] = [
     defaultPrice: 160,
     mainImage: "products/mens/shoes/5/qelpvc8por0uy9b9qufj",
     variants: [
-      { name: "normal", price: 450 },
+      { name: "normal", price: 160 },
       { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
@@ -86,7 +87,7 @@ const mockProducts: Product[] = [
     defaultPrice: 3250,
     mainImage: "products/mens/shoes/6/hidbvhsasijfcs7m1bk1",
     variants: [
-      { name: "normal", price: 450 },
+      { name: "normal", price: 3250 },
       { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
@@ -100,7 +101,7 @@ const mockProducts: Product[] = [
     defaultPrice: 650,
     mainImage: "products/mens/shoes/7/qjszhw0wsfjzq2j4mcuh",
     variants: [
-      { name: "normal", price: 450 },
+      { name: "normal", price: 650 },
       { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
@@ -114,7 +115,7 @@ const mockProducts: Product[] = [
     defaultPrice: 185,
     mainImage: "products/mens/shoes/8/bvf3dtcxywvil9dregyv",
     variants: [
-      { name: "normal", price: 450 },
+      { name: "normal", price: 185 },
       { name: "high", price: 550 },
       { name: "master", price: 750 },
     ],
@@ -124,7 +125,7 @@ const mockProducts: Product[] = [
   },
   {
     id: "9",
-    name: "Air Jordan 2 High Retro",
+    name: "Air Jordan 2 High Retrodasdsadasdsdasdsadsadsadwqewqeweqwegfgdgdfgf",
     defaultPrice: 197,
     mainImage: "products/mens/shoes/9/nqvafgnxjpayph9h8yqr",
     variants: [

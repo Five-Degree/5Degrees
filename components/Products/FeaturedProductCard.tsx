@@ -33,9 +33,10 @@ export default function FeaturedProductCard({
       border={".0625rem solid var(--border-color)"}
       position={"relative"}
       minHeight={"8.875rem"}
-      sx={{ aspectRatio: "1 / 0.5" }}
+      sx={{ aspectRatio: "0.8 / 0.5" }}
       ml={"15%"}
       alignItems={"center"}
+      justifyContent={"flex-end"}
       padding={1}
       marginBlock={1}
       {...anime}
@@ -44,14 +45,16 @@ export default function FeaturedProductCard({
         src={product.featuredImage}
         alt={product.name}
         // Responsive
-        width={matchesXL ? 152 * 1.3 : 152}
-        height={matchesXL ? 91 * 1.3 : 91}
+        width={152}
+        height={91}
         style={{
           position: "absolute",
           left: "-20%",
-          bottom: "15%",
+          bottom: "20%",
           rotate: "-25deg",
           filter: "drop-shadow(var(--shadow))",
+          width: "50%",
+          height: "auto",
         }}
       />
       <Stack
@@ -59,18 +62,14 @@ export default function FeaturedProductCard({
         sx={{
           fontSize: { xxl: "1.8rem", xl: "1.3rem", lg: "1.2rem", md: "1rem" },
         }}
-        ml={{ xl: "9.5rem", lg: "7rem" }}
+        width={"60%"}
       >
         <Tooltip title={product.name}>
-          <Typography
-            variant="h3"
-            textOverflow={"ellipsis"}
-            width={"8.75em"}
-            overflow={"hidden"}
-            whiteSpace={"nowrap"}
-          >
-            <Link href={`/product/${product.id}`}>{product.name}</Link>
-          </Typography>
+          <Link href={`/product/${product.id}`}>
+            <Typography variant="h3" noWrap>
+              {product.name}
+            </Typography>
+          </Link>
         </Tooltip>
         <Typography variant="h1">${product.defaultPrice}</Typography>
         <Stack direction={"row"} gap={1}>

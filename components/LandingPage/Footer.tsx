@@ -7,9 +7,9 @@ import Link from "next/link";
 import React from "react";
 import CustomIconButton from "../Custom/CustomIconButton";
 import {
-    FacebookIcon,
-    InstagramIcon,
-    LinkedInIcon
+  FacebookIcon,
+  InstagramIcon,
+  LinkedInIcon,
 } from "../Utility/CustomIcons";
 const FooterSection = ({
   children,
@@ -48,6 +48,7 @@ export default function Footer() {
       overflow={"hidden"}
       flexWrap={"wrap"}
       paddingInline={3}
+      gap={2}
     >
       <Image src={Logo} alt="5 Degrees" data-aos="zoom-in" />
       <Stack

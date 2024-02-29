@@ -10,7 +10,7 @@ export default function CartDrawerCard({ item }: { item: CartProduct }) {
   const { removeFromCart } = useCart();
 
   return (
-    <Card sx={{ minWidth: "21.875rem", minHeight: "160px" }}>
+    <Card sx={{ width: "100%", minHeight: "160px" }}>
       <CardContent
         sx={{
           position: "relative",

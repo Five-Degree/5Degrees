@@ -18,6 +18,7 @@ export default function UserMenu({
   const pathname = usePathname();
   return (
     <Menu
+      // disableScrollLock
       anchorEl={accountOpenAnchor}
       id={id}
       open={accountOpen}

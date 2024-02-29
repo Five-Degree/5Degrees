@@ -51,13 +51,14 @@ export default function CartContextProvider({
         // If the product is already in the cart, replace the existing instance
         const updatedCart = [...prev];
         updatedCart[existingProductIndex] = product;
+        handleShowSnackbar("Item updated!");
         return updatedCart;
       } else {
         // If the product is not in the cart, add it to the cart
+        handleShowSnackbar("Item added to cart!");
         return [...prev, product];
       }
     });
-    handleShowSnackbar("Item added to cart!");
   };
   const removeFromCart = (product: CartProduct) => {
     const filteredCart = cart.filter((prod) => prod.id != product.id);

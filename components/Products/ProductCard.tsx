@@ -11,12 +11,14 @@ import {
   CardActionArea,
   CardContent,
   Chip,
+  Stack,
   Tooltip,
   Typography,
 } from "@mui/material";
 import { CldImage } from "next-cloudinary";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import PriceComponent from "../Custom/PriceComponent";
 
 export default function ProductCard({
   product,
@@ -28,7 +30,6 @@ export default function ProductCard({
   const [showImageModal, setShowImageModal] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const { cart } = useCart();
-  const { matchesXL, matchesLG } = useResponsive();
   const { showAddToCartModal, addToCartModal, handleAddToCartOpen } =
     useAddToCartModal({ product });
 
@@ -45,20 +46,18 @@ export default function ProductCard({
       <Card
         sx={{
           position: "relative",
-          width: "max-content",
-          height: "fit-content",
-          fontSize: { xl: "1.5rem", md: "0.8rem" },
+          width: "100%",
         }}
         {...anime}
       >
         <CldImage
           // Responsive
-          width={matchesXL ? 192 * 1.6 : matchesLG ? 192 * 1.2 : 192}
-          height={matchesXL ? 123 * 1.6 : matchesLG ? 123 * 1.2 : 123}
+          width={192}
+          height={123}
           src={product.mainImage}
           alt={product.name}
           onClick={() => setShowImageModal(true)}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", width: "100%", height: "auto" }}
         />
         <Chip
           label={capitalize(product.availability)}
@@ -70,24 +69,20 @@ export default function ProductCard({
               product.availability == "available"
                 ? "var(--success)"
                 : "var(--error)",
-            fontSize: "0.8em",
+            fontSize: "var(--body2)",
           }}
         />
         <CardActionArea onClick={() => router.push(`product/${product.id}`)}>
           <CardContent
-            // Responsive
-            sx={{ fontSize: { xl: "1.5rem", lg: "1rem", md: "0.8rem" } }}
+          // Responsive
           >
-            <Typography
-              variant="h3"
-              textOverflow={"ellipsis"}
-              width={"8.75em"}
-              overflow={"hidden"}
-              whiteSpace={"nowrap"}
-            >
+            <Typography variant="h3" width={"20ch"} noWrap>
               {product.name}
             </Typography>
-            <Typography variant="h1">${product.defaultPrice}</Typography>
+            <PriceComponent
+              price={product.defaultPrice}
+              salePrice={product.salePrice}
+            />
             <Typography variant="body2" textTransform={"uppercase"}>
               {product.variants.length ?? 5}{" "}
               <span style={{ fontWeight: "lighter" }}>Variants</span>

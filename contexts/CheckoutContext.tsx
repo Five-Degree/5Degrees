@@ -24,22 +24,25 @@ export default function CheckoutContextProvider({
   const [saveInfo, setSaveInfo] = useState(false);
   const [scheduleDelivery, setScheduleDelivery] = useState(false);
   const [rapidDelivery, setRapidDelivery] = useState(false);
-  const [defaultDeliveryDate, setDefaultDeliveryDate] = useState<Dayjs | null>(
-    dayjs().add(3, "days")
-  );
+  const [scheduledDeliveryDate, setScheduledDeliveryDate] =
+    useState<Dayjs | null>(dayjs().add(3, "days"));
   const [paymentMethod, setPaymentMethod] = useState("card");
 
   const handleScheduleDelivery = (
     event: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
-  ) => setScheduleDelivery(checked);
+  ) => {
+    setRapidDelivery(false);
+    setScheduleDelivery(checked);
+  };
 
   const handleRapidDelivery = (
     event: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => setRapidDelivery(checked);
 
-  const handleDefaultDeliveryDate = (day: Dayjs) => setDefaultDeliveryDate(day);
+  const handleScheduledDeliveryDate = (day: Dayjs) =>
+    setScheduledDeliveryDate(day);
 
   const handleSaveInfo = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -61,13 +64,13 @@ export default function CheckoutContextProvider({
     saveInfo,
     scheduleDelivery,
     rapidDelivery,
-    defaultDeliveryDate,
+    scheduledDeliveryDate,
     paymentMethod,
     handleSaveInfo,
     handleDeliveryInfoChange,
     handleScheduleDelivery,
     handleRapidDelivery,
-    handleDefaultDeliveryDate,
+    handleScheduledDeliveryDate,
     handleSetPaymentMethod,
   };
   return (
@@ -76,13 +79,13 @@ export default function CheckoutContextProvider({
     </CheckoutContext.Provider>
   );
 }
-export type PaymentMethod="card" | "online" | "cod"
+export type PaymentMethod = "card" | "online" | "cod";
 interface ICheckoutContext {
   deliveryInfo: FormCredentials;
   saveInfo: boolean;
   scheduleDelivery: boolean;
   rapidDelivery: boolean;
-  defaultDeliveryDate: dayjs.Dayjs | null;
+  scheduledDeliveryDate: dayjs.Dayjs | null;
   paymentMethod: PaymentMethod;
   handleSaveInfo: (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -97,7 +100,7 @@ interface ICheckoutContext {
     event: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => void;
-  handleDefaultDeliveryDate: (day: Dayjs) => void;
+  handleScheduledDeliveryDate: (day: Dayjs) => void;
   handleSetPaymentMethod: (
     event: React.MouseEvent<HTMLElement, MouseEvent>,
     value: any

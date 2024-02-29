@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import { Alumni_Sans, Bebas_Neue } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
-import { LocalizationProvider } from "@mui/x-date-pickers";
+
 const alumniSans = Alumni_Sans({
   subsets: ["latin"],
   variable: "--font-as",
@@ -39,12 +39,12 @@ export default function RootLayout({
           <AppRouterCacheProvider>
             {/* mui theme provider */}
             <ThemeClient>
-              {/* Animation on scroll provider */}
-              <AOSInit />
               {/* Screen Responsive size provider */}
               <ResponsiveContextProvider>
                 {/* Cart Provider */}
                 <CartContextProvider>
+                  {/* Animation on scroll provider */}
+                  <AOSInit />
                   {/* Top loading bar component */}
                   <NextTopLoader showSpinner={false} color="var(--accent)" />
                   <Navbar />

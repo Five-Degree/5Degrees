@@ -22,6 +22,7 @@ type Product = {
   name: string;
   desc?: string;
   defaultPrice: number;
+  salePrice?: number;
   mainImage: string;
   featuredImage?: string;
   images?: string[];

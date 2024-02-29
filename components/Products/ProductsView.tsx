@@ -1,47 +1,34 @@
-import React, { useState } from "react";
 import ProductCard from "@/components/Products/ProductCard";
-import mockProducts from "@/shared/constants/mockProducts";
-import { Grid, Pagination, Stack } from "@mui/material";
 import SearchProducts from "@/components/Products/SearchProducts";
+import { useResponsive } from "@/contexts/ResponsiveContext";
+import mockProducts from "@/shared/constants/mockProducts";
+import { Grid, Stack } from "@mui/material";
 
 export default function ProductsView() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
-    setCurrentPage(value);
-  };
+  const { matchesSM } = useResponsive();
+
   return (
-    <Stack ml={6} gap={4} maxWidth={"70%"}>
+    <Stack gap={4}>
       <SearchProducts />
-      <Grid container gap={4}>
-        {mockProducts.map((product, index) => (
-          <Grid item key={product.id}>
-            {!product.featuredImage && (
-              <ProductCard
-                product={product}
-                data-aos="zoom-in"
-                data-aos-delay={index * 50}
-                data-aos-once={true}
-              />
-            )}
-          </Grid>
-        ))}
-      </Grid>
-      <Stack
-        width={"100%"}
-        alignItems={"center"}
-        data-aos="fade-up"
-        data-aos-once={true}
+      <Grid
+        container
+        gap={4}
+        justifyContent={matchesSM ? "flex-start" : "center"}
       >
-        <Pagination
-          page={currentPage}
-          count={10}
-          onChange={handlePageChange}
-          size="large"
-        />
-      </Stack>
+        {mockProducts.map(
+          (product, index) =>
+            !product.featuredImage && (
+              <Grid item key={product.id} width={matchesSM ? undefined : "80%"}>
+                <ProductCard
+                  product={product}
+                  data-aos="zoom-in"
+                  data-aos-delay={matchesSM ? 0 : index * 50}
+                  data-aos-once={true}
+                />
+              </Grid>
+            )
+        )}
+      </Grid>
     </Stack>
   );
 }

@@ -39,11 +39,11 @@ export default function Featured() {
   }
   return (
     <>
-      <Stack direction={"row"}>
+      <Stack pr={2} direction={{ xs: "column", md: "row" }} gap={2}>
         <Stack
           marginLeft={"10%"}
-          alignItems={"flex-end"}
-          mr={2}
+          alignItems={{ xs: "flex-start", md: "flex-end" }}
+          pr={2}
           data-aos="fade-up"
           // Responsive
           sx={{ fontSize: { xl: "1.5rem", lg: "1rem", md: "0.8rem" } }}

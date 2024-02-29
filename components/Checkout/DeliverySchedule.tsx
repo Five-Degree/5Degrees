@@ -7,7 +7,7 @@ import {
   AccordionSummary,
   Divider,
   Stack,
-  Typography
+  Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import CustomSwitch from "../Custom/CustomSwitch";
@@ -16,7 +16,8 @@ export default function DeliverySchedule() {
   const {
     scheduleDelivery,
     rapidDelivery,
-    defaultDeliveryDate,
+    scheduledDeliveryDate,
+    handleScheduledDeliveryDate,
     handleScheduleDelivery,
     handleRapidDelivery,
   } = useCheckout();
@@ -34,7 +35,12 @@ export default function DeliverySchedule() {
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreRounded />}>
         <Stack direction={"row"} gap={1} alignItems={"center"}>
-          <Typography variant="h2">Schedule Delivery</Typography>
+          <Typography
+            variant="h2"
+            color={scheduleDelivery ? "var(--accent)" : "var(--gray)"}
+          >
+            Schedule Delivery
+          </Typography>
           <CustomSwitch
             value={scheduleDelivery}
             onChange={handleScheduleDelivery}
@@ -62,7 +68,7 @@ export default function DeliverySchedule() {
                 <CustomSwitch
                   value={rapidDelivery}
                   onChange={handleRapidDelivery}
-                  disabled={!scheduleDelivery}
+                  disabled={!scheduleDelivery || !!scheduledDeliveryDate}
                 />
                 <Typography>Deliver in 3 days</Typography>
               </Stack>
@@ -76,8 +82,9 @@ export default function DeliverySchedule() {
                 <DatePicker
                   views={["month", "day"]}
                   disabled={!scheduleDelivery}
-                  defaultValue={defaultDeliveryDate}
-                  minDate={defaultDeliveryDate}
+                  defaultValue={scheduledDeliveryDate}
+                  minDate={scheduledDeliveryDate}
+                  onChange={(e) => e && handleScheduledDeliveryDate(e)}
                 />
               </Stack>
             </>

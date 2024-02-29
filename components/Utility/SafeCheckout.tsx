@@ -8,7 +8,13 @@ import PCIBadge from "@/public/Images/badge_pci_dss_compliant@2x.png";
 export default function SafeCheckout() {
   return (
     <Stack alignItems={"center"} marginBlock={2} gap={2}>
-      <Stack direction="row" alignItems={"center"} gap={2}>
+      <Stack
+        direction="row"
+        alignItems={"center"}
+        gap={2}
+        flexWrap={"wrap"}
+        justifyContent={"center"}
+      >
         <Lock />
         <Typography>
           Guarenteed <strong>Safe & Secure</strong> Checkout
@@ -34,7 +40,11 @@ export default function SafeCheckout() {
         />
       </Stack>
       <Divider flexItem />
-      <Image src={PaymentMethods} alt="All payment methods" />
+      <Image
+        src={PaymentMethods}
+        alt="All payment methods"
+        style={{ height: "1.5em", width: "auto" }}
+      />
     </Stack>
   );
 }

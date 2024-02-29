@@ -26,6 +26,7 @@ export default function OrderSummary() {
               gap={3}
               maxHeight={"75%"}
               sx={{ overflowY: "auto" }}
+              pb={2}
               borderBottom={"1px solid var(--border-color)"}
             >
               {cart.length > 0 ? (
@@ -34,7 +35,7 @@ export default function OrderSummary() {
                 <Stack
                   sx={{
                     color: "var(--gray)",
-                    minWidth: "21.875rem",
+                    minWidth: "20.625rem",
                     minHeight: "10.625rem",
                   }}
                   alignItems={"center"}

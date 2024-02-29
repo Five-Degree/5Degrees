@@ -45,10 +45,10 @@ export default function PaymentMethod() {
             <AccountBalanceRoundedIcon sx={{ fontSize: "2.8125rem" }} />
             Online
           </ToggleButton>
-          <ToggleButton value="cod" aria-label="cash on delivery">
+          {/* <ToggleButton value="cod" aria-label="cash on delivery">
             <LocalShippingRoundedIcon sx={{ fontSize: "2.8125rem" }} />
             Cash on Delivery
-          </ToggleButton>
+          </ToggleButton> */}
         </ToggleButtonGroup>
         <SafeCheckout />
       </AccordionDetails>

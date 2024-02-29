@@ -9,7 +9,7 @@ declare module "@mui/material/styles" {
   }
 }
 import { createTheme } from "@mui/material/styles";
-const theme = createTheme({
+const muiTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
@@ -56,7 +56,7 @@ const theme = createTheme({
         root: {
           textTransform: "none",
           fontWeight: "bold",
-          fontSize: "1em",
+          fontSize: "1.2rem",
           fontFamily: "var(--font-as)",
           color: "var(--accent)",
           borderRadius: "var(--border-radius)",
@@ -249,18 +249,18 @@ const theme = createTheme({
       "Segoe UI Symbol",
     ].join(","),
     body1: {
-      color: "var(--body1, #281515)",
+      color: "var(--body1-color, #281515)",
       fontFamily: "var(--font-as)",
-      fontSize: "1em",
+      fontSize: "var(--body1)",
       fontStyle: "normal",
       fontWeight: "600",
       lineHeight: "normal",
       letterSpacing: "0.0175rem",
     },
     body2: {
-      color: "var(--body2, #9B9EAC)",
+      color: "var(--body2-color, #9B9EAC)",
       fontFamily: "var(--font-as)",
-      fontSize: ".875em",
+      fontSize: "var(--body2)",
       fontStyle: "normal",
       fontWeight: "700",
       lineHeight: "normal",
@@ -270,13 +270,14 @@ const theme = createTheme({
       fontWeight: "600",
       fontFamily: "var(--font-bn)",
       margin: "0",
-      fontSize: "2.1875em",
+      fontSize: "var(--h1)",
+
       color: "var(--h1-color, #281515)",
     },
     h2: {
       color: "var(--h2-color, #281515)",
       fontFamily: "var(--font-as)",
-      fontSize: "1.5em",
+      fontSize: "var(--h2)",
       fontStyle: "normal",
       fontWeight: "600",
       lineHeight: "normal",
@@ -284,7 +285,7 @@ const theme = createTheme({
     h3: {
       color: "var(--h3-color, #281515)",
       fontFamily: "var(--font-bn)",
-      fontSize: "1em",
+      fontSize: "var(--h3)",
       fontStyle: "normal",
       fontWeight: "400",
       lineHeight: "normal",
@@ -292,4 +293,4 @@ const theme = createTheme({
   },
 });
 
-export default theme;
+export default muiTheme;

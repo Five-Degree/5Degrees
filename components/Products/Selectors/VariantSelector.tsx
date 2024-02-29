@@ -25,7 +25,7 @@ export default function VariantSelector({
     >
       {product.variants.map((v) => (
         <ToggleButton key={v.name} value={v.name} aria-label={v.name}>
-          {v.name}
+          {v.name}&nbsp;-&nbsp;{v.price}$
           {v.name == selectedVariant && (
             <CheckRounded sx={{ fontSize: "inherit" }} />
           )}

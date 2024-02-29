@@ -35,7 +35,6 @@ export default function CartDrawer({
         paddingBlock={3}
         gap={1}
         position={"relative"}
-        fontSize={{ xl: "1.3rem", lg: "1.1rem", md: "1rem" }}
         maxHeight={"100vh"}
       >
         <Typography variant="h1">Cart</Typography>
@@ -51,7 +50,7 @@ export default function CartDrawer({
             <Stack
               sx={{
                 color: "var(--gray)",
-                minWidth: "21.875rem",
+                minWidth: "20.625rem",
                 minHeight: "10.625rem",
               }}
               alignItems={"center"}

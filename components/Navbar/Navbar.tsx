@@ -26,7 +26,12 @@ function NavLinks({
   activeLink: NavLink;
 }) {
   return (
-    <Stack direction={"row"} gap={"2.375rem"} height={"100%"}>
+    <Stack
+      direction={"row"}
+      gap={"2.375rem"}
+      height={"100%"}
+      display={{ xs: "none", md: "flex" }}
+    >
       {navLinks.map((link) => {
         const match = link.title == activeLink.title;
         return (
@@ -57,12 +62,9 @@ function UserControls() {
   const router = useRouter();
   const pathname = usePathname();
   const [searchSelected, setSearchSelected] = useState(false);
-  const [cartQuantity, setCartQuantity] = useState(0);
   const { user } = useAuth();
   const { cart } = useCart();
-  useEffect(() => {
-    setCartQuantity(cart.length);
-  }, [cart]);
+
   const [drawerState, setDrawerState] = useState(false);
   const toggleDrawer =
     (state: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -85,7 +87,7 @@ function UserControls() {
     setDrawerState(false);
   }
   return (
-    <Stack direction={"row"} gap={3} alignItems={"center"}>
+    <Stack direction={"row"} gap={1} alignItems={"center"}>
       <Stack direction="row" position={"relative"}>
         <Input
           disableUnderline
@@ -120,15 +122,17 @@ function UserControls() {
       {pathname != "/checkout" && (
         <>
           <CustomIconButton aria-label="checkout" onClick={toggleDrawer(true)}>
-            <Badge badgeContent={cartQuantity} color="error">
+            <Badge badgeContent={cart.length ?? 0} color="error">
               <ShoppingCartCheckoutRoundedIcon />
             </Badge>
           </CustomIconButton>
-          <CartDrawer
-            drawerState={drawerState}
-            toggleDrawer={toggleDrawer}
-            handleCheckoutAction={handleCheckoutAction}
-          />
+          {drawerState && (
+            <CartDrawer
+              drawerState={drawerState}
+              toggleDrawer={toggleDrawer}
+              handleCheckoutAction={handleCheckoutAction}
+            />
+          )}
         </>
       )}
     </Stack>

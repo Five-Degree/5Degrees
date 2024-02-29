@@ -14,22 +14,26 @@ export default function Reviews() {
   return (
     <Stack
       direction={"row"}
-      justifyContent={"center"}
+      justifyContent={{ xs: "flex-start", xl: "center" }}
       gap={4}
-      paddingInline={"10%"}
+      paddingInline={2}
+      ml={4}
       component={"section"}
       id="Reviews"
+      overflow={"auto"}
+      pb={2}
     >
       {mockReviews.map((review, index) => (
         <Card
           key={review.id}
-          sx={{ width: { md: "17rem", lg: "24rem" } }}
+          sx={{
+            width: { xs: "17rem", sm: "20rem" },
+            minWidth: { xs: "14rem", sm: "20rem" },
+          }}
           data-aos="zoom-out"
           data-aos-delay={index * 50}
         >
-          <CardContent
-            sx={{ fontSize: { xl: "1.5rem", lg: "1rem", md: "0.8rem" } }}
-          >
+          <CardContent>
             <Stack gap={2}>
               <Stack direction={"row"} gap={2} alignItems={"center"}>
                 {review.image ? (

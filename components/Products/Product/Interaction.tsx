@@ -11,6 +11,7 @@ import ColorSelector from "@/components/Products/Selectors/ColorSelector";
 import VariantSelector from "@/components/Products/Selectors/VariantSelector";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import SizeSelector from "../Selectors/SizeSelector";
+import PriceComponent from "@/components/Custom/PriceComponent";
 
 export default function ProductInteraction({ product }: { product: Product }) {
   const { addToCart, getFromCart, removeFromCart } = useCart();
@@ -84,9 +85,10 @@ export default function ProductInteraction({ product }: { product: Product }) {
           <Typography>{product.reviews?.length ?? 0} Reviews</Typography>
         </Stack>
       </Stack>
-      <Typography variant="h1" color={"var(--accent)"}>
-        ${formValues.unitPrice}
-      </Typography>
+      <PriceComponent
+        price={formValues.unitPrice}
+        salePrice={product.salePrice}
+      />
       <Stack gap={1}>
         <Typography variant="body2">Variants:</Typography>
         <VariantSelector
