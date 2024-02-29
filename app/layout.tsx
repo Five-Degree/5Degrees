@@ -9,6 +9,7 @@ import type { Metadata } from "next";
 import { Alumni_Sans, Bebas_Neue } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
+import { ThemeContextProvider } from "@/contexts/ThemeContext";
 
 const alumniSans = Alumni_Sans({
   subsets: ["latin"],
@@ -37,21 +38,24 @@ export default function RootLayout({
         <AuthContextProvider>
           {/* mui app router context */}
           <AppRouterCacheProvider>
-            {/* mui theme provider */}
-            <ThemeClient>
-              {/* Screen Responsive size provider */}
-              <ResponsiveContextProvider>
-                {/* Cart Provider */}
-                <CartContextProvider>
-                  {/* Animation on scroll provider */}
-                  <AOSInit />
-                  {/* Top loading bar component */}
-                  <NextTopLoader showSpinner={false} color="var(--accent)" />
-                  <Navbar />
-                  {children}
-                </CartContextProvider>
-              </ResponsiveContextProvider>
-            </ThemeClient>
+            {/* theme context to allow toggling the theme from light to dark... */}
+            <ThemeContextProvider>
+              {/* mui theme provider client version cause fucking use client is trash*/}
+              <ThemeClient>
+                {/* Screen Responsive size provider */}
+                <ResponsiveContextProvider>
+                  {/* Cart Provider */}
+                  <CartContextProvider>
+                    {/* Animation on scroll provider */}
+                    <AOSInit />
+                    {/* Top loading bar component */}
+                    <NextTopLoader showSpinner={false} color="var(--accent)" />
+                    <Navbar />
+                    {children}
+                  </CartContextProvider>
+                </ResponsiveContextProvider>
+              </ThemeClient>
+            </ThemeContextProvider>
           </AppRouterCacheProvider>
         </AuthContextProvider>
       </body>

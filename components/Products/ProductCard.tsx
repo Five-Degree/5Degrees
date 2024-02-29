@@ -1,7 +1,5 @@
 import CustomIconButton from "@/components/Custom/CustomIconButton";
-import ImageModal from "@/components/Products/ImageModal";
 import { useCart } from "@/contexts/CartContext";
-import { useResponsive } from "@/contexts/ResponsiveContext";
 import capitalize from "@/shared/functions/capitalize";
 import useAddToCartModal from "@/shared/hooks/useAddToCartModal";
 import Product from "@/shared/interfaces/Products";
@@ -11,7 +9,6 @@ import {
   CardActionArea,
   CardContent,
   Chip,
-  Stack,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -27,15 +24,11 @@ export default function ProductCard({
   product: Product;
 } & IAos) {
   const router = useRouter();
-  const [showImageModal, setShowImageModal] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const { cart } = useCart();
   const { showAddToCartModal, addToCartModal, handleAddToCartOpen } =
     useAddToCartModal({ product });
 
-  function handleImageClose() {
-    setShowImageModal(false);
-  }
   useEffect(() => {
     // Check if the product is in the cart
     const isProductInCart = cart.findIndex((ci) => ci.id === product.id) !== -1;
@@ -50,15 +43,6 @@ export default function ProductCard({
         }}
         {...anime}
       >
-        <CldImage
-          // Responsive
-          width={192}
-          height={123}
-          src={product.mainImage}
-          alt={product.name}
-          onClick={() => setShowImageModal(true)}
-          style={{ cursor: "pointer", width: "100%", height: "auto" }}
-        />
         <Chip
           label={capitalize(product.availability)}
           sx={{
@@ -70,9 +54,18 @@ export default function ProductCard({
                 ? "var(--success)"
                 : "var(--error)",
             fontSize: "var(--body2)",
+            zIndex: 2,
           }}
         />
         <CardActionArea onClick={() => router.push(`product/${product.id}`)}>
+          <CldImage
+            // Responsive
+            width={192}
+            height={123}
+            src={product.mainImage}
+            alt={product.name}
+            style={{ width: "100%", height: "auto" }}
+          />
           <CardContent
           // Responsive
           >
@@ -114,13 +107,6 @@ export default function ProductCard({
           ""
         )}
       </Card>
-      {showImageModal && (
-        <ImageModal
-          product={product}
-          showImageModal={showImageModal}
-          handleClose={handleImageClose}
-        />
-      )}
       {showAddToCartModal && addToCartModal}
     </>
   );

@@ -58,11 +58,7 @@ export default function LoginForm() {
   }
   return (
     <>
-      <Typography
-        variant="h1"
-        fontSize={"2.25em"}
-        sx={{ color: "var(--black)", fontWeight: "bold" }}
-      >
+      <Typography variant="h1" fontSize={"2.25em"}>
         Login
       </Typography>
       <FormContainer onSubmit={handleGoogleLogin}>

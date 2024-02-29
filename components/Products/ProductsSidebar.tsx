@@ -25,7 +25,7 @@ export default function ProductsSidebar() {
     paddingBlock: "0",
     textTransform: "none",
     textAlign: matchesSM ? "right" : "center",
-    color: "var(--primary)",
+    color: "var(--secondary-text)",
     width: "100%",
     borderRadius: !matchesSM
       ? "var(--border-radius)"

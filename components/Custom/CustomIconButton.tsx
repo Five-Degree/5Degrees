@@ -1,15 +1,15 @@
+import React, { forwardRef } from "react";
 import { IconButton, IconButtonProps, styled } from "@mui/material";
-import React from "react";
 
 type Props = {
   children: React.ReactNode;
   kind?: "shadow" | "plain" | "highlight";
 } & IconButtonProps;
-export default function CustomIconButton({
-  children,
-  kind,
-  ...iconButtonProps
-}: Props) {
+
+const CustomIconButton = forwardRef<HTMLButtonElement, Props>(function (
+  { children, kind, ...iconButtonProps },
+  ref
+) {
   const Highlight = styled(IconButton)({
     background: "var(--accent)",
     "& .MuiSvgIcon-root": { color: "var(--white)" },
@@ -17,7 +17,8 @@ export default function CustomIconButton({
     aspectRatio: "1 / 1",
   });
   const Shadow = styled(IconButton)({
-    background: "var(--white)",
+    background: "var(--background)",
+    color: "var(--primary-text)",
     boxShadow: "var(--shadow)",
     ":hover": {
       background: "var(--accent)",
@@ -27,15 +28,53 @@ export default function CustomIconButton({
     },
     aspectRatio: "1 / 1",
   });
+  const Default = styled(IconButton)({
+    "& .MuiSvgIcon-root": {
+      color: "var(--primary-text)",
+    },
+    ":hover": {
+      background: "var(--accent)",
+      "& .MuiSvgIcon-root": {
+        color: "var(--white)",
+      },
+    },
+    aspectRatio: "1 / 1",
+  });
+
   switch (kind) {
     case "shadow":
-      return <Shadow {...iconButtonProps}>{children}</Shadow>;
-      break;
+      return (
+        <Shadow ref={ref} {...iconButtonProps}>
+          {children}
+        </Shadow>
+      );
     case "highlight":
-      return <Highlight {...iconButtonProps}>{children}</Highlight>;
-      break;
+      return (
+        <Highlight ref={ref} {...iconButtonProps}>
+          {children}
+        </Highlight>
+      );
     default:
-      return <IconButton {...iconButtonProps}>{children}</IconButton>;
-      break;
+      return (
+        <IconButton
+          {...iconButtonProps}
+          sx={{
+            "& .MuiSvgIcon-root": {
+              color: "var(--primary-text)",
+            },
+            ":hover": {
+              background: "var(--accent)",
+              "& .MuiSvgIcon-root": {
+                color: "var(--white)",
+              },
+            },
+            ...iconButtonProps.sx,
+          }}
+        >
+          {children}
+        </IconButton>
+      );
   }
-}
+});
+
+export default CustomIconButton;

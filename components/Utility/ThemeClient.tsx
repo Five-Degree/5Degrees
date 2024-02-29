@@ -1,5 +1,6 @@
 "use client";
-import muiTheme from "@/shared/themes/theme";
+import { useThemeContext } from "@/contexts/ThemeContext";
+import { useDarkTheme } from "@/shared/hooks/useDarkTheme";
 import { ThemeProvider } from "@mui/material";
 import React from "react";
 
@@ -8,5 +9,6 @@ export default function ThemeClient({
 }: {
   children: React.ReactNode;
 }) {
-  return <ThemeProvider theme={muiTheme}>{children}</ThemeProvider>;
+  const { theme } = useThemeContext();
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }

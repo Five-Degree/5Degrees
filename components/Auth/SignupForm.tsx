@@ -1,6 +1,8 @@
 "use client";
 import FormContainer from "@/components/Custom/FormComponents/FormContainer";
-import FormInput, { FormCredentials } from "@/components/Custom/FormComponents/FormInput";
+import FormInput, {
+  FormCredentials,
+} from "@/components/Custom/FormComponents/FormInput";
 import { useAuth } from "@/contexts/AuthContext";
 import inputs from "@/shared/constants/inputs.json";
 import { GetRefinedFirebaseError } from "@/shared/functions/errorHandler";
@@ -60,7 +62,7 @@ export default function SignupForm() {
       <Typography
         variant="h1"
         fontSize={"2.25rem"}
-        sx={{ color: "var(--primary)", fontWeight: "bold" }}
+        sx={{ color: "var(--primary-text)", fontWeight: "bold" }}
       >
         Sign up
       </Typography>

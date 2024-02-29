@@ -40,9 +40,6 @@ const muiTheme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: "var(--border-radius)",
-          ":hover": {
-            background: "var(--graylight)",
-          },
         },
         content: {
           "&.Mui-expanded": {
@@ -67,6 +64,13 @@ const muiTheme = createTheme({
           ":hover": {
             background: "var(--accent)",
           },
+        },
+      },
+    },
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          color: "var(--primary-text)",
         },
       },
     },
@@ -99,6 +103,22 @@ const muiTheme = createTheme({
         },
       },
     },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          fontWeight: "bold",
+          fontSize: "13px",
+          color: "var(--border-color)",
+          borderColor: "var(--border-color)",
+          ":before": {
+            borderColor: "var(--border-color)",
+          },
+          ":after": {
+            borderColor: "var(--border-color)",
+          },
+        },
+      },
+    },
     MuiFormHelperText: {
       styleOverrides: {
         root: {
@@ -112,12 +132,14 @@ const muiTheme = createTheme({
         root: {
           fontSize: "1em",
           width: "100%",
-          color: "var(--primary)",
+          color: "var(--primary-text)",
+          background: "var(--background)",
           "& .MuiInputBase-input": {
+            background: "var(--background)",
             color: "var(--accent)",
             paddingLeft: "0.5em",
             "::placeholder": {
-              color: "var(--primary)",
+              color: "var(--primary-text)",
             },
           },
           outline: "1px solid var(--border-color)",
@@ -126,7 +148,13 @@ const muiTheme = createTheme({
         },
       },
     },
-
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          outline: "1px solid var(--border-color)",
+        },
+      },
+    },
     MuiInputLabel: {
       styleOverrides: {
         root: {
@@ -151,14 +179,8 @@ const muiTheme = createTheme({
       styleOverrides: {
         root: {
           fontSize: "1.3em",
-          ":hover": {
-            backgroundColor: "var(--graylight)",
-          },
           "&.Mui-selected": {
             backgroundColor: "var(--accentalpha)",
-            ":hover": {
-              backgroundColor: "var(--graylight)",
-            },
           },
         },
       },
@@ -170,10 +192,27 @@ const muiTheme = createTheme({
         },
       },
     },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          color: "var(--primary-text)",
+        },
+      },
+    },
     MuiPaper: {
       styleOverrides: {
         root: {
           borderRadius: "var(--border-radius)",
+          background: "var(--background)",
+        },
+      },
+    },
+    MuiRating: {
+      styleOverrides: {
+        icon: {
+          "& .MuiSvgIcon-root": {
+            color: "orange",
+          },
         },
       },
     },
@@ -185,7 +224,7 @@ const muiTheme = createTheme({
           },
         },
         select: {
-          color: "var(--primary)",
+          color: "var(--primary-text)",
           padding: ".3125em .5em",
         },
       },
@@ -193,17 +232,25 @@ const muiTheme = createTheme({
     MuiSnackbarContent: {
       styleOverrides: {
         root: {
-          fontSize: "1em",
+          fontSize: "var(--body1)",
           background: "var(--primary)",
           borderRadius: "var(--border-radius)",
         },
       },
     },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          color: "var(--gray)",
+        },
+      },
+    },
+
     MuiTab: {
       styleOverrides: {
         root: {
           fontFamily: "var(--font-bn)",
-          color: "var(--primary)",
+          color: "var(--primary-text)",
           fontSize: "1.2em",
           "&.Mui-selected": {
             color: "var(--accent)",
@@ -219,6 +266,7 @@ const muiTheme = createTheme({
         },
       },
     },
+
     MuiToggleButton: {
       styleOverrides: {
         root: {
@@ -226,6 +274,8 @@ const muiTheme = createTheme({
           paddingBlock: "0",
           fontSize: "1em",
           fontFamily: "var(--font-as)",
+          color: "var(--primary-text)",
+          border: "1px solid var(--border-color)",
           "&.Mui-selected": {
             fontWeight: "700",
             color: "var(--accent)",

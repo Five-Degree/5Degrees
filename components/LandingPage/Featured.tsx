@@ -39,14 +39,12 @@ export default function Featured() {
   }
   return (
     <>
-      <Stack pr={2} direction={{ xs: "column", md: "row" }} gap={2}>
+      <Stack direction={{ xs: "column", md: "row" }} gap={2}>
         <Stack
           marginLeft={"10%"}
           alignItems={{ xs: "flex-start", md: "flex-end" }}
           pr={2}
           data-aos="fade-up"
-          // Responsive
-          sx={{ fontSize: { xl: "1.5rem", lg: "1rem", md: "0.8rem" } }}
         >
           <Typography variant="h1">Featured</Typography>
           <Typography variant="h2">
@@ -57,6 +55,7 @@ export default function Featured() {
           width={"100%"}
           sx={{ overflowX: "hidden" }}
           position={"relative"}
+          pr={2}
           height={"max-content"}
         >
           <Slider {...sliderSettings} ref={sliderRef}>
@@ -77,7 +76,7 @@ export default function Featured() {
               kind="shadow"
               sx={{
                 position: "absolute",
-                left: "10%",
+                left: "5%",
                 top: "40%",
                 rotate: "180deg",
               }}
@@ -91,7 +90,7 @@ export default function Featured() {
               kind="shadow"
               sx={{
                 position: "absolute",
-                right: "10%",
+                right: "5%",
                 top: "40%",
               }}
               onClick={handleNext}

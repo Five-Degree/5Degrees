@@ -25,18 +25,8 @@ export default function ContactForm() {
       </Typography>
       <Stack gap={2} data-aos="fade-right" alignItems={"center"}>
         <Stack direction={"row"} gap={2}>
-          <Input
-            type="text"
-            disableUnderline
-            placeholder="Name"
-            sx={{ background: "var(--white)" }}
-          />
-          <Input
-            type="text"
-            disableUnderline
-            placeholder="Email"
-            sx={{ background: "var(--white)" }}
-          />
+          <Input type="text" disableUnderline placeholder="Name" />
+          <Input type="text" disableUnderline placeholder="Email" />
         </Stack>
         <Input
           type="text"
@@ -45,7 +35,6 @@ export default function ContactForm() {
           multiline
           maxRows={5}
           sx={{
-            background: "var(--white)",
             minHeight: "9.375rem",
             alignItems: "flex-start",
             pt: 1,

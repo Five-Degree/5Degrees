@@ -6,6 +6,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Divider,
+  Input,
   Stack,
   Typography,
 } from "@mui/material";
@@ -91,12 +92,18 @@ export default function DeliverySchedule() {
           )}
 
           <Typography>Delivery Note</Typography>
-          <FormInput
-            id="deliverynote"
+          <Input
+            type="text"
+            id="deliveryNote"
+            disableUnderline
             placeholder="Note"
             multiline
-            minRows={3}
-            maxRows={3}
+            maxRows={5}
+            sx={{
+              minHeight: "9.375rem",
+              alignItems: "flex-start",
+              pt: 1,
+            }}
           />
         </Stack>
       </AccordionDetails>

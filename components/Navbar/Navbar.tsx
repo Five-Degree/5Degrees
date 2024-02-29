@@ -14,6 +14,12 @@ import CustomIconButton from "../Custom/CustomIconButton";
 import CartDrawer from "./CartDrawer";
 import UserMenuControls from "./UserMenuControls";
 import { homeNavHrefMap, homeNavLinks } from "@/shared/constants/Links";
+import {
+  ClearAllRounded,
+  DarkModeRounded,
+  LightModeRounded,
+} from "@mui/icons-material";
+import { useThemeContext } from "@/contexts/ThemeContext";
 interface NavLink {
   title: string;
   href: Url;
@@ -46,7 +52,7 @@ function NavLinks({
             <Typography
               fontSize={"0.8em"}
               fontWeight={match ? "600" : "400"}
-              color={match ? "var(--accent)" : "var(--primary)"}
+              color={match ? "var(--accent)" : "var(--primary-text)"}
               textTransform={"uppercase"}
             >
               <Link href={link.href}>{link.title}</Link>
@@ -64,6 +70,7 @@ function UserControls() {
   const [searchSelected, setSearchSelected] = useState(false);
   const { user } = useAuth();
   const { cart } = useCart();
+  const { toggleColorMode, mode } = useThemeContext();
 
   const [drawerState, setDrawerState] = useState(false);
   const toggleDrawer =
@@ -88,6 +95,9 @@ function UserControls() {
   }
   return (
     <Stack direction={"row"} gap={1} alignItems={"center"}>
+      <CustomIconButton onClick={toggleColorMode}>
+        {mode == "dark" ? <LightModeRounded /> : <DarkModeRounded />}
+      </CustomIconButton>
       <Stack direction="row" position={"relative"}>
         <Input
           disableUnderline
@@ -109,7 +119,7 @@ function UserControls() {
         />
 
         <CustomIconButton
-          onClick={() => setSearchSelected(!searchSelected)}
+          onClick={() => setSearchSelected(true)}
           kind="highlight"
           aria-label="search"
         >

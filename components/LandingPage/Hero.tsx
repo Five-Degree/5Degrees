@@ -1,10 +1,13 @@
 "use client";
+import { useThemeContext } from "@/contexts/ThemeContext";
 import HeroBg from "@/public/Images/HeroBg.png";
 import HeroShoe from "@/public/Images/HeroShoe.png";
 import HeroText from "@/public/Images/HeroText.svg";
+import HeroTextDark from "@/public/Images/HeroTextDark.svg";
 import { Stack } from "@mui/material";
 import Image from "next/image";
 export default function Hero() {
+  const { mode } = useThemeContext();
   return (
     <Stack
       sx={{
@@ -12,7 +15,7 @@ export default function Hero() {
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
         width: "100%",
-        minHeight: { xs: "50vh", md: "70vh" },
+        minHeight: { xs: "60vh", sm: "70vh" },
       }}
       direction={"row"}
       position="relative"
@@ -22,7 +25,7 @@ export default function Hero() {
     >
       <Stack width={{ xs: "80%", md: "50%" }} ml={"10%"}>
         <Image
-          src={HeroText}
+          src={mode == "dark" ? HeroTextDark : HeroText}
           alt="Discover limited sneakers without limitations"
           style={{
             width: "100%",

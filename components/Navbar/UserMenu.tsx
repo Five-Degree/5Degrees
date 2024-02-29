@@ -1,6 +1,15 @@
+import { useThemeContext } from "@/contexts/ThemeContext";
 import { NavLinks } from "@/shared/interfaces/Links";
-import { ListItemIcon, Menu, MenuItem } from "@mui/material";
+import { DarkModeRounded } from "@mui/icons-material";
+import {
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Stack,
+  useMediaQuery,
+} from "@mui/material";
 import { usePathname } from "next/navigation";
+import CustomSwitch from "../Custom/CustomSwitch";
 interface NavMenu {
   id: string;
   accountOpenAnchor: null | HTMLElement;
@@ -16,14 +25,14 @@ export default function UserMenu({
   items,
 }: NavMenu) {
   const pathname = usePathname();
+
   return (
     <Menu
-      // disableScrollLock
+      disableScrollLock
       anchorEl={accountOpenAnchor}
       id={id}
       open={accountOpen}
       onClose={handleClose}
-      onClick={handleClose}
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       slotProps={{
@@ -41,7 +50,7 @@ export default function UserMenu({
               height: 10,
               borderTop: "1px solid var(--border-color)",
               borderLeft: "1px solid var(--border-color)",
-              bgcolor: "background.paper",
+              bgcolor: "var(--background)",
               transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },

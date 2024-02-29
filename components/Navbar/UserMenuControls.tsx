@@ -20,13 +20,13 @@ export default function UserMenuControls() {
     name: "Payments",
     handler: handleStripePortal,
     icon: <ReceiptLongRoundedIcon />,
-    goto: "",
+    goto: "/payments",
   };
   const orderHistoryLink = {
     name: "Order History",
     icon: <SpaceDashboardOutlinedIcon />,
-    goto: "/dashboard",
-    handler: (param: any) => router.push("/dashboard"),
+    goto: "/orderHistory",
+    handler: (param: any) => router.push("/"),
   };
   const logoutLink = {
     name: "Logout",
@@ -41,6 +41,7 @@ export default function UserMenuControls() {
   ];
 
   function handleAccountClick(event: React.MouseEvent<HTMLElement>) {
+    console.log("event.currentTarget.id", event.currentTarget.id);
     setAccountOpenAnchor(event.currentTarget);
   }
   function handleClose() {
@@ -67,6 +68,7 @@ export default function UserMenuControls() {
         aria-controls={accountOpen ? "Account Settings" : "undefined"}
         aria-haspopup={true}
         aria-expanded={accountOpen ? true : undefined}
+        id="userMenu"
       >
         <UserAvatar avatar={user?.photoURL} name={user?.email} />
       </CustomIconButton>

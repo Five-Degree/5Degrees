@@ -22,7 +22,7 @@ export default function ProductsView() {
                 <ProductCard
                   product={product}
                   data-aos="zoom-in"
-                  data-aos-delay={matchesSM ? 0 : index * 50}
+                  data-aos-delay={matchesSM ? index * 50 : 0}
                   data-aos-once={true}
                 />
               </Grid>

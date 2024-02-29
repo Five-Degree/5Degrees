@@ -59,7 +59,7 @@ export default function FormInput(props: IFormInput) {
           htmlFor={id}
           disableAnimation
           sx={{
-            color: wrongInput ? "var(--error)" : "var(--primary)",
+            color: wrongInput ? "var(--error)" : "var(--primary-text)",
             fontSize: "1.15em",
             top: "-10%",
           }}
