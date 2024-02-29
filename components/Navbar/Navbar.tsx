@@ -4,12 +4,18 @@ import { useCart } from "@/contexts/CartContext";
 import Logo from "@/public/Logos/Logo.svg";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import ShoppingCartCheckoutRoundedIcon from "@mui/icons-material/ShoppingCartCheckoutRounded";
-import { Badge, Input, Stack, Typography } from "@mui/material";
+import {
+  Badge,
+  ClickAwayListener,
+  Input,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Url } from "next/dist/shared/lib/router/router";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import CustomIconButton from "../Custom/CustomIconButton";
 import CartDrawer from "./CartDrawer";
 import UserMenuControls from "./UserMenuControls";
@@ -98,34 +104,36 @@ function UserControls() {
       <CustomIconButton onClick={toggleColorMode}>
         {mode == "dark" ? <LightModeRounded /> : <DarkModeRounded />}
       </CustomIconButton>
-      <Stack direction="row" position={"relative"}>
-        <Input
-          disableUnderline
-          type="search"
-          placeholder="Search for product"
-          id="search-product"
-          sx={{
-            fontSize: "1rem",
-            position: "absolute",
-            right: "70%",
-            pr: "40%",
-            top: "50%",
-            translate: "0 -50%",
-            transition: "all 0.3s ease",
-            borderRight: "none",
-            width: searchSelected ? "30ch" : "0",
-            opacity: searchSelected ? "1" : "0",
-          }}
-        />
+      <ClickAwayListener onClickAway={() => setSearchSelected(false)}>
+        <Stack direction="row" position={"relative"}>
+          <Input
+            disableUnderline
+            type="search"
+            placeholder="Search for product"
+            id="search-product"
+            sx={{
+              fontSize: "1rem",
+              position: "absolute",
+              right: "70%",
+              pr: "40%",
+              top: "50%",
+              translate: "0 -50%",
+              transition: "all 0.3s ease",
+              borderRight: "none",
+              width: searchSelected ? "30ch" : "0",
+              opacity: searchSelected ? "1" : "0",
+            }}
+          />
 
-        <CustomIconButton
-          onClick={() => setSearchSelected(true)}
-          kind="highlight"
-          aria-label="search"
-        >
-          <SearchRoundedIcon />
-        </CustomIconButton>
-      </Stack>
+          <CustomIconButton
+            onClick={() => setSearchSelected(true)}
+            kind="highlight"
+            aria-label="search"
+          >
+            <SearchRoundedIcon />
+          </CustomIconButton>
+        </Stack>
+      </ClickAwayListener>
 
       {user && <UserMenuControls />}
 

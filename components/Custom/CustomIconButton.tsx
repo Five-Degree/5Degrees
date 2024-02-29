@@ -1,15 +1,15 @@
-import React, { forwardRef } from "react";
 import { IconButton, IconButtonProps, styled } from "@mui/material";
+import React from "react";
 
 type Props = {
   children: React.ReactNode;
   kind?: "shadow" | "plain" | "highlight";
 } & IconButtonProps;
-
-const CustomIconButton = forwardRef<HTMLButtonElement, Props>(function (
-  { children, kind, ...iconButtonProps },
-  ref
-) {
+export default function CustomIconButton({
+  children,
+  kind,
+  ...iconButtonProps
+}: Props) {
   const Highlight = styled(IconButton)({
     background: "var(--accent)",
     "& .MuiSvgIcon-root": { color: "var(--white)" },
@@ -28,32 +28,13 @@ const CustomIconButton = forwardRef<HTMLButtonElement, Props>(function (
     },
     aspectRatio: "1 / 1",
   });
-  const Default = styled(IconButton)({
-    "& .MuiSvgIcon-root": {
-      color: "var(--primary-text)",
-    },
-    ":hover": {
-      background: "var(--accent)",
-      "& .MuiSvgIcon-root": {
-        color: "var(--white)",
-      },
-    },
-    aspectRatio: "1 / 1",
-  });
-
   switch (kind) {
     case "shadow":
-      return (
-        <Shadow ref={ref} {...iconButtonProps}>
-          {children}
-        </Shadow>
-      );
+      return <Shadow {...iconButtonProps}>{children}</Shadow>;
+      break;
     case "highlight":
-      return (
-        <Highlight ref={ref} {...iconButtonProps}>
-          {children}
-        </Highlight>
-      );
+      return <Highlight {...iconButtonProps}>{children}</Highlight>;
+      break;
     default:
       return (
         <IconButton
@@ -74,7 +55,6 @@ const CustomIconButton = forwardRef<HTMLButtonElement, Props>(function (
           {children}
         </IconButton>
       );
+      break;
   }
-});
-
-export default CustomIconButton;
+}

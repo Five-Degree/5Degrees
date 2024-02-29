@@ -31,7 +31,6 @@
   --h3: 1.3rem;
   --body1: 1rem;
   --body2: 0.875rem;
-  transition: color 0.3s ease;
 }
 
 * {
@@ -134,9 +133,4 @@ a:hover {
   --h3-color: var(--white);
   --body1-color: var(--white);
   --body2-color: var(--graylight);
-}
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }
