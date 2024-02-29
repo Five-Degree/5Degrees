@@ -233,7 +233,7 @@ const muiTheme = createTheme({
       styleOverrides: {
         root: {
           fontSize: "var(--body1)",
-          background: "var(--primary)",
+          background: "var(--accent)",
           borderRadius: "var(--border-radius)",
         },
       },
