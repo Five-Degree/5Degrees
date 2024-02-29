@@ -35,7 +35,7 @@ export default function CartDrawer({
         paddingBlock={3}
         gap={1}
         position={"relative"}
-        maxHeight={"100vh"}
+        maxHeight={"100svh"}
       >
         <Typography variant="h1">Cart</Typography>
 

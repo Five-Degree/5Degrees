@@ -20,7 +20,7 @@ export default function AllProducts() {
         id="AllProducts"
         direction={{ xs: "column", sm: "row" }}
         alignItems={{ xs: "center", sm: "flex-start" }}
-        gap={3}
+        gap={4}
       >
         <ProductsSidebar />
         <ProductsView />
