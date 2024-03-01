@@ -10,9 +10,9 @@ export default function PriceComponent({ price, salePrice }: Props) {
       <Stack direction={"row"} gap={1} alignItems={"baseline"}>
         <Typography
           maxWidth={"5ch"}
-          noWrap
           variant="h1"
           color={"var(--accent)"}
+          noWrap
         >
           ${salePrice}
         </Typography>

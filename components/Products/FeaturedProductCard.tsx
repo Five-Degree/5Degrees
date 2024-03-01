@@ -1,8 +1,6 @@
 import { useCart } from "@/contexts/CartContext";
-import { useResponsive } from "@/contexts/ResponsiveContext";
 import Product from "@/shared/interfaces/Products";
-import { CheckRounded } from "@mui/icons-material";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import { AddShoppingCartRounded, CheckRounded } from "@mui/icons-material";
 import { ButtonBase, Stack, Tooltip, Typography } from "@mui/material";
 import { CldImage } from "next-cloudinary";
 import Link from "next/link";
@@ -17,8 +15,7 @@ export default function FeaturedProductCard({
   anime?: IAos;
   handleActiveProduct: (product: Product) => void;
 }) {
-  const { matchesXL } = useResponsive();
-  const { cart, removeFromCart } = useCart();
+  const { cart } = useCart();
   const [addedToCart, setAddedToCart] = useState(false);
   useEffect(() => {
     // Check if the product is in the cart
@@ -93,6 +90,12 @@ export default function FeaturedProductCard({
           borderRadius: "60px 0 0 0",
           padding: "1em 0.5em 0.5em 1em",
           background: "none",
+          ":hover": {
+            background: "var(--accent)",
+            "& .MuiSvgIcon-root": {
+              color: "white",
+            },
+          },
         }}
         aria-label="button"
         component={"button"}
@@ -100,21 +103,11 @@ export default function FeaturedProductCard({
       >
         {addedToCart ? (
           <Tooltip title={"In cart"}>
-            <CheckRounded
-              sx={{
-                // Responsive
-                fontSize: { xl: "2em", md: "1.5em" },
-              }}
-            />
+            <CheckRounded />
           </Tooltip>
         ) : (
           <Tooltip title={"Add to cart"}>
-            <AddRoundedIcon
-              sx={{
-                // Responsive
-                fontSize: { xl: "2em", md: "1.5em" },
-              }}
-            />
+            <AddShoppingCartRounded />
           </Tooltip>
         )}
       </ButtonBase>
