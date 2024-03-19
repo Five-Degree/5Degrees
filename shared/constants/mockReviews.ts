@@ -1,13 +1,6 @@
-export interface Review {
-  id: string;
-  name: string;
-  image?: string;
-  product: string;
-  review: string;
-  rating: number;
-  date: Date | number;
-}
-const mockReviews: Review[] = [
+import Reviews from "@/shared/interfaces/Reviews";
+
+const mockReviews: Reviews = [
   {
     id: "1",
     name: "Melissa Abdou",

@@ -1,12 +1,10 @@
-import { Review } from "@/shared/constants/mockReviews";
+import { Review } from "@/shared/interfaces/Reviews";
 import {
   Avatar,
-  Card,
-  CardContent,
   Divider,
   Rating,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import dayjs from "dayjs";
 import { CldImage } from "next-cloudinary";

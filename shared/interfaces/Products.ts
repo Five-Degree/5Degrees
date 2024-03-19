@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
-import { Review } from "../constants/mockReviews";
 import { ShoeSize } from "../constants/shoeSizes";
+import Reviews from "./Reviews";
 
 export type VariantNames =
   | "normal"
@@ -28,9 +28,10 @@ type Product = {
   images?: string[];
   variants: ProductVariant[];
   colors: NonNullColors | NonNullColors[];
+  // Shoesize always defaults to US size regardless of what the user chooses
   sizes: ShoeSize["USMen"][];
   availability?: "available" | "out of stock";
-  reviews?: Review[];
+  reviews?: Reviews;
 };
 export interface CartProduct
   extends Omit<
