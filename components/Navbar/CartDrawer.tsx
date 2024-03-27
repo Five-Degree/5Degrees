@@ -69,7 +69,7 @@ export default function CartDrawer({
             </Stack>
           )}
           {cart.map((item) => {
-            return <CartDrawerCard item={item} key={item.id} />;
+            return <CartDrawerCard item={item} key={item.cartId} />;
           })}
         </Stack>
         <Stack

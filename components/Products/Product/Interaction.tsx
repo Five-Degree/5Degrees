@@ -9,14 +9,12 @@ import { Button, Rating, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ColorSelector from "@/components/Products/Selectors/ColorSelector";
 import VariantSelector from "@/components/Products/Selectors/VariantSelector";
-import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import SizeSelector from "../Selectors/SizeSelector";
 import PriceComponent from "@/components/Custom/PriceComponent";
 
 export default function ProductInteraction({ product }: { product: Product }) {
-  const { addToCart, getFromCart, removeFromCart } = useCart();
+  const { addToCart } = useCart();
   const [addedToCart, setAddedToCart] = useState(false);
-  const prodFromCart = getFromCart(product.id);
   const {
     formValues,
     handleVariantChange,
@@ -25,10 +23,10 @@ export default function ProductInteraction({ product }: { product: Product }) {
     handleSizeChange,
   } = useAddToCartForm({
     product,
-    defaultColor: prodFromCart?.selectedColor,
-    defaultVariant: prodFromCart?.selectedVariant,
-    defaultQuantity: prodFromCart?.quantity,
-    defaultUnitPrice: prodFromCart?.unitPrice,
+    defaultColor: product.colors[0],
+    defaultVariant: product.variants[0].name,
+    defaultQuantity: 1,
+    defaultUnitPrice: product.defaultPrice,
   });
   const rating = product.reviews
     ? product.reviews?.reduce((acc, cur) => acc + cur.rating, 0) /
@@ -120,41 +118,16 @@ export default function ProductInteraction({ product }: { product: Product }) {
           value={formValues.quantity}
         />
       </Stack>
-      {prodFromCart && (
-        <Stack
-          alignItems={"center"}
-          direction={"row"}
-          justifyContent={"space-between"}
-        >
-          <Typography>Item added to cart</Typography>
-          <Button
-            onClick={() => removeFromCart(prodFromCart)}
-            endIcon={<DeleteOutlineRoundedIcon />}
-          >
-            Remove
-          </Button>
-        </Stack>
-      )}
       <Stack>
         <Button
           variant={addedToCart ? "text" : "contained"}
           endIcon={
-            addedToCart ? (
-              <CheckRoundedIcon />
-            ) : prodFromCart ? (
-              <SettingsSuggestRoundedIcon />
-            ) : (
-              <AddShoppingCartRoundedIcon />
-            )
+            addedToCart ? <CheckRoundedIcon /> : <AddShoppingCartRoundedIcon />
           }
           type="submit"
           disabled={addedToCart}
         >
-          {addedToCart
-            ? "Item added!"
-            : prodFromCart
-            ? "Modify cart item"
-            : "Add to cart"}
+          {addedToCart ? "Item added!" : "Add to cart"}
         </Button>
       </Stack>
       <Stack gap={1}>

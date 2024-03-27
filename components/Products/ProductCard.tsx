@@ -9,6 +9,7 @@ import {
   CardActionArea,
   CardContent,
   Chip,
+  Stack,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -16,6 +17,7 @@ import { CldImage } from "next-cloudinary";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import PriceComponent from "../Custom/PriceComponent";
+import { CheckRounded } from "@mui/icons-material";
 
 export default function ProductCard({
   product,
@@ -86,26 +88,25 @@ export default function ProductCard({
             </Typography>
           </CardContent>
         </CardActionArea>
-        {addedToCart ? (
-          <Typography
-            sx={{ position: "absolute", bottom: "5%", right: "5%" }}
-            color={"var(--accent)"}
-          >
-            Added to Cart
-          </Typography>
-        ) : // "check"
-        product.availability == "available" ? (
-          <CustomIconButton
-            sx={{ position: "absolute", bottom: "5%", right: "5%" }}
-            onClick={handleAddToCartOpen}
-          >
-            <Tooltip title={"Add to Cart"}>
-              <AddShoppingCartRoundedIcon />
-            </Tooltip>
-          </CustomIconButton>
-        ) : (
-          ""
-        )}
+        <Stack
+          direction={"row"}
+          sx={{ position: "absolute", bottom: "5%", right: "5%" }}
+          alignItems={"center"}
+        >
+          {product.availability == "available" ? (
+            <CustomIconButton onClick={handleAddToCartOpen}>
+              <Tooltip title={"Add to Cart"}>
+                {addedToCart ? (
+                  <CheckRounded />
+                ) : (
+                  <AddShoppingCartRoundedIcon />
+                )}
+              </Tooltip>
+            </CustomIconButton>
+          ) : (
+            ""
+          )}
+        </Stack>
       </Card>
       {showAddToCartModal && addToCartModal}
     </>

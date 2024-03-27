@@ -1,6 +1,7 @@
 import { CSSProperties } from "react";
 import { ShoeSize } from "../constants/shoeSizes";
 import Reviews from "./Reviews";
+import { Timestamp } from "firebase/firestore";
 
 export type VariantNames =
   | "normal"
@@ -20,6 +21,8 @@ export type NonNullColors = NonNullable<CSSProperties["color"]>;
 type Product = {
   id: string;
   name: string;
+  createdAt?: Timestamp;
+  updatedAt?: Timestamp;
   desc?: string;
   defaultPrice: number;
   salePrice?: number;
@@ -38,6 +41,7 @@ export interface CartProduct
     Product,
     "images" | "colors" | "variants" | "defaultPrice" | "availability" | "sizes"
   > {
+  cartId?: string;
   quantity: number;
   selectedVariant: VariantNames;
   selectedColor: NonNullColors;
