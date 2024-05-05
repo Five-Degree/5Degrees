@@ -8,7 +8,6 @@ import CustomIconButton from "../Custom/CustomIconButton";
 import Link from "next/link";
 export default function CartDrawerCard({ item }: { item: CartProduct }) {
   const { removeFromCart } = useCart();
-
   return (
     <Card sx={{ width: "100%", minHeight: "160px" }}>
       <CardContent
@@ -22,7 +21,7 @@ export default function CartDrawerCard({ item }: { item: CartProduct }) {
         <Typography variant="h3">
           <Link href={`/product/${item.id}`}>{item.name}</Link>
         </Typography>
-        <Stack direction={"row"} gap={2}>
+        <Stack direction={"row"} gap={2} alignItems={"center"}>
           <CldImage
             src={item.mainImage}
             width={192 * 0.5}
@@ -33,11 +32,9 @@ export default function CartDrawerCard({ item }: { item: CartProduct }) {
               border: "1px solid var(--border-color)",
             }}
           />
-          <Stack gap={1}>
+          <Stack>
             <Stack direction={"row"} alignItems={"center"} gap={1}>
-              <Typography variant="h3" color={"var(--gray)"}>
-                Color:
-              </Typography>
+              <Typography color={"var(--gray)"}>Color:</Typography>
               <CircleIcon
                 sx={{
                   color: item.selectedColor,
@@ -47,10 +44,12 @@ export default function CartDrawerCard({ item }: { item: CartProduct }) {
               />
             </Stack>
             <Stack direction={"row"} alignItems={"center"} gap={1}>
-              <Typography variant="h3" color={"var(--gray)"}>
-                Variant:
-              </Typography>
-              <Typography variant="h3">{item.selectedVariant}</Typography>
+              <Typography color={"var(--gray)"}>Variant:</Typography>
+              <Typography>{item.selectedVariant}</Typography>
+            </Stack>
+            <Stack direction={"row"} alignItems={"center"} gap={1}>
+              <Typography color={"var(--gray)"}>Size:</Typography>
+              <Typography>{item.selectedSize}</Typography>
             </Stack>
           </Stack>
         </Stack>

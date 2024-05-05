@@ -7,7 +7,7 @@ export interface AddToCartForm {
   variant: VariantNames;
   quantity: number;
   color: NonNullColors;
-  size: ShoeSize["USMen"];
+  size: ShoeSize["EU"];
   unitPrice: number;
 }
 
@@ -26,7 +26,7 @@ export default function useAddToCartForm({
   defaultColor?: NonNullColors;
   defaultUnitPrice?: number;
   defaultQuantity?: number;
-  defaultSize?: ShoeSize["USMen"];
+  defaultSize?: ShoeSize["EU"];
 }) {
   const [formValues, setFormValues] = useState<AddToCartForm>({
     variant: defaultVariant,
@@ -62,10 +62,10 @@ export default function useAddToCartForm({
     event.preventDefault();
     setFormValues({ ...formValues, quantity: value ?? 0 });
   }
-  function handleSizeChange(event: SelectChangeEvent<ShoeSize["USMen"]>) {
+  function handleSizeChange(event: SelectChangeEvent<ShoeSize["EU"]>) {
     setFormValues({
       ...formValues,
-      size: event.target.value as ShoeSize["USMen"],
+      size: event.target.value as ShoeSize["EU"],
     });
   }
   return {

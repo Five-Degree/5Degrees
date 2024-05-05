@@ -2,13 +2,16 @@ import ProductCard from "@/components/Products/ProductCard";
 import SearchProducts from "@/components/Products/SearchProducts";
 import { useResponsive } from "@/contexts/ResponsiveContext";
 import mockProducts from "@/shared/constants/mockProducts";
-import { Grid, Stack } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 
 export default function ProductsView() {
   const { matchesSM } = useResponsive();
 
   return (
-    <Stack gap={4}>
+    <Stack gap={4} paddingLeft={matchesSM ? "10%" : undefined}>
+      <Typography variant="h1" textAlign={matchesSM ? "left" : "center"}>
+        All Products
+      </Typography>
       <SearchProducts />
       <Grid
         container

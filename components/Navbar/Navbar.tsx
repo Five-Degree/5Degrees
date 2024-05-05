@@ -1,7 +1,10 @@
 "use client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
+import { useThemeContext } from "@/contexts/ThemeContext";
 import Logo from "@/public/Logos/Logo.svg";
+import { homeNavHrefMap, homeNavLinks } from "@/shared/constants/Links";
+import { DarkModeRounded, LightModeRounded } from "@mui/icons-material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import ShoppingCartCheckoutRoundedIcon from "@mui/icons-material/ShoppingCartCheckoutRounded";
 import {
@@ -19,13 +22,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import CustomIconButton from "../Custom/CustomIconButton";
 import CartDrawer from "./CartDrawer";
 import UserMenuControls from "./UserMenuControls";
-import { homeNavHrefMap, homeNavLinks } from "@/shared/constants/Links";
-import {
-  ClearAllRounded,
-  DarkModeRounded,
-  LightModeRounded,
-} from "@mui/icons-material";
-import { useThemeContext } from "@/contexts/ThemeContext";
 interface NavLink {
   title: string;
   href: Url;
@@ -188,7 +184,7 @@ export default function Navbar() {
           style={{ maxWidth: "26px", height: "auto" }}
         />
       </Link>
-      <NavLinks navLinks={navLinks} activeLink={activeLink} />
+      {/* <NavLinks navLinks={navLinks} activeLink={activeLink} /> */}
       <UserControls />
     </Stack>
   );

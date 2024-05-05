@@ -1,9 +1,4 @@
-import shoeSizesMap, {
-  ShoeSize,
-  getEUSize,
-  getLengthSize,
-  getUKSize,
-} from "@/shared/constants/shoeSizes";
+import { ShoeSize } from "@/shared/constants/shoeSizes";
 import Product from "@/shared/interfaces/Products";
 import {
   FormControl,
@@ -13,24 +8,17 @@ import {
   SelectChangeEvent,
   Stack,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export default function SizeSelector({
   selectedSize,
   handleSizeChange,
   product,
 }: {
-  selectedSize: ShoeSize["USMen"];
-  handleSizeChange: (event: SelectChangeEvent<ShoeSize["USMen"]>) => void;
+  selectedSize: ShoeSize["EU"];
+  handleSizeChange: (event: SelectChangeEvent<ShoeSize["EU"]>) => void;
   product: Product;
 }) {
-  const initialEU = getEUSize(selectedSize);
-  const initialLength = getLengthSize(selectedSize);
-  const [us, setUS] = useState(selectedSize);
-  const [eu, setEU] = useState(initialEU);
-  const [uk, setUK] = useState(getUKSize(selectedSize));
-  const [length, setLength] = useState(initialLength);
-
   const formControlFactory = (
     name: "US" | "UK" | "EU" | "Length",
     children: React.ReactNode
@@ -43,7 +31,7 @@ export default function SizeSelector({
 
   return (
     <Stack direction={"row"} width={"100%"} gap={1}>
-      {formControlFactory(
+      {/* {formControlFactory(
         "US",
         <Select
           labelId={`us-select-label`}
@@ -59,9 +47,9 @@ export default function SizeSelector({
             </MenuItem>
           ))}
         </Select>
-      )}
+      )} */}
 
-      {formControlFactory(
+      {/* {formControlFactory(
         "UK",
         <Select
           labelId={`uk-select-label`}
@@ -77,7 +65,7 @@ export default function SizeSelector({
             </MenuItem>
           ))}
         </Select>
-      )}
+      )} */}
 
       {formControlFactory(
         "EU",
@@ -91,12 +79,12 @@ export default function SizeSelector({
         >
           {product.sizes.map((s) => (
             <MenuItem key={s} value={s}>
-              {getEUSize(s)}
+              {s}
             </MenuItem>
           ))}
         </Select>
       )}
-      {formControlFactory(
+      {/* {formControlFactory(
         "Length",
         <Select
           labelId={`length-select-label`}
@@ -112,7 +100,7 @@ export default function SizeSelector({
             </MenuItem>
           ))}
         </Select>
-      )}
+      )} */}
     </Stack>
   );
 }

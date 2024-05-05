@@ -1,16 +1,15 @@
 import QuantityInput from "@/components/Custom/CustomQuantityInput";
+import PriceComponent from "@/components/Custom/PriceComponent";
+import ColorSelector from "@/components/Products/Selectors/ColorSelector";
+import VariantSelector from "@/components/Products/Selectors/VariantSelector";
 import { useCart } from "@/contexts/CartContext";
 import useAddToCartForm from "@/shared/hooks/useAddToCartForm";
 import Product from "@/shared/interfaces/Products";
 import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
-import SettingsSuggestRoundedIcon from "@mui/icons-material/SettingsSuggestRounded";
 import { Button, Rating, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import ColorSelector from "@/components/Products/Selectors/ColorSelector";
-import VariantSelector from "@/components/Products/Selectors/VariantSelector";
 import SizeSelector from "../Selectors/SizeSelector";
-import PriceComponent from "@/components/Custom/PriceComponent";
 
 export default function ProductInteraction({ product }: { product: Product }) {
   const { addToCart } = useCart();

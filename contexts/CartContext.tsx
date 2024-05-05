@@ -58,6 +58,10 @@ export default function CartContextProvider({
       //   return updatedCart;
       // } else {
       // If the product is not in the cart, add it to the cart
+      if (prev.find((p) => p.cartId == cartId)) {
+        handleShowSnackbar("Similar item already exists in cart!");
+        return prev;
+      }
       handleShowSnackbar("Item added to cart!");
       return [...prev, prodToAdd];
       // }

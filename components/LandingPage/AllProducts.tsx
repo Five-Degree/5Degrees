@@ -22,7 +22,7 @@ export default function AllProducts() {
         alignItems={{ xs: "center", sm: "flex-start" }}
         gap={4}
       >
-        <ProductsSidebar />
+        {/* <ProductsSidebar /> */}
         <ProductsView />
       </Stack>
       <Stack

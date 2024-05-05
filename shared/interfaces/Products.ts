@@ -32,7 +32,7 @@ type Product = {
   variants: ProductVariant[];
   colors: NonNullColors | NonNullColors[];
   // Shoesize always defaults to US size regardless of what the user chooses
-  sizes: ShoeSize["USMen"][];
+  sizes: ShoeSize["EU"][];
   availability?: "available" | "out of stock";
   reviews?: Reviews;
 };
@@ -45,7 +45,7 @@ export interface CartProduct
   quantity: number;
   selectedVariant: VariantNames;
   selectedColor: NonNullColors;
-  selectedSize: ShoeSize["USMen"];
+  selectedSize: ShoeSize["EU"];
   unitPrice: number;
 }
 
