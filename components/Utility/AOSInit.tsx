@@ -8,8 +8,10 @@ export default function AOSInit() {
       startEvent: "DOMContentLoaded",
       initClassName: "aos-init",
       animatedClassName: "aos-animate",
-      duration: 800,
+      duration: 600,
       easing: "ease-in-out-back",
+      anchorPlacement: "bottom-bottom",
+
       // disable: window.innerWidth < 780,
     });
   }, []);

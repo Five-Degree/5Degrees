@@ -20,7 +20,7 @@ export default function Reviews() {
       ml={4}
       component={"section"}
       id="Reviews"
-      overflow={"auto"}
+      sx={{ overflowX: "auto", overflowY: "hidden" }}
       pb={2}
     >
       {mockReviews.map((review, index) => (
