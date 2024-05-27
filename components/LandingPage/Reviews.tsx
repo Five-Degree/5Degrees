@@ -32,6 +32,7 @@ export default function Reviews() {
           }}
           data-aos="zoom-out"
           data-aos-delay={index * 50}
+          data-aos-anchor-placement="bottom-bottom"
         >
           <CardContent>
             <Stack gap={2}>

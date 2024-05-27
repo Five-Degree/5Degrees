@@ -25,13 +25,13 @@ type Product = {
   updatedAt?: Timestamp;
   desc?: string;
   defaultPrice: number;
-  salePrice?: number;
+  discount?: number;
   mainImage: string;
   featuredImage?: string;
   images?: string[];
   variants: ProductVariant[];
   colors: NonNullColors | NonNullColors[];
-  // Shoesize always defaults to US size regardless of what the user chooses
+  // Shoesize always defaults to EU size regardless of what the user chooses
   sizes: ShoeSize["EU"][];
   availability?: "available" | "out of stock";
   reviews?: Reviews;

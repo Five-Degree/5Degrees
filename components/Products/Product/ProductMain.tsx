@@ -6,6 +6,7 @@ import ProductDetails from "./Details";
 import ProductInteraction from "./Interaction";
 import Product from "@/shared/interfaces/Products";
 export default function ProductMain({ product }: { product: Product }) {
+  console.log("product", product);
   return (
     <Stack
       direction={{ md: "row", xs: "column-reverse" }}

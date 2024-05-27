@@ -56,6 +56,7 @@ export default function Footer() {
         gap={1}
         data-aos="fade-up"
         data-aos-delay={100}
+        data-aos-anchor-placement="bottom-bottom"
       >
         <Typography variant="h2">
           <Link href={"/"}>Customers</Link>
@@ -67,13 +68,23 @@ export default function Footer() {
           <Link href={"/"}>Support</Link>
         </Typography>
       </Stack>
-      <FooterSection title="What we do" data-aos="fade-up" data-aos-delay={300}>
+      <FooterSection
+        title="What we do"
+        data-aos="fade-up"
+        data-aos-delay={300}
+        data-aos-anchor-placement="bottom-bottom"
+      >
         <Typography fontSize={"1.125em"} textAlign={"center"}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Non minima
           officiis hic voluptatum in suscipit autem eligendi.
         </Typography>
       </FooterSection>
-      <FooterSection title="Contact Us" data-aos="fade-up" data-aos-delay={400}>
+      <FooterSection
+        title="Contact Us"
+        data-aos="fade-up"
+        data-aos-delay={400}
+        data-aos-anchor-placement="bottom-bottom"
+      >
         <Typography fontSize={"1.125em"} textAlign={"center"}>
           7711 Old Mountain Towers,
           <br />
@@ -95,7 +106,12 @@ export default function Footer() {
           </CustomIconButton>
         </Stack>
       </FooterSection>
-      <FooterSection title="We Accept" data-aos="fade-up" data-aos-delay={500}>
+      <FooterSection
+        title="We Accept"
+        data-aos="fade-up"
+        data-aos-delay={500}
+        data-aos-anchor-placement="bottom-bottom"
+      >
         <Image src={PaymentMethods} alt="Payment Methods" />
       </FooterSection>
     </Stack>

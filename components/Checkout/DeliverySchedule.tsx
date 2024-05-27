@@ -59,7 +59,7 @@ export default function DeliverySchedule() {
             <span style={{ color: "var(--accent)" }}>3-5 business days</span>.
           </Typography>
           <Divider />
-          {rowFactory(
+          {/* {rowFactory(
             <>
               <Stack direction={"row"} alignItems={"center"}>
                 <Typography>Fast Delivery</Typography>
@@ -74,7 +74,7 @@ export default function DeliverySchedule() {
                 <Typography>Deliver in 3 days</Typography>
               </Stack>
             </>
-          )}
+          )} */}
 
           {rowFactory(
             <>

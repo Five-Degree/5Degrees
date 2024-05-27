@@ -68,6 +68,7 @@ export default function OrderSummary() {
               </Stack>
               <Button
                 variant="contained"
+                type="submit"
                 endIcon={<CheckRounded />}
                 disabled={cart.length == 0}
               >

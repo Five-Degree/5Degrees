@@ -59,7 +59,7 @@ export default function ColorSelector({
       </ToggleButton>
     </Tooltip>
   );
-
+  if (product.colors.length == 0) return <></>;
   return (
     <ToggleButtonGroup
       value={selectedColor}

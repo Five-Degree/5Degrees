@@ -22,10 +22,6 @@ export default function ProductInteraction({ product }: { product: Product }) {
     handleSizeChange,
   } = useAddToCartForm({
     product,
-    defaultColor: product.colors[0],
-    defaultVariant: product.variants[0].name,
-    defaultQuantity: 1,
-    defaultUnitPrice: product.defaultPrice,
   });
   const rating = product.reviews
     ? product.reviews?.reduce((acc, cur) => acc + cur.rating, 0) /
@@ -84,7 +80,7 @@ export default function ProductInteraction({ product }: { product: Product }) {
       </Stack>
       <PriceComponent
         price={formValues.unitPrice}
-        salePrice={product.salePrice}
+        discount={product.discount}
       />
       <Stack gap={1}>
         <Typography variant="body2">Variants:</Typography>
@@ -94,14 +90,16 @@ export default function ProductInteraction({ product }: { product: Product }) {
           product={product}
         />
       </Stack>
-      <Stack gap={1}>
-        <Typography variant="body2">Colors:</Typography>
-        <ColorSelector
-          selectedColor={formValues.color}
-          handleColorChange={handleColorChange}
-          product={product}
-        />
-      </Stack>
+      {product.colors.length != 0 && (
+        <Stack gap={1}>
+          <Typography variant="body2">Colors:</Typography>
+          <ColorSelector
+            selectedColor={formValues.color}
+            handleColorChange={handleColorChange}
+            product={product}
+          />
+        </Stack>
+      )}
       <Stack gap={1}>
         <Typography variant="body2">Sizes:</Typography>
         <SizeSelector

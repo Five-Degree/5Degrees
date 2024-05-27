@@ -13,7 +13,7 @@ export interface AddToCartForm {
 
 export default function useAddToCartForm({
   product,
-  defaultVariant = "normal",
+  defaultVariant = product.variants[0].name,
   defaultColor = typeof product.colors == "string"
     ? product.colors
     : product.colors[0],

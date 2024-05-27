@@ -60,14 +60,16 @@ export default function ProductCard({
           }}
         />
         <CardActionArea onClick={() => router.push(`product/${product.id}`)}>
-          <CldImage
-            // Responsive
-            width={192}
-            height={123}
-            src={product.mainImage}
-            alt={product.name}
-            style={{ width: "100%", height: "auto" }}
-          />
+          <Stack width={"100%"} height={"11.125rem"} overflow={"hidden"}>
+            <CldImage
+              // Responsive
+              width={192}
+              height={123}
+              src={product.mainImage}
+              alt={product.name}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </Stack>
           <CardContent
           // Responsive
           >
@@ -76,14 +78,14 @@ export default function ProductCard({
             </Typography>
             <PriceComponent
               price={product.defaultPrice}
-              salePrice={product.salePrice}
+              discount={product.discount}
             />
             <Typography variant="body2" textTransform={"uppercase"}>
               {product.variants.length ?? 5}{" "}
               <span style={{ fontWeight: "lighter" }}>Variants</span>
             </Typography>
             <Typography variant="body2" textTransform={"uppercase"}>
-              {product.colors?.length ?? 1}{" "}
+              {product.colors?.length == 0 ? 1 : product.colors.length}{" "}
               <span style={{ fontWeight: "lighter" }}>Colors</span>
             </Typography>
           </CardContent>

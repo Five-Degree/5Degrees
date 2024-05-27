@@ -1,16 +1,23 @@
 import ProductCard from "@/components/Products/ProductCard";
 import SearchProducts from "@/components/Products/SearchProducts";
 import { useResponsive } from "@/contexts/ResponsiveContext";
-import mockProducts from "@/shared/constants/mockProducts";
-import { Grid, Stack, Typography } from "@mui/material";
+import Product from "@/shared/interfaces/Products";
+import { Grid, Skeleton, Stack, Typography } from "@mui/material";
 
-export default function ProductsView() {
+interface Props {
+  title: string;
+  products: Product[];
+  loading: boolean;
+}
+
+export default function ProductsView({ title, products, loading }: Props) {
   const { matchesSM } = useResponsive();
-
+  console.log("products", products);
+  console.log("loading", loading);
   return (
     <Stack gap={4} paddingLeft={matchesSM ? "10%" : undefined}>
       <Typography variant="h1" textAlign={matchesSM ? "left" : "center"}>
-        All Products
+        {title}
       </Typography>
       <SearchProducts />
       <Grid
@@ -18,19 +25,24 @@ export default function ProductsView() {
         gap={4}
         justifyContent={matchesSM ? "flex-start" : "center"}
       >
-        {mockProducts.map(
-          (product, index) =>
-            !product.featuredImage && (
-              <Grid item key={product.id} width={matchesSM ? undefined : "80%"}>
-                <ProductCard
-                  product={product}
-                  data-aos="zoom-in"
-                  data-aos-delay={matchesSM ? index * 50 : 0}
-                  data-aos-once={true}
-                />
-              </Grid>
-            )
-        )}
+        {products.map((product, index) => (
+          <Grid item key={product.id} width={matchesSM ? undefined : "80%"}>
+            <ProductCard
+              product={product}
+              data-aos="zoom-in"
+              data-aos-once={true}
+            />
+          </Grid>
+        ))}
+        {loading &&
+          Array.from(new Array(12)).map((v, i) => (
+            <Skeleton
+              key={i}
+              variant="rounded"
+              width={matchesSM ? 250 : 350}
+              height={350}
+            />
+          ))}
       </Grid>
     </Stack>
   );

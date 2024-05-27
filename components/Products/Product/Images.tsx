@@ -57,12 +57,12 @@ export default function ProductImages({ product }: { product: Product }) {
         direction={{ md: "column", xs: "row" }}
         justifyContent={"flex-start"}
       >
-        <ButtonBase
+        {/* <ButtonBase
           onClick={() => setActiveImage(product.mainImage)}
           disabled={activeImage == product.mainImage}
         >
           {imagesFactory(product.mainImage, product.name)}
-        </ButtonBase>
+        </ButtonBase> */}
         {product.images?.map((img) => (
           <ButtonBase
             key={img}

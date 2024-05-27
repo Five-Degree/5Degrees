@@ -18,13 +18,17 @@ import FormInput, {
 import { useCheckout } from "@/contexts/CheckoutContext";
 
 export default function DeliveryInformation() {
-  const { deliveryInfo, saveInfo, handleDeliveryInfoChange: onDeliveryInfoChange, handleSaveInfo } =
-    useCheckout();
+  const {
+    deliveryInfo,
+    saveInfo,
+    handleDeliveryInfoChange: onDeliveryInfoChange,
+    handleSaveInfo,
+  } = useCheckout();
   const formInputFactory = (input: IFormInput) => (
     <FormInput
       key={input.id}
       {...input}
-      value={deliveryInfo[input.id]}
+      // value={deliveryInfo[input.id]}
       onChange={onDeliveryInfoChange}
     />
   );

@@ -7,7 +7,7 @@ const mockProducts: Product[] = [
     name: "Air Jordan 1 High Retro",
     desc: "Duis non libero sodales, blandit mi ac, hendrerit dolor. Fusce ut diam ligula. Donec eu quam non quam tristique fermentum in nec leo. In dapibus justo ut finibus facilisis. Nunc pulvinar blandit enim sed vestibulum. Sed commodo tellus ut massa fermentum, id fringilla justo elementum. Sed ut molestie nunc, condimentum gravida ex.",
     defaultPrice: 3589,
-    salePrice: 1290,
+    discount: 25,
     mainImage: "products/mens/shoes/1/tvycewdsdubwcxdohqup",
     variants: [
       { name: "normal", price: 3589 },

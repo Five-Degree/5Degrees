@@ -1,6 +1,13 @@
-import { useState } from "react";
-import { DocumentData, FirestoreError, doc, setDoc } from "firebase/firestore";
 import { db } from "@/firebase/config";
+import {
+  DocumentData,
+  FirestoreError,
+  addDoc,
+  collection,
+  doc,
+  setDoc,
+} from "firebase/firestore";
+import { useState } from "react";
 
 const useSetDocument = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -8,13 +15,24 @@ const useSetDocument = () => {
   const setDocument = async (
     collection: string,
     docId: string,
-    data: DocumentData
+    data: DocumentData,
+    merge: boolean = false
   ) => {
     setLoading(true);
-    await setDoc(doc(db, collection, docId), data)
-      .catch((err) => setError(err))
+    await setDoc(doc(db, collection, docId), data, { merge })
+      .catch((err) => {
+        setError(err);
+      })
       .finally(() => setLoading(false));
   };
-  return { setDocument, loading, error };
+  const createDocument = async (coll: string, data: DocumentData) => {
+    setLoading(true);
+    await addDoc(collection(db, coll), data)
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => setLoading(false));
+  };
+  return { setDocument, createDocument, loading, error };
 };
 export default useSetDocument;

@@ -9,11 +9,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useAuth } from "@/contexts/AuthContext";
 import { redirect } from "next/navigation";
+import { useCheckout } from "@/contexts/CheckoutContext";
 export default function Checkout() {
   const { user } = useAuth();
   useLayoutEffect(() => {
     if (!user) redirect("/");
   }, [user]);
+  const { handleCheckoutFormSubmit } = useCheckout();
   return (
     // mui date picker localisation
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -24,6 +26,8 @@ export default function Checkout() {
         paddingInline={3}
         flexWrap={{ md: "nowrap", xs: "wrap" }}
         fontSize={{ lg: "1.3rem", md: "1rem" }}
+        component={"form"}
+        onSubmit={handleCheckoutFormSubmit}
       >
         <Stack width={"100%"} gap={1}>
           <DeliveryInformation />

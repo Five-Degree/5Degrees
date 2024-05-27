@@ -107,16 +107,18 @@ export default function AddToCartModal({
               product={product}
             />
           </PartWrapper>
-          <PartWrapper>
-            <Typography variant="body2" width={"100%"}>
-              Colors:
-            </Typography>
-            <ColorSelector
-              selectedColor={formValues.color}
-              handleColorChange={handleColorChange}
-              product={product}
-            />
-          </PartWrapper>
+          {product.colors.length != 0 && (
+            <PartWrapper>
+              <Typography variant="body2" width={"100%"}>
+                Colors:
+              </Typography>
+              <ColorSelector
+                selectedColor={formValues.color}
+                handleColorChange={handleColorChange}
+                product={product}
+              />
+            </PartWrapper>
+          )}
           <PartWrapper>
             <Typography variant="body2" width={"100%"}>
               Sizes:
