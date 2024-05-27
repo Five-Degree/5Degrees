@@ -69,7 +69,7 @@ export default function AllProducts() {
     };
     fetchNextData();
   };
-  console.log("products", products, "lastProduct", lastProduct);
+  // console.log("products", products, "lastProduct", lastProduct);
   return (
     <Stack gap={3}>
       <Stack

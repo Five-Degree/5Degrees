@@ -12,8 +12,8 @@ interface Props {
 
 export default function ProductsView({ title, products, loading }: Props) {
   const { matchesSM } = useResponsive();
-  console.log("products", products);
-  console.log("loading", loading);
+  // console.log("products", products);
+  // console.log("loading", loading);
   return (
     <Stack gap={4} paddingLeft={matchesSM ? "10%" : undefined}>
       <Typography variant="h1" textAlign={matchesSM ? "left" : "center"}>

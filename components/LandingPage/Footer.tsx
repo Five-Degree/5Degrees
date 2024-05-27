@@ -50,13 +50,17 @@ export default function Footer() {
       paddingInline={3}
       gap={2}
     >
-      <Image src={Logo} alt="5 Degrees" data-aos="zoom-in" />
+      <Image
+        src={Logo}
+        alt="5 Degrees"
+        // data-aos="zoom-in"
+      />
       <Stack
         alignItems={"center"}
         gap={1}
-        data-aos="fade-up"
-        data-aos-delay={100}
-        data-aos-anchor-placement="bottom-bottom"
+        // data-aos="fade-up"
+        // data-aos-delay={100}
+        // data-aos-anchor-placement="bottom-bottom"
       >
         <Typography variant="h2">
           <Link href={"/"}>Customers</Link>
@@ -70,9 +74,9 @@ export default function Footer() {
       </Stack>
       <FooterSection
         title="What we do"
-        data-aos="fade-up"
-        data-aos-delay={300}
-        data-aos-anchor-placement="bottom-bottom"
+        // data-aos="fade-up"
+        // data-aos-delay={300}
+        // data-aos-anchor-placement="bottom-bottom"
       >
         <Typography fontSize={"1.125em"} textAlign={"center"}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Non minima
@@ -81,9 +85,9 @@ export default function Footer() {
       </FooterSection>
       <FooterSection
         title="Contact Us"
-        data-aos="fade-up"
-        data-aos-delay={400}
-        data-aos-anchor-placement="bottom-bottom"
+        // data-aos="fade-up"
+        // data-aos-delay={400}
+        // data-aos-anchor-placement="bottom-bottom"
       >
         <Typography fontSize={"1.125em"} textAlign={"center"}>
           7711 Old Mountain Towers,
@@ -108,9 +112,9 @@ export default function Footer() {
       </FooterSection>
       <FooterSection
         title="We Accept"
-        data-aos="fade-up"
-        data-aos-delay={500}
-        data-aos-anchor-placement="bottom-bottom"
+        // data-aos="fade-up"
+        // data-aos-delay={500}
+        // data-aos-anchor-placement="bottom-bottom"
       >
         <Image src={PaymentMethods} alt="Payment Methods" />
       </FooterSection>
