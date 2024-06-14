@@ -11,8 +11,6 @@ export default function AOSInit() {
       duration: 600,
       easing: "ease-in-out-back",
       anchorPlacement: "bottom-bottom",
-
-      // disable: window.innerWidth < 780,
     });
   }, []);
   return null;

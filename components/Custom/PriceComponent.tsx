@@ -7,14 +7,14 @@ interface Props {
 export default function PriceComponent({ price, discount }: Props) {
   if (discount)
     return (
-      <Stack direction={"row"} gap={1} alignItems={"baseline"}>
+      <Stack direction={"row"} gap={1} alignItems={"baseline"} width={"100%"}>
         <Typography
           maxWidth={"7ch"}
           variant="h1"
           color={"var(--accent)"}
           noWrap
         >
-          ${(price - (price * discount) / 100).toFixed(1)}
+          ${(price - (price * discount) / 100).toFixed(2)}
         </Typography>
         <Typography
           sx={{ textDecoration: "line-through" }}

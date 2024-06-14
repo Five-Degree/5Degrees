@@ -1,4 +1,4 @@
-import { db } from "@/firebase/config";
+import { db } from "@/lib/firebase/config";
 import {
   DocumentData,
   FirestoreError,

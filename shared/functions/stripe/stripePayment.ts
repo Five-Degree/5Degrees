@@ -1,4 +1,4 @@
-import { auth, db, fun } from "@/firebase/config";
+import { auth, db, fun } from "@/lib/firebase/config";
 import {
   Timestamp,
   addDoc,

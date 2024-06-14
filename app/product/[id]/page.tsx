@@ -1,5 +1,5 @@
 import ProductMain from "@/components/Products/Product/ProductMain";
-import { db } from "@/firebase/config";
+import { db } from "@/lib/firebase/config";
 import Product from "@/shared/interfaces/Products";
 import { Typography } from "@mui/material";
 import { doc, getDoc } from "firebase/firestore";

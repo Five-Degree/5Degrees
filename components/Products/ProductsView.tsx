@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function ProductsView({ title, products, loading }: Props) {
-  const { matchesSM } = useResponsive();
+  const { matchesSM, matchesMD, matchesLG } = useResponsive();
   // console.log("products", products);
   // console.log("loading", loading);
   return (
@@ -26,7 +26,13 @@ export default function ProductsView({ title, products, loading }: Props) {
         justifyContent={matchesSM ? "flex-start" : "center"}
       >
         {products.map((product, index) => (
-          <Grid item key={product.id} width={matchesSM ? undefined : "80%"}>
+          <Grid
+            item
+            key={product.id}
+            width={
+              matchesLG ? "20%" : matchesMD ? "30%" : matchesSM ? "40%" : "80%"
+            }
+          >
             <ProductCard
               product={product}
               data-aos="zoom-in"
@@ -39,7 +45,9 @@ export default function ProductsView({ title, products, loading }: Props) {
             <Skeleton
               key={i}
               variant="rounded"
-              width={matchesSM ? 250 : 350}
+              width={
+                matchesLG ? "20%" : matchesMD ? "30%" : matchesSM ? "40%" : "80%"
+              }
               height={350}
             />
           ))}

@@ -13,7 +13,7 @@ import {
   QueryFieldFilterConstraint,
 } from "firebase/firestore";
 import checkIfObjectExistsInArray from "@/shared/functions/checkIfObjectExistsInArray";
-import { db } from "@/firebase/config";
+import { db } from "@/lib/firebase/config";
 
 export type FilterParams = {
   label: string;

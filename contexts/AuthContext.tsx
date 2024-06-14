@@ -14,7 +14,7 @@ import {
 } from "firebase/auth";
 import Cookies from "js-cookie";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase/config";
+import { auth } from "../lib/firebase/config";
 
 const AuthContext = createContext<any>({});
 export const useAuth = (): IAuthContext => useContext(AuthContext);

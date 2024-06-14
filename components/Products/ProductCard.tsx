@@ -45,35 +45,40 @@ export default function ProductCard({
         }}
         {...anime}
       >
-        <Chip
-          label={capitalize(product.availability)}
-          sx={{
-            position: "absolute",
-            top: "5%",
-            right: "5%",
-            color:
-              product.availability == "available"
-                ? "var(--success)"
-                : "var(--error)",
-            fontSize: "var(--body2)",
-            zIndex: 2,
-          }}
-        />
+        {product.availability == "out of stock" && (
+          <Chip
+            label={capitalize(product.availability)}
+            sx={{
+              position: "absolute",
+              top: "5%",
+              right: "5%",
+              color: "var(--error)",
+              fontSize: "var(--body2)",
+              zIndex: 2,
+            }}
+          />
+        )}
+
         <CardActionArea onClick={() => router.push(`product/${product.id}`)}>
           <Stack width={"100%"} height={"11.125rem"} overflow={"hidden"}>
             <CldImage
               // Responsive
-              width={192}
-              height={123}
+              width={192 * 2}
+              height={123 * 2}
               src={product.mainImage}
               alt={product.name}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                // maxHeight: "250px",
+              }}
             />
           </Stack>
           <CardContent
           // Responsive
           >
-            <Typography variant="h3" width={"20ch"} noWrap>
+            <Typography variant="h3" width={"100%"} noWrap>
               {product.name}
             </Typography>
             <PriceComponent
@@ -109,6 +114,21 @@ export default function ProductCard({
             ""
           )}
         </Stack>
+        {product.discount && (
+          <Stack
+            position={"absolute"}
+            sx={{ top: "5%", left: "0" }}
+            bgcolor={"var(--background)"}
+            paddingBlock={0.5}
+            paddingInline={1}
+            color={"var(--accent)"}
+            fontWeight={"bold"}
+            borderRadius={"0 var(--border-radius) var(--border-radius) 0"}
+            fontFamily={"var(--font-bn)"}
+          >
+            {product.discount}% OFF
+          </Stack>
+        )}
       </Card>
       {showAddToCartModal && addToCartModal}
     </>
