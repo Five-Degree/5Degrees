@@ -52,7 +52,6 @@ export default function Featured() {
     },
     orderby: { fieldPath: "createdAt", directionStr: "desc" },
   });
-  console.log(featProducts);
   return (
     <>
       <Stack direction={{ xs: "column", md: "row" }} gap={2}>
