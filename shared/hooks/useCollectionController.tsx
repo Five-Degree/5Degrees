@@ -8,25 +8,52 @@ import {
   OrderByDirection,
   query,
   startAfter,
+  where,
+  WhereFilterOp,
+  QueryFieldFilterConstraint,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 interface Props<T> {
   coll: string;
   orderby: { fieldPath: string | FieldPath; directionStr?: OrderByDirection };
+  initialWhereClause?: {
+    fieldPath: string | FieldPath;
+    opStr: WhereFilterOp;
+    value: unknown;
+  };
   queryLimit?: number;
 }
+export type FilterParams = {
+  label: string;
+  value: Array<any>;
+};
+
 export default function useCollectionController<
   T extends { [key: string]: any }
->({ coll, orderby, queryLimit = 12 }: Props<T>) {
+>({ coll, orderby, initialWhereClause, queryLimit = 12 }: Props<T>) {
   const [results, setResults] = useState<T[]>([]);
   const [lastResult, setLastResult] = useState<T | null>(null);
+  const [filterConstraint, setFilterConstraint] = useState<
+    Array<QueryFieldFilterConstraint>
+  >(
+    initialWhereClause
+      ? [
+          where(
+            initialWhereClause.fieldPath,
+            initialWhereClause.opStr,
+            initialWhereClause.value
+          ),
+        ]
+      : []
+  );
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const q = query(
         collection(db, coll),
+        ...filterConstraint,
         orderBy(orderby.fieldPath, orderby.directionStr),
         limit(queryLimit)
       );
@@ -47,6 +74,7 @@ export default function useCollectionController<
       setLoading(true);
       const q = query(
         collection(db, "products"),
+        ...filterConstraint,
         orderBy(orderby.fieldPath, orderby.directionStr),
         startAfter(lastResult[orderby.fieldPath as keyof T]),
         limit(queryLimit)

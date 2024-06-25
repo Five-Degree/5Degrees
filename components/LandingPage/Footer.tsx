@@ -1,16 +1,17 @@
 "use client";
 import PaymentMethods from "@/public/Images/PaymentMethods.svg";
 import Logo from "@/public/Logos/Logo.svg";
-import { Stack, Typography } from "@mui/material";
+import {
+  Facebook,
+  Instagram,
+  MailRounded,
+  Twitter,
+  YouTube,
+} from "@mui/icons-material";
+import { Stack, Tooltip, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import CustomIconButton from "../Custom/CustomIconButton";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedInIcon,
-} from "../Utility/CustomIcons";
 const FooterSection = ({
   children,
   title,
@@ -21,7 +22,7 @@ const FooterSection = ({
 } & IAos) => {
   return (
     <Stack
-      maxWidth={"13.25rem"}
+      maxWidth={"21.875rem"}
       alignItems={"center"}
       gap={2}
       {...anime}
@@ -39,6 +40,11 @@ const FooterSection = ({
   );
 };
 export default function Footer() {
+  const iconStyles = {
+    ":hover": {
+      color: "var(--accent)",
+    },
+  };
   return (
     <Stack
       direction={"row"}
@@ -50,18 +56,8 @@ export default function Footer() {
       paddingInline={3}
       gap={2}
     >
-      <Image
-        src={Logo}
-        alt="5 Degrees"
-        // data-aos="zoom-in"
-      />
-      <Stack
-        alignItems={"center"}
-        gap={1}
-        // data-aos="fade-up"
-        // data-aos-delay={100}
-        // data-aos-anchor-placement="bottom-bottom"
-      >
+      <Image src={Logo} alt="5 Degrees" />
+      <Stack alignItems={"center"} gap={1}>
         <Typography variant="h2">
           <Link href={"/"}>Customers</Link>
         </Typography>
@@ -72,50 +68,37 @@ export default function Footer() {
           <Link href={"/"}>Support</Link>
         </Typography>
       </Stack>
-      <FooterSection
-        title="What we do"
-        // data-aos="fade-up"
-        // data-aos-delay={300}
-        // data-aos-anchor-placement="bottom-bottom"
-      >
+      <FooterSection title="What we do">
         <Typography fontSize={"1.125em"} textAlign={"center"}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Non minima
-          officiis hic voluptatum in suscipit autem eligendi.
+          Enter into our spacious arena of endless decision making. you dont
+          have any obligation to leave but only at your expense. We welcome you
+          to the array of sneaker picking with unorthodox colors and unicorn
+          sizes that touch the interiors of your chambers, come have a kick from
+          our virtual and into your physical
         </Typography>
       </FooterSection>
-      <FooterSection
-        title="Contact Us"
-        // data-aos="fade-up"
-        // data-aos-delay={400}
-        // data-aos-anchor-placement="bottom-bottom"
-      >
-        <Typography fontSize={"1.125em"} textAlign={"center"}>
-          7711 Old Mountain Towers,
-          <br />
-          Nightmute, Ohio,
-          <br />
-          43498-4451
-          <br />
-          {"("}567{")"} 555-6283
-        </Typography>
-        <Stack direction={"row"}>
-          <CustomIconButton>
-            <FacebookIcon />
-          </CustomIconButton>
-          <CustomIconButton>
-            <LinkedInIcon />
-          </CustomIconButton>
-          <CustomIconButton>
-            <InstagramIcon />
-          </CustomIconButton>
+      <FooterSection title="Contact Us">
+        <Stack direction={"row"} gap={1}>
+          <Link href={"https://www.facebook.com/profile.php?id=61550536636170"}>
+            <Facebook sx={iconStyles} />
+          </Link>
+          <Link href={"mailto:five.degrees@yahoo.com"} target="_blank">
+            <Tooltip title="five.degrees@yahoo.com">
+              <MailRounded sx={iconStyles} />
+            </Tooltip>
+          </Link>
+          <Link href={"https://x.com/5degrees1317"}>
+            <Twitter sx={iconStyles} />
+          </Link>
+          <Link href={"https://www.instagram.com/5degrees_._/"}>
+            <Instagram sx={iconStyles} />
+          </Link>
+          <Link href={"https://www.youtube.com/@5degrees148"}>
+            <YouTube sx={iconStyles} />
+          </Link>
         </Stack>
       </FooterSection>
-      <FooterSection
-        title="We Accept"
-        // data-aos="fade-up"
-        // data-aos-delay={500}
-        // data-aos-anchor-placement="bottom-bottom"
-      >
+      <FooterSection title="We Accept">
         <Image src={PaymentMethods} alt="Payment Methods" />
       </FooterSection>
     </Stack>

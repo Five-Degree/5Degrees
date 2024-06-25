@@ -42,15 +42,15 @@ export default function FeaturedProductCard({
         src={product.featuredImage}
         alt={product.name}
         // Responsive
-        width={152}
-        height={91}
+        width={152*2}
+        height={91*2}
         style={{
           position: "absolute",
           left: "-20%",
           bottom: "20%",
           rotate: "-25deg",
           filter: "drop-shadow(var(--shadow))",
-          width: "50%",
+          width: "55%",
           height: "auto",
         }}
       />
