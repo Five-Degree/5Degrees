@@ -25,7 +25,13 @@ export default function OrderSummary() {
               mt={2}
               gap={3}
               maxHeight={"75%"}
-              sx={{ overflowY: "auto" }}
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "1fr",
+                gridAutoRows: "min-content",
+                overflowY: "auto",
+                overflowX: "clip",
+              }}
               pb={2}
               borderBottom={"1px solid var(--border-color)"}
             >
