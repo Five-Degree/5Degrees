@@ -9,16 +9,28 @@ import Link from "next/link";
 export default function CartDrawerCard({ item }: { item: CartProduct }) {
   const { removeFromCart } = useCart();
   return (
-    <Card sx={{ width: "100%", minHeight: "160px" }}>
+    <Card
+      sx={{
+        width: "100%",
+        height: "fit-content",
+        display: "flex",
+      }}
+    >
       <CardContent
         sx={{
           position: "relative",
           display: "flex",
           flexDirection: "column",
+
           gap: 1,
+          padding: "0.5rem",
+          ":last-child": {
+            paddingBottom: 0,
+          },
+          width: "100%",
         }}
       >
-        <Typography variant="h3">
+        <Typography variant="h3" paddingRight={"1.5625rem"}>
           <Link href={`/product/${item.id}`}>{item.name}</Link>
         </Typography>
         <Stack direction={"row"} gap={2} alignItems={"center"}>

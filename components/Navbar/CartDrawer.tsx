@@ -50,7 +50,13 @@ export default function CartDrawer({
           gap={1}
           height={"80vh"}
           maxHeight={"80vh"}
-          sx={{ overflowY: "auto", overflowX: "clip" }}
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gridAutoRows: "min-content",
+            overflowY: "auto",
+            overflowX: "clip",
+          }}
         >
           {cart.length == 0 && (
             <Stack
