@@ -32,7 +32,7 @@ export default function Checkout() {
         <Stack width={"100%"} gap={1}>
           <DeliveryInformation />
           {/* <DeliverySchedule /> */}
-          <PaymentMethod />
+          {/* <PaymentMethod /> */}
         </Stack>
         <OrderSummary />
       </Stack>
