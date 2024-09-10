@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import {
   FormControl,
   Input,
@@ -21,7 +21,7 @@ export interface IFormInput extends InputProps {
   loading?: boolean;
   helperText?: string;
   pattern?: string;
-  label?: string;
+  label?: string | ReactNode;
   width?: string;
 }
 export default function FormInput(props: IFormInput) {
