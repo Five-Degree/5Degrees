@@ -4,7 +4,7 @@ import FormInput, {
   FormCredentials,
 } from "@/components/Custom/FormComponents/FormInput";
 import { useAuth } from "@/contexts/AuthContext";
-import inputs from "@/shared/constants/inputs.json";
+import inputs from "@/shared/constants/inputs";
 import { GetRefinedFirebaseError } from "@/shared/functions/errorHandler";
 import { Button, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";

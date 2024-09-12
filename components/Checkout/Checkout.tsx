@@ -9,7 +9,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useAuth } from "@/contexts/AuthContext";
 import { redirect } from "next/navigation";
-import { useCheckout } from "@/contexts/CheckoutContext";
+import { useCheckout } from "./CheckoutContext";
 export default function Checkout() {
   const { user } = useAuth();
   useLayoutEffect(() => {

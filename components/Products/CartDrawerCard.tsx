@@ -45,7 +45,7 @@ export default function CartDrawerCard({ item }: { item: CartProduct }) {
             }}
           />
           <Stack>
-            <Stack direction={"row"} alignItems={"center"} gap={1}>
+            {/* <Stack direction={"row"} alignItems={"center"} gap={1}>
               <Typography color={"var(--gray)"}>Color:</Typography>
               <CircleIcon
                 sx={{
@@ -54,7 +54,7 @@ export default function CartDrawerCard({ item }: { item: CartProduct }) {
                   borderRadius: "50%",
                 }}
               />
-            </Stack>
+            </Stack> */}
             <Stack direction={"row"} alignItems={"center"} gap={1}>
               <Typography color={"var(--gray)"}>Variant:</Typography>
               <Typography>{item.selectedVariant}</Typography>

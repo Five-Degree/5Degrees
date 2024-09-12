@@ -32,11 +32,26 @@ type Props = {
       includeAggr?: false;
       aggrDoc?: never;
     }
-);
-const useGetCollection = ({ queryLimit, coll }: Props) => {
+) &
+  (
+    | {
+        includeId: true;
+        idKey?: string;
+      }
+    | {
+        includeId?: false;
+        idKey?: never;
+      }
+  );
+export default function useGetCollection<T extends DocumentData>({
+  queryLimit,
+  coll,
+  includeId,
+  idKey = "id",
+}: Props) {
   const [isMounted, setIsMounted] = useState(false); //for when the component mounts so that initialFetch runs only once when component mounts and again whenever the filterConstraint changes
-  const [results, setResults] = useState<Array<DocumentData>>([]);
-  const [lastResult, setLastResult] = useState<DocumentData | null>(null);
+  const [results, setResults] = useState<Array<T | DocumentData>>([]);
+  const [lastResult, setLastResult] = useState<DocumentData | T | null>(null);
   const [endOfData, setEndOfData] = useState<boolean>(false);
   const [filterConstraint, setFilterConstraint] = useState<
     Array<QueryFieldFilterConstraint>
@@ -111,12 +126,14 @@ const useGetCollection = ({ queryLimit, coll }: Props) => {
       const unsubscribe = onSnapshot(
         query,
         (querySnapshot) => {
-          var docs = results;
+          var docs: (T | DocumentData)[] = [];
           var docCount = 0;
           console.log("onSnapshot triggered");
           querySnapshot.forEach((doc) => {
-            console.log(doc.id, "=>", doc.data());
-            if (!checkIfObjectExistsInArray(docs, "_id", doc.data())) {
+            // console.log(doc.id, "=>", doc.data());
+            if (includeId) {
+              docs = [...docs, { [idKey]: doc.id, ...doc.data() }];
+            } else {
               docs = [...docs, doc.data()];
             }
             docCount++;
@@ -147,6 +164,4 @@ const useGetCollection = ({ queryLimit, coll }: Props) => {
     handleSetFilter,
     handleClearFilter,
   };
-};
-
-export default useGetCollection;
+}

@@ -1,44 +1,61 @@
-import inputs from "@/shared/constants/inputs.json";
+import { useAuth } from "@/contexts/AuthContext";
+import inputs from "@/shared/constants/inputs";
+import useGetCollection from "@/shared/hooks/useGetCollection";
+import { DeliveryInfo } from "@/shared/interfaces/Order";
 import { ExpandMoreRounded } from "@mui/icons-material";
 import {
   Accordion,
   AccordionActions,
   AccordionDetails,
   AccordionSummary,
+  Box,
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
 import CustomSwitch from "../Custom/CustomSwitch";
-import FormContainer from "../Custom/FormComponents/FormContainer";
-import FormInput, {
-  FormCredentials,
-  IFormInput,
-} from "../Custom/FormComponents/FormInput";
-import { useCheckout } from "@/contexts/CheckoutContext";
+import FormInput, { IFormInput } from "../Custom/FormComponents/FormInput";
+import { useCheckout } from "./CheckoutContext";
+import DeliveryInformationCard from "./DeliveryInformationCard";
 
 export default function DeliveryInformation() {
   const {
     deliveryInfo,
     saveInfo,
-    handleDeliveryInfoChange: onDeliveryInfoChange,
-    handleSaveInfo,
+    handleDeliveryInfoChange,
+    handleSaveInfoChange: handleSaveInfo,
   } = useCheckout();
+  const { user } = useAuth();
   const formInputFactory = (input: IFormInput) => (
     <FormInput
       key={input.id}
       {...input}
-      // value={deliveryInfo[input.id]}
-      onChange={onDeliveryInfoChange}
+      value={deliveryInfo[input.name as keyof DeliveryInfo] || ""}
+      onChange={(e) => handleDeliveryInfoChange(e.target.name, e.target.value)}
     />
   );
+  const { results, loading, error } = useGetCollection<DeliveryInfo>({
+    queryLimit: 3,
+    coll: `users/${user?.uid}/deliveryInformations`,
+    includeId: true,
+  });
   // console.log(formValues, saveDetails);
+  console.log({ deliveryInfo });
+  console.log({ results, error });
+
   return (
     <Accordion defaultExpanded>
       <AccordionSummary expandIcon={<ExpandMoreRounded />}>
         <Typography variant="h2">Delivery Information</Typography>
       </AccordionSummary>
       <AccordionDetails>
+        <Stack direction={"row"} overflow={"auto hidden"} gap={"0.5rem"}>
+          {results.map((res) => (
+            <DeliveryInformationCard
+              key={res.email}
+              res={res as DeliveryInfo}
+            />
+          ))}
+        </Stack>
         <Stack
           gap={2}
           width={"100%"}
@@ -66,7 +83,34 @@ export default function DeliveryInformation() {
           {formInputFactory(inputs.billingInfo[5])}
           <Stack direction={"row"} gap={1}>
             {/* Country */}
-            {formInputFactory(inputs.billingInfo[6])}
+            {/* {formInputFactory({})} */}
+            <FormInput
+              {...inputs.billingInfo[6]}
+              onOptionSelect={(o) =>
+                handleDeliveryInfoChange("country", o.name)
+              }
+              onChange={(e) =>
+                handleDeliveryInfoChange(e.target.name, e.target.value)
+              }
+              value={deliveryInfo.country}
+              renderOption={(o) => {
+                return (
+                  <Box
+                    // component="li"
+                    sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                  >
+                    <img
+                      loading="lazy"
+                      width="20"
+                      srcSet={`https://flagcdn.com/w40/${o.code.toLowerCase()}.png 2x`}
+                      src={`https://flagcdn.com/w20/${o.code.toLowerCase()}.png`}
+                      alt=""
+                    />
+                    {o.name}
+                  </Box>
+                );
+              }}
+            />
             {/* City */}
             {formInputFactory(inputs.billingInfo[7])}
             {/* Postal Code */}

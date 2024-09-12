@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 import {
   FormControl,
   Input,
@@ -8,25 +8,48 @@ import {
   InputLabel,
   Skeleton,
   InputProps,
+  Menu,
+  MenuList,
+  MenuItem,
+  ListItemIcon,
 } from "@mui/material";
 import VisibilityOutlined from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlined from "@mui/icons-material/VisibilityOffOutlined";
+import { ArrowDropDown } from "@mui/icons-material";
+import CustomIconButton from "../CustomIconButton";
+import FormSelectInput from "./FormSelectInput";
 
 export interface FormCredentials {
   [key: string]: string;
 }
 
-export interface IFormInput extends InputProps {
+type IFormInputOption = { name: string; [key: string]: any };
+
+export type IFormInput = {
   id: string;
+  name: string;
   loading?: boolean;
   helperText?: string;
   pattern?: string;
   label?: string | ReactNode;
   width?: string;
-}
+  options?: IFormInputOption[];
+  renderOption?: (option: IFormInputOption) => ReactNode;
+  onOptionSelect?: (option: IFormInputOption) => void;
+} & InputProps;
 export default function FormInput(props: IFormInput) {
-  const { id, helperText, loading, label, pattern, width, ...inputProps } =
-    props;
+  const {
+    id,
+    helperText,
+    loading,
+    options,
+    label,
+    pattern,
+    width,
+    renderOption,
+    onOptionSelect,
+    ...inputProps
+  } = props;
   const [wrongInput, setWrongInput] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -68,12 +91,14 @@ export default function FormInput(props: IFormInput) {
           {inputProps.required && wrongInput && "*"}
         </InputLabel>
       )}
-      {loading ? (
+      {loading && (
         <Skeleton height={46} sx={{ mt: "0.6rem", borderRadius: "0.5rem" }} />
-      ) : (
+      )}
+      {!loading && !options ? (
         <Input
           {...inputProps}
           disableUnderline
+          id={id}
           error={wrongInput}
           onBlur={handleFocus}
           type={
@@ -86,9 +111,17 @@ export default function FormInput(props: IFormInput) {
           endAdornment={inputProps.type == "password" ? passwordAdornment : ""}
           color="secondary"
           sx={{
-            background: "var(--white)",
             border: wrongInput ? "1px solid var(--error)" : undefined,
           }}
+        />
+      ) : (
+        <FormSelectInput
+          {...props}
+          options={options}
+          handleFocus={handleFocus}
+          wrongInput={wrongInput}
+          renderOption={renderOption}
+          onOptionSelect={onOptionSelect}
         />
       )}
       <FormHelperText sx={{ color: "var(--error)" }}>

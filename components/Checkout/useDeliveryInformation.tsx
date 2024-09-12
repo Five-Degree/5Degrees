@@ -1,39 +1,64 @@
+import { db } from "@/lib/firebase/config";
+import useSetDocument from "@/shared/hooks/useSetDocument";
+import { DeliveryInfo } from "@/shared/interfaces/Order";
+import { User } from "firebase/auth";
+import { deleteDoc, doc, Timestamp } from "firebase/firestore";
 import React, { useState } from "react";
-import { FormCredentials } from "../Custom/FormComponents/FormInput";
 
 export default function useDeliveryInformation() {
-  const [deliveryInfo, setDeliveryInfo] = useState<FormCredentials>({
-    firstname: "",
-    lastname: "",
+  const [deliveryInfo, setDeliveryInfo] = useState<DeliveryInfo>({
+    firstName: "",
+    lastName: "",
     email: "",
-    phonenumber: "",
-    country: "",
-    state: "",
-    city: "",
-    address: "",
-    postalcode: "",
-  });
-  const [deliveryLocation, setDeliveryLocation] = useState<FormCredentials>({
+    whatsappNumber: "",
     country: "",
     city: "",
+    address1: "",
+    address2: "",
     postalCode: "",
   });
   const [saveInfo, setSaveInfo] = useState(false);
-  const handleDeliveryInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { createDocument, setDocument } = useSetDocument();
+
+  const handleDeliveryInfoChange = (name: string, value: string) => {
     setDeliveryInfo({
       ...deliveryInfo,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
-  const handleSaveInfo = (
+  const handleSaveInfoChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => setSaveInfo(checked);
+
+  async function setDeliveryInfoDocument(user: User) {
+    if (!deliveryInfo.id) {
+      await createDocument(`users/${user.uid}/deliveryInformations`, {
+        ...deliveryInfo,
+        dateCreated: Timestamp.now(),
+      });
+    } else {
+      await setDocument(
+        `users/${user.uid}/deliveryInformations`,
+        deliveryInfo.id,
+        { ...deliveryInfo, dateModified: Timestamp.now() },
+        true
+      );
+    }
+  }
+
+  async function deleteDeliveryInfoDocument(user: User, docId: string) {
+    const docRef = doc(db, `users/${user.uid}/deliveryInformations/${docId}`);
+    await deleteDoc(docRef);
+  }
+
   return {
     deliveryInfo,
-    deliveryLocation,
     saveInfo,
     handleDeliveryInfoChange,
-    handleSaveInfo,
+    handleSaveInfoChange,
+    setDeliveryInfo,
+    setDeliveryInfoDocument,
+    deleteDeliveryInfoDocument,
   };
 }

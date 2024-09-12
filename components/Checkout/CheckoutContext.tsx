@@ -2,9 +2,12 @@
 import useDeliveryInformation from "@/components/Checkout/useDeliveryInformation";
 import useDeliverySchedule from "@/components/Checkout/useDeliverySchedule";
 import usePaymentMethod from "@/components/Checkout/usePaymentMethod";
+import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/contexts/CartContext";
 import useSetDocument from "@/shared/hooks/useSetDocument";
+import { Timestamp } from "firebase/firestore";
 import { createContext, useContext } from "react";
-import { useAuth } from "./AuthContext";
+import useFormHelpers from "../Custom/FormComponents/useFormHelpers";
 
 type CheckoutContextType =
   | ({
@@ -13,7 +16,8 @@ type CheckoutContextType =
       ) => Promise<void>;
     } & (ReturnType<typeof useDeliveryInformation> &
       ReturnType<typeof useDeliverySchedule> &
-      ReturnType<typeof usePaymentMethod>))
+      ReturnType<typeof usePaymentMethod> &
+      ReturnType<typeof useFormHelpers>))
   | null;
 
 export const CheckoutContext = createContext<CheckoutContextType>(null);
@@ -31,8 +35,11 @@ export default function CheckoutContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { createDocument } = useSetDocument();
   const { user } = useAuth();
+  const { cart, totalCost } = useCart();
+
+  const formHelpers = useFormHelpers();
+
   const deliveryInformation = useDeliveryInformation();
 
   const deliverySchedule = useDeliverySchedule();
@@ -48,8 +55,11 @@ export default function CheckoutContextProvider({
       ...deliveryInformation,
       ...deliverySchedule,
       ...paymentMethod,
+      cart,
+      totalCost,
     });
-    // await createDocument();
+    if (deliveryInformation.saveInfo && user)
+      await deliveryInformation.setDeliveryInfoDocument(user);
   };
 
   return (
@@ -58,6 +68,7 @@ export default function CheckoutContextProvider({
         ...deliveryInformation,
         ...deliverySchedule,
         ...paymentMethod,
+        ...formHelpers,
         handleCheckoutFormSubmit,
       }}
     >

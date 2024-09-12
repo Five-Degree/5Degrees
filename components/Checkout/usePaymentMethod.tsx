@@ -1,4 +1,4 @@
-import { PaymentMethod } from "@/contexts/CheckoutContext";
+import { PaymentMethod } from "./CheckoutContext";
 import React, { useState } from "react";
 
 export default function usePaymentMethod() {

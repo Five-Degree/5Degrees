@@ -89,7 +89,7 @@ const muiTheme = createTheme({
           borderRadius: "var(--border-radius)",
           fontFamily: "var(--font-as)",
           fontWeight: "bold",
-          background: "var(--white)",
+          background: "var(--background)",
           height: "fit-content",
           paddingBlock: "0.2em",
         },
@@ -130,18 +130,19 @@ const muiTheme = createTheme({
     MuiInput: {
       styleOverrides: {
         root: {
-          fontSize: "1em",
+          fontSize: "1rem",
           width: "100%",
           color: "var(--primary-text)",
           background: "var(--background)",
           "& .MuiInputBase-input": {
             background: "var(--background)",
-            color: "var(--accent)",
-            paddingLeft: "0.5em",
+            color: "var(--secondary-text)",
+            padding: "0.5em",
             "::placeholder": {
               color: "var(--primary-text)",
             },
           },
+
           outline: "1px solid var(--border-color)",
           // boxShadow: "var(--inset-shadow)",
           borderRadius: "var(--border-radius)",
