@@ -30,7 +30,7 @@ type Product = {
   featuredImage?: string;
   images?: string[];
   variants: ProductVariant[];
-  colors: NonNullColors | NonNullColors[];
+  // colors: NonNullColors | NonNullColors[];
   // Shoesize always defaults to EU size regardless of what the user chooses
   sizes: ShoeSize["EU"][];
   availability?: "available" | "out of stock";
@@ -44,7 +44,7 @@ export interface CartProduct
   cartId?: string;
   quantity: number;
   selectedVariant: VariantNames;
-  selectedColor: NonNullColors;
+  // selectedColor: NonNullColors;
   selectedSize: ShoeSize["EU"];
   unitPrice: number;
 }

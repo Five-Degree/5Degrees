@@ -17,7 +17,6 @@ export default function ProductInteraction({ product }: { product: Product }) {
   const {
     formValues,
     handleVariantChange,
-    handleColorChange,
     handleQuantityChange,
     handleSizeChange,
   } = useAddToCartForm({
@@ -33,7 +32,7 @@ export default function ProductInteraction({ product }: { product: Product }) {
       id: product.id,
       quantity: formValues.quantity,
       selectedVariant: formValues.variant,
-      selectedColor: formValues.color,
+      // selectedColor: formValues.color,
       selectedSize: formValues.size,
       unitPrice: formValues.unitPrice,
       name: product.name,
@@ -90,7 +89,7 @@ export default function ProductInteraction({ product }: { product: Product }) {
           product={product}
         />
       </Stack>
-      {product.colors.length != 0 && (
+      {/* {product.colors.length != 0 && (
         <Stack gap={1}>
           <Typography variant="body2">Colors:</Typography>
           <ColorSelector
@@ -99,7 +98,7 @@ export default function ProductInteraction({ product }: { product: Product }) {
             product={product}
           />
         </Stack>
-      )}
+      )} */}
       <Stack gap={1}>
         <Typography variant="body2">Sizes:</Typography>
         <SizeSelector

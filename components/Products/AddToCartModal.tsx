@@ -36,7 +36,7 @@ export default function AddToCartModal({
   const {
     formValues,
     handleVariantChange,
-    handleColorChange,
+    // handleColorChange,
     handleQuantityChange,
     handleSizeChange,
   } = useAddToCartForm({ product });
@@ -65,7 +65,7 @@ export default function AddToCartModal({
       id: product.id,
       quantity: formValues.quantity,
       selectedVariant: formValues.variant,
-      selectedColor: formValues.color,
+      // selectedColor: formValues.color,
       selectedSize: formValues.size,
       unitPrice: formValues.unitPrice,
       name: product.name,
@@ -107,7 +107,7 @@ export default function AddToCartModal({
               product={product}
             />
           </PartWrapper>
-          {product.colors.length != 0 && (
+          {/* {product.colors.length != 0 && (
             <PartWrapper>
               <Typography variant="body2" width={"100%"}>
                 Colors:
@@ -118,7 +118,7 @@ export default function AddToCartModal({
                 product={product}
               />
             </PartWrapper>
-          )}
+          )} */}
           <PartWrapper>
             <Typography variant="body2" width={"100%"}>
               Sizes:
