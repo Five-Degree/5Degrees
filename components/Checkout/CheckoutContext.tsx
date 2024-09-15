@@ -8,6 +8,8 @@ import useSetDocument from "@/shared/hooks/useSetDocument";
 import { Timestamp } from "firebase/firestore";
 import { createContext, useContext } from "react";
 import useFormHelpers from "../Custom/FormComponents/useFormHelpers";
+import Order from "@/shared/interfaces/Order";
+import { useRouter } from "next/navigation";
 
 type CheckoutContextType =
   | ({
@@ -36,7 +38,8 @@ export default function CheckoutContextProvider({
   children: React.ReactNode;
 }) {
   const { user } = useAuth();
-  const { cart, totalCost } = useCart();
+  const { cart, totalCost, clearCart } = useCart();
+  const router = useRouter();
 
   const formHelpers = useFormHelpers();
 
@@ -45,6 +48,7 @@ export default function CheckoutContextProvider({
   const deliverySchedule = useDeliverySchedule();
 
   const paymentMethod = usePaymentMethod();
+  const { createDocument } = useSetDocument();
 
   const handleCheckoutFormSubmit = async (
     e: React.FormEvent<HTMLFormElement>
@@ -52,17 +56,36 @@ export default function CheckoutContextProvider({
     e.preventDefault();
     console.log(user?.uid);
     console.log({
-      ...deliveryInformation,
-      ...deliverySchedule,
-      ...paymentMethod,
+      deliveryInformation,
+      deliverySchedule,
+      paymentMethod,
       cart,
       totalCost,
     });
-    if (deliveryInformation.saveInfo && user)
-      await deliveryInformation.setDeliveryInfoDocument(user);
-    
-
-    
+    try {
+      formHelpers.startLoading();
+      if (deliveryInformation.saveInfo && user)
+        await deliveryInformation.setDeliveryInfoDocument(user);
+      if (cart.length > 0 && user) {
+        const orderData: Omit<Order, "id"> = {
+          userId: user.uid,
+          deliveryInfo: deliveryInformation.deliveryInfo,
+          dateCreated: Timestamp.now(),
+          status: "Confirming Order",
+          cartTotalCost: totalCost,
+          cartProducts: cart,
+          qualityCheck: deliveryInformation.qaulityCheck,
+        };
+        const docRef = await createDocument("orders", orderData);
+        clearCart();
+        router.push(`/checkout/success/${docRef?.id}`);
+      }
+      formHelpers.endLoading();
+    } catch (error) {
+      router.push("/checkout/failed");
+      formHelpers.endLoading();
+      console.log(error);
+    }
   };
 
   return (

@@ -47,9 +47,8 @@ export default function DeliveryInformation() {
       loading={loading || loadingDeliveryInfo}
     />
   );
-  // console.log(formValues, saveDetails);
-  console.log({ deliveryInfo });
-  console.log({ results, error });
+  // console.log({ deliveryInfo });
+  // console.log({ results, error });
 
   return (
     <Accordion defaultExpanded>
@@ -59,10 +58,7 @@ export default function DeliveryInformation() {
       <AccordionDetails>
         <Stack direction={"row"} overflow={"auto hidden"} gap={"0.5rem"}>
           {results.map((res) => (
-            <DeliveryInformationCard
-              key={res.email}
-              res={res as DeliveryInfo}
-            />
+            <DeliveryInformationCard key={res.id} res={res as DeliveryInfo} />
           ))}
         </Stack>
         <Stack

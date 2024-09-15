@@ -20,14 +20,13 @@ export default function FormSelectInput({
 }: FormSelectInputProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const { onChange, ...rest } = inputProps;
+  const { loading, onChange, ...rest } = inputProps;
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleSelect = () => {};
   return (
     <>
       <Input

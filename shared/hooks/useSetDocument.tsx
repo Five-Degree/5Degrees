@@ -27,11 +27,13 @@ const useSetDocument = () => {
   };
   const createDocument = async (coll: string, data: DocumentData) => {
     setLoading(true);
-    await addDoc(collection(db, coll), data)
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => setLoading(false));
+    try {
+      const docRef = await addDoc(collection(db, coll), data);
+      setLoading(false);
+      return docRef;
+    } catch (error) {
+      if (error instanceof FirestoreError) setError(error);
+    }
   };
   return { setDocument, createDocument, loading, error };
 };

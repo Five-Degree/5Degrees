@@ -94,36 +94,39 @@ export default function FormInput(props: IFormInput) {
       {loading && (
         <Skeleton height={46} sx={{ mt: "0.6rem", borderRadius: "0.5rem" }} />
       )}
-      {!loading && !options ? (
-        <Input
-          {...inputProps}
-          disableUnderline
-          id={id}
-          error={wrongInput}
-          onBlur={handleFocus}
-          type={
-            inputProps.type == "password"
-              ? showPassword
-                ? "text"
+      {!loading &&
+        (!options ? (
+          <Input
+            {...inputProps}
+            disableUnderline
+            id={id}
+            error={wrongInput}
+            onBlur={handleFocus}
+            type={
+              inputProps.type == "password"
+                ? showPassword
+                  ? "text"
+                  : inputProps.type
                 : inputProps.type
-              : inputProps.type
-          }
-          endAdornment={inputProps.type == "password" ? passwordAdornment : ""}
-          color="secondary"
-          sx={{
-            border: wrongInput ? "1px solid var(--error)" : undefined,
-          }}
-        />
-      ) : (
-        <FormSelectInput
-          {...props}
-          options={options}
-          handleFocus={handleFocus}
-          wrongInput={wrongInput}
-          renderOption={renderOption}
-          onOptionSelect={onOptionSelect}
-        />
-      )}
+            }
+            endAdornment={
+              inputProps.type == "password" ? passwordAdornment : ""
+            }
+            color="secondary"
+            sx={{
+              border: wrongInput ? "1px solid var(--error)" : undefined,
+            }}
+          />
+        ) : (
+          <FormSelectInput
+            {...props}
+            options={options}
+            handleFocus={handleFocus}
+            wrongInput={wrongInput}
+            renderOption={renderOption}
+            onOptionSelect={onOptionSelect}
+          />
+        ))}
       <FormHelperText sx={{ color: "var(--error)" }}>
         {wrongInput && helperText}
       </FormHelperText>

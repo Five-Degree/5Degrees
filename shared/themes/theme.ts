@@ -107,7 +107,7 @@ const muiTheme = createTheme({
       styleOverrides: {
         root: {
           fontWeight: "bold",
-          fontSize: "13px",
+          fontSize: "var(--body2)",
           color: "var(--border-color)",
           borderColor: "var(--border-color)",
           ":before": {

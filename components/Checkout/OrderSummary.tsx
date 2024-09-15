@@ -5,14 +5,16 @@ import { Button, Card, CardContent, Stack, Typography } from "@mui/material";
 import CartDrawerCard from "../Products/CartDrawerCard";
 import { useLayoutEffect } from "react";
 import { redirect } from "next/navigation";
+import { useCheckout } from "./CheckoutContext";
 
 export default function OrderSummary() {
   const { cart, totalCost } = useCart();
-  useLayoutEffect(() => {
-    if (cart.length < 1) {
-      redirect("/");
-    }
-  }, [cart]);
+  const { loading } = useCheckout();
+  // useLayoutEffect(() => {
+  //   if (cart.length < 1) {
+  //     redirect("/");
+  //   }
+  // }, [cart]);
   return (
     <Stack
       sx={{ width: { lg: "60%", md: "100%", xs: "100%" }, height: "90vh" }}
@@ -76,7 +78,7 @@ export default function OrderSummary() {
                 variant="contained"
                 type="submit"
                 endIcon={<CheckRounded />}
-                disabled={cart.length == 0}
+                disabled={cart.length == 0 || loading}
               >
                 Confirm Order
               </Button>
