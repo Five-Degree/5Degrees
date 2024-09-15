@@ -18,6 +18,7 @@ export default function useDeliveryInformation() {
     postalCode: "",
   });
   const [saveInfo, setSaveInfo] = useState(false);
+  const [qaulityCheck, setQualityCheck] = useState(false);
   const { createDocument, setDocument } = useSetDocument();
 
   const handleDeliveryInfoChange = (name: string, value: string) => {
@@ -30,6 +31,10 @@ export default function useDeliveryInformation() {
     event: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => setSaveInfo(checked);
+  const handleQualityCheckChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    checked: boolean
+  ) => setQualityCheck(checked);
 
   async function setDeliveryInfoDocument(user: User) {
     if (!deliveryInfo.id) {
@@ -55,8 +60,10 @@ export default function useDeliveryInformation() {
   return {
     deliveryInfo,
     saveInfo,
+    qaulityCheck,
     handleDeliveryInfoChange,
     handleSaveInfoChange,
+    handleQualityCheckChange,
     setDeliveryInfo,
     setDeliveryInfoDocument,
     deleteDeliveryInfoDocument,

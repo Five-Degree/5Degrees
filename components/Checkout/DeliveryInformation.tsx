@@ -2,13 +2,14 @@ import { useAuth } from "@/contexts/AuthContext";
 import inputs from "@/shared/constants/inputs";
 import useGetCollection from "@/shared/hooks/useGetCollection";
 import { DeliveryInfo } from "@/shared/interfaces/Order";
-import { ExpandMoreRounded } from "@mui/icons-material";
+import { ExpandMoreRounded, FactCheckRounded } from "@mui/icons-material";
 import {
   Accordion,
   AccordionActions,
   AccordionDetails,
   AccordionSummary,
   Box,
+  Divider,
   Stack,
   Typography,
 } from "@mui/material";
@@ -21,23 +22,31 @@ export default function DeliveryInformation() {
   const {
     deliveryInfo,
     saveInfo,
+    qaulityCheck,
     handleDeliveryInfoChange,
-    handleSaveInfoChange: handleSaveInfo,
+    handleSaveInfoChange,
+    handleQualityCheckChange,
+    loading,
   } = useCheckout();
   const { user } = useAuth();
+  const {
+    results,
+    loading: loadingDeliveryInfo,
+    error,
+  } = useGetCollection<DeliveryInfo>({
+    queryLimit: 3,
+    coll: `users/${user?.uid}/deliveryInformations`,
+    includeId: true,
+  });
   const formInputFactory = (input: IFormInput) => (
     <FormInput
       key={input.id}
       {...input}
       value={deliveryInfo[input.name as keyof DeliveryInfo] || ""}
       onChange={(e) => handleDeliveryInfoChange(e.target.name, e.target.value)}
+      loading={loading || loadingDeliveryInfo}
     />
   );
-  const { results, loading, error } = useGetCollection<DeliveryInfo>({
-    queryLimit: 3,
-    coll: `users/${user?.uid}/deliveryInformations`,
-    includeId: true,
-  });
   // console.log(formValues, saveDetails);
   console.log({ deliveryInfo });
   console.log({ results, error });
@@ -92,6 +101,7 @@ export default function DeliveryInformation() {
               onChange={(e) =>
                 handleDeliveryInfoChange(e.target.name, e.target.value)
               }
+              loading={loading || loadingDeliveryInfo}
               value={deliveryInfo.country}
               renderOption={(o) => {
                 return (
@@ -126,9 +136,40 @@ export default function DeliveryInformation() {
           gap={3}
           alignItems={"center"}
           justifyContent={"flex-end"}
+          bgcolor={qaulityCheck ? "var(--accentalpha)" : ""}
+          borderRadius={"var(--border-radius)"}
+          p={"0.5em"}
+        >
+          <Typography
+            alignItems={"center"}
+            display={"flex"}
+            gap={"0.25em"}
+            color={qaulityCheck ? "var(--accent)" : undefined}
+          >
+            <FactCheckRounded />
+            Quality Checking
+          </Typography>
+          <CustomSwitch
+            disabled={loading || loadingDeliveryInfo}
+            value={qaulityCheck}
+            onChange={handleQualityCheckChange}
+          />
+        </Stack>
+        <Divider orientation="vertical" flexItem />
+        <Stack
+          direction={"row"}
+          marginBlock={1}
+          paddingInline={2}
+          gap={3}
+          alignItems={"center"}
+          justifyContent={"flex-end"}
         >
           <Typography>Save shipping details</Typography>
-          <CustomSwitch value={saveInfo} onChange={handleSaveInfo} />
+          <CustomSwitch
+            disabled={loading || loadingDeliveryInfo}
+            value={saveInfo}
+            onChange={handleSaveInfoChange}
+          />
         </Stack>
       </AccordionActions>
     </Accordion>

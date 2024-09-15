@@ -60,6 +60,9 @@ export default function CheckoutContextProvider({
     });
     if (deliveryInformation.saveInfo && user)
       await deliveryInformation.setDeliveryInfoDocument(user);
+    
+
+    
   };
 
   return (

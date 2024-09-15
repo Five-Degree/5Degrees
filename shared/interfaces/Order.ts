@@ -28,7 +28,8 @@ export default interface Order {
   deliveryInfo: DeliveryInfo;
   dateCreated: Timestamp;
   status: OrderStatus;
-  orderTotal: number;
-  orderItems: CartProduct[];
+  cartTotal: number;
+  cartProducts: CartProduct[];
+  qualityCheck?: boolean;
   qualityCheckLink?: string;
 }
