@@ -46,6 +46,9 @@ const muiTheme = createTheme({
             margin: 0,
           },
         },
+        expandIconWrapper: {
+          color: "currentcolor",
+        },
       },
     },
     MuiButton: {
@@ -168,6 +171,35 @@ const muiTheme = createTheme({
         },
       },
     },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          color: "currentColor",
+        },
+      },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            backgroundColor: "var(--accentalpha)",
+            ":hover": {
+              backgroundColor: "var(--border-color)",
+            },
+          },
+          ":hover": {
+            backgroundColor: "var(--border-color)",
+          },
+        },
+      },
+    },
     MuiMenu: {
       styleOverrides: {
         paper: {
@@ -180,8 +212,12 @@ const muiTheme = createTheme({
       styleOverrides: {
         root: {
           fontSize: "1.3em",
+          transition: "all 0.3s ease",
           "&.Mui-selected": {
             backgroundColor: "var(--accentalpha)",
+          },
+          ":hover": {
+            backgroundColor: "var(--border-color)",
           },
         },
       },
@@ -242,7 +278,7 @@ const muiTheme = createTheme({
     MuiSvgIcon: {
       styleOverrides: {
         root: {
-          color: "var(--gray)",
+          fontSize: "inherit",
         },
       },
     },

@@ -1,6 +1,4 @@
-import { useCheckout } from "@/contexts/CheckoutContext";
 import { ExpandMoreRounded } from "@mui/icons-material";
-import FastForwardRoundedIcon from "@mui/icons-material/FastForwardRounded";
 import {
   Accordion,
   AccordionDetails,
@@ -12,7 +10,7 @@ import {
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import CustomSwitch from "../Custom/CustomSwitch";
-import FormInput from "../Custom/FormComponents/FormInput";
+import { useCheckout } from "./CheckoutContext";
 export default function DeliverySchedule() {
   const {
     scheduleDelivery,

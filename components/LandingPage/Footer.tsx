@@ -78,7 +78,7 @@ export default function Footer() {
         </Typography>
       </FooterSection>
       <FooterSection title="Contact Us">
-        <Stack direction={"row"} gap={1}>
+        <Stack direction={"row"} gap={1} color={"var(--accent)"}>
           <Link href={"https://www.facebook.com/profile.php?id=61550536636170"}>
             <Facebook sx={iconStyles} />
           </Link>

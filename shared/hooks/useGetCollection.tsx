@@ -11,6 +11,8 @@ import {
   DocumentData,
   FirestoreError,
   QueryFieldFilterConstraint,
+  FieldPath,
+  WhereFilterOp,
 } from "firebase/firestore";
 import checkIfObjectExistsInArray from "@/shared/functions/checkIfObjectExistsInArray";
 import { db } from "@/lib/firebase/config";
@@ -23,6 +25,7 @@ export type FilterParams = {
 type Props = {
   queryLimit: number;
   coll: string;
+  initialFilterConstraints?: Array<QueryFieldFilterConstraint>;
 } & (
   | {
       includeAggr: true;
@@ -48,14 +51,15 @@ export default function useGetCollection<T extends DocumentData>({
   coll,
   includeId,
   idKey = "id",
+  initialFilterConstraints,
 }: Props) {
   const [isMounted, setIsMounted] = useState(false); //for when the component mounts so that initialFetch runs only once when component mounts and again whenever the filterConstraint changes
-  const [results, setResults] = useState<Array<T | DocumentData>>([]);
-  const [lastResult, setLastResult] = useState<DocumentData | T | null>(null);
+  const [results, setResults] = useState<Array<T>>([]);
+  const [lastResult, setLastResult] = useState<T | null>(null);
   const [endOfData, setEndOfData] = useState<boolean>(false);
   const [filterConstraint, setFilterConstraint] = useState<
     Array<QueryFieldFilterConstraint>
-  >([]);
+  >(initialFilterConstraints ?? []);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<FirestoreError | undefined>();
 
@@ -94,11 +98,15 @@ export default function useGetCollection<T extends DocumentData>({
   }
   /**
    * Function that changes the filter constraints when set by the user
-   * @param {FilterParams} filterParams Object containing label and value
+   * @param {QueryFieldFilterConstraint} filterParams Object containing label and value
    */
-  function handleSetFilter(filterParams: FilterParams) {
+  function handleSetFilter(
+    fieldPath: string | FieldPath,
+    opStr: WhereFilterOp,
+    value: unknown
+  ) {
     clearAll();
-    setFilterConstraint([where(filterParams.label, "in", filterParams.value)]);
+    setFilterConstraint([where(fieldPath, opStr, value)]);
   }
   /**
    * Function to clear filter constraints
@@ -130,6 +138,7 @@ export default function useGetCollection<T extends DocumentData>({
           var docCount = 0;
           console.log("onSnapshot triggered");
           querySnapshot.forEach((doc) => {
+            console.log("data", doc.data());
             // console.log(doc.id, "=>", doc.data());
             if (includeId) {
               docs = [...docs, { [idKey]: doc.id, ...doc.data() }];
@@ -141,11 +150,13 @@ export default function useGetCollection<T extends DocumentData>({
           if (docCount < queryLimit) {
             setEndOfData(true);
           }
-          setLastResult(docs[docs.length - 1]);
-          setResults(docs);
+          setLastResult(docs[docs.length - 1] as T);
+          setResults(docs as T[]);
           setLoading(false);
         },
         (error) => {
+          console.error(error);
+          setLoading(false);
           setError(error);
         }
       );

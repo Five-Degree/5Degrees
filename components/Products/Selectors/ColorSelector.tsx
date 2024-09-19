@@ -3,8 +3,7 @@ import { CheckRounded } from "@mui/icons-material";
 import {
   ToggleButton,
   ToggleButtonGroup,
-  Tooltip,
-  Typography,
+  Tooltip
 } from "@mui/material";
 import React from "react";
 
@@ -18,7 +17,9 @@ export default function ColorSelector({
     event: React.MouseEvent<HTMLElement>,
     value: NonNullColors
   ) => void;
-  product: Product;
+  product: Product & {
+    colors: NonNullColors | NonNullColors[];
+  };
 }) {
   const colorButtonFactory = (color: NonNullColors) => (
     <Tooltip key={color} title={color}>

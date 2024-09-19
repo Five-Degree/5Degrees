@@ -1,7 +1,6 @@
 "use client";
 import CustomIconButton from "@/components/Custom/CustomIconButton";
 import FeaturedProductCard from "@/components/Products/FeaturedProductCard";
-import mockProducts from "@/shared/constants/mockProducts";
 import useAddToCartModal from "@/shared/hooks/useAddToCartModal";
 import useCollectionController from "@/shared/hooks/useCollectionController";
 import useSlickSlider from "@/shared/hooks/useSlickSlider";
@@ -26,7 +25,7 @@ export default function Featured() {
     defaultPrice: 0,
     mainImage: "",
     variants: [],
-    colors: [],
+    // colors: [],
     sizes: [],
   });
   const { handleAddToCartOpen, showAddToCartModal, addToCartModal } =

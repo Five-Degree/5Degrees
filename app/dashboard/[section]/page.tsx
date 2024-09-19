@@ -1,9 +1,23 @@
 "use client";
-import { Typography } from "@mui/material";
-import { useParams } from "next/navigation";
-import React from "react";
 
-export default function page() {
+import Account from "@/components/Dashboard/Account";
+import Orders from "@/components/Dashboard/Orders";
+import { notFound, useParams } from "next/navigation";
+
+export default function DashboardSectionPage() {
   const { section } = useParams();
-  return <Typography>dashboard-{section}</Typography>;
+
+  switch (section) {
+    case "account":
+      return <Account />;
+      break;
+
+    case "orders":
+      return <Orders />;
+      break;
+
+    default:
+      return notFound();
+      break;
+  }
 }

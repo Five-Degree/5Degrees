@@ -63,7 +63,7 @@ export default function ProductInteraction({ product }: { product: Product }) {
       onSubmit={handleAddToCart}
     >
       <Stack>
-        <Typography variant="h1" fontSize={"1.9em"} width={"8.75em"}>
+        <Typography variant="h1" fontSize={"1.9em"} width={"100%"}>
           {product.name}
         </Typography>
         <Stack direction={"row"} gap={1} alignItems={"center"}>

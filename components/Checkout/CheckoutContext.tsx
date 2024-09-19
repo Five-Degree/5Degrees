@@ -78,11 +78,11 @@ export default function CheckoutContextProvider({
         };
         const docRef = await createDocument("orders", orderData);
         clearCart();
-        router.push(`/checkout/success/${docRef?.id}`);
+        router.replace(`/checkout/success/${docRef?.id}`);
       }
       formHelpers.endLoading();
     } catch (error) {
-      router.push("/checkout/failed");
+      router.replace("/checkout/failed");
       formHelpers.endLoading();
       console.log(error);
     }

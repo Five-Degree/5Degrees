@@ -42,8 +42,8 @@ export default function FeaturedProductCard({
         src={product.featuredImage}
         alt={product.name}
         // Responsive
-        width={152*2}
-        height={91*2}
+        width={152 * 2}
+        height={91 * 2}
         style={{
           position: "absolute",
           left: "-20%",
@@ -74,10 +74,10 @@ export default function FeaturedProductCard({
             {product.variants.length ?? 5}{" "}
             <span style={{ fontWeight: "lighter" }}>Variants</span>
           </Typography>
-          <Typography variant="body2" textTransform={"uppercase"}>
+          {/* <Typography variant="body2" textTransform={"uppercase"}>
             {product.colors?.length ?? 1}{" "}
             <span style={{ fontWeight: "lighter" }}>Colors</span>
-          </Typography>
+          </Typography> */}
         </Stack>
       </Stack>
       <ButtonBase
@@ -87,15 +87,17 @@ export default function FeaturedProductCard({
           right: 0,
           borderTop: "1px solid var(--border-color)",
           borderLeft: "1px solid var(--border-color)",
-          borderRadius: "60px 0 0 0",
+          borderRadius: "60px 0 var(--border-radius) 0",
           padding: "1em 0.5em 0.5em 1em",
           background: "none",
+          transition: "all 0.3s ease",
           ":hover": {
             background: "var(--accent)",
             "& .MuiSvgIcon-root": {
               color: "white",
             },
           },
+          fontSize: "var(--h3)",
         }}
         aria-label="button"
         component={"button"}

@@ -1,6 +1,7 @@
+import CartProductCard from "@/components/Products/CartProductCard";
 import { useCart } from "@/contexts/CartContext";
+import { ProductionQuantityLimitsRounded } from "@mui/icons-material";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
-import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import {
   Button,
   Divider,
@@ -9,7 +10,6 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import CartDrawerCard from "@/components/Products/CartDrawerCard";
 export default function CartDrawer({
   drawerState,
   toggleDrawer,
@@ -66,16 +66,16 @@ export default function CartDrawer({
                 minHeight: "10.625rem",
               }}
               alignItems={"center"}
-              gap={2}
+              mt={2}
             >
-              <ProductionQuantityLimitsIcon fontSize="large" />
+              <ProductionQuantityLimitsRounded sx={{ fontSize: "3rem" }} />
               <Typography color={"var(--gray)"} variant="h2">
                 Your cart is empty!
               </Typography>
             </Stack>
           )}
           {cart.map((item) => {
-            return <CartDrawerCard item={item} key={item.cartId} />;
+            return <CartProductCard item={item} key={item.cartId} />;
           })}
         </Stack>
         <Stack

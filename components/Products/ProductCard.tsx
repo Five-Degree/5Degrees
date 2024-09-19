@@ -89,10 +89,10 @@ export default function ProductCard({
               {product.variants.length ?? 5}{" "}
               <span style={{ fontWeight: "lighter" }}>Variants</span>
             </Typography>
-            <Typography variant="body2" textTransform={"uppercase"}>
+            {/* <Typography variant="body2" textTransform={"uppercase"}>
               {product.colors?.length == 0 ? 1 : product.colors.length}{" "}
               <span style={{ fontWeight: "lighter" }}>Colors</span>
-            </Typography>
+            </Typography> */}
           </CardContent>
         </CardActionArea>
         <Stack

@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <Stack component={"main"} gap={15}>
       <Stack>
-        <Hero />
+        {/* <Hero /> */}
         <Featured />
       </Stack>
       <AllProducts />

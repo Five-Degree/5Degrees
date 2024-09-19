@@ -17,6 +17,7 @@ import CustomSwitch from "../Custom/CustomSwitch";
 import FormInput, { IFormInput } from "../Custom/FormComponents/FormInput";
 import { useCheckout } from "./CheckoutContext";
 import DeliveryInformationCard from "./DeliveryInformationCard";
+import Image from "next/image";
 
 export default function DeliveryInformation() {
   const {
@@ -105,12 +106,13 @@ export default function DeliveryInformation() {
                     // component="li"
                     sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
                   >
-                    <img
+                    <Image
                       loading="lazy"
-                      width="20"
-                      srcSet={`https://flagcdn.com/w40/${o.code.toLowerCase()}.png 2x`}
+                      width={20}
+                      height={11}
                       src={`https://flagcdn.com/w20/${o.code.toLowerCase()}.png`}
-                      alt=""
+                      alt={`${o.code.toLowerCase()}`}
+                      style={{ fontSize: "1.25rem" }}
                     />
                     {o.name}
                   </Box>

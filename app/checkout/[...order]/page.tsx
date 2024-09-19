@@ -2,7 +2,7 @@
 import { Button, Divider, Stack, Typography } from "@mui/material";
 import { notFound, useParams, useRouter } from "next/navigation";
 
-export default function page() {
+export default function OrderPage() {
   const { order } = useParams();
   const router = useRouter();
   switch (order[0]) {
@@ -29,9 +29,11 @@ export default function page() {
           <Typography>
             Click below to check your order status and details
           </Typography>
-          <Button>Order History</Button>
+          <Button onClick={() => router.replace("/dashboard/orders")}>
+            Order History
+          </Button>
           <Divider flexItem>or</Divider>
-          <Button onClick={() => router.push("/")} variant="contained">
+          <Button onClick={() => router.replace("/")} variant="contained">
             Continue Shopping
           </Button>
         </Stack>

@@ -6,7 +6,13 @@ import { Card, CardContent, Stack, Tooltip, Typography } from "@mui/material";
 import { CldImage } from "next-cloudinary";
 import CustomIconButton from "../Custom/CustomIconButton";
 import Link from "next/link";
-export default function CartDrawerCard({ item }: { item: CartProduct }) {
+export default function CartProductCard({
+  item,
+  readOnly = false,
+}: {
+  item: CartProduct;
+  readOnly?: boolean;
+}) {
   const { removeFromCart } = useCart();
   return (
     <Card
@@ -21,12 +27,7 @@ export default function CartDrawerCard({ item }: { item: CartProduct }) {
           position: "relative",
           display: "flex",
           flexDirection: "column",
-
           gap: 1,
-          padding: "0.5rem",
-          ":last-child": {
-            paddingBottom: 0,
-          },
           width: "100%",
         }}
       >
@@ -45,16 +46,6 @@ export default function CartDrawerCard({ item }: { item: CartProduct }) {
             }}
           />
           <Stack>
-            {/* <Stack direction={"row"} alignItems={"center"} gap={1}>
-              <Typography color={"var(--gray)"}>Color:</Typography>
-              <CircleIcon
-                sx={{
-                  color: item.selectedColor,
-                  border: "1px solid var(--border-color)",
-                  borderRadius: "50%",
-                }}
-              />
-            </Stack> */}
             <Stack direction={"row"} alignItems={"center"} gap={1}>
               <Typography color={"var(--gray)"}>Variant:</Typography>
               <Typography>{item.selectedVariant}</Typography>
@@ -78,17 +69,19 @@ export default function CartDrawerCard({ item }: { item: CartProduct }) {
             ${item.unitPrice}
           </Typography>
         </Stack>
-        <Stack position={"absolute"} right={"5%"} top={"5%"}>
-          <CustomIconButton
-            size="small"
-            sx={{ ":hover": { color: "var(--error)" } }}
-            onClick={() => removeFromCart(item)}
-          >
-            <Tooltip title="Remove from cart">
-              <DeleteOutlineRoundedIcon />
-            </Tooltip>
-          </CustomIconButton>
-        </Stack>
+        {!readOnly && (
+          <Stack position={"absolute"} right={"5%"} top={"5%"}>
+            <CustomIconButton
+              size="small"
+              sx={{ ":hover": { color: "var(--error)" } }}
+              onClick={() => removeFromCart(item)}
+            >
+              <Tooltip title="Remove from cart">
+                <DeleteOutlineRoundedIcon />
+              </Tooltip>
+            </CustomIconButton>
+          </Stack>
+        )}{" "}
       </CardContent>
     </Card>
   );

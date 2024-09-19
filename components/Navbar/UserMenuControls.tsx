@@ -16,17 +16,20 @@ export default function UserMenuControls() {
   const [accountOpenAnchor, setAccountOpenAnchor] =
     useState<null | HTMLElement>(null);
   const accountOpen = Boolean(accountOpenAnchor);
-  const paymentsLink = {
-    name: "Payments",
-    handler: handleStripePortal,
-    icon: <ReceiptLongRoundedIcon />,
-    goto: "/payments",
-  };
+  // const paymentsLink = {
+  //   name: "Payments",
+  //   handler: handleStripePortal,
+  //   icon: <ReceiptLongRoundedIcon />,
+  //   goto: "/payments",
+  // };
   const orderHistoryLink = {
-    name: "Order History",
+    name: "Your Orders",
     icon: <SpaceDashboardOutlinedIcon />,
-    goto: "/orderHistory",
-    handler: (param: any) => router.push("/"),
+    goto: "/dashboard/orders",
+    handler: (param: any) => {
+      setAccountOpenAnchor(null);
+      router.push("/dashboard/orders");
+    },
   };
   const logoutLink = {
     name: "Logout",
@@ -35,7 +38,7 @@ export default function UserMenuControls() {
     goto: "",
   };
   const menuLinks: Array<NavLinks> = [
-    paymentsLink,
+    // paymentsLink,
     orderHistoryLink,
     logoutLink,
   ];

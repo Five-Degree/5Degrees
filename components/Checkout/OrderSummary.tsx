@@ -2,7 +2,7 @@ import { useCart } from "@/contexts/CartContext";
 import { CheckRounded } from "@mui/icons-material";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import { Button, Card, CardContent, Stack, Typography } from "@mui/material";
-import CartDrawerCard from "../Products/CartDrawerCard";
+import CartProductCard from "../Products/CartProductCard";
 import { useLayoutEffect } from "react";
 import { redirect } from "next/navigation";
 import { useCheckout } from "./CheckoutContext";
@@ -38,7 +38,7 @@ export default function OrderSummary() {
               borderBottom={"1px solid var(--border-color)"}
             >
               {cart.length > 0 ? (
-                cart.map((item) => <CartDrawerCard item={item} key={item.id} />)
+                cart.map((item) => <CartProductCard item={item} key={item.id} />)
               ) : (
                 <Stack
                   sx={{

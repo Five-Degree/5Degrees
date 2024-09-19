@@ -1,6 +1,6 @@
 import Product, { VariantNames } from "@/shared/interfaces/Products";
 import { CheckRounded } from "@mui/icons-material";
-import { ToggleButton, ToggleButtonGroup, Tooltip } from "@mui/material";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import React from "react";
 
 export default function VariantSelector({
@@ -22,6 +22,7 @@ export default function VariantSelector({
       onChange={handleVariantChange}
       id="variant"
       aria-label="variants"
+      sx={{ flexWrap: "wrap" }}
     >
       {product.variants.map((v) => (
         <ToggleButton key={v.name} value={v.name} aria-label={v.name}>

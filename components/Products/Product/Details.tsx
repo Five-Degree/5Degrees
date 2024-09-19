@@ -65,7 +65,7 @@ export default function ProductDetails({ product }: { product: Product }) {
           aria-label="basic tabs example"
         >
           <Tab label="Description" {...a11yProps("Description")} />
-          <Tab
+          {/* <Tab
             label="Reviews"
             icon={
               product.reviews && (
@@ -74,8 +74,8 @@ export default function ProductDetails({ product }: { product: Product }) {
             }
             iconPosition="end"
             {...a11yProps("Reviews")}
-          />
-          <Tab label="Support" {...a11yProps("Support")} />
+          /> */}
+          {/* <Tab label="Support" {...a11yProps("Support")} /> */}
         </Tabs>
       </Stack>
       <CustomTabPanel value={activeTab} index={"Description"}>

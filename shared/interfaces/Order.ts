@@ -1,5 +1,10 @@
 import { Timestamp } from "firebase/firestore";
 import { CartProduct } from "./Products";
+import {
+  AutorenewRounded,
+  CheckCircleRounded,
+  LocalShippingRounded,
+} from "@mui/icons-material";
 
 export type DeliveryInfo = {
   id?: string;
@@ -27,6 +32,7 @@ export default interface Order {
   userId: string;
   deliveryInfo: DeliveryInfo;
   dateCreated: Timestamp;
+  deliveryDate?: Timestamp;
   status: OrderStatus;
   cartTotalCost: number;
   cartProducts: CartProduct[];

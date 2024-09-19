@@ -1,15 +1,16 @@
-import { useThemeContext } from "@/contexts/ThemeContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { NavLinks } from "@/shared/interfaces/Links";
-import { DarkModeRounded } from "@mui/icons-material";
 import {
+  Divider,
+  ListItem,
   ListItemIcon,
   Menu,
   MenuItem,
   Stack,
-  useMediaQuery,
+  Typography,
 } from "@mui/material";
 import { usePathname } from "next/navigation";
-import CustomSwitch from "../Custom/CustomSwitch";
+import UserAvatar from "./UserAvatar";
 interface NavMenu {
   id: string;
   accountOpenAnchor: null | HTMLElement;
@@ -26,6 +27,7 @@ export default function UserMenu({
 }: NavMenu) {
   const pathname = usePathname();
 
+  const { user } = useAuth();
   return (
     <Menu
       disableScrollLock
@@ -58,15 +60,27 @@ export default function UserMenu({
         },
       }}
     >
-      {items.map((menuItem: any) => {
-        if (pathname !== menuItem.goto)
-          return (
-            <MenuItem onClick={menuItem.handler} key={menuItem.name}>
-              <ListItemIcon>{menuItem.icon}</ListItemIcon>
-              {menuItem.name}
-            </MenuItem>
-          );
-      })}
+      <Stack gap={1}>
+        <Stack direction={"row"} paddingInline={2} paddingBlock={1} gap={2}>
+          <UserAvatar avatar={user?.photoURL} name={user?.email} />
+          <Stack flex={"1 0 auto"}>
+            <Typography>{user?.displayName ?? user?.email}</Typography>
+            <Typography variant="body2">{user?.email}</Typography>
+          </Stack>
+        </Stack>
+        <Divider flexItem />
+        <Stack>
+          {items.map((menuItem: any) => {
+            if (pathname !== menuItem.goto)
+              return (
+                <MenuItem onClick={menuItem.handler} key={menuItem.name}>
+                  <ListItemIcon>{menuItem.icon}</ListItemIcon>
+                  {menuItem.name}
+                </MenuItem>
+              );
+          })}
+        </Stack>
+      </Stack>
     </Menu>
   );
 }

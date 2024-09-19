@@ -1,9 +1,9 @@
-import { initializeApp, FirebaseApp } from "firebase/app";
-import { getAuth, Auth } from "firebase/auth";
+import { FirebaseApp, initializeApp } from "firebase/app";
+import { Auth, getAuth } from "firebase/auth";
 import {
+  Firestore,
   getFirestore,
   initializeFirestore,
-  Firestore,
   persistentLocalCache,
   persistentMultipleTabManager,
 } from "firebase/firestore";
@@ -22,6 +22,6 @@ initializeFirestore(app, {
     tabManager: persistentMultipleTabManager(),
   }),
 });
-export const fun: Functions = getFunctions(app, "europe-west1");
+export const fun: Functions = getFunctions(app);
 export const db: Firestore = getFirestore(app);
 export const auth: Auth = getAuth(app);

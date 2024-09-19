@@ -1,4 +1,3 @@
-import { useCheckout } from "@/contexts/CheckoutContext";
 import { CreditCard, ExpandMoreRounded } from "@mui/icons-material";
 import AccountBalanceRoundedIcon from "@mui/icons-material/AccountBalanceRounded";
 import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
@@ -11,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import SafeCheckout from "../Utility/SafeCheckout";
+import { useCheckout } from "./CheckoutContext";
 
 export default function PaymentMethod() {
   const { paymentMethod, handleSetPaymentMethod } = useCheckout();
