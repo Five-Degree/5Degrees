@@ -2,7 +2,6 @@ import Order, { OrderStatus } from "@/shared/interfaces/Order";
 import {
   AutorenewRounded,
   CheckCircleRounded,
-  CheckRounded,
   FactCheckRounded,
   LocalShippingRounded,
 } from "@mui/icons-material";
