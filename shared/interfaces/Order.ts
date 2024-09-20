@@ -17,7 +17,6 @@ export type DeliveryInfo = {
   country: string;
   city: string;
   postalCode: string;
-  dateCreated?: string;
 };
 
 export type OrderStatus =
@@ -31,7 +30,8 @@ export default interface Order {
   id: string;
   userId: string;
   deliveryInfo: DeliveryInfo;
-  dateCreated: Timestamp;
+  createdAt: Timestamp;
+  updatedAt?: Timestamp;
   deliveryDate?: Timestamp;
   status: OrderStatus;
   cartTotalCost: number;

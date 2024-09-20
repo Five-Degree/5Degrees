@@ -59,7 +59,7 @@ export default function OrderCard({ order }: { order: Order }) {
               Order no. {order.id}
             </Typography>
             <Typography variant="body2">
-              {order.dateCreated.toDate().toUTCString()}
+              {order.createdAt.toDate().toUTCString()}
             </Typography>
           </Stack>
           <Typography

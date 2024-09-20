@@ -25,7 +25,7 @@ interface Props {
 
 export default function OrderModal({ order, open, handleClose }: Props) {
   const orderDetailsMap = {
-    "Ordered On": order.dateCreated.toDate().toUTCString(),
+    "Ordered On": order.createdAt.toDate().toUTCString(),
     "Total Cost": `$${order.cartTotalCost}`,
     "Total Items in Order": `${order.cartProducts.length} items(s)`,
     "Est. Delivery Date": order.deliveryDate?.toDate().toUTCString(),

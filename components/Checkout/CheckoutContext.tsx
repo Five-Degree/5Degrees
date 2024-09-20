@@ -70,7 +70,7 @@ export default function CheckoutContextProvider({
         const orderData: Omit<Order, "id"> = {
           userId: user.uid,
           deliveryInfo: deliveryInformation.deliveryInfo,
-          dateCreated: Timestamp.now(),
+          createdAt: Timestamp.now(),
           status: "Confirming Order",
           cartTotalCost: totalCost,
           cartProducts: cart,
