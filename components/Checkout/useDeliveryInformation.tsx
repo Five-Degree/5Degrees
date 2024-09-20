@@ -6,7 +6,9 @@ import { deleteDoc, doc, Timestamp } from "firebase/firestore";
 import React, { useState } from "react";
 
 export default function useDeliveryInformation() {
-  const [deliveryInfo, setDeliveryInfo] = useState<DeliveryInfo>({
+  const [deliveryInfo, setDeliveryInfo] = useState<
+    Omit<DeliveryInfo, "createdAt">
+  >({
     firstName: "",
     lastName: "",
     email: "",
@@ -40,13 +42,13 @@ export default function useDeliveryInformation() {
     if (!deliveryInfo.id) {
       await createDocument(`users/${user.uid}/deliveryInformations`, {
         ...deliveryInfo,
-        dateCreated: Timestamp.now(),
+        createdAt: Timestamp.now(),
       });
     } else {
       await setDocument(
         `users/${user.uid}/deliveryInformations`,
         deliveryInfo.id,
-        { ...deliveryInfo, dateModified: Timestamp.now() },
+        { ...deliveryInfo, updatedAt: Timestamp.now() },
         true
       );
     }

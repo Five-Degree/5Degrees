@@ -1,21 +1,20 @@
-import { useState, useEffect } from "react";
+import { db } from "@/lib/firebase/config";
 import {
-  onSnapshot,
-  query,
   collection,
-  where,
-  orderBy,
-  limit,
-  startAfter,
-  Query,
   DocumentData,
-  FirestoreError,
-  QueryFieldFilterConstraint,
   FieldPath,
+  FirestoreError,
+  limit,
+  onSnapshot,
+  orderBy,
+  query,
+  Query,
+  QueryFieldFilterConstraint,
+  startAfter,
+  where,
   WhereFilterOp,
 } from "firebase/firestore";
-import checkIfObjectExistsInArray from "@/shared/functions/checkIfObjectExistsInArray";
-import { db } from "@/lib/firebase/config";
+import { useEffect, useState } from "react";
 
 export type FilterParams = {
   label: string;
@@ -74,7 +73,7 @@ export default function useGetCollection<T extends DocumentData>({
       const q = query(
         collection(db, coll),
         ...filterConstraint,
-        orderBy("dateCreated", "desc"),
+        orderBy("createdAt", "desc"),
         limit(queryLimit)
       );
       fetchDocs(q);
@@ -89,9 +88,9 @@ export default function useGetCollection<T extends DocumentData>({
       const q = query(
         collection(db, coll),
         ...filterConstraint,
-        orderBy("dateCreated", "desc"),
+        orderBy("createdAt", "desc"),
         limit(queryLimit),
-        startAfter(lastResult.dateCreated)
+        startAfter(lastResult.createdAt)
       );
       fetchDocs(q);
     }

@@ -17,6 +17,8 @@ export type DeliveryInfo = {
   country: string;
   city: string;
   postalCode: string;
+  createdAt: Timestamp;
+  updatedAt?: Timestamp;
 };
 
 export type OrderStatus =
