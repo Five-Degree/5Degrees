@@ -71,6 +71,7 @@ export default function CheckoutContextProvider({
           userId: user.uid,
           deliveryInfo: deliveryInformation.deliveryInfo,
           createdAt: Timestamp.now(),
+          updatedAt: Timestamp.now(),
           status: "Confirming Order",
           cartTotalCost: totalCost,
           cartProducts: cart,
