@@ -6,9 +6,7 @@ import { deleteDoc, doc, Timestamp } from "firebase/firestore";
 import React, { useState } from "react";
 
 export default function useDeliveryInformation() {
-  const [deliveryInfo, setDeliveryInfo] = useState<
-    Omit<DeliveryInfo, "createdAt">
-  >({
+  const [deliveryInfo, setDeliveryInfo] = useState<DeliveryInfo>({
     firstName: "",
     lastName: "",
     email: "",
