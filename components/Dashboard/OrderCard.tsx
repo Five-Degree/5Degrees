@@ -1,21 +1,22 @@
+import timestampToDate from "@/shared/functions/timestampToDate";
 import Order, { OrderStatus } from "@/shared/interfaces/Order";
 import {
   AutorenewRounded,
   CheckCircleRounded,
+  CheckRounded,
   CurrencyExchangeRounded,
+  DoneAllRounded,
   FactCheckRounded,
   LocalShippingRounded,
 } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import OrderModal from "./OrderModal";
-import { Timestamp } from "firebase/firestore";
-import timestampToDate from "@/shared/functions/timestampToDate";
 
 export function generateStatusIcon(status: OrderStatus) {
   switch (status) {
     case "Confirming Order":
-      return <CheckCircleRounded sx={{ fontSize: "var(--body1)" }} />;
+      return <CheckRounded sx={{ fontSize: "var(--body1)" }} />;
       break;
     case "Payment Pending":
       return <CurrencyExchangeRounded sx={{ fontSize: "var(--body1)" }} />;
@@ -27,7 +28,7 @@ export function generateStatusIcon(status: OrderStatus) {
       return <LocalShippingRounded sx={{ fontSize: "var(--body1)" }} />;
       break;
     case "Delivered":
-      return <CheckCircleRounded sx={{ fontSize: "var(--body1)" }} />;
+      return <DoneAllRounded sx={{ fontSize: "var(--body1)" }} />;
       break;
     default:
       return <></>;
