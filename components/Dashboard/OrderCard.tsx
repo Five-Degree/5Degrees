@@ -8,6 +8,8 @@ import {
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import OrderModal from "./OrderModal";
+import { Timestamp } from "firebase/firestore";
+import timestampToDate from "@/shared/functions/timestampToDate";
 
 export function generateStatusIcon(status: OrderStatus) {
   switch (status) {
@@ -58,7 +60,7 @@ export default function OrderCard({ order }: { order: Order }) {
               Order no. {order.id}
             </Typography>
             <Typography variant="body2">
-              {order.createdAt.toDate().toUTCString()}
+              {timestampToDate(order.createdAt)?.toUTCString()}
             </Typography>
           </Stack>
           <Typography
@@ -67,6 +69,7 @@ export default function OrderCard({ order }: { order: Order }) {
             color={"var(--accent)"}
             variant="body2"
             textAlign={"center"}
+            gap={0.5}
           >
             {generateStatusIcon(order.status)} {order.status}
           </Typography>

@@ -7,6 +7,7 @@ import useSlickSlider from "@/shared/hooks/useSlickSlider";
 import Product from "@/shared/interfaces/Products";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { Skeleton, Stack, Typography } from "@mui/material";
+import { where } from "firebase/firestore";
 import { useState } from "react";
 import Slider from "react-slick";
 
@@ -37,18 +38,9 @@ export default function Featured() {
     setActiveProduct(product);
     handleAddToCartOpen();
   }
-  const {
-    results: featProducts,
-    loading,
-    lastResult,
-    showNext,
-  } = useCollectionController<Product>({
+  const { results: featProducts, loading } = useCollectionController<Product>({
     coll: "products",
-    initialWhereClause: {
-      fieldPath: "featuredImage",
-      opStr: "!=",
-      value: null,
-    },
+    initialWhereClause: [where("featuredImage", "!=", null)],
     orderby: { fieldPath: "createdAt", directionStr: "desc" },
   });
   return (

@@ -1,10 +1,5 @@
 import { Timestamp } from "firebase/firestore";
 import { CartProduct } from "./Products";
-import {
-  AutorenewRounded,
-  CheckCircleRounded,
-  LocalShippingRounded,
-} from "@mui/icons-material";
 
 export type DeliveryInfo = {
   id?: string;

@@ -17,11 +17,7 @@ import { useEffect, useState } from "react";
 interface Props<T> {
   coll: string;
   orderby: { fieldPath: string | FieldPath; directionStr?: OrderByDirection };
-  initialWhereClause?: {
-    fieldPath: string | FieldPath;
-    opStr: WhereFilterOp;
-    value: unknown;
-  };
+  initialWhereClause?: Array<QueryFieldFilterConstraint>;
   queryLimit?: number;
 }
 export type FilterParams = {
@@ -36,17 +32,7 @@ export default function useCollectionController<
   const [lastResult, setLastResult] = useState<T | null>(null);
   const [filterConstraint, setFilterConstraint] = useState<
     Array<QueryFieldFilterConstraint>
-  >(
-    initialWhereClause
-      ? [
-          where(
-            initialWhereClause.fieldPath,
-            initialWhereClause.opStr,
-            initialWhereClause.value
-          ),
-        ]
-      : []
-  );
+  >(initialWhereClause ?? []);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {

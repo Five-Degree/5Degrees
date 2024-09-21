@@ -16,6 +16,7 @@ import {
   OpenInNewRounded,
 } from "@mui/icons-material";
 import Link from "next/link";
+import timestampToDate from "@/shared/functions/timestampToDate";
 
 interface Props {
   order: Order;
@@ -25,10 +26,10 @@ interface Props {
 
 export default function OrderModal({ order, open, handleClose }: Props) {
   const orderDetailsMap = {
-    "Ordered On": order.createdAt.toDate().toUTCString(),
+    "Ordered On": timestampToDate(order.createdAt)?.toUTCString(),
     "Total Cost": `$${order.cartTotalCost}`,
     "Total Items in Order": `${order.cartProducts.length} items(s)`,
-    "Est. Delivery Date": order.deliveryDate?.toDate().toUTCString(),
+    "Est. Delivery Date": timestampToDate(order.deliveryDate)?.toUTCString(),
   };
 
   return (
