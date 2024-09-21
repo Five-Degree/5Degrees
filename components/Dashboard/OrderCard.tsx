@@ -2,6 +2,7 @@ import Order, { OrderStatus } from "@/shared/interfaces/Order";
 import {
   AutorenewRounded,
   CheckCircleRounded,
+  CurrencyExchangeRounded,
   FactCheckRounded,
   LocalShippingRounded,
 } from "@mui/icons-material";
@@ -14,7 +15,11 @@ import timestampToDate from "@/shared/functions/timestampToDate";
 export function generateStatusIcon(status: OrderStatus) {
   switch (status) {
     case "Confirming Order":
+      return <CheckCircleRounded sx={{ fontSize: "var(--body1)" }} />;
+      break;
     case "Payment Pending":
+      return <CurrencyExchangeRounded sx={{ fontSize: "var(--body1)" }} />;
+      break;
     case "Processing Order":
       return <AutorenewRounded sx={{ fontSize: "var(--body1)" }} />;
       break;
