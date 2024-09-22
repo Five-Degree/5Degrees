@@ -17,6 +17,8 @@ import {
 } from "@mui/icons-material";
 import Link from "next/link";
 import timestampToDate from "@/shared/functions/timestampToDate";
+import SectionWithTitle from "../Custom/SectionWithTitle";
+import { PlainDataMapper } from "../Custom/PlainData";
 
 interface Props {
   order: Order;
@@ -31,7 +33,16 @@ export default function OrderModal({ order, open, handleClose }: Props) {
     "Total Items in Order": `${order.cartProducts.length} items(s)`,
     "Est. Delivery Date": timestampToDate(order.deliveryDate)?.toUTCString(),
   };
-
+  const deliveryDetailsMap = {
+    Email: order.deliveryInfo.email,
+    "Full Name": `${order.deliveryInfo.firstName} ${order.deliveryInfo.lastName}`,
+    Whatsapp: order.deliveryInfo.whatsappNumber,
+    Country: order.deliveryInfo.country,
+    City: order.deliveryInfo.city,
+    "Postal Code": order.deliveryInfo.postalCode,
+    "Address 1": order.deliveryInfo.address1,
+    "Address 2": order.deliveryInfo.address2,
+  };
   return (
     <Modal
       open={open}
@@ -79,28 +90,13 @@ export default function OrderModal({ order, open, handleClose }: Props) {
           <Stack direction={"row"} sx={{ opacity: "0.5" }}>
             <Typography variant="h2">Order No.{order.id}</Typography>
           </Stack>
-          <Stack paddingInline={1}>
-            <Typography variant="h3">Order Details</Typography>
-            <Divider flexItem />
-          </Stack>
-          <Stack paddingInline={3} gap={1}>
-            {Object.keys(orderDetailsMap).map(
-              (od) =>
-                // dont show undefined values row
-                orderDetailsMap[od as keyof typeof orderDetailsMap] && (
-                  <Stack
-                    direction={"row"}
-                    key={od}
-                    justifyContent={"space-between"}
-                  >
-                    <Typography>{od}</Typography>
-                    <Typography color={"var(--accent)"}>
-                      {orderDetailsMap[od as keyof typeof orderDetailsMap]}
-                    </Typography>
-                  </Stack>
-                )
-            )}
-          </Stack>
+
+          <SectionWithTitle title="Order Details">
+            <PlainDataMapper obj={orderDetailsMap} />
+          </SectionWithTitle>
+          <SectionWithTitle title="Delivery Information">
+            <PlainDataMapper obj={deliveryDetailsMap} />
+          </SectionWithTitle>
           {order.qualityCheck && (
             <>
               <Stack paddingInline={1}>
@@ -132,37 +128,36 @@ export default function OrderModal({ order, open, handleClose }: Props) {
                   )
                 }
                 {order.qualityCheckLink && (
-                  <Link href={order.qualityCheckLink} target="_blank">
+                  <a href={order.qualityCheckLink} target="_blank">
                     <Button endIcon={<OpenInNewRounded />} variant="contained">
                       Click here to view your Quality Checking Media
                     </Button>
-                  </Link>
+                  </a>
                 )}
               </Stack>
             </>
           )}
 
-          <Stack paddingInline={1}>
-            <Typography variant="h3">Ordered Products</Typography>
-            <Divider flexItem />
-          </Stack>
-          <Stack
-            paddingInline={3}
-            gap={0.5}
-            flexGrow={1}
-            overflow={"hidden auto"}
-            minHeight={"50vh"}
-          >
-            <Stack gap={1}>
-              {order.cartProducts.map((cartProduct) => (
-                <CartProductCard
-                  key={cartProduct.cartId}
-                  item={cartProduct}
-                  readOnly
-                />
-              ))}
+          <SectionWithTitle title="Ordered Products">
+            <Stack
+              p={2}
+              bgcolor={"var(--border-color)"}
+              borderRadius={"var(--border-radius)"}
+              flexGrow={1}
+              overflow={"hidden auto"}
+              maxHeight={"50vh"}
+            >
+              <Stack gap={1}>
+                {order.cartProducts.map((cartProduct) => (
+                  <CartProductCard
+                    key={cartProduct.cartId}
+                    item={cartProduct}
+                    readOnly
+                  />
+                ))}
+              </Stack>
             </Stack>
-          </Stack>
+          </SectionWithTitle>
         </Stack>
       </Stack>
     </Modal>
