@@ -67,7 +67,7 @@ export default function Orders() {
     <Stack width={"100%"} gap={2}>
       <Typography variant="h1">Orders</Typography>
       {OrdersSections.map((os) => (
-        <Accordion key={os.title}>
+        <Accordion key={os.title} sx={{ ":before": { display: "none" } }}>
           <AccordionSummary expandIcon={<ExpandMoreRounded />}>
             <Typography
               fontWeight={"bold"}
