@@ -72,9 +72,9 @@ export default function CartContextProvider({
     setCart(filteredCart);
     handleShowSnackbar("Item removed from cart!");
   };
-  const clearCart = () => {
+  const clearCart = (alert: boolean = true) => {
     setCart([]);
-    handleShowSnackbar("Cart cleared!");
+    if (alert) handleShowSnackbar("Cart cleared!");
   };
   const getFromCart = (productId: Product["id"]) => {
     const existingIndex = cart.findIndex((ci) => ci.id == productId);
@@ -132,5 +132,5 @@ interface ICartContext {
   addToCart: (product: CartProduct) => void;
   getFromCart: (productId: Product["id"]) => CartProduct | null;
   removeFromCart: (product: CartProduct) => void;
-  clearCart: () => void;
+  clearCart: (alert?: boolean) => void;
 }

@@ -38,7 +38,13 @@ export default function SignupForm() {
         .then((userCred) => {
           sendEV();
         })
-        .then(() => router.replace("/verifyEmail"))
+        .then(() =>
+          router.replace(
+            redirectTo
+              ? `/verifyEmail?redirectTo=${redirectTo}`
+              : "/verifyEmail"
+          )
+        )
         .catch((error: any) => handleError(GetRefinedFirebaseError(error)))
         .finally(() => setLoading(false));
     } else {

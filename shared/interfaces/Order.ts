@@ -21,7 +21,9 @@ export type OrderStatus =
   | "Payment Pending"
   | "Processing Order"
   | "Out for Delivery"
-  | "Delivered";
+  | "Delivered"
+  | "Failed"
+  | "Cancelled";
 
 export default interface Order {
   id: string;
@@ -35,4 +37,5 @@ export default interface Order {
   cartProducts: CartProduct[];
   qualityCheck: boolean;
   qualityCheckLink?: string;
+  promoCode?: string;
 }

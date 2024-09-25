@@ -39,6 +39,32 @@ export default function OrderPage() {
         </Stack>
       );
       break;
+    case "failed":
+      return (
+        <Stack
+          alignItems={"center"}
+          maxWidth={"34.375rem"}
+          padding={"2.5rem 1rem"}
+          marginInline={"auto"}
+          textAlign={"center"}
+          border={"1px solid var(--border-color)"}
+          borderRadius={"var(--border-radius)"}
+          gap={2}
+        >
+          <Typography variant="h1" color={"var(--accent)"}>
+            Failed to place order!
+          </Typography>
+          <Typography>
+            Please place the order again or contact one of our agents for
+            further assistance
+          </Typography>
+
+          <Button onClick={() => router.replace("/")} variant="contained">
+            Continue Shopping
+          </Button>
+        </Stack>
+      );
+      break;
 
     default:
       return notFound();

@@ -6,6 +6,7 @@ import { Card, CardContent, Stack, Tooltip, Typography } from "@mui/material";
 import { CldImage } from "next-cloudinary";
 import CustomIconButton from "../Custom/CustomIconButton";
 import Link from "next/link";
+import { DeleteRounded } from "@mui/icons-material";
 export default function CartProductCard({
   item,
   readOnly = false,
@@ -71,13 +72,9 @@ export default function CartProductCard({
         </Stack>
         {!readOnly && (
           <Stack position={"absolute"} right={"5%"} top={"5%"}>
-            <CustomIconButton
-              size="small"
-              sx={{ ":hover": { color: "var(--error)" } }}
-              onClick={() => removeFromCart(item)}
-            >
+            <CustomIconButton onClick={() => removeFromCart(item)}>
               <Tooltip title="Remove from cart">
-                <DeleteOutlineRoundedIcon />
+                <DeleteRounded fontSize="large" />
               </Tooltip>
             </CustomIconButton>
           </Stack>

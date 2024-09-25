@@ -84,6 +84,7 @@ export default function useGetCollection<T extends DocumentData>({
    * Function to fetch more data when intersection observer is activated
    */
   function fetchMoreDataFunction() {
+    console.log("triggered fetchmore");
     if (lastResult) {
       const q = query(
         collection(db, coll),
@@ -128,17 +129,17 @@ export default function useGetCollection<T extends DocumentData>({
    * @param {Query<DocumentData>} query Firestore query
    */
   async function fetchDocs(query: Query<DocumentData>) {
+    console.log("fetching docs", !endOfData);
     if (!endOfData) {
       setLoading(true);
       const unsubscribe = onSnapshot(
         query,
         (querySnapshot) => {
-          var docs: (T | DocumentData)[] = [];
+          var docs: (T | DocumentData)[] = [...results];
           var docCount = 0;
           console.log("onSnapshot triggered");
           querySnapshot.forEach((doc) => {
-            console.log("data", doc.data());
-            // console.log(doc.id, "=>", doc.data());
+            console.log(doc.id, "=>", doc.data());
             if (includeId) {
               docs = [...docs, { [idKey]: doc.id, ...doc.data() }];
             } else {

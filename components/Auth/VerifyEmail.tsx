@@ -3,11 +3,15 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import MarkEmailReadOutlinedIcon from "@mui/icons-material/MarkEmailReadOutlined";
+import { useRouter, useSearchParams } from "next/navigation";
 export default function VerifyEmail() {
   const { sendEV } = useAuth();
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const countdownTime = 30;
   const [countdown, setCountdown] = useState(countdownTime);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo");
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (isButtonDisabled) {
@@ -41,11 +45,13 @@ export default function VerifyEmail() {
       alignItems={"center"}
       gap={7}
     >
-      <MarkEmailReadOutlinedIcon sx={{ fontSize: "120px" }} />
+      <MarkEmailReadOutlinedIcon
+        sx={{ fontSize: "120px", color: "var(--body1-color)" }}
+      />
       <Typography
         variant="h1"
         fontWeight={"bold"}
-        color={"var(--primary)"}
+        color={"var(--accent)"}
         maxWidth={"20ch"}
         textAlign={"center"}
       >
@@ -66,7 +72,12 @@ export default function VerifyEmail() {
         {isButtonDisabled && (
           <Typography>Resend email in {countdown} seconds</Typography>
         )}
-        <Button variant="text">Already verified email? Click here.</Button>
+        <Button
+          variant="text"
+          onClick={() => router.replace(redirectTo ? redirectTo : "/")}
+        >
+          Already verified email? Click here.
+        </Button>
       </Stack>
     </Stack>
   );

@@ -47,8 +47,8 @@ export default function OrderModal({ order, open, handleClose }: Props) {
     <Modal
       open={open}
       onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
+      aria-labelledby="order-modal-title"
+      aria-describedby="order-modal-description"
     >
       <Stack
         position={"relative"}
@@ -99,18 +99,7 @@ export default function OrderModal({ order, open, handleClose }: Props) {
           </SectionWithTitle>
           {order.qualityCheck && (
             <>
-              <Stack paddingInline={1}>
-                <Typography
-                  variant="h3"
-                  display={"flex"}
-                  alignItems={"center"}
-                  gap={1}
-                >
-                  Quality Checking <FactCheckRounded />
-                </Typography>
-                <Divider flexItem />
-              </Stack>
-              <Stack paddingInline={3}>
+              <SectionWithTitle title="Quality Checking">
                 {
                   // If any of the statuses below or if there is not qc link then ask to wait
                   ((
@@ -134,7 +123,7 @@ export default function OrderModal({ order, open, handleClose }: Props) {
                     </Button>
                   </a>
                 )}
-              </Stack>
+              </SectionWithTitle>
             </>
           )}
 

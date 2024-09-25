@@ -20,14 +20,14 @@ export default function Checkout() {
     // mui date picker localisation
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Stack
+        component={"form"}
+        onSubmit={handleCheckoutFormSubmit}
         direction={"row"}
         justifyContent={"center"}
         gap={2}
         paddingInline={3}
         flexWrap={{ md: "nowrap", xs: "wrap" }}
         fontSize={{ lg: "1.3rem", md: "1rem" }}
-        component={"form"}
-        onSubmit={handleCheckoutFormSubmit}
       >
         <Stack width={"100%"} gap={1}>
           <DeliveryInformation />

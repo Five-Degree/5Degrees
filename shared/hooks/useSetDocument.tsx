@@ -10,31 +10,34 @@ import {
 import { useState } from "react";
 
 const useSetDocument = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<FirestoreError | undefined>();
-  const setDocument = async (
+  async function setDocument(
     collection: string,
     docId: string,
     data: DocumentData,
     merge: boolean = false
-  ) => {
-    setLoading(true);
-    await setDoc(doc(db, collection, docId), data, { merge })
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => setLoading(false));
-  };
-  const createDocument = async (coll: string, data: DocumentData) => {
-    setLoading(true);
+  ) {
+    // setLoading(true);
+
+    try {
+      await setDoc(doc(db, collection, docId), data, { merge });
+    } catch (error) {
+      console.error(error);
+      throw Error(
+        `Error occured while setting document in ${collection} with ${docId}, reason for error: ${error}`
+      );
+    }
+  }
+  async function createDocument(coll: string, data: DocumentData) {
     try {
       const docRef = await addDoc(collection(db, coll), data);
-      setLoading(false);
       return docRef;
     } catch (error) {
-      if (error instanceof FirestoreError) setError(error);
+      console.error(error);
+      throw Error(
+        `Error occured while setting document in ${coll}, reason for error: ${error}`
+      );
     }
-  };
-  return { setDocument, createDocument, loading, error };
+  }
+  return { setDocument, createDocument };
 };
 export default useSetDocument;

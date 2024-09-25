@@ -6,15 +6,12 @@ import CartProductCard from "../Products/CartProductCard";
 import { useLayoutEffect } from "react";
 import { redirect } from "next/navigation";
 import { useCheckout } from "./CheckoutContext";
+import FormInput from "../Custom/FormComponents/FormInput";
 
 export default function OrderSummary() {
   const { cart, totalCost } = useCart();
-  const { loading } = useCheckout();
-  // useLayoutEffect(() => {
-  //   if (cart.length < 1) {
-  //     redirect("/");
-  //   }
-  // }, [cart]);
+  const { loading, promoCode, handlePromoCodeChange } = useCheckout();
+
   return (
     <Stack
       sx={{ width: { lg: "60%", md: "100%", xs: "100%" }, height: "90vh" }}
@@ -38,7 +35,9 @@ export default function OrderSummary() {
               borderBottom={"1px solid var(--border-color)"}
             >
               {cart.length > 0 ? (
-                cart.map((item) => <CartProductCard item={item} key={item.id} />)
+                cart.map((item) => (
+                  <CartProductCard item={item} key={item.id} />
+                ))
               ) : (
                 <Stack
                   sx={{
@@ -57,7 +56,14 @@ export default function OrderSummary() {
               )}
             </Stack>
 
-            <Stack gap={1} paddingInline={2}>
+            <Stack gap={1} paddingInline={2} pt={2}>
+              <FormInput
+                id="promoCode"
+                name="promoCode"
+                value={promoCode}
+                onChange={handlePromoCodeChange}
+                placeholder="Enter your discount code"
+              />
               <Stack
                 direction={"row"}
                 justifyContent={"space-between"}

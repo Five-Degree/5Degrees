@@ -2,9 +2,11 @@ import timestampToDate from "@/shared/functions/timestampToDate";
 import Order, { OrderStatus } from "@/shared/interfaces/Order";
 import {
   AutorenewRounded,
+  CancelRounded,
   CheckCircleRounded,
   CheckRounded,
   CurrencyExchangeRounded,
+  DangerousRounded,
   DoneAllRounded,
   FactCheckRounded,
   LocalShippingRounded,
@@ -29,6 +31,12 @@ export function generateStatusIcon(status: OrderStatus) {
       break;
     case "Delivered":
       return <DoneAllRounded sx={{ fontSize: "var(--body1)" }} />;
+      break;
+    case "Cancelled":
+      return <CancelRounded sx={{ fontSize: "var(--body1)" }} />;
+      break;
+    case "Failed":
+      return <DangerousRounded sx={{ fontSize: "var(--body1)" }} />;
       break;
     default:
       return <></>;
@@ -62,10 +70,10 @@ export default function OrderCard({ order }: { order: Order }) {
           alignItems={"flex-start"}
         >
           <Stack>
-            <Typography sx={{ opacity: 0.5 }} variant="h2" fontSize={"1.2em"}>
+            <Typography variant="h2" fontSize={"1.8em"}>
               Order no. {order.id}
             </Typography>
-            <Typography variant="body2">
+            <Typography sx={{ opacity: 0.5 }}>
               {timestampToDate(order.createdAt)?.toUTCString()}
             </Typography>
           </Stack>
@@ -73,7 +81,7 @@ export default function OrderCard({ order }: { order: Order }) {
             alignItems={"center"}
             display={"flex"}
             color={"var(--accent)"}
-            variant="body2"
+            // variant="body2"
             textAlign={"center"}
             gap={0.5}
           >

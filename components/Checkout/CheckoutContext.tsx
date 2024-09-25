@@ -10,16 +10,18 @@ import { createContext, useContext } from "react";
 import useFormHelpers from "../Custom/FormComponents/useFormHelpers";
 import Order from "@/shared/interfaces/Order";
 import { useRouter } from "next/navigation";
+import usePromoCode from "./usePromoCode";
 
 type CheckoutContextType =
   | ({
       handleCheckoutFormSubmit: (
         e: React.FormEvent<HTMLFormElement>
       ) => Promise<void>;
-    } & (ReturnType<typeof useDeliveryInformation> &
+    } & ReturnType<typeof useDeliveryInformation> &
       ReturnType<typeof useDeliverySchedule> &
       ReturnType<typeof usePaymentMethod> &
-      ReturnType<typeof useFormHelpers>))
+      ReturnType<typeof useFormHelpers> &
+      ReturnType<typeof usePromoCode>)
   | null;
 
 export const CheckoutContext = createContext<CheckoutContextType>(null);
@@ -41,13 +43,15 @@ export default function CheckoutContextProvider({
   const { cart, totalCost, clearCart } = useCart();
   const router = useRouter();
 
-  const formHelpers = useFormHelpers();
+  const formHelpersHook = useFormHelpers();
 
-  const deliveryInformation = useDeliveryInformation();
+  const deliveryInformationHook = useDeliveryInformation();
 
-  const deliverySchedule = useDeliverySchedule();
+  const deliveryScheduleHook = useDeliverySchedule();
 
-  const paymentMethod = usePaymentMethod();
+  const promoCodeHook = usePromoCode();
+
+  const paymentMethodHook = usePaymentMethod();
   const { createDocument } = useSetDocument();
 
   const handleCheckoutFormSubmit = async (
@@ -56,35 +60,37 @@ export default function CheckoutContextProvider({
     e.preventDefault();
     console.log(user?.uid);
     console.log({
-      deliveryInformation,
-      deliverySchedule,
-      paymentMethod,
+      deliveryInformationHook,
+      deliveryScheduleHook,
+      paymentMethodHook,
       cart,
       totalCost,
     });
     try {
-      formHelpers.startLoading();
-      if (deliveryInformation.saveInfo && user)
-        await deliveryInformation.setDeliveryInfoDocument(user);
+      formHelpersHook.startLoading();
+      if (deliveryInformationHook.saveInfo && user)
+        await deliveryInformationHook.setDeliveryInfoDocument(user);
       if (cart.length > 0 && user) {
         const orderData: Omit<Order, "id"> = {
           userId: user.uid,
-          deliveryInfo: deliveryInformation.deliveryInfo,
+          deliveryInfo: deliveryInformationHook.deliveryInfo,
           createdAt: Timestamp.now(),
           updatedAt: Timestamp.now(),
           status: "Confirming Order",
           cartTotalCost: totalCost,
           cartProducts: cart,
-          qualityCheck: deliveryInformation.qaulityCheck,
+          qualityCheck: deliveryInformationHook.qaulityCheck,
+          promoCode: promoCodeHook.promoCode,
         };
         const docRef = await createDocument("orders", orderData);
-        clearCart();
+        console.log("docRef", docRef);
+        clearCart(false);
         router.replace(`/checkout/success/${docRef?.id}`);
       }
-      formHelpers.endLoading();
+      formHelpersHook.endLoading();
     } catch (error) {
       router.replace("/checkout/failed");
-      formHelpers.endLoading();
+      formHelpersHook.endLoading();
       console.log(error);
     }
   };
@@ -92,10 +98,11 @@ export default function CheckoutContextProvider({
   return (
     <CheckoutContext.Provider
       value={{
-        ...deliveryInformation,
-        ...deliverySchedule,
-        ...paymentMethod,
-        ...formHelpers,
+        ...deliveryInformationHook,
+        ...deliveryScheduleHook,
+        ...promoCodeHook,
+        ...paymentMethodHook,
+        ...formHelpersHook,
         handleCheckoutFormSubmit,
       }}
     >
