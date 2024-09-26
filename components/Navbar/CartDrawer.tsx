@@ -83,7 +83,7 @@ export default function CartDrawer({
           alignItems={"flex-start"}
           justifyContent={"space-between"}
         >
-          <Button disabled={cart.length == 0} onClick={clearCart}>
+          <Button disabled={cart.length == 0} onClick={() => clearCart()}>
             Clear All
           </Button>
           <Stack alignItems={"flex-end"}>
