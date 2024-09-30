@@ -14,7 +14,7 @@ export default function Home() {
         <Featured />
       </Stack>
       <AllProducts />
-      <Reviews />
+      {/* <Reviews /> */}
       {/* <ContactForm /> */}
       <Footer />
     </Stack>

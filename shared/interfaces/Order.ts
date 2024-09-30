@@ -16,15 +16,17 @@ export type DeliveryInfo = {
   updatedAt?: Timestamp;
 };
 
-export type OrderStatus =
-  | "Confirming Order"
-  | "Payment Pending"
-  | "Processing Order"
-  | "Out for Delivery"
-  | "Delivered"
-  | "Failed"
-  | "Cancelled";
+export const orderStatuses = [
+  "Confirming Order",
+  "Payment Pending",
+  "Processing Order",
+  "Out for Delivery",
+  "Delivered",
+  "Failed",
+  "Cancelled",
+] as const;
 
+export type OrderStatus = (typeof orderStatuses)[number];
 export default interface Order {
   id: string;
   userId: string;

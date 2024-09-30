@@ -1,14 +1,8 @@
 "use client";
 import PaymentMethods from "@/public/Images/PaymentMethods.svg";
 import Logo from "@/public/Logos/Logo.svg";
-import {
-  Facebook,
-  Instagram,
-  MailRounded,
-  Twitter,
-  YouTube,
-} from "@mui/icons-material";
-import { Stack, Tooltip, Typography } from "@mui/material";
+import { PhoneRounded } from "@mui/icons-material";
+import { Button, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -59,14 +53,19 @@ export default function Footer() {
       <Image src={Logo} alt="5 Degrees" />
       <Stack alignItems={"center"} gap={1}>
         <Typography variant="h2">
-          <Link href={"/"}>Customers</Link>
+          <Link
+            href={"https://www.reddit.com/r/5degreesstore/ "}
+            target="_blank"
+          >
+            Customer Reviews
+          </Link>
         </Typography>
         <Typography variant="h2">
-          <Link href={"/"}>About Us</Link>
+          <Link href={"/aboutUs"}>About Us</Link>
         </Typography>
-        <Typography variant="h2">
+        {/* <Typography variant="h2">
           <Link href={"/"}>Support</Link>
-        </Typography>
+        </Typography> */}
       </Stack>
       <FooterSection title="What we do">
         <Typography fontSize={"1.125em"} textAlign={"center"}>
@@ -77,27 +76,15 @@ export default function Footer() {
           our virtual and into your physical
         </Typography>
       </FooterSection>
-      <FooterSection title="Contact Us">
-        <Stack direction={"row"} gap={1} color={"var(--accent)"}>
-          <Link href={"https://www.facebook.com/profile.php?id=61550536636170"}>
-            <Facebook sx={iconStyles} />
-          </Link>
-          <Link href={"mailto:five.degrees@yahoo.com"} target="_blank">
-            <Tooltip title="five.degrees@yahoo.com">
-              <MailRounded sx={iconStyles} />
-            </Tooltip>
-          </Link>
-          <Link href={"https://x.com/5degrees1317"}>
-            <Twitter sx={iconStyles} />
-          </Link>
-          <Link href={"https://www.instagram.com/5degrees_._/"}>
-            <Instagram sx={iconStyles} />
-          </Link>
-          <Link href={"https://www.youtube.com/@5degrees148"}>
-            <YouTube sx={iconStyles} />
-          </Link>
-        </Stack>
-      </FooterSection>
+      <Button
+        href="https://beacons.ai/5degrees"
+        variant="contained"
+        sx={{ alignSelf: "flex-start" }}
+        target="_blank"
+        startIcon={<PhoneRounded />}
+      >
+        Contact Us
+      </Button>
       <FooterSection title="We Accept">
         <Image src={PaymentMethods} alt="Payment Methods" />
       </FooterSection>

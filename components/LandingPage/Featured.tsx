@@ -86,8 +86,9 @@ export default function Featured() {
                 sx={{
                   position: "absolute",
                   left: "5%",
-                  top: "40%",
+                  top: "50%",
                   rotate: "180deg",
+                  transition: "all 0.3s ease",
                 }}
                 onClick={handlePrev}
               >
@@ -100,7 +101,8 @@ export default function Featured() {
                 sx={{
                   position: "absolute",
                   right: "5%",
-                  top: "40%",
+                  top: "50%",
+                  transition: "all 0.3s ease",
                 }}
                 onClick={handleNext}
               >

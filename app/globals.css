@@ -50,6 +50,7 @@ body {
 body {
   color: rgb(var(--primary-text));
   background: var(--background);
+  transition: background 0.3s ease;
 }
 
 a {
@@ -57,7 +58,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  color: var(--accent);
+  color: var(--accentdark);
 }
 /* Scroll Bar Styles(not mozilla) */
 ::-webkit-scrollbar {

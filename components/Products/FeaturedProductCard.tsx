@@ -50,7 +50,7 @@ export default function FeaturedProductCard({
           bottom: "20%",
           rotate: "-25deg",
           filter: "drop-shadow(var(--shadow))",
-          width: "55%",
+          width: "60%",
           height: "auto",
         }}
       />
