@@ -32,7 +32,13 @@ export default function CartProductCard({
           width: "100%",
         }}
       >
-        <Typography variant="h3" paddingRight={"1.5625rem"}>
+        <Typography
+          variant="h3"
+          paddingRight={"2rem"}
+          overflow={"hidden"}
+          textOverflow={"ellipsis"}
+          sx={{ lineClamp: "2", WebkitLineClamp: "2" }}
+        >
           <Link href={`/product/${item.id}`}>{item.name}</Link>
         </Typography>
         <Stack direction={"row"} gap={2} alignItems={"center"}>

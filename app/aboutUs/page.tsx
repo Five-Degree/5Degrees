@@ -14,7 +14,7 @@ export default function page() {
           that are in charge of their designated products. By experimenting with
           different elements and circumstances, we have created and refined the
           cycle of renovation and ongoing R&D. Five Degrees was founded as a
-          result of the parent company's new approach to expanding its
+          result of the parent company&apos;s new approach to expanding its
           international business and internal creation of an organization to
           facilitate the development of far more amicable terms of communication
           with our overseas clients. The primary reason for the ease of trade
@@ -22,7 +22,7 @@ export default function page() {
           test project using social media platforms to increase awareness and
           test the system. Eventually, we were able to ease the transition into
           this new era, and customers and potential clients can now shop with
-          ease using our dynamic structure.
+          ease using our dynamic structure.
         </Typography>
       </Stack>
       <Footer />

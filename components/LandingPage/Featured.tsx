@@ -8,6 +8,7 @@ import Product from "@/shared/interfaces/Products";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { Skeleton, Stack, Typography } from "@mui/material";
 import { where } from "firebase/firestore";
+import React from "react";
 import { useState } from "react";
 import Slider from "react-slick";
 
