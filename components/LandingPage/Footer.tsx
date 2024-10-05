@@ -61,6 +61,11 @@ export default function Footer() {
           </Link>
         </Typography>
         <Typography variant="h2">
+          <Link href={"https://beacons.ai/5degrees"} target="_blank">
+            Contact Us
+          </Link>
+        </Typography>
+        <Typography variant="h2">
           <Link href={"/aboutUs"}>About Us</Link>
         </Typography>
         {/* <Typography variant="h2">
@@ -76,15 +81,7 @@ export default function Footer() {
           our virtual and into your physical
         </Typography>
       </FooterSection>
-      <Button
-        href="https://beacons.ai/5degrees"
-        variant="contained"
-        sx={{ alignSelf: "flex-start" }}
-        target="_blank"
-        startIcon={<PhoneRounded />}
-      >
-        Contact Us
-      </Button>
+
       <FooterSection title="We Accept">
         <Image src={PaymentMethods} alt="Payment Methods" />
       </FooterSection>
