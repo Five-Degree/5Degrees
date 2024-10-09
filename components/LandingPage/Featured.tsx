@@ -27,7 +27,7 @@ export default function Featured() {
     defaultPrice: 0,
     mainImage: "",
     variants: [],
-    // colors: [],
+    colors: [],
     sizes: [],
   });
   const { handleAddToCartOpen, showAddToCartModal, addToCartModal } =
