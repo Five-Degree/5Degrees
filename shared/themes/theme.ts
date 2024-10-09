@@ -320,6 +320,15 @@ const muiTheme = createTheme({
         },
       },
     },
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        grouped: {
+          ":not(:first-of-type)": {
+            borderLeft: "1px solid var(--border-color)",
+          },
+        },
+      },
+    },
   },
   typography: {
     fontFamily: [

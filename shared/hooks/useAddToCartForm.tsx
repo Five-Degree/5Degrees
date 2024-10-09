@@ -6,7 +6,7 @@ import { SelectChangeEvent } from "@mui/material";
 export interface AddToCartForm {
   variant: VariantNames;
   quantity: number;
-  // color: NonNullColors;
+  color: NonNullColors;
   size: ShoeSize["EU"];
   unitPrice: number;
 }
@@ -14,9 +14,9 @@ export interface AddToCartForm {
 export default function useAddToCartForm({
   product,
   defaultVariant = product.variants[0].name,
-  // defaultColor = typeof product.colors == "string"
-  //   ? product.colors
-  //   : product.colors[0],
+  defaultColor = typeof product.colors == "string"
+    ? product.colors
+    : product.colors[0],
   defaultUnitPrice = product.defaultPrice,
   defaultQuantity = 1,
   defaultSize = product.sizes[0],
@@ -32,7 +32,7 @@ export default function useAddToCartForm({
     variant: defaultVariant,
     quantity: defaultQuantity,
     size: defaultSize,
-    // color: defaultColor,
+    color: defaultColor,
     unitPrice: defaultUnitPrice,
   });
 
@@ -49,12 +49,12 @@ export default function useAddToCartForm({
           product.defaultPrice,
       });
   }
-  // function handleColorChange(
-  //   event: React.MouseEvent<HTMLElement>,
-  //   value: AddToCartForm["color"] | null
-  // ) {
-  //   if (value !== null) setFormValues({ ...formValues, color: value });
-  // }
+  function handleColorChange(
+    event: React.MouseEvent<HTMLElement>,
+    value: AddToCartForm["color"] | null
+  ) {
+    if (value !== null) setFormValues({ ...formValues, color: value });
+  }
   function handleQuantityChange(
     event: React.SyntheticEvent,
     value: number | undefined
@@ -71,7 +71,7 @@ export default function useAddToCartForm({
   return {
     formValues,
     handleVariantChange,
-    // handleColorChange,
+    handleColorChange,
     handleQuantityChange,
     handleSizeChange,
   };

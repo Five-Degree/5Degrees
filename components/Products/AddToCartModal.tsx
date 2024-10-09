@@ -1,22 +1,18 @@
 import { useCart } from "@/contexts/CartContext";
+import useAddToCartForm from "@/shared/hooks/useAddToCartForm";
 import Product, {
   NonNullColors,
   VariantNames,
 } from "@/shared/interfaces/Products";
-import {
-  Button,
-  Card,
-  CardContent,
-  Modal,
-  Stack,
-  Typography,
-} from "@mui/material";
-import React, { useState } from "react";
+import { Button, IconButton, Modal, Stack, Typography } from "@mui/material";
+import React from "react";
 import QuantityInput from "../Custom/CustomQuantityInput";
+import ProductImages from "./Product/ProductImages";
 import ColorSelector from "./Selectors/ColorSelector";
-import VariantSelector from "./Selectors/VariantSelector";
-import useAddToCartForm from "@/shared/hooks/useAddToCartForm";
 import SizeSelector from "./Selectors/SizeSelector";
+import VariantSelector from "./Selectors/VariantSelector";
+import CustomIconButton from "../Custom/CustomIconButton";
+import { CloseRounded } from "@mui/icons-material";
 export interface AddToCartForm {
   variant: VariantNames;
   quantity: number;
@@ -36,7 +32,7 @@ export default function AddToCartModal({
   const {
     formValues,
     handleVariantChange,
-    // handleColorChange,
+    handleColorChange,
     handleQuantityChange,
     handleSizeChange,
   } = useAddToCartForm({ product });
@@ -45,9 +41,8 @@ export default function AddToCartModal({
     return (
       <Stack
         direction={"row"}
-        mt={3}
         alignItems={"center"}
-        gap={2}
+        gap={1}
         flexWrap={"wrap"}
         sx={{
           // minWidth: "15.625rem",
@@ -65,7 +60,7 @@ export default function AddToCartModal({
       id: product.id,
       quantity: formValues.quantity,
       selectedVariant: formValues.variant,
-      // selectedColor: formValues.color,
+      selectedColor: formValues.color,
       selectedSize: formValues.size,
       unitPrice: formValues.unitPrice,
       name: product.name,
@@ -75,65 +70,99 @@ export default function AddToCartModal({
   }
   return (
     <Modal
-      disablePortal
       open={openAddToCart}
       aria-labelledby={product.name}
       aria-describedby={product.name}
       onClose={handleAddToCartClose}
       sx={{
         display: "flex",
-        alignItems: "center",
+        // alignItems: "center",
+        overflowY: "auto",
+        height: "95vh",
+        marginBlock: "auto",
         justifyContent: "center",
       }}
-      container={document.body}
+      // container={document.body}
+      disableEnforceFocus={false}
+      disableScrollLock={false}
     >
-      <Card>
-        <CardContent
-          component={"form"}
-          onSubmit={handleAddToCart}
+      <Stack
+        component={"form"}
+        bgcolor={"var(--background)"}
+        justifyContent={"center"}
+        marginBlock={"auto"}
+        paddingBlock={6}
+        paddingInline={2}
+        borderRadius={"var(--border-radius)"}
+        onSubmit={handleAddToCart}
+        overflow={"hidden auto"}
+        gap={2}
+        position={"relative"}
+      >
+        <Typography variant="h1" marginInline={3}>
+          Add to cart
+        </Typography>
+        <IconButton
           sx={{
-            // minWidth: "15.625rem",
-            fontSize: { xxl: "1.5rem", xl: "1.3rem", md: "1rem" },
+            position: "absolute",
+            top: "5%",
+            right: "8%",
+            translate: "100% 0%",
+            zIndex: 99,
           }}
+          onClick={handleAddToCartClose}
         >
-          <Typography variant="h1">Add to cart</Typography>
+          <CloseRounded sx={{ color: "var(--body1-color)" }} />
+        </IconButton>
+        <Stack width={{ md: "80%", xs: "90%" }} marginInline={"auto"}>
+          <ProductImages product={product} />
+        </Stack>
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+          alignItems={{ md: "flex-end", xs: "flex-start" }}
+          paddingInline={3}
+        >
           <PartWrapper>
-            <Typography variant="body2" width={"100%"}>
-              Variants:
-            </Typography>
+            <Typography width={"100%"}>Variants:</Typography>
             <VariantSelector
               selectedVariant={formValues.variant}
               handleVariantChange={handleVariantChange}
               product={product}
             />
           </PartWrapper>
-          {/* {product.colors.length != 0 && (
+          <Stack direction={"row"} gap={2} alignItems={"center"}>
+            <Typography>Unit Price:</Typography>
+            <Typography variant="h1">${formValues.unitPrice}</Typography>
+          </Stack>
+        </Stack>
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+          alignItems={{ md: "flex-end", xs: "center" }}
+          paddingInline={3}
+        >
+          <Stack direction={"row"} gap={2}>
+            {product.colors.length != 0 && (
+              <PartWrapper>
+                <Typography width={"100%"}>Colors:</Typography>
+                <ColorSelector
+                  selectedColor={formValues.color}
+                  handleColorChange={handleColorChange}
+                  product={product}
+                />
+              </PartWrapper>
+            )}
             <PartWrapper>
-              <Typography variant="body2" width={"100%"}>
-                Colors:
-              </Typography>
-              <ColorSelector
-                selectedColor={formValues.color}
-                handleColorChange={handleColorChange}
+              <Typography>Sizes:</Typography>
+              <SizeSelector
+                selectedSize={formValues.size}
+                handleSizeChange={handleSizeChange}
                 product={product}
               />
             </PartWrapper>
-          )} */}
-          <PartWrapper>
-            <Typography variant="body2" width={"100%"}>
-              Sizes:
-            </Typography>
-            <SizeSelector
-              selectedSize={formValues.size}
-              handleSizeChange={handleSizeChange}
-              product={product}
-            />
-          </PartWrapper>
-          <Stack alignItems={"flex-end"} mt={4}>
-            <Typography>Unit Price</Typography>
-            <Typography variant="h1">${formValues.unitPrice}</Typography>
           </Stack>
-          <Stack direction={"row"} justifyContent={"flex-end"} gap={2}>
+          <Stack direction={{ md: "row", xs: "column" }} gap={1}>
             <QuantityInput
               handleChange={handleQuantityChange}
               value={formValues.quantity}
@@ -142,8 +171,8 @@ export default function AddToCartModal({
               Add
             </Button>
           </Stack>
-        </CardContent>
-      </Card>
+        </Stack>
+      </Stack>
     </Modal>
   );
 }

@@ -4,7 +4,13 @@ import { ButtonBase, Grid, Stack } from "@mui/material";
 import { CldImage } from "next-cloudinary";
 import React, { useState } from "react";
 
-export default function ProductImages({ product }: { product: Product }) {
+export default function ProductImages({
+  product,
+  direction = "vertical",
+}: {
+  product: Product;
+  direction?: "horizontal" | "vertical";
+}) {
   const [activeImage, setActiveImage] = useState<string>(product.mainImage);
   const imagesFactory = (url: string, name: string) => (
     <CldImage
@@ -21,14 +27,18 @@ export default function ProductImages({ product }: { product: Product }) {
   );
   return (
     <Stack
-      direction={{ md: "row-reverse", xs: "column" }}
-      justifyContent={"flex-start"}
+      direction={
+        direction == "vertical" ? { md: "row-reverse", xs: "column" } : "column"
+      }
+      // justifyContent={"flex-start"}
+      width={"100%"}
       height={{ md: "40vh", xs: "auto" }}
       alignItems={"center"}
       gap={1}
       sx={{
         fontSize: { xxl: "1.5rem", xl: "1.3rem", md: "1rem" },
       }}
+      overflow={"auto"}
     >
       <CldImage
         src={activeImage}
@@ -46,15 +56,25 @@ export default function ProductImages({ product }: { product: Product }) {
       <Stack
         gap={2}
         sx={{
-          overflowY: { md: "auto", xs: "visible" },
-          overflowX: { md: "visible", xs: "auto" },
+          overflowY:
+            direction == "vertical" ? { md: "auto", xs: "visible" } : "visible",
+          overflowX:
+            direction == "vertical" ? { md: "visible", xs: "auto" } : "auto",
           direction: { md: "rtl", xs: "ltr" },
         }}
-        height={{ md: "100%", xs: "max-content" }}
-        width={{ md: "max-content", xs: "100%" }}
+        height={
+          direction == "vertical"
+            ? { md: "100%", xs: "max-content" }
+            : "max-content"
+        }
+        width={
+          direction == "vertical" ? { md: "max-content", xs: "100%" } : "100%"
+        }
         paddingInline={1}
         paddingBlock={1}
-        direction={{ md: "column", xs: "row" }}
+        direction={
+          direction == "vertical" ? { md: "column", xs: "row" } : "row"
+        }
         justifyContent={"flex-start"}
       >
         {/* <ButtonBase

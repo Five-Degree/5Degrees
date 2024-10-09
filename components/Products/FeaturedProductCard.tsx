@@ -74,10 +74,17 @@ export default function FeaturedProductCard({
             {product.variants.length ?? 5}{" "}
             <span style={{ fontWeight: "lighter" }}>Variants</span>
           </Typography>
-          {/* <Typography variant="body2" textTransform={"uppercase"}>
-            {product.colors?.length ?? 1}{" "}
-            <span style={{ fontWeight: "lighter" }}>Colors</span>
-          </Typography> */}
+          <Typography variant="body2" textTransform={"uppercase"}>
+            {product.colors && product.colors.length > 0 && (
+              <>
+                {product.colors.length}
+                <span style={{ fontWeight: "lighter" }}>
+                  {" "}
+                  Color{"("}s{")"}
+                </span>
+              </>
+            )}
+          </Typography>
         </Stack>
       </Stack>
       <ButtonBase
