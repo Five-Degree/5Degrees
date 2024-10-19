@@ -18,7 +18,7 @@ export default function useDeliveryInformation() {
     postalCode: "",
   });
   const [saveInfo, setSaveInfo] = useState(false);
-  const [qaulityCheck, setQualityCheck] = useState(false);
+  const [qualityCheck, setQualityCheck] = useState(false);
   const { createDocument, setDocument } = useSetDocument();
 
   const handleDeliveryInfoChange = (name: string, value: string) => {
@@ -60,7 +60,7 @@ export default function useDeliveryInformation() {
   return {
     deliveryInfo,
     saveInfo,
-    qaulityCheck,
+     qualityCheck,
     handleDeliveryInfoChange,
     handleSaveInfoChange,
     handleQualityCheckChange,

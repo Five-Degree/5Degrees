@@ -23,7 +23,7 @@ export default function DeliveryInformation() {
   const {
     deliveryInfo,
     saveInfo,
-    qaulityCheck,
+    qualityCheck,
     handleDeliveryInfoChange,
     handleSaveInfoChange,
     handleQualityCheckChange,
@@ -134,7 +134,7 @@ export default function DeliveryInformation() {
           gap={3}
           alignItems={"center"}
           justifyContent={"flex-end"}
-          bgcolor={qaulityCheck ? "var(--accentalpha)" : ""}
+          bgcolor={qualityCheck ? "var(--accentalpha)" : ""}
           borderRadius={"var(--border-radius)"}
           p={"0.5em"}
         >
@@ -142,14 +142,14 @@ export default function DeliveryInformation() {
             alignItems={"center"}
             display={"flex"}
             gap={"0.25em"}
-            color={qaulityCheck ? "var(--accent)" : undefined}
+            color={qualityCheck ? "var(--accent)" : undefined}
           >
             <FactCheckRounded />
             Quality Checking
           </Typography>
           <CustomSwitch
             disabled={loading || loadingDeliveryInfo}
-            value={qaulityCheck}
+            value={qualityCheck}
             onChange={handleQualityCheckChange}
           />
         </Stack>

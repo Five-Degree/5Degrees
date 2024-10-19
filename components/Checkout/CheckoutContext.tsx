@@ -80,13 +80,11 @@ export default function CheckoutContextProvider({
           status: "Confirming Order",
           cartTotalCost: totalCost,
           cartProducts: cart,
-          qualityCheck: deliveryInformationHook.qaulityCheck,
+          qualityCheck: deliveryInformationHook.qualityCheck,
           promoCode: promoCodeHook.promoCode,
         };
         const formattedOrderData = convertUndefinedToNull(orderData);
-        // console.log("formattedOrderData", formattedOrderData);
         const docRef = await createDocument("orders", formattedOrderData);
-        // console.log("docRef", docRef);
         clearCart(false);
         router.replace(`/checkout/success/${docRef?.id}`);
       }
