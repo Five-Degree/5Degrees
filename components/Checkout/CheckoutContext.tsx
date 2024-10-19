@@ -11,6 +11,7 @@ import useFormHelpers from "../Custom/FormComponents/useFormHelpers";
 import Order from "@/shared/interfaces/Order";
 import { useRouter } from "next/navigation";
 import usePromoCode from "./usePromoCode";
+import convertUndefinedToNull from "@/shared/functions/convertUndefinedToString";
 
 type CheckoutContextType =
   | ({
@@ -82,16 +83,18 @@ export default function CheckoutContextProvider({
           qualityCheck: deliveryInformationHook.qaulityCheck,
           promoCode: promoCodeHook.promoCode,
         };
-        const docRef = await createDocument("orders", orderData);
-        console.log("docRef", docRef);
+        const formattedOrderData = convertUndefinedToNull(orderData);
+        // console.log("formattedOrderData", formattedOrderData);
+        const docRef = await createDocument("orders", formattedOrderData);
+        // console.log("docRef", docRef);
         clearCart(false);
         router.replace(`/checkout/success/${docRef?.id}`);
       }
       formHelpersHook.endLoading();
     } catch (error) {
-      router.replace("/checkout/failed");
-      formHelpersHook.endLoading();
       console.log(error);
+      formHelpersHook.endLoading();
+      router.replace("/checkout/failed");
     }
   };
 

@@ -16,8 +16,6 @@ const useSetDocument = () => {
     data: DocumentData,
     merge: boolean = false
   ) {
-    // setLoading(true);
-
     try {
       await setDoc(doc(db, collection, docId), data, { merge });
     } catch (error) {
@@ -34,7 +32,7 @@ const useSetDocument = () => {
     } catch (error) {
       console.error(error);
       throw Error(
-        `Error occured while setting document in ${coll}, reason for error: ${error}`
+        `Error occured while creating document in ${coll}, reason for error: ${error}`
       );
     }
   }
