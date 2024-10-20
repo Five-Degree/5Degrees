@@ -10,15 +10,20 @@ import {
   AccordionSummary,
   Box,
   Divider,
+  FormControl,
+  InputLabel,
   Stack,
   Typography,
 } from "@mui/material";
 import CustomSwitch from "../Custom/CustomSwitch";
 import FormInput, { IFormInput } from "../Custom/FormComponents/FormInput";
 import { useCheckout } from "./CheckoutContext";
-import DeliveryInformationCard from "./DeliveryInformationCard";
+import SavedInformationCard from "./SavedInformationCard";
 import Image from "next/image";
-
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/semantic-ui.css";
+import theme from "@/shared/themes/reactPhoneInput";
+import PhoneNumberInput from "../Custom/FormComponents/PhoneNumberInput";
 export default function DeliveryInformation() {
   const {
     deliveryInfo,
@@ -59,7 +64,7 @@ export default function DeliveryInformation() {
       <AccordionDetails>
         <Stack direction={"row"} overflow={"auto hidden"} gap={"0.5rem"}>
           {results.map((res) => (
-            <DeliveryInformationCard key={res.id} res={res as DeliveryInfo} />
+            <SavedInformationCard key={res.id} res={res as DeliveryInfo} />
           ))}
         </Stack>
         <Stack
@@ -82,7 +87,14 @@ export default function DeliveryInformation() {
             {/* Email */}
             {formInputFactory(inputs.billingInfo[2])}
             {/* Phone */}
-            {formInputFactory(inputs.billingInfo[3])}
+            <PhoneNumberInput
+              id={inputs.billingInfo[2].id}
+              onChange={(e) =>
+                handleDeliveryInfoChange("whatsappNumber", e as string)
+              }
+              name={inputs.billingInfo[2].name}
+              value={deliveryInfo.whatsappNumber}
+            />
           </Stack>
           {/* Address */}
           {formInputFactory(inputs.billingInfo[4])}

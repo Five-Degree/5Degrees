@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import {
   FormControl,
   Input,
@@ -7,16 +7,10 @@ import {
   IconButton,
   InputLabel,
   Skeleton,
-  InputProps,
-  Menu,
-  MenuList,
-  MenuItem,
-  ListItemIcon,
+  InputProps
 } from "@mui/material";
 import VisibilityOutlined from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlined from "@mui/icons-material/VisibilityOffOutlined";
-import { ArrowDropDown } from "@mui/icons-material";
-import CustomIconButton from "../CustomIconButton";
 import FormSelectInput from "./FormSelectInput";
 
 export interface FormCredentials {

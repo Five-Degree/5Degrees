@@ -1,22 +1,9 @@
 import Order from "@/shared/interfaces/Order";
-import {
-  Button,
-  Divider,
-  IconButton,
-  Modal,
-  Stack,
-  Typography,
-} from "@mui/material";
-import React from "react";
+import { Button, Modal, Stack, Typography } from "@mui/material";
 import CartProductCard from "../Products/CartProductCard";
 import CustomIconButton from "../Custom/CustomIconButton";
-import {
-  CloseRounded,
-  FactCheckRounded,
-  OpenInNewRounded,
-} from "@mui/icons-material";
-import Link from "next/link";
-import timestampToDate from "@/shared/functions/timestampToDate";
+import { CloseRounded, OpenInNewRounded } from "@mui/icons-material";
+import timestampToDate from "@/shared/functions/convertToDate";
 import SectionWithTitle from "../Custom/SectionWithTitle";
 import { PlainDataMapper } from "../Custom/PlainData";
 
@@ -28,10 +15,10 @@ interface Props {
 
 export default function OrderModal({ order, open, handleClose }: Props) {
   const orderDetailsMap = {
-    "Ordered On": timestampToDate(order.createdAt)?.toUTCString(),
+    "Ordered On": timestampToDate(order.createdAt)?.toLocaleString(),
     "Total Cost": `$${order.cartTotalCost}`,
     "Total Items in Order": `${order.cartProducts.length} items(s)`,
-    "Est. Delivery Date": timestampToDate(order.deliveryDate)?.toUTCString(),
+    "Est. Delivery Date": timestampToDate(order.deliveryDate)?.toLocaleString(),
   };
   const deliveryDetailsMap = {
     Email: order.deliveryInfo.email,
@@ -91,11 +78,25 @@ export default function OrderModal({ order, open, handleClose }: Props) {
             <Typography variant="h2">Order No.{order.id}</Typography>
           </Stack>
 
-          <SectionWithTitle title="Order Details">
-            <PlainDataMapper obj={orderDetailsMap} />
-          </SectionWithTitle>
-          <SectionWithTitle title="Delivery Information">
-            <PlainDataMapper obj={deliveryDetailsMap} />
+          <SectionWithTitle title="Ordered Products">
+            <Stack
+              p={2}
+              bgcolor={"var(--accentalpha)"}
+              borderRadius={"var(--border-radius)"}
+              flexGrow={1}
+              overflow={"hidden auto"}
+              maxHeight={"50vh"}
+            >
+              <Stack gap={1}>
+                {order.cartProducts.map((cartProduct) => (
+                  <CartProductCard
+                    key={cartProduct.cartId}
+                    item={cartProduct}
+                    readOnly
+                  />
+                ))}
+              </Stack>
+            </Stack>
           </SectionWithTitle>
           {order.qualityCheck && (
             <>
@@ -126,26 +127,11 @@ export default function OrderModal({ order, open, handleClose }: Props) {
               </SectionWithTitle>
             </>
           )}
-
-          <SectionWithTitle title="Ordered Products">
-            <Stack
-              p={2}
-              bgcolor={"var(--border-color)"}
-              borderRadius={"var(--border-radius)"}
-              flexGrow={1}
-              overflow={"hidden auto"}
-              maxHeight={"50vh"}
-            >
-              <Stack gap={1}>
-                {order.cartProducts.map((cartProduct) => (
-                  <CartProductCard
-                    key={cartProduct.cartId}
-                    item={cartProduct}
-                    readOnly
-                  />
-                ))}
-              </Stack>
-            </Stack>
+          <SectionWithTitle title="Order Details">
+            <PlainDataMapper obj={orderDetailsMap} />
+          </SectionWithTitle>
+          <SectionWithTitle title="Delivery Information">
+            <PlainDataMapper obj={deliveryDetailsMap} />
           </SectionWithTitle>
         </Stack>
       </Stack>

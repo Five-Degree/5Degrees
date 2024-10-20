@@ -81,6 +81,30 @@ a:hover {
   background: rgba(255, 255, 255, 0.3);
 }
 
+.react-tel-input > .form-control::placeholder {
+  color: var(--primary-text);
+}
+
+.react-tel-input .country,
+.react-tel-input .selected-flag {
+  transition: background-color 0.3s ease;
+}
+.react-tel-input .selected-flag {
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1;
+  width: auto !important;
+}
+
+.react-tel-input .selected-flag.open,
+.react-tel-input .selected-flag:hover {
+  background-color: var(--accent) !important;
+}
+
+.react-tel-input .country-list .country.highlight,
+.react-tel-input .country-list .country:hover {
+  background-color: var(--border-color) !important;
+}
+
 @media screen and (min-width: 600px) {
   :root {
     --h1: 1.8rem;

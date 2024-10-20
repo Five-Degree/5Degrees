@@ -1,9 +1,7 @@
-import timestampToDate from "@/shared/functions/timestampToDate";
 import Order, { OrderStatus } from "@/shared/interfaces/Order";
 import {
   AutorenewRounded,
   CancelRounded,
-  CheckCircleRounded,
   CheckRounded,
   CurrencyExchangeRounded,
   DangerousRounded,
@@ -14,6 +12,7 @@ import {
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import OrderModal from "./OrderModal";
+import convertToDate from "@/shared/functions/convertToDate";
 
 export function generateStatusIcon(status: OrderStatus) {
   switch (status) {
@@ -74,7 +73,7 @@ export default function OrderCard({ order }: { order: Order }) {
               Order no. {order.id}
             </Typography>
             <Typography sx={{ opacity: 0.5 }}>
-              {timestampToDate(order.createdAt)?.toUTCString()}
+              {convertToDate(order.createdAt)?.toLocaleString()}
             </Typography>
           </Stack>
           <Typography
