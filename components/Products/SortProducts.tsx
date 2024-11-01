@@ -15,13 +15,11 @@ import {
   TrendingUpRounded,
 } from "@mui/icons-material";
 import { useCollection } from "./Product/CollectionController";
-import { useSearchContext } from "../Custom/SearchContext";
 
 export default function SortProducts() {
   const { handleAnchorClick, handleAnchorRemoval, anchorEl, open } =
     useAnchoredDisclosure();
   const { formData, setFormData } = useCollection();
-  const {} = useSearchContext();
 
   const PriceSorter = (
     <Stack direction={"row"} alignItems={"center"} gap={3}>

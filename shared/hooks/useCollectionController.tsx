@@ -13,6 +13,7 @@ import {
   type DocumentData,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import convertToDate from "../functions/convertToDate";
 
 export interface UseCollectionProps<T> {
   coll: string;
@@ -73,6 +74,14 @@ export default function useCollectionController<
     const fetchNextData = async () => {
       if (!lastResult) return;
       setLoading(true);
+      console.log(
+        "lastResult[orderByField]",
+        { defaultOrderby },
+        { orderByConstraint },
+        orderByField,
+        lastResult[orderByField]
+      );
+
       const q = query(
         collection(db, coll),
         ...filterConstraint,
