@@ -1,7 +1,7 @@
 import ProductCard from "@/components/Products/ProductCard";
 import SearchProducts from "@/components/Products/SearchProducts";
 import { useResponsive } from "@/contexts/ResponsiveContext";
-import { Button, Grid, Skeleton, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid, Skeleton, Stack, Typography } from "@mui/material";
 import { useCollection } from "./Product/CollectionController";
 import Product from "@/shared/interfaces/Products";
 
@@ -23,55 +23,38 @@ export default function ProductsView({ title }: Props) {
         alignItems={{ xs: "center", sm: "flex-start" }}
         gap={4}
       >
-        <Stack gap={4} paddingLeft={matchesSM ? "10%" : undefined}>
+        <Stack gap={4} width={"100%"} paddingInline={"8.3%"}>
           <Typography variant="h1" textAlign={matchesSM ? "left" : "center"}>
             {title}
           </Typography>
           <SearchProducts />
-          <Grid
-            container
+          <Box
+            sx={{
+              display: "grid",
+              alignItems: "center",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              width: "100%",
+            }}
             gap={4}
-            justifyContent={matchesSM ? "flex-start" : "center"}
           >
             {products.map((product, index) => (
-              <Grid
-                item
+              <ProductCard
                 key={product.id}
-                width={
-                  matchesLG
-                    ? "20%"
-                    : matchesMD
-                    ? "30%"
-                    : matchesSM
-                    ? "40%"
-                    : "80%"
-                }
-              >
-                <ProductCard
-                  product={product as Product}
-                  data-aos="zoom-in"
-                  data-aos-once={true}
-                />
-              </Grid>
+                product={product as Product}
+                data-aos="zoom-in"
+                data-aos-once={true}
+              />
             ))}
             {loading &&
-              Array.from(new Array(12)).map((v, i) => (
+              Array.from(new Array(4)).map((v, i) => (
                 <Skeleton
                   key={i}
                   variant="rounded"
-                  width={
-                    matchesLG
-                      ? "20%"
-                      : matchesMD
-                      ? "30%"
-                      : matchesSM
-                      ? "40%"
-                      : "80%"
-                  }
+                  width={"100%"}
                   height={350}
                 />
               ))}
-          </Grid>
+          </Box>
         </Stack>
       </Stack>
       <Stack

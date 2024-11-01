@@ -41,7 +41,7 @@ export default function ProductCard({
       <Card
         sx={{
           position: "relative",
-          width: "100%",
+          // width:"350px",
         }}
         {...anime}
       >
