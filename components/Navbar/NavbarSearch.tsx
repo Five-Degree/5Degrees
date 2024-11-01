@@ -5,9 +5,11 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import SearchAutocomplete from "../Custom/SearchAutocomplete";
 import ProductSearchHit from "../Products/ProductSearchHit";
 import SearchContextProvider from "../Custom/SearchContext";
+import { useRouter } from "next/navigation";
 
 export default function NavbarSearch() {
   const [searchSelected, setSearchSelected] = useState(false);
+  const router = useRouter();
 
   return (
     <SearchContextProvider
@@ -25,6 +27,7 @@ export default function NavbarSearch() {
         opacity: searchSelected ? "1" : "0",
         pointerEvents: searchSelected ? "all" : "none",
       }}
+      handleHitClick={(hit) => router.push(`/product/${hit.objectID}`)}
     >
       <ClickAwayListener onClickAway={() => setSearchSelected(false)}>
         <Stack direction="row" position={"relative"}>
