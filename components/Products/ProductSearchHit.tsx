@@ -28,11 +28,11 @@ export default function ProductSearchHit({
             borderRadius: "var(--border-radius)",
           }}
         />
-        <Stack pl={1} width={"max-content"} overflow={"hidden"}>
-          <Typography variant="h3" component="p" noWrap>
+        <Stack pl={1} alignItems={"center"}>
+          <Typography variant="h3" component="p" maxWidth={"25ch"} noWrap>
             {hit.name}
           </Typography>
-          <Typography
+          {/* <Typography
             sx={{
               overflow: "hidden",
               textOverflow: "ellipsis",
@@ -44,7 +44,7 @@ export default function ProductSearchHit({
             color={"var(--secondary-text)"}
           >
             {hit.desc}
-          </Typography>
+          </Typography> */}
         </Stack>
       </Stack>
     </Tooltip>

@@ -13,7 +13,6 @@ import {
 import {
   useHits,
   type UseHitsProps,
-  useInfiniteHits,
   useInstantSearch,
   useSearchBox,
   type UseSearchBoxProps,
@@ -22,6 +21,7 @@ import {
 export type SearchAutocompleteProps<T extends Record<string, any>> = {
   autocompleteSx?: SxProps;
   HitComponent: ComponentType<{ hit: Hit<T> }>;
+  handleHitClick(option: Hit): void;
 };
 
 const SearchContext = createContext<SearchProviderValueProps<any>>(null);
@@ -34,32 +34,27 @@ export const useSearchContext = () => {
     );
   } else return context;
 };
-type SearchContextProviderProps<T extends Record<string, any>> =
-  SearchAutocompleteProps<T> & {
-    searchBoxConnector?: UseSearchBoxProps;
-    useHitsProps?: UseHitsProps;
-    handleHitClick(option: Hit): void;
-    children: Readonly<ReactNode>;
-  };
-type SearchProviderValueProps<T extends Record<string, any>> =
-  | ({
-      searchHits: Hit<T>[];
-      inputValue: string;
-      options: readonly Hit[];
-      isSearchStalled: boolean;
-      handleHitClick(option: Hit): void;
-      //   showMore(): void;
-      setQuery(newQuery: string): void;
-      setOptions: Dispatch<SetStateAction<readonly Hit[]>>;
-    } & SearchAutocompleteProps<T>)
-  | null;
-export default function SearchContextProvider<T extends Record<string, any>>({
+type SearchContextProviderProps = {
+  searchBoxConnector?: UseSearchBoxProps;
+  useHitsProps?: UseHitsProps;
+  children: Readonly<ReactNode>;
+};
+type SearchProviderValueProps<T extends Record<string, any>> = {
+  searchHits: Hit<T>[];
+  inputValue: string;
+  options: readonly Hit[];
+  isSearchStalled: boolean;
+  //   showMore(): void;
+  setQuery(newQuery: string): void;
+  setOptions: Dispatch<SetStateAction<readonly Hit[]>>;
+} | null;
+
+export default function SearchContextProvider({
   searchBoxConnector,
   useHitsProps,
   children,
-  handleHitClick,
   ...rest
-}: SearchContextProviderProps<T>) {
+}: SearchContextProviderProps) {
   const { query, refine } = useSearchBox(searchBoxConnector);
   const { status } = useInstantSearch();
   const [inputValue, setInputValue] = useState(query);
@@ -81,7 +76,6 @@ export default function SearchContextProvider<T extends Record<string, any>>({
         inputValue,
         options,
         isSearchStalled,
-        handleHitClick,
         setQuery,
         setOptions,
         ...rest,

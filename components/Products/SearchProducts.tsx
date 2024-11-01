@@ -5,10 +5,13 @@ import { useCollection } from "./Product/CollectionController";
 import type { FormEvent } from "react";
 import { useSearchContext } from "../Custom/SearchContext";
 import { where, orderBy, documentId } from "firebase/firestore";
+import ProductSearchHit from "./ProductSearchHit";
+import { useRouter } from "next/navigation";
 
 export default function SearchProducts() {
   const { formData, handleSetConstraints } = useCollection();
   const { searchHits, inputValue } = useSearchContext();
+  const router = useRouter();
 
   // console.log(formData);
   console.log({ formData, searchHits });
@@ -48,7 +51,13 @@ export default function SearchProducts() {
       data-aos-once={true}
     >
       <SortProducts />
-      <SearchAutocomplete />
+      <SearchAutocomplete
+        HitComponent={ProductSearchHit}
+        autocompleteSx={{ width: "21.875rem" }}
+        handleHitClick={(option) => {
+          router.push(`/product/${option.objectID}`);
+        }}
+      />
 
       {(formData.defaultPrice || inputValue.length > 0) && (
         <Button variant="contained" type="submit">

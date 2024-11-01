@@ -14,7 +14,6 @@ export type ProductConstraints = {
 };
 
 export default function AllProducts() {
-  const router = useRouter();
   return (
     <CollectionController<Product, ProductConstraints>
       useCollectionProps={{
@@ -27,13 +26,7 @@ export default function AllProducts() {
         searchHits: [],
       }}
     >
-      <SearchContextProvider
-        HitComponent={ProductSearchHit}
-        autocompleteSx={{ width: "21.875rem" }}
-        handleHitClick={(option) => {
-          router.push(`/product/${option.objectID}`);
-        }}
-      >
+      <SearchContextProvider>
         <ProductsView title="All Products" />
       </SearchContextProvider>
     </CollectionController>

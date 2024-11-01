@@ -2,18 +2,13 @@
 
 import { Autocomplete, ListItemButton, TextField } from "@mui/material";
 import { type Hit } from "algoliasearch/lite";
-import { useSearchContext } from "./SearchContext";
+import { SearchAutocompleteProps, useSearchContext } from "./SearchContext";
 
-export default function SearchAutocomplete<T>() {
-  const {
-    autocompleteSx,
-    options,
-    isSearchStalled,
-    inputValue,
-    setQuery,
-    handleHitClick,
-    HitComponent,
-  } = useSearchContext();
+export default function SearchAutocomplete<T extends Record<string, any>>(
+  props: SearchAutocompleteProps<T>
+) {
+  const { autocompleteSx, HitComponent, handleHitClick } = props;
+  const { options, isSearchStalled, inputValue, setQuery } = useSearchContext();
   return (
     <Autocomplete
       freeSolo

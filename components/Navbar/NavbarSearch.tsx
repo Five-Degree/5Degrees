@@ -12,26 +12,27 @@ export default function NavbarSearch() {
   const router = useRouter();
 
   return (
-    <SearchContextProvider
-      HitComponent={ProductSearchHit}
-      autocompleteSx={{
-        fontSize: "1rem",
-        position: "absolute",
-        right: "70%",
-        pr: "40%",
-        top: "50%",
-        translate: "0 -50%",
-        transition: "all 0.3s ease",
-        borderRight: "none",
-        width: searchSelected ? "21.875rem" : "0",
-        opacity: searchSelected ? "1" : "0",
-        pointerEvents: searchSelected ? "all" : "none",
-      }}
-      handleHitClick={(hit) => router.push(`/product/${hit.objectID}`)}
-    >
+    <SearchContextProvider>
       <ClickAwayListener onClickAway={() => setSearchSelected(false)}>
         <Stack direction="row" position={"relative"}>
-          <SearchAutocomplete />
+          <SearchAutocomplete
+            handleHitClick={(hit) => router.push(`/product/${hit.objectID}`)}
+            HitComponent={ProductSearchHit}
+            autocompleteSx={{
+              fontSize: "1rem",
+              position: "absolute",
+              right: { md: "70%", xs: "-100%" },
+              pr: "40%",
+              top: "50%",
+              translate: "0 -50%",
+              transition: "all 0.3s ease",
+              borderRight: "none",
+              width: searchSelected ? "21.875rem" : "0",
+              opacity: searchSelected ? "1" : "0",
+              pointerEvents: searchSelected ? "all" : "none",
+              zIndex: 999,
+            }}
+          />
 
           <CustomIconButton
             onClick={() => setSearchSelected(true)}
