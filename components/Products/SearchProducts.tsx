@@ -1,36 +1,60 @@
-import CustomIconButton from "@/components/Custom/CustomIconButton";
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import SortRoundedIcon from "@mui/icons-material/SortRounded";
-import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
-import { FormControl, Input, Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
+import SearchAutocomplete from "../Custom/SearchAutocomplete";
+import SortProducts from "./SortProducts";
+import { useCollection } from "./Product/CollectionController";
+import type { FormEvent } from "react";
+import { useSearchContext } from "../Custom/SearchContext";
+import { where, orderBy, documentId } from "firebase/firestore";
+
 export default function SearchProducts() {
+  const { formData, handleSetConstraints } = useCollection();
+  const { searchHits, inputValue } = useSearchContext();
+
+  // console.log(formData);
+  console.log({ formData, searchHits });
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const ids =
+      inputValue.length > 0 ? searchHits.map((sh) => sh.objectID) : [];
+    console.log({ formData, ids, searchHits });
+    const orderByFA = [];
+    const filterFA = [];
+    let obf = "createdAt";
+    if (formData.defaultPrice) {
+      orderByFA.push(orderBy("defaultPrice", formData.defaultPrice));
+      obf = "defaultPrice";
+    }
+    if (ids.length > 0) {
+      filterFA.push(where("id", "in", ids));
+    }
+    console.log({ filterFA });
+    handleSetConstraints(
+      obf,
+      orderByFA.length > 0 ? orderByFA : undefined,
+      filterFA.length > 0 ? filterFA : undefined
+    );
+  }
   return (
-    <form style={{ width: "100%" }} data-aos="fade-left" data-aos-once={true}>
-      <Stack
-        direction={"row"}
-        width={"100%"}
-        gap={1}
-        alignItems={"center"}
-        sx={{ fontSize: { xl: "1.5rem", lg: "1rem", md: "0.8rem" } }}
-        justifyContent={{ xs: "center", sm: "flex-start" }}
-      >
-        <CustomIconButton>
-          <SortRoundedIcon />
-        </CustomIconButton>
-        <CustomIconButton>
-          <TuneRoundedIcon />
-        </CustomIconButton>
-        <FormControl variant="filled">
-          <Input
-            disableUnderline
-            type="search"
-            placeholder="Search for products"
-            id="search-product"
-            startAdornment={<SearchRoundedIcon />}
-            sx={{ fontSize: "1em" }}
-          />
-        </FormControl>
-      </Stack>
-    </form>
+    <Stack
+      component={"form"}
+      onSubmit={handleSubmit}
+      direction={"row"}
+      width={"100%"}
+      gap={1}
+      alignItems={"center"}
+      sx={{ fontSize: { xl: "1.5rem", lg: "1rem", md: "0.8rem" } }}
+      justifyContent={{ xs: "center", sm: "flex-start" }}
+      data-aos="fade-left"
+      data-aos-once={true}
+    >
+      <SortProducts />
+      <SearchAutocomplete />
+
+      {(formData.defaultPrice || inputValue.length > 0) && (
+        <Button variant="contained" type="submit">
+          Search
+        </Button>
+      )}
+    </Stack>
   );
 }

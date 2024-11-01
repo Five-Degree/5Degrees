@@ -22,6 +22,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import CustomIconButton from "../Custom/CustomIconButton";
 import CartDrawer from "./CartDrawer";
 import UserMenuControls from "./UserMenuControls";
+import NavbarSearch from "./NavbarSearch";
 interface NavLink {
   title: string;
   href: Url;
@@ -69,7 +70,6 @@ function NavLinks({
 function UserControls() {
   const router = useRouter();
   const pathname = usePathname();
-  const [searchSelected, setSearchSelected] = useState(false);
   const { user } = useAuth();
   const { cart } = useCart();
   const { toggleColorMode, mode } = useThemeContext();
@@ -100,36 +100,7 @@ function UserControls() {
       <CustomIconButton onClick={toggleColorMode}>
         {mode == "dark" ? <LightModeRounded /> : <DarkModeRounded />}
       </CustomIconButton>
-      <ClickAwayListener onClickAway={() => setSearchSelected(false)}>
-        <Stack direction="row" position={"relative"}>
-          <Input
-            disableUnderline
-            type="search"
-            placeholder="Search for product"
-            id="search-product"
-            sx={{
-              fontSize: "1rem",
-              position: "absolute",
-              right: "70%",
-              pr: "40%",
-              top: "50%",
-              translate: "0 -50%",
-              transition: "all 0.3s ease",
-              borderRight: "none",
-              width: searchSelected ? "30ch" : "0",
-              opacity: searchSelected ? "1" : "0",
-            }}
-          />
-
-          <CustomIconButton
-            onClick={() => setSearchSelected(true)}
-            kind="highlight"
-            aria-label="search"
-          >
-            <SearchRoundedIcon />
-          </CustomIconButton>
-        </Stack>
-      </ClickAwayListener>
+      <NavbarSearch />
 
       {user && <UserMenuControls />}
 

@@ -60,7 +60,12 @@ export default function ProductCard({
         )}
 
         <CardActionArea onClick={() => router.push(`product/${product.id}`)}>
-          <Stack width={"100%"} height={"11.125rem"} overflow={"hidden"}>
+          <Stack
+            width={"100%"}
+            height={"11.125rem"}
+            bgcolor={"var(--graylight)"}
+            overflow={"hidden"}
+          >
             <CldImage
               // Responsive
               width={192 * 2}
@@ -71,6 +76,7 @@ export default function ProductCard({
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
+                mixBlendMode: "darken",
                 // maxHeight: "250px",
               }}
             />
@@ -88,19 +94,21 @@ export default function ProductCard({
             <Typography variant="body2" textTransform={"uppercase"}>
               {product.variants.length ?? 5}{" "}
               <span style={{ fontWeight: "lighter" }}>
-                Variant{"("}s{")"}
+                Variant{product.variants.length > 1 ? "s" : ""}
               </span>
             </Typography>
             <Typography variant="body2" textTransform={"uppercase"}>
-              {product.colors && product.colors.length > 0 && (
+              {
                 <>
-                  {product.colors.length}
+                  {product.colors && product.colors.length > 0
+                    ? product.colors.length
+                    : 1}
                   <span style={{ fontWeight: "lighter" }}>
                     {" "}
-                    Color{"("}s{")"}
+                    Color{product.colors.length > 1 ? "s" : ""}
                   </span>
                 </>
-              )}
+              }
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -111,7 +119,7 @@ export default function ProductCard({
         >
           {product.availability == "available" ? (
             <CustomIconButton onClick={handleAddToCartOpen}>
-              <Tooltip title={"Add to Cart"}>
+              <Tooltip title={addedToCart ? "Add More" : "Add to Cart"}>
                 {addedToCart ? (
                   <CheckRounded />
                 ) : (

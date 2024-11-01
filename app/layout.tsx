@@ -10,6 +10,7 @@ import { Alumni_Sans, Bebas_Neue } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import { ThemeContextProvider } from "@/contexts/ThemeContext";
+import InstantSearchProvider from "@/components/Utility/InstantSearchProvider";
 
 const alumniSans = Alumni_Sans({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${alumniSans.variable} ${bebasNeue.variable}`}>
+        <NextTopLoader showSpinner={false} color="var(--accent)" />
         {/* Auth context containing user */}
         <AuthContextProvider>
           {/* mui app router context */}
@@ -48,10 +50,12 @@ export default function RootLayout({
                   <CartContextProvider>
                     {/* Animation on scroll provider */}
                     <AOSInit />
-                    {/* Top loading bar component */}
-                    <NextTopLoader showSpinner={false} color="var(--accent)" />
-                    <Navbar />
-                    {children}
+                    {/* Algolia search provider */}
+                    <InstantSearchProvider>
+                      {/* Top loading bar component */}
+                      <Navbar />
+                      {children}
+                    </InstantSearchProvider>
                   </CartContextProvider>
                 </ResponsiveContextProvider>
               </ThemeClient>

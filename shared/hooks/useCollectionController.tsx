@@ -1,80 +1,112 @@
 import { db } from "@/lib/firebase/config";
 import {
   collection,
-  FieldPath,
   getDocs,
   limit,
-  orderBy,
-  OrderByDirection,
   query,
   startAfter,
-  where,
-  WhereFilterOp,
-  QueryFieldFilterConstraint,
+  getDoc,
+  doc,
+  type QueryFieldFilterConstraint,
+  type QueryOrderByConstraint,
+  type DocumentSnapshot,
+  type DocumentData,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-interface Props<T> {
+export interface UseCollectionProps<T> {
   coll: string;
-  orderby: { fieldPath: string | FieldPath; directionStr?: OrderByDirection };
-  initialWhereClause?: Array<QueryFieldFilterConstraint>;
+  defaultOrderByField: keyof T;
+  defaultOrderby: QueryOrderByConstraint;
+  initialWhereClause?: QueryFieldFilterConstraint[];
   queryLimit?: number;
 }
 export type FilterParams = {
   label: string;
-  value: Array<any>;
+  value: any[];
 };
 
 export default function useCollectionController<
   T extends { [key: string]: any }
->({ coll, orderby, initialWhereClause, queryLimit = 12 }: Props<T>) {
+>({
+  coll,
+  defaultOrderby,
+  defaultOrderByField,
+  initialWhereClause,
+  queryLimit = 12,
+}: UseCollectionProps<T>) {
   const [results, setResults] = useState<T[]>([]);
   const [lastResult, setLastResult] = useState<T | null>(null);
-  const [filterConstraint, setFilterConstraint] = useState<
-    Array<QueryFieldFilterConstraint>
-  >(initialWhereClause ?? []);
   const [loading, setLoading] = useState(true);
+  const [orderByField, setOrderByField] =
+    useState<keyof T>(defaultOrderByField);
+  const [filterConstraint, setFilterConstraint] = useState<
+    QueryFieldFilterConstraint[]
+  >(initialWhereClause ?? []);
+  const [orderByConstraint, setOrderByConstraint] = useState<
+    QueryOrderByConstraint[]
+  >([]);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const q = query(
         collection(db, coll),
         ...filterConstraint,
-        orderBy(orderby.fieldPath, orderby.directionStr),
+        ...orderByConstraint,
+        defaultOrderby,
         limit(queryLimit)
       );
       const docsSnapshot = await getDocs(q);
       const initialDocs = docsSnapshot.docs.map((doc) => doc.data() as T);
+      // console.log({ initialDocs, q });
       setResults(initialDocs);
-      if (initialDocs.length == queryLimit)
+      if (initialDocs.length == queryLimit) {
         setLastResult(initialDocs[initialDocs.length - 1]);
-      else setLastResult(null);
+      } else setLastResult(null);
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [orderByConstraint, filterConstraint]);
 
-  const showNext = () => {
+  const loadMore = () => {
     const fetchNextData = async () => {
       if (!lastResult) return;
       setLoading(true);
       const q = query(
-        collection(db, "products"),
+        collection(db, coll),
         ...filterConstraint,
-        orderBy(orderby.fieldPath, orderby.directionStr),
-        startAfter(lastResult[orderby.fieldPath as keyof T]),
+        ...orderByConstraint,
+        defaultOrderby,
+        startAfter(lastResult[orderByField]),
         limit(queryLimit)
       );
-      const productSnapshot = await getDocs(q);
-      const newProducts = productSnapshot.docs.map((doc) => doc.data() as T);
-      console.log("newProds", newProducts, lastResult);
-      setResults((prev) => [...prev, ...newProducts]);
-      if (newProducts.length == queryLimit)
-        setLastResult(newProducts[newProducts.length - 1]);
-      else setLastResult(null);
+      const snapshot = await getDocs(q);
+      const newResults = snapshot.docs.map((doc) => doc.data() as T);
+      console.log("new items:", newResults, lastResult);
+      setResults((prev) => [...prev, ...newResults]);
+      if (newResults.length == queryLimit) {
+        setLastResult(newResults[newResults.length - 1]);
+      } else setLastResult(null);
       setLoading(false);
     };
     fetchNextData();
   };
-  return { results, loading, lastResult, showNext };
+
+  function handleSetConstraints(
+    obf?: string,
+    orderBy?: QueryOrderByConstraint[],
+    filter?: QueryFieldFilterConstraint[]
+  ) {
+    if (obf) setOrderByField(obf);
+    if (orderBy) setOrderByConstraint(orderBy);
+    if (filter) setFilterConstraint(filter);
+  }
+  return {
+    results,
+    loading,
+    lastResult,
+    loadMore,
+    handleSetConstraints,
+  };
 }

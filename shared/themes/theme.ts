@@ -51,6 +51,45 @@ const muiTheme = createTheme({
         },
       },
     },
+    MuiAutocomplete: {
+      styleOverrides: {
+        root: {
+          "& .MuiInput-root .MuiInput-input": {
+            padding: "0.5em",
+            "&:focus": {
+              outline: "1px solid var(--border-color)",
+            },
+          },
+        },
+        input: {
+          fontSize: "1rem",
+          width: "100%",
+          color: "var(--primary-text)",
+          background: "var(--background)",
+          borderRadius: "var(--border-radius)",
+          outline: "1px solid var(--border-color)",
+        },
+        inputRoot: {
+          outline: "none",
+        },
+        listbox: {
+          maxHeight: "500px",
+          display: "flex",
+          flexDirection: "column",
+        },
+        popper: {
+          outline: "1px solid var(--border-color)",
+          borderRadius: "var(--border-radius)",
+        },
+      },
+    },
+    MuiBadge: {
+      styleOverrides: {
+        badge: {
+          backgroundColor: "var(--accent)",
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -137,6 +176,10 @@ const muiTheme = createTheme({
           width: "100%",
           color: "var(--primary-text)",
           background: "var(--background)",
+
+          outline: "1px solid var(--border-color)",
+          // boxShadow: "var(--inset-shadow)",
+          borderRadius: "var(--border-radius)",
           "& .MuiInputBase-input": {
             background: "var(--background)",
             color: "var(--secondary-text)",
@@ -145,10 +188,6 @@ const muiTheme = createTheme({
               color: "var(--primary-text)",
             },
           },
-
-          outline: "1px solid var(--border-color)",
-          // boxShadow: "var(--inset-shadow)",
-          borderRadius: "var(--border-radius)",
         },
       },
     },
@@ -256,13 +295,14 @@ const muiTheme = createTheme({
     MuiSelect: {
       styleOverrides: {
         root: {
+          fontSize: "1.2em",
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: "var(--accent)",
           },
         },
         select: {
           color: "var(--primary-text)",
-          padding: ".3125em .5em",
+          padding: ".3em 1em",
         },
       },
     },
@@ -303,12 +343,11 @@ const muiTheme = createTheme({
         },
       },
     },
-
     MuiToggleButton: {
       styleOverrides: {
         root: {
           paddingInline: "1em",
-          paddingBlock: "0",
+          paddingBlock: "0.3em",
           fontSize: "1em",
           fontFamily: "var(--font-as)",
           color: "var(--primary-text)",
@@ -326,6 +365,14 @@ const muiTheme = createTheme({
           ":not(:first-of-type)": {
             borderLeft: "1px solid var(--border-color)",
           },
+        },
+      },
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          fontSize: "var(--body2)",
+          fontFamily: "var(--font-bn)",
         },
       },
     },

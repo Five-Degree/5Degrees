@@ -12,13 +12,14 @@ export default function CustomIconButton({
 }: Props) {
   const Highlight = styled(IconButton)({
     background: "var(--accent)",
-    "& .MuiSvgIcon-root": { color: "var(--white)" },
+    "&:not(:disabled) .MuiSvgIcon-root": { color: "var(--white)" },
     ":hover": { "& .MuiSvgIcon-root": { color: "var(--accent)" } },
     aspectRatio: "1 / 1",
   });
   const Shadow = styled(IconButton)({
     background: "var(--background)",
     color: "var(--primary-text)",
+    transition: "all 0.3s ease",
     boxShadow: "var(--shadow)",
     ":hover": {
       background: "var(--accent)",
@@ -40,6 +41,7 @@ export default function CustomIconButton({
         <IconButton
           {...iconButtonProps}
           sx={{
+            transition: "all 0.3s ease",
             "& .MuiSvgIcon-root": {
               color: "var(--primary-text)",
             },

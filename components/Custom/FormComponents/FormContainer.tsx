@@ -1,23 +1,22 @@
-import { Stack } from "@mui/material";
-import React from "react";
-export default function FormContainer({
-  onSubmit,
-  children,
-  sx,
-}: {
-  onSubmit: React.FormEventHandler<HTMLFormElement>;
-  children: React.ReactNode;
+import { Stack, StackProps } from "@mui/material";
+import React, { HTMLProps } from "react";
+
+export type FormContainerProps = {
   sx?: React.CSSProperties;
-}) {
+} & StackProps<"form">;
+
+export default function FormContainer({
+  children,
+  ...props
+}: FormContainerProps) {
   return (
     <Stack
       component={"form"}
-      onSubmit={onSubmit}
       sx={{
         gap: "1.25rem",
         alignItems: "center",
         width: "100%",
-        ...sx,
+        ...props.sx,
       }}
     >
       {children}

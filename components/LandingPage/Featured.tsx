@@ -8,6 +8,7 @@ import Product from "@/shared/interfaces/Products";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { Skeleton, Stack, Typography } from "@mui/material";
 import { where } from "firebase/firestore";
+import { orderBy } from "firebase/firestore/lite";
 import React from "react";
 import { useState } from "react";
 import Slider from "react-slick";
@@ -42,7 +43,8 @@ export default function Featured() {
   const { results: featProducts, loading } = useCollectionController<Product>({
     coll: "products",
     initialWhereClause: [where("featuredImage", "!=", null)],
-    orderby: { fieldPath: "createdAt", directionStr: "desc" },
+    defaultOrderByField: "createdAt",
+    defaultOrderby: orderBy("createdAt", "desc"),
   });
   return (
     <>
@@ -83,7 +85,7 @@ export default function Featured() {
             </Slider>
             {currentPage > 1 && (
               <CustomIconButton
-                kind="shadow"
+                kind="highlight"
                 sx={{
                   position: "absolute",
                   left: "5%",
@@ -98,7 +100,7 @@ export default function Featured() {
             )}
             {currentPage < totalPages && (
               <CustomIconButton
-                kind="shadow"
+                kind="highlight"
                 sx={{
                   position: "absolute",
                   right: "5%",

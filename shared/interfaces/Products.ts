@@ -1,7 +1,8 @@
 import { CSSProperties } from "react";
 import { ShoeSize } from "../constants/shoeSizes";
 import Reviews from "./Reviews";
-import { Timestamp } from "firebase/firestore";
+import type { Timestamp } from "firebase/firestore";
+import type { BaseHit } from "instantsearch.js";
 
 export type VariantNames =
   | "normal"
@@ -48,5 +49,10 @@ export interface CartProduct
   selectedSize: ShoeSize["EU"];
   unitPrice: number;
 }
+export type ProductSearchHitProps = Pick<
+  Product,
+  "defaultPrice" | "mainImage" | "name" | "desc"
+> &
+  BaseHit;
 
 export default Product;

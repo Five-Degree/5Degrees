@@ -1,44 +1,41 @@
 "use client";
 import ProductsView from "@/components/Products/ProductsView";
-import useCollectionController from "@/shared/hooks/useCollectionController";
-import Product from "@/shared/interfaces/Products";
-import { Button, Stack } from "@mui/material";
-export default function AllProducts() {
-  const {
-    results: products,
-    loading,
-    lastResult,
-    showNext,
-  } = useCollectionController<Product>({
-    coll: "products",
-    orderby: { fieldPath: "createdAt", directionStr: "desc" },
-  });
+import { orderBy } from "firebase/firestore/lite";
+import CollectionController from "../Products/Product/CollectionController";
+import Product, { ProductSearchHitProps } from "@/shared/interfaces/Products";
+import SearchContextProvider from "../Custom/SearchContext";
+import ProductSearchHit from "../Products/ProductSearchHit";
+import { Hit } from "algoliasearch/lite";
+import { useRouter } from "next/navigation";
 
+export type ProductConstraints = {
+  defaultPrice: string;
+  searchHits: Hit<ProductSearchHitProps>[];
+};
+
+export default function AllProducts() {
+  const router = useRouter();
   return (
-    <Stack gap={3}>
-      <Stack
-        overflow={"hidden"}
-        component={"section"}
-        id="AllProducts"
-        direction={{ xs: "column", sm: "row" }}
-        alignItems={{ xs: "center", sm: "flex-start" }}
-        gap={4}
+    <CollectionController<Product, ProductConstraints>
+      useCollectionProps={{
+        coll: "products",
+        defaultOrderByField: "createdAt",
+        defaultOrderby: orderBy("createdAt", "desc"),
+      }}
+      initialFormData={{
+        defaultPrice: "",
+        searchHits: [],
+      }}
+    >
+      <SearchContextProvider
+        HitComponent={ProductSearchHit}
+        autocompleteSx={{ width: "21.875rem" }}
+        handleHitClick={(option) => {
+          router.push(`/product/${option.objectID}`);
+        }}
       >
-        {/* <ProductsSidebar /> */}
-        <ProductsView
-          title="All Products"
-          products={products}
-          loading={loading}
-        />
-      </Stack>
-      <Stack
-        width={"100%"}
-        alignItems={"center"}
-        data-aos="fade-up"
-        data-aos-once={true}
-      >
-        {!!lastResult && <Button onClick={showNext}>Load More</Button>}
-      </Stack>
-    </Stack>
+        <ProductsView title="All Products" />
+      </SearchContextProvider>
+    </CollectionController>
   );
 }

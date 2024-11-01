@@ -24,7 +24,7 @@ export default function SizeSelector({
     children: React.ReactNode
   ) => (
     <FormControl sx={{ minWidth: 70 }}>
-      <InputLabel id={`${name}-select-label`}>{name}</InputLabel>
+      {/* <InputLabel id={`${name}-select-label`}>{name}</InputLabel> */}
       {children}
     </FormControl>
   );
@@ -76,6 +76,8 @@ export default function SizeSelector({
           autoWidth
           label={"EU"}
           onChange={handleSizeChange}
+          variant="standard"
+          disableUnderline
         >
           {product.sizes.map((s) => (
             <MenuItem key={s} value={s}>

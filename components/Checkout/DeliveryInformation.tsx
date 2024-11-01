@@ -10,8 +10,6 @@ import {
   AccordionSummary,
   Box,
   Divider,
-  FormControl,
-  InputLabel,
   Stack,
   Typography,
 } from "@mui/material";
@@ -20,10 +18,8 @@ import FormInput, { IFormInput } from "../Custom/FormComponents/FormInput";
 import { useCheckout } from "./CheckoutContext";
 import SavedInformationCard from "./SavedInformationCard";
 import Image from "next/image";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/semantic-ui.css";
-import theme from "@/shared/themes/reactPhoneInput";
 import PhoneNumberInput from "../Custom/FormComponents/PhoneNumberInput";
+
 export default function DeliveryInformation() {
   const {
     deliveryInfo,
@@ -88,12 +84,13 @@ export default function DeliveryInformation() {
             {formInputFactory(inputs.billingInfo[2])}
             {/* Phone */}
             <PhoneNumberInput
-              id={inputs.billingInfo[2].id}
+              id={inputs.billingInfo[3].id}
               onChange={(e) =>
                 handleDeliveryInfoChange("whatsappNumber", e as string)
               }
-              name={inputs.billingInfo[2].name}
+              name={inputs.billingInfo[3].name}
               value={deliveryInfo.whatsappNumber}
+              label={inputs.billingInfo[3].label}
             />
           </Stack>
           {/* Address */}

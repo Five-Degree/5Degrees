@@ -57,7 +57,7 @@ export default function useAddToCartForm({
   }
   function handleQuantityChange(
     event: React.SyntheticEvent,
-    value: number | undefined
+    value: number | null
   ) {
     event.preventDefault();
     setFormValues({ ...formValues, quantity: value ?? 0 });

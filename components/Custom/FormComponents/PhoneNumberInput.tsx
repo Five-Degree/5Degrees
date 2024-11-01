@@ -1,12 +1,10 @@
 import { FormControl, InputLabel } from "@mui/material";
-import React, {
-  ComponentProps,
-  ComponentPropsWithoutRef,
-  useState,
-} from "react";
+import React, { ComponentPropsWithoutRef, ReactNode, useState } from "react";
 import PhoneInput, { type CountryData } from "react-phone-input-2";
-import { IFormInput } from "./FormInput";
-import { isMobilePhone } from "validator";
+import isMobilePhone from "validator/es/lib/isMobilePhone";
+import "react-phone-input-2/lib/semantic-ui.css";
+import { MobilePhoneLocale } from "validator";
+
 const theme = {
   containerStyle: {
     fontFamily: "var(--font-as)",
@@ -40,6 +38,7 @@ const theme = {
   },
 };
 type IPhoneNumberInput = {
+  label?: ReactNode;
   onChange(
     value: string,
     data: CountryData | {},
@@ -52,11 +51,16 @@ type IPhoneNumberInput = {
 } & ComponentPropsWithoutRef<"input">;
 
 export default function PhoneNumberInput(props: IPhoneNumberInput) {
-  const { value, onChange, ...rest } = props;
+  const { value, label, onChange, ...rest } = props;
   const [wrongInput, setWrongInput] = useState<boolean>(false);
 
-  function handleFocus(e: React.FocusEvent<HTMLInputElement>) {
-    if (!isMobilePhone(e.target.value)) {
+  function handleBlur(
+    e: React.FocusEvent<HTMLInputElement>,
+    data: CountryData
+  ) {
+    const pnum = e.target.value.replaceAll(" ", "").replace("+", "");
+    console.log(pnum);
+    if (!isMobilePhone(pnum)) {
       setWrongInput(true);
     }
   }
@@ -72,12 +76,12 @@ export default function PhoneNumberInput(props: IPhoneNumberInput) {
           top: "-10%",
         }}
       >
-        Whatsapp Number
+        {label}
       </InputLabel>
       <PhoneInput
         value={value}
         onChange={onChange}
-        onBlur={handleFocus}
+        onBlur={handleBlur}
         inputProps={{
           ...rest,
         }}

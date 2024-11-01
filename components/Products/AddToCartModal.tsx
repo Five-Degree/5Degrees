@@ -12,7 +12,7 @@ import ColorSelector from "./Selectors/ColorSelector";
 import SizeSelector from "./Selectors/SizeSelector";
 import VariantSelector from "./Selectors/VariantSelector";
 import CustomIconButton from "../Custom/CustomIconButton";
-import { CloseRounded } from "@mui/icons-material";
+import { AddShoppingCart, CloseRounded } from "@mui/icons-material";
 export interface AddToCartForm {
   variant: VariantNames;
   quantity: number;
@@ -73,25 +73,39 @@ export default function AddToCartModal({
       open={openAddToCart}
       aria-labelledby={product.name}
       aria-describedby={product.name}
-      onClose={handleAddToCartClose}
+      container={
+        typeof window !== "undefined"
+          ? window.document.getElementById("__next")
+          : undefined
+      }
+      // onClose={handleAddToCartClose}
+      slotProps={{
+        backdrop: {
+          sx: {
+            backdropFilter: "blur(10px)",
+          },
+        },
+      }}
       sx={{
         display: "flex",
         // alignItems: "center",
-        overflowY: "auto",
+        overflow: "auto",
         height: "95vh",
         marginBlock: "auto",
         justifyContent: "center",
+        alignItems: "center",
       }}
       // container={document.body}
-      disableEnforceFocus={false}
-      disableScrollLock={false}
+      // disableEnforceFocus={false}
+      // disableScrollLock={false}
     >
       <Stack
         component={"form"}
         bgcolor={"var(--background)"}
         justifyContent={"center"}
         marginBlock={"auto"}
-        paddingBlock={6}
+        paddingTop={8}
+        paddingBottom={4}
         paddingInline={2}
         borderRadius={"var(--border-radius)"}
         onSubmit={handleAddToCart}
@@ -99,10 +113,10 @@ export default function AddToCartModal({
         gap={2}
         position={"relative"}
       >
-        <Typography variant="h1" marginInline={3}>
+        {/* <Typography variant="h1" marginInline={3}>
           Add to cart
-        </Typography>
-        <IconButton
+        </Typography> */}
+        <CustomIconButton
           sx={{
             position: "absolute",
             top: "5%",
@@ -113,7 +127,7 @@ export default function AddToCartModal({
           onClick={handleAddToCartClose}
         >
           <CloseRounded sx={{ color: "var(--body1-color)" }} />
-        </IconButton>
+        </CustomIconButton>
         <Stack width={{ md: "80%", xs: "90%" }} marginInline={"auto"}>
           <ProductImages product={product} />
         </Stack>
@@ -154,7 +168,9 @@ export default function AddToCartModal({
               </PartWrapper>
             )}
             <PartWrapper>
-              <Typography>Sizes:</Typography>
+              <Typography>
+                Sizes {"("}EU{")"}:
+              </Typography>
               <SizeSelector
                 selectedSize={formValues.size}
                 handleSizeChange={handleSizeChange}
@@ -164,11 +180,18 @@ export default function AddToCartModal({
           </Stack>
           <Stack direction={{ md: "row", xs: "column" }} gap={1}>
             <QuantityInput
-              handleChange={handleQuantityChange}
               value={formValues.quantity}
+              onChange={handleQuantityChange}
+              aria-label="Quantity Input"
+              min={1}
+              max={99}
             />
-            <Button variant="contained" type="submit">
-              Add
+            <Button
+              variant="contained"
+              type="submit"
+              endIcon={<AddShoppingCart />}
+            >
+              Add To Cart
             </Button>
           </Stack>
         </Stack>

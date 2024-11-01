@@ -111,8 +111,11 @@ export default function ProductInteraction({ product }: { product: Product }) {
       <Stack alignItems={"flex-start"} gap={1}>
         <Typography variant="body2">Quantity:</Typography>
         <QuantityInput
-          handleChange={handleQuantityChange}
           value={formValues.quantity}
+          onChange={handleQuantityChange}
+          aria-label="Quantity Input"
+          min={1}
+          max={99}
         />
       </Stack>
       <Stack>

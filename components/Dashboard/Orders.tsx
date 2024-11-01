@@ -75,8 +75,8 @@ export default function Orders() {
   return (
     <Stack width={"100%"} gap={2}>
       <Typography variant="h1">Orders</Typography>
-      {OrdersSections.map((os) => (
-        <Accordion key={os.title} sx={{ ":before": { display: "none" } }}>
+      {OrdersSections.map((section) => (
+        <Accordion key={section.title} sx={{ ":before": { display: "none" } }}>
           <AccordionSummary expandIcon={<ExpandMoreRounded />}>
             <Typography
               fontWeight={"bold"}
@@ -84,22 +84,24 @@ export default function Orders() {
               alignItems={"center"}
               display={"flex"}
             >
-              {os.icon} {os.title}
+              {section.icon} {section.title}
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Stack gap={1} position={"relative"}>
-              {os.items.length == 0 && (
-                <Typography>{os.emptyMessage}</Typography>
+              {section.items.length == 0 && (
+                <Typography>{section.emptyMessage}</Typography>
               )}
-              {os.items.length > 0 &&
-                os.items.map((o) => <OrderCard key={o.id} order={o} />)}
-              {os.loading && <Loading />}
+              {section.items.length > 0 &&
+                section.items.map((o) => <OrderCard key={o.id} order={o} />)}
+              {section.loading && <Loading />}
             </Stack>
             <InView
               as="div"
               style={{ height: "32px", width: "100%" }}
-              onChange={(inView, entry) => (inView ? os.fetchMore() : null)}
+              onChange={(inView, entry) =>
+                inView ? section.fetchMore() : null
+              }
             />
           </AccordionDetails>
         </Accordion>
