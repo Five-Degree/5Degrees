@@ -1,6 +1,7 @@
 "use client";
+
 import useCollectionController, {
-  UseCollectionProps,
+  UseCollectionProps2,
 } from "@/shared/hooks/useCollectionController";
 import {
   createContext,
@@ -37,7 +38,7 @@ export default function CollectionController<
   children,
 }: {
   initialFormData: FD;
-  useCollectionProps: UseCollectionProps<T>;
+  useCollectionProps: UseCollectionProps2<T>;
   children: Readonly<ReactNode>;
 }) {
   const controller = useCollectionController<T>(useCollectionProps);

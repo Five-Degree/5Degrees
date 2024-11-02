@@ -3,119 +3,95 @@ import {
   collection,
   getDocs,
   limit,
+  orderBy,
   query,
+  QueryConstraint,
+  QueryStartAtConstraint,
   startAfter,
-  getDoc,
-  doc,
-  type QueryFieldFilterConstraint,
-  type QueryOrderByConstraint,
-  type DocumentSnapshot,
-  type DocumentData,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import convertToDate from "../functions/convertToDate";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-export interface UseCollectionProps<T> {
+export interface UseCollectionProps2<T> {
   coll: string;
-  defaultOrderByField: keyof T;
-  defaultOrderby: QueryOrderByConstraint;
-  initialWhereClause?: QueryFieldFilterConstraint[];
   queryLimit?: number;
+  initialQueryConstraint: QueryConstraint[];
+  initialOrderByField: string;
 }
-export type FilterParams = {
-  label: string;
-  value: any[];
-};
 
 export default function useCollectionController<
   T extends { [key: string]: any }
 >({
   coll,
-  defaultOrderby,
-  defaultOrderByField,
-  initialWhereClause,
+  initialQueryConstraint,
+  initialOrderByField,
   queryLimit = 12,
-}: UseCollectionProps<T>) {
+}: UseCollectionProps2<T>) {
   const [results, setResults] = useState<T[]>([]);
   const [lastResult, setLastResult] = useState<T | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [orderByField, setOrderByField] =
-    useState<keyof T>(defaultOrderByField);
-  const [filterConstraint, setFilterConstraint] = useState<
-    QueryFieldFilterConstraint[]
-  >(initialWhereClause ?? []);
-  const [orderByConstraint, setOrderByConstraint] = useState<
-    QueryOrderByConstraint[]
-  >([]);
+  const [loading, setLoading] = useState(false);
+  const initialFetch = useRef<boolean>(true);
+  const [orderByField, setOrderByField] = useState(initialOrderByField);
+  const [queryConstraint, setQueryConstraint] = useState<QueryConstraint[]>(
+    initialQueryConstraint
+  );
+  const fetchData = useCallback(
+    async (
+      startAt: QueryStartAtConstraint[],
+      _queryConstraint: QueryConstraint[] = queryConstraint
+    ) => {
+      setLoading(true);
+      console.log({ queryConstraint });
+      const q = query(
+        collection(db, coll),
+        ..._queryConstraint,
+        orderBy("createdAt", "desc"),
+        limit(queryLimit),
+        ...startAt
+      );
+
+      console.log({ q });
+      const docsSnapshot = await getDocs(q);
+      const docs = docsSnapshot.docs.map((doc) => doc.data() as T);
+      if (docs.length == queryLimit) {
+        setLastResult(docs[docs.length - 1]);
+      } else setLastResult(null);
+      setLoading(false);
+      return docs;
+    },
+    [queryConstraint]
+  );
+
+  async function loadMore() {
+    if (!lastResult) return;
+    console.log("lastResult[orderByField]", lastResult[orderByField]);
+    const docs = await fetchData([startAfter(lastResult[orderByField])]);
+    setResults((prev) => [...prev, ...docs]);
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const q = query(
-        collection(db, coll),
-        ...filterConstraint,
-        ...orderByConstraint,
-        defaultOrderby,
-        limit(queryLimit)
-      );
-      const docsSnapshot = await getDocs(q);
-      const initialDocs = docsSnapshot.docs.map((doc) => doc.data() as T);
-      // console.log({ initialDocs, q });
-      setResults(initialDocs);
-      if (initialDocs.length == queryLimit) {
-        setLastResult(initialDocs[initialDocs.length - 1]);
-      } else setLastResult(null);
-      setLoading(false);
+    if (!initialFetch.current) return;
+    const initialFetcher = async () => {
+      const data = await fetchData([]);
+      setResults(data);
     };
-    fetchData();
-  }, [orderByConstraint, filterConstraint]);
+    initialFetcher();
+    initialFetch.current = false;
+  }, []);
 
-  const loadMore = () => {
-    const fetchNextData = async () => {
-      if (!lastResult) return;
-      setLoading(true);
-      console.log(
-        "lastResult[orderByField]",
-        { defaultOrderby },
-        { orderByConstraint },
-        orderByField,
-        lastResult[orderByField]
-      );
-
-      const q = query(
-        collection(db, coll),
-        ...filterConstraint,
-        ...orderByConstraint,
-        defaultOrderby,
-        startAfter(lastResult[orderByField]),
-        limit(queryLimit)
-      );
-      const snapshot = await getDocs(q);
-      const newResults = snapshot.docs.map((doc) => doc.data() as T);
-      console.log("new items:", newResults, lastResult);
-      setResults((prev) => [...prev, ...newResults]);
-      if (newResults.length == queryLimit) {
-        setLastResult(newResults[newResults.length - 1]);
-      } else setLastResult(null);
-      setLoading(false);
-    };
-    fetchNextData();
-  };
-
-  function handleSetConstraints(
-    obf?: string,
-    orderBy?: QueryOrderByConstraint[],
-    filter?: QueryFieldFilterConstraint[]
+  async function refetchDataWithConstraints(
+    _queryConstraint?: QueryConstraint[]
   ) {
-    if (obf) setOrderByField(obf);
-    if (orderBy) setOrderByConstraint(orderBy);
-    if (filter) setFilterConstraint(filter);
+    const data = await fetchData([], _queryConstraint);
+    setResults(data);
   }
+
   return {
     results,
-    loading,
     lastResult,
+    loading,
     loadMore,
-    handleSetConstraints,
+    setQueryConstraint,
+    setOrderByField,
+    refetchDataWithConstraints,
   };
 }

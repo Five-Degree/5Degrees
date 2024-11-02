@@ -9,33 +9,32 @@ import ProductSearchHit from "./ProductSearchHit";
 import { useRouter } from "next/navigation";
 
 export default function SearchProducts() {
-  const { formData, handleSetConstraints } = useCollection();
+  const {
+    formData,
+    setQueryConstraint,
+    refetchDataWithConstraints,
+    setOrderByField,
+  } = useCollection();
   const { searchHits, inputValue } = useSearchContext();
   const router = useRouter();
 
   // console.log(formData);
-  console.log({ formData, searchHits });
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const ids =
-      inputValue.length > 0 ? searchHits.map((sh) => sh.objectID) : [];
-    console.log({ formData, ids, searchHits });
     const orderByFA = [];
     const filterFA = [];
-    let obf = "createdAt";
-    if (formData.defaultPrice) {
-      orderByFA.push(orderBy("defaultPrice", formData.defaultPrice));
-      obf = "defaultPrice";
-    }
+    const ids =
+      inputValue.length > 0 ? searchHits.map((sh) => sh.objectID) : [];
     if (ids.length > 0) {
       filterFA.push(where("id", "in", ids));
     }
-    console.log({ filterFA });
-    handleSetConstraints(
-      obf,
-      orderByFA.length > 0 ? orderByFA : undefined,
-      filterFA.length > 0 ? filterFA : undefined
-    );
+    if (formData.defaultPrice) {
+      orderByFA.push(orderBy("defaultPrice", formData.defaultPrice));
+      setOrderByField("defaultPrice");
+    }
+    console.log({ filterFA, orderByFA });
+    setQueryConstraint([...filterFA, ...orderByFA]);
+    await refetchDataWithConstraints([...filterFA, ...orderByFA]);
   }
   return (
     <Stack

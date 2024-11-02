@@ -18,8 +18,8 @@ export default function AllProducts() {
     <CollectionController<Product, ProductConstraints>
       useCollectionProps={{
         coll: "products",
-        defaultOrderByField: "createdAt",
-        defaultOrderby: orderBy("createdAt", "desc"),
+        initialOrderByField: "createdAt",
+        initialQueryConstraint: [orderBy("createdAt", "desc")],
       }}
       initialFormData={{
         defaultPrice: "",
