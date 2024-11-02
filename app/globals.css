@@ -61,23 +61,23 @@ a:hover {
   color: var(--accentdark);
 }
 /* Scroll Bar Styles(not mozilla) */
-::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
-::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px var(--border-color);
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
   background: var(--accent);
-  -webkit-box-shadow: inset 0 0 6px --accentalpha;
+  -webkit-box-shadow: inset 0 0 6px var(--accentalpha);
 }
 
-::-webkit-scrollbar-thumb:window-inactive {
+*::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 255, 255, 0.3);
 }
 
