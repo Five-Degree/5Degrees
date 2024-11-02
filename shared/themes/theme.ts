@@ -373,6 +373,7 @@ const muiTheme = createTheme({
         tooltip: {
           fontSize: "var(--body2)",
           fontFamily: "var(--font-bn)",
+          backgroundColor: "var(--accentdark)",
         },
       },
     },

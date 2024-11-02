@@ -9,11 +9,11 @@ export default function ProductSearchHit({
   hit: Hit<ProductSearchHitProps>;
 }) {
   return (
-    <Tooltip title={hit.name}>
+    <Tooltip title={hit.name} followCursor>
       <Stack
         direction={"row"}
         alignItems={"center"}
-        height="6.25rem"
+        // height="6.25rem"
         maxWidth={"100%"}
       >
         <CldImage
@@ -29,7 +29,7 @@ export default function ProductSearchHit({
           }}
         />
         <Stack pl={1} alignItems={"center"}>
-          <Typography variant="h3" component="p" maxWidth={"25ch"} noWrap>
+          <Typography variant="h3" component="p" maxWidth={"22ch"} noWrap>
             {hit.name}
           </Typography>
           {/* <Typography

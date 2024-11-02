@@ -59,59 +59,61 @@ export default function ProductCard({
           />
         )}
 
-        <CardActionArea onClick={() => router.push(`product/${product.id}`)}>
-          <Stack
-            width={"100%"}
-            height={"11.125rem"}
-            bgcolor={"var(--graylight)"}
-            overflow={"hidden"}
-          >
-            <CldImage
-              // Responsive
-              width={192 * 2}
-              height={123 * 2}
-              src={product.mainImage}
-              alt={product.name}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                mixBlendMode: "darken",
-                // maxHeight: "250px",
-              }}
-            />
-          </Stack>
-          <CardContent
-          // Responsive
-          >
-            <Typography variant="h3" width={"100%"} noWrap>
-              {product.name}
-            </Typography>
-            <PriceComponent
-              price={product.defaultPrice}
-              discount={product.discount}
-            />
-            <Typography variant="body2" textTransform={"uppercase"}>
-              {product.variants.length ?? 5}{" "}
-              <span style={{ fontWeight: "lighter" }}>
-                Variant{product.variants.length > 1 ? "s" : ""}
-              </span>
-            </Typography>
-            <Typography variant="body2" textTransform={"uppercase"}>
-              {
-                <>
-                  {product.colors && product.colors.length > 0
-                    ? product.colors.length
-                    : 1}
-                  <span style={{ fontWeight: "lighter" }}>
-                    {" "}
-                    Color{product.colors.length > 1 ? "s" : ""}
-                  </span>
-                </>
-              }
-            </Typography>
-          </CardContent>
-        </CardActionArea>
+        <Tooltip title={"View Product"} followCursor>
+          <CardActionArea onClick={() => router.push(`product/${product.id}`)}>
+            <Stack
+              width={"100%"}
+              height={"11.125rem"}
+              bgcolor={"var(--graylight)"}
+              overflow={"hidden"}
+            >
+              <CldImage
+                // Responsive
+                width={192 * 2}
+                height={123 * 2}
+                src={product.mainImage}
+                alt={product.name}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  mixBlendMode: "darken",
+                  // maxHeight: "250px",
+                }}
+              />
+            </Stack>
+            <CardContent
+            // Responsive
+            >
+              <Typography variant="h3" width={"100%"} noWrap>
+                {product.name}
+              </Typography>
+              <PriceComponent
+                price={product.defaultPrice}
+                discount={product.discount}
+              />
+              <Typography variant="body2" textTransform={"uppercase"}>
+                {product.variants.length ?? 5}{" "}
+                <span style={{ fontWeight: "lighter" }}>
+                  Variant{product.variants.length > 1 ? "s" : ""}
+                </span>
+              </Typography>
+              <Typography variant="body2" textTransform={"uppercase"}>
+                {
+                  <>
+                    {product.colors && product.colors.length > 0
+                      ? product.colors.length
+                      : 1}
+                    <span style={{ fontWeight: "lighter" }}>
+                      {" "}
+                      Color{product.colors.length > 1 ? "s" : ""}
+                    </span>
+                  </>
+                }
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Tooltip>
         <Stack
           direction={"row"}
           sx={{ position: "absolute", bottom: "5%", right: "5%" }}

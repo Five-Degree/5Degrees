@@ -27,11 +27,7 @@ export default function SearchAutocomplete<T extends Record<string, any>>(
         typeof option === "string" ? option : option.objectID
       }
       renderOption={(props, option) => (
-        <ListItemButton
-          key={props.key}
-          sx={{ paddingBlock: "0.25rem" }}
-          onClick={() => handleHitClick(option)}
-        >
+        <ListItemButton key={props.key} onClick={() => handleHitClick(option)}>
           <HitComponent hit={option as Hit<T>} />
         </ListItemButton>
       )}
