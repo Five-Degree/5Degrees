@@ -42,9 +42,8 @@ export default function Featured() {
   }
   const { results: featProducts, loading } = useCollectionController<Product>({
     coll: "products",
-    initialWhereClause: [where("featuredImage", "!=", null)],
-    defaultOrderByField: "createdAt",
-    defaultOrderby: orderBy("createdAt", "desc"),
+    initialQueryConstraint: [where("featuredImage", "!=", null)],
+    initialOrderByField: "createdAt",
   });
   return (
     <>
