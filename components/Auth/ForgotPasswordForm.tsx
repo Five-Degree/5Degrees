@@ -6,11 +6,11 @@ import FormInput, {
 import { useAuth } from "@/contexts/AuthContext";
 import inputs from "@/shared/constants/inputs";
 import { GetRefinedFirebaseError } from "@/shared/functions/errorHandler";
+import useErrorHandler from "@/shared/hooks/useErrorHandler";
 import { Button, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useErrorHandler } from "../../contexts/ErrorHandlerContext";
 
 export default function ForgotPasswordForm() {
   const { handleError, errorAlert } = useErrorHandler();

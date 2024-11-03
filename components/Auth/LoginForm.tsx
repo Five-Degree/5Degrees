@@ -12,8 +12,8 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import google from "@/public/Logos/Google.svg";
-import { useErrorHandler } from "@/contexts/ErrorHandlerContext";
 import Image from "next/image";
+import useErrorHandler from "@/shared/hooks/useErrorHandler";
 
 export default function LoginForm() {
   const { handleError, errorAlert } = useErrorHandler();

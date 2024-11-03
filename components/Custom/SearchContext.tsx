@@ -1,3 +1,4 @@
+"use client";
 import type { SxProps } from "@mui/material";
 import type { Hit } from "algoliasearch/lite";
 import {
@@ -11,12 +12,14 @@ import {
   useState,
 } from "react";
 import {
+  InstantSearch,
   useHits,
   type UseHitsProps,
   useInstantSearch,
   useSearchBox,
   type UseSearchBoxProps,
 } from "react-instantsearch";
+import { liteClient as algoliasearch } from "algoliasearch/lite";
 
 export type SearchAutocompleteProps<T extends Record<string, any>> = {
   autocompleteSx?: SxProps;

@@ -1,14 +1,9 @@
 import { Stack, StackProps } from "@mui/material";
-import React, { HTMLProps } from "react";
-
-export type FormContainerProps = {
-  sx?: React.CSSProperties;
-} & StackProps<"form">;
 
 export default function FormContainer({
   children,
   ...props
-}: FormContainerProps) {
+}: StackProps<"form">) {
   return (
     <Stack
       component={"form"}
@@ -18,6 +13,7 @@ export default function FormContainer({
         width: "100%",
         ...props.sx,
       }}
+      {...props}
     >
       {children}
     </Stack>

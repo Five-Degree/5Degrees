@@ -1,10 +1,8 @@
 "use client";
 import { Stack } from "@mui/material";
-import React, { useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import DeliveryInformation from "./DeliveryInformation";
-import PaymentMethod from "./PaymentMethod";
 import OrderSummary from "./OrderSummary";
-import DeliverySchedule from "./DeliverySchedule";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useAuth } from "@/contexts/AuthContext";
@@ -14,6 +12,7 @@ export default function Checkout() {
   const { user } = useAuth();
   useLayoutEffect(() => {
     if (!user) redirect("/");
+    if (user && !user.emailVerified) redirect("/verifyEmail");
   }, [user]);
   const { handleCheckoutFormSubmit } = useCheckout();
   return (

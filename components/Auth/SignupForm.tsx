@@ -11,10 +11,10 @@ import { Button, Divider, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
-import { useErrorHandler } from "../../contexts/ErrorHandlerContext";
+import React, { FormEvent, useState } from "react";
 import google from "@/public/Logos/Google.svg";
 import Image from "next/image";
+import useErrorHandler from "@/shared/hooks/useErrorHandler";
 
 export default function SignupForm() {
   const { handleError, errorAlert } = useErrorHandler();
@@ -30,11 +30,12 @@ export default function SignupForm() {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirectTo");
 
-  function handleSignUp(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSignUp(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (values.confirmPassword == values.password) {
       setLoading(true);
-      signup(values.email, values.password)
+      console.log({ values });
+      await signup(values.email, values.password)
         .then((userCred) => {
           sendEV();
         })
@@ -57,7 +58,9 @@ export default function SignupForm() {
     setLoading(true);
     googleAccess()
       .then(() => router.replace(redirectTo ?? "/"))
-      .catch((error: any) => handleError(GetRefinedFirebaseError(error)))
+      .catch((error: any) => {
+        handleError(GetRefinedFirebaseError(error));
+      })
       .finally(() => setLoading(false));
   }
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {

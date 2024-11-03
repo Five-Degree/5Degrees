@@ -35,7 +35,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${alumniSans.variable} ${bebasNeue.variable}`}>
-        <NextTopLoader showSpinner={false} color="var(--accent)" />
         {/* Auth context containing user */}
         <AuthContextProvider>
           {/* mui app router context */}
@@ -50,12 +49,10 @@ export default function RootLayout({
                   <CartContextProvider>
                     {/* Animation on scroll provider */}
                     <AOSInit />
-                    {/* Algolia search provider */}
-                    <InstantSearchProvider>
-                      {/* Top loading bar component */}
-                      <Navbar />
-                      {children}
-                    </InstantSearchProvider>
+                    <Navbar />
+                    {/* Top loading bar component */}
+                    <NextTopLoader showSpinner={false} color="var(--accent)" />
+                    {children}
                   </CartContextProvider>
                 </ResponsiveContextProvider>
               </ThemeClient>

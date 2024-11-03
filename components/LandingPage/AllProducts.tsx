@@ -7,6 +7,7 @@ import SearchContextProvider from "../Custom/SearchContext";
 import ProductSearchHit from "../Products/ProductSearchHit";
 import { Hit } from "algoliasearch/lite";
 import { useRouter } from "next/navigation";
+import InstantSearchProvider from "../Utility/InstantSearchProvider";
 
 export type ProductConstraints = {
   defaultPrice: string;
@@ -26,9 +27,11 @@ export default function AllProducts() {
         searchHits: [],
       }}
     >
-      <SearchContextProvider>
-        <ProductsView title="All Products" />
-      </SearchContextProvider>
+      <InstantSearchProvider>
+        <SearchContextProvider>
+          <ProductsView title="All Products" />
+        </SearchContextProvider>
+      </InstantSearchProvider>
     </CollectionController>
   );
 }
