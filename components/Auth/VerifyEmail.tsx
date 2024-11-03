@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import MarkEmailReadOutlinedIcon from "@mui/icons-material/MarkEmailReadOutlined";
 import { useRouter, useSearchParams } from "next/navigation";
 export default function VerifyEmail() {
-  const { sendEV } = useAuth();
+  const { sendEV, logout } = useAuth();
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const countdownTime = 30;
   const [countdown, setCountdown] = useState(countdownTime);
@@ -74,7 +74,12 @@ export default function VerifyEmail() {
         )}
         <Button
           variant="text"
-          onClick={() => router.replace(redirectTo ? redirectTo : "/")}
+          onClick={() => {
+            logout();
+            router.replace(
+              `/auth/login${redirectTo ? "?redirectTo=" + redirectTo : ""}`
+            );
+          }}
         >
           Already verified email? Click here.
         </Button>
