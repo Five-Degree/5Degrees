@@ -81,7 +81,7 @@ export default function VerifyEmail() {
             );
           }}
         >
-          Already verified email? Click here.
+          Already verified your email? Click here.
         </Button>
       </Stack>
     </Stack>

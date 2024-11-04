@@ -76,9 +76,9 @@ export default function Footer() {
         <Typography fontSize={"1.125em"} textAlign={"center"}>
           Enter into our spacious arena of endless decision making. you dont
           have any obligation to leave but only at your expense. We welcome you
-          to the array of sneaker picking with unorthodox colors and unicorn
-          sizes that touch the interiors of your chambers, come have a kick from
-          our virtual and into your physical
+          to the array of product picking with unorthodox gradients and unicorn
+          selections that touch the interiors of your chambers, come have a
+          boost from our virtual and into your physical
         </Typography>
       </FooterSection>
 
