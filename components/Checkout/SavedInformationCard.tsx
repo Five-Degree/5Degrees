@@ -1,6 +1,6 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { DeliveryInfo } from "@/shared/interfaces/Order";
-import { Delete } from "@mui/icons-material";
+import { Delete, DeleteOutlineRounded } from "@mui/icons-material";
 import { Stack, Tooltip, Typography } from "@mui/material";
 import CustomIconButton from "../Custom/CustomIconButton";
 import { useCheckout } from "./CheckoutContext";
@@ -43,7 +43,9 @@ export default function SavedInformationCard({ res }: { res: DeliveryInfo }) {
         sx={{ position: "absolute", top: "0.15em", right: "0.15em" }}
         onClick={() => res.id && handleDelete(res.id)}
       >
-        <Delete sx={{ fontSize: "var(--body1)" }} />
+        <Tooltip title={"Delete"}>
+          <DeleteOutlineRounded sx={{ fontSize: "var(--body1)" }} />
+        </Tooltip>
       </CustomIconButton>
       <Typography>
         {res.firstName} {res.lastName}
