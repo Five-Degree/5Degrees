@@ -1,11 +1,11 @@
 "use client";
 import PaymentMethods from "@/public/Images/PaymentMethods.svg";
 import Logo from "@/public/Logos/Logo.svg";
-import { PhoneRounded } from "@mui/icons-material";
-import { Button, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
 const FooterSection = ({
   children,
   title,

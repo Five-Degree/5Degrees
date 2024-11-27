@@ -25,10 +25,10 @@ export default function DeliveryInformation() {
     deliveryInfo,
     saveInfo,
     qualityCheck,
+    loading,
     handleDeliveryInfoChange,
     handleSaveInfoChange,
     handleQualityCheckChange,
-    loading,
   } = useCheckout();
   const { user } = useAuth();
   const {

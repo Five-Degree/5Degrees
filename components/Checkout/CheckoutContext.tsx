@@ -10,7 +10,7 @@ import { createContext, useContext } from "react";
 import useFormHelpers from "../Custom/FormComponents/useFormHelpers";
 import Order from "@/shared/interfaces/Order";
 import { useRouter } from "next/navigation";
-import usePromoCode from "./usePromoCode";
+import useOrderNotes from "./useOrderNotes";
 import convertUndefinedToNull from "@/shared/functions/convertUndefinedToString";
 
 type CheckoutContextType =
@@ -22,7 +22,7 @@ type CheckoutContextType =
       ReturnType<typeof useDeliverySchedule> &
       ReturnType<typeof usePaymentMethod> &
       ReturnType<typeof useFormHelpers> &
-      ReturnType<typeof usePromoCode>)
+      ReturnType<typeof useOrderNotes>)
   | null;
 
 export const CheckoutContext = createContext<CheckoutContextType>(null);
@@ -50,7 +50,8 @@ export default function CheckoutContextProvider({
 
   const deliveryScheduleHook = useDeliverySchedule();
 
-  const promoCodeHook = usePromoCode();
+  //TODO Convert to discount code hook once campaigns is implemented
+  const orderNotesHook = useOrderNotes();
 
   const paymentMethodHook = usePaymentMethod();
   const { createDocument } = useSetDocument();
@@ -81,7 +82,7 @@ export default function CheckoutContextProvider({
           cartTotalCost: totalCost,
           cartProducts: cart,
           qualityCheck: deliveryInformationHook.qualityCheck,
-          promoCode: promoCodeHook.promoCode,
+          orderNotes: orderNotesHook.orderNotes,
         };
         const formattedOrderData = convertUndefinedToNull(orderData);
         const docRef = await createDocument("orders", formattedOrderData);
@@ -101,7 +102,7 @@ export default function CheckoutContextProvider({
       value={{
         ...deliveryInformationHook,
         ...deliveryScheduleHook,
-        ...promoCodeHook,
+        ...orderNotesHook,
         ...paymentMethodHook,
         ...formHelpersHook,
         handleCheckoutFormSubmit,

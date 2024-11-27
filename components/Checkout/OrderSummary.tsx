@@ -10,7 +10,7 @@ import FormInput from "../Custom/FormComponents/FormInput";
 
 export default function OrderSummary() {
   const { cart, totalCost } = useCart();
-  const { loading, promoCode, handlePromoCodeChange } = useCheckout();
+  const { loading, orderNotes, handleOrderNotesChange } = useCheckout();
 
   return (
     <Stack
@@ -58,11 +58,11 @@ export default function OrderSummary() {
 
             <Stack gap={1} paddingInline={2} pt={2}>
               <FormInput
-                id="promoCode"
-                name="promoCode"
-                value={promoCode}
-                onChange={handlePromoCodeChange}
-                placeholder="Enter your discount code"
+                id="orderNotes"
+                name="orderNotes"
+                value={orderNotes}
+                onChange={handleOrderNotesChange}
+                placeholder="Order Notes"
               />
               <Stack
                 direction={"row"}

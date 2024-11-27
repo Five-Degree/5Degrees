@@ -39,5 +39,5 @@ export default interface Order {
   cartProducts: CartProduct[];
   qualityCheck: boolean;
   qualityCheckLink?: string;
-  promoCode?: string;
+  orderNotes?: string;
 }

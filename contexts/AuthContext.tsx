@@ -52,8 +52,7 @@ export const AuthContextProvider = ({
   }
   //Google Login and signup Auth function
   async function googleAccess() {
-    const provider = new GoogleAuthProvider();
-    const value = await signInWithPopup(auth, provider);
+    const value = await signInWithPopup(auth, new GoogleAuthProvider());
     setUser(value.user);
   }
 

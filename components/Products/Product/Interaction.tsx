@@ -67,7 +67,7 @@ export default function ProductInteraction({ product }: { product: Product }) {
         <Typography variant="h1" fontSize={"1.9em"} width={"100%"}>
           {product.name}
         </Typography>
-        <Stack direction={"row"} gap={1} alignItems={"center"}>
+        {/* <Stack direction={"row"} gap={1} alignItems={"center"}>
           <Rating
             name="product-rating"
             value={rating}
@@ -76,7 +76,7 @@ export default function ProductInteraction({ product }: { product: Product }) {
             precision={0.5}
           />
           <Typography>{product.reviews?.length ?? 0} Reviews</Typography>
-        </Stack>
+        </Stack> */}
       </Stack>
       <PriceComponent
         price={formValues.unitPrice}
