@@ -3,7 +3,6 @@ import React, { ComponentPropsWithoutRef, ReactNode, useState } from "react";
 import PhoneInput, { type CountryData } from "react-phone-input-2";
 import isMobilePhone from "validator/es/lib/isMobilePhone";
 import "react-phone-input-2/lib/semantic-ui.css";
-import { MobilePhoneLocale } from "validator";
 
 const theme = {
   containerStyle: {

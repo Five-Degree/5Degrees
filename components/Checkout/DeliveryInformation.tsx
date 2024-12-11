@@ -88,6 +88,7 @@ export default function DeliveryInformation() {
               onChange={(e) =>
                 handleDeliveryInfoChange("whatsappNumber", e as string)
               }
+              required
               name={inputs.billingInfo[3].name}
               value={deliveryInfo.whatsappNumber}
               label={inputs.billingInfo[3].label}
