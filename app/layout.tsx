@@ -24,7 +24,7 @@ const bebasNeue = Bebas_Neue({
 });
 export const metadata: Metadata = {
   title: { template: "%s | 5 Degrees", default: "5 Degrees" },
-  description: "Discover limited sneakers without limitations",
+  description: "Discover without limitations, the odd and superior cart.",
 };
 
 export default function RootLayout({
