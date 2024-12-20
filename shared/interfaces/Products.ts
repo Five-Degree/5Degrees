@@ -18,6 +18,10 @@ export type ProductVariant = {
 };
 
 export type NonNullColors = NonNullable<CSSProperties["color"]>;
+export type ColorImage = {
+  colorName: string;
+  imageURL: string;
+};
 
 type Product = {
   id: string;
@@ -31,7 +35,7 @@ type Product = {
   featuredImage?: string;
   images?: string[];
   variants: ProductVariant[];
-  colors: NonNullColors | NonNullColors[];
+  colors: ColorImage[];
   // Shoesize always defaults to EU size regardless of what the user chooses
   sizes: ShoeSize["EU"][];
   availability?: "available" | "out of stock";
@@ -45,7 +49,7 @@ export interface CartProduct
   cartId?: string;
   quantity: number;
   selectedVariant: VariantNames;
-  selectedColor: NonNullColors;
+  selectedColor: ColorImage;
   selectedSize: ShoeSize["EU"];
   unitPrice: number;
 }

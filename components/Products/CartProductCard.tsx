@@ -41,10 +41,12 @@ export default function CartProductCard({
         </Typography>
         <Stack direction={"row"} gap={2} alignItems={"center"}>
           <CldImage
-            src={item.mainImage}
+            src={
+              item.selectedColor ? item.selectedColor.imageURL : item.mainImage
+            }
             width={192 * 0.5}
             height={123 * 0.5}
-            alt={item.name}
+            alt={`${item.name} ${item?.selectedColor?.colorName}`}
             style={{
               borderRadius: "var(--border-radius)",
               border: "1px solid var(--border-color)",
@@ -59,6 +61,12 @@ export default function CartProductCard({
               <Typography color={"var(--gray)"}>Size:</Typography>
               <Typography>{item.selectedSize}</Typography>
             </Stack>
+            {item.selectedColor && (
+              <Stack direction={"row"} alignItems={"center"} gap={1}>
+                <Typography color={"var(--gray)"}>Color:</Typography>
+                <Typography>{item.selectedColor.colorName}</Typography>
+              </Stack>
+            )}
           </Stack>
         </Stack>
         <Stack

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
-import { Chip, Stack, Tabs, Typography } from "@mui/material";
+import { Stack, Tabs, Typography } from "@mui/material";
 import Product from "@/shared/interfaces/Products";
 import ReviewCard from "./ReviewCard";
 

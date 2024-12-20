@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Product, { NonNullColors, VariantNames } from "../interfaces/Products";
+import Product, { VariantNames } from "../interfaces/Products";
 import { ShoeSize } from "../constants/shoeSizes";
 import { SelectChangeEvent } from "@mui/material";
 
 export interface AddToCartForm {
   variant: VariantNames;
   quantity: number;
-  color: NonNullColors;
+  color: Product["colors"][number];
   size: ShoeSize["EU"];
   unitPrice: number;
 }
@@ -14,16 +14,14 @@ export interface AddToCartForm {
 export default function useAddToCartForm({
   product,
   defaultVariant = product.variants[0].name,
-  defaultColor = typeof product.colors == "string"
-    ? product.colors
-    : product.colors[0],
+  defaultColor = product.colors[0],
   defaultUnitPrice = product.defaultPrice,
   defaultQuantity = 1,
   defaultSize = product.sizes[0],
 }: {
   product: Product;
   defaultVariant?: VariantNames;
-  defaultColor?: NonNullColors;
+  defaultColor?: Product["colors"][number];
   defaultUnitPrice?: number;
   defaultQuantity?: number;
   defaultSize?: ShoeSize["EU"];
@@ -51,9 +49,9 @@ export default function useAddToCartForm({
   }
   function handleColorChange(
     event: React.MouseEvent<HTMLElement>,
-    value: AddToCartForm["color"] | null
+    value: Product["colors"][number]
   ) {
-    if (value !== null) setFormValues({ ...formValues, color: value });
+    setFormValues({ ...formValues, color: value });
   }
   function handleQuantityChange(
     event: React.SyntheticEvent,

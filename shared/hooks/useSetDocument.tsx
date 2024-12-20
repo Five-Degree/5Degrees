@@ -1,13 +1,10 @@
 import { db } from "@/lib/firebase/config";
 import {
-  DocumentData,
-  FirestoreError,
-  addDoc,
+  DocumentData, addDoc,
   collection,
   doc,
-  setDoc,
+  setDoc
 } from "firebase/firestore";
-import { useState } from "react";
 
 const useSetDocument = () => {
   async function setDocument(

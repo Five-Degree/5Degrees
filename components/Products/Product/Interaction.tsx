@@ -7,7 +7,7 @@ import useAddToCartForm from "@/shared/hooks/useAddToCartForm";
 import Product from "@/shared/interfaces/Products";
 import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
-import { Button, Rating, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SizeSelector from "../Selectors/SizeSelector";
 
@@ -23,10 +23,7 @@ export default function ProductInteraction({ product }: { product: Product }) {
   } = useAddToCartForm({
     product,
   });
-  const rating = product.reviews
-    ? product.reviews?.reduce((acc, cur) => acc + cur.rating, 0) /
-      product.reviews?.length
-    : 0;
+
   function handleAddToCart(e: React.FormEvent) {
     e.preventDefault();
     addToCart({
@@ -67,16 +64,6 @@ export default function ProductInteraction({ product }: { product: Product }) {
         <Typography variant="h1" fontSize={"1.9em"} width={"100%"}>
           {product.name}
         </Typography>
-        {/* <Stack direction={"row"} gap={1} alignItems={"center"}>
-          <Rating
-            name="product-rating"
-            value={rating}
-            size="small"
-            readOnly
-            precision={0.5}
-          />
-          <Typography>{product.reviews?.length ?? 0} Reviews</Typography>
-        </Stack> */}
       </Stack>
       <PriceComponent
         price={formValues.unitPrice}
