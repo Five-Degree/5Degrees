@@ -1,8 +1,15 @@
+import useMousePosition from "@/shared/hooks/useMousePosition";
 import Product, { CartProduct } from "@/shared/interfaces/Products";
 import { CheckRounded } from "@mui/icons-material";
-import { ToggleButton, ToggleButtonGroup, Tooltip } from "@mui/material";
+import {
+  Grow,
+  Stack,
+  ToggleButton,
+  ToggleButtonGroup,
+  Tooltip,
+} from "@mui/material";
 import { CldImage } from "next-cloudinary";
-import React from "react";
+import React, { useState } from "react";
 
 export interface ColorSelectorProps {
   selectedColor: CartProduct["selectedColor"];
@@ -13,13 +20,7 @@ export interface ColorSelectorProps {
   product: Product;
 }
 
-function ColorBox({
-  selectedColor,
-  color,
-}: {
-  selectedColor: Product["colors"][number];
-  color: Product["colors"][number];
-}) {
+function ColorBox({ color }: { color: Product["colors"][number] }) {
   return (
     <span
       style={{
@@ -43,29 +44,18 @@ function ColorBox({
           style={{ position: "absolute", width: "100%", height: "100%" }}
         />
       )}
-      {selectedColor.colorName == color.colorName && (
-        <CheckRounded
-          sx={{
-            fontSize: "inherit",
-            color: "white",
-            mixBlendMode: "difference",
-          }}
-        />
-      )}
     </span>
   );
 }
-
-export default function ColorSelector({
-  selectedColor,
-  handleColorChange,
-  product,
-}: ColorSelectorProps) {
-  console.log({ selectedColor });
-
-  const colorButtonFactory = (color: Product["colors"][number]) => (
+function ColorButtonFactory({ color }: { color: Product["colors"][number] }) {
+  const [showEnlarged, setShowEnlarged] = useState(false);
+  const { mousePosition } = useMousePosition({ includeTouch: false });
+  console.log({ mousePosition });
+  return (
     <Tooltip key={color.colorName} title={color.colorName}>
       <ToggleButton
+        onMouseEnter={() => setShowEnlarged(true)}
+        onMouseLeave={() => setShowEnlarged(false)}
         value={color}
         aria-label={color.colorName}
         sx={{
@@ -74,10 +64,35 @@ export default function ColorSelector({
           paddingInline: "0.5em",
         }}
       >
-        <ColorBox color={color} selectedColor={selectedColor} />
+        <Grow in={showEnlarged}>
+          <Stack
+            position={"absolute"}
+            bottom={"100%"}
+            // visibility={showEnlarged ? "visible" : "hidden"}
+            zIndex={999}
+            borderRadius={"var(--border-radius)"}
+            overflow={"hidden"}
+          >
+            <CldImage
+              src={color.imageURL}
+              alt={color.colorName}
+              width={100}
+              height={100}
+            />
+          </Stack>
+        </Grow>
+        <ColorBox color={color} />
       </ToggleButton>
     </Tooltip>
   );
+}
+export default function ColorSelector({
+  selectedColor,
+  handleColorChange,
+  product,
+}: ColorSelectorProps) {
+  console.log({ selectedColor });
+
   if (product.colors.length == 0) return <></>;
   return (
     <ToggleButtonGroup
@@ -87,7 +102,9 @@ export default function ColorSelector({
       onChange={handleColorChange}
       aria-label="color"
     >
-      {product.colors.map((color) => colorButtonFactory(color))}
+      {product.colors.map((color) => (
+        <ColorButtonFactory color={color} key={color.imageURL} />
+      ))}
     </ToggleButtonGroup>
   );
 }
