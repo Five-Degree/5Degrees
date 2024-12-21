@@ -1,6 +1,4 @@
-import useMousePosition from "@/shared/hooks/useMousePosition";
 import Product, { CartProduct } from "@/shared/interfaces/Products";
-import { CheckRounded } from "@mui/icons-material";
 import {
   Grow,
   Stack,
@@ -49,8 +47,6 @@ function ColorBox({ color }: { color: Product["colors"][number] }) {
 }
 function ColorButtonFactory({ color }: { color: Product["colors"][number] }) {
   const [showEnlarged, setShowEnlarged] = useState(false);
-  const { mousePosition } = useMousePosition({ includeTouch: false });
-  console.log({ mousePosition });
   return (
     <Tooltip key={color.colorName} title={color.colorName}>
       <ToggleButton
