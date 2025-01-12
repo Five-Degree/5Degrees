@@ -54,7 +54,7 @@ export default function Footer() {
       <Stack alignItems={"center"} gap={1}>
         <Typography variant="h2">
           <Link
-            href={"https://www.reddit.com/r/5degreesstore/ "}
+            href={"https://www.reddit.com/r/Fivedegreesreddit/s/vlEvqk1AZD"}
             target="_blank"
           >
             Customer Reviews
