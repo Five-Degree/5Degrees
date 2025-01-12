@@ -49,7 +49,7 @@ export interface CartProduct
   cartId?: string;
   quantity: number;
   selectedVariant: VariantNames;
-  selectedColor: ColorImage;
+  selectedColor?: ColorImage;
   selectedSize: ShoeSize["EU"];
   unitPrice: number;
 }

@@ -82,9 +82,7 @@ export default function ProductCard({
                 }}
               />
             </Stack>
-            <CardContent
-            // Responsive
-            >
+            <CardContent>
               <Typography variant="h3" width={"100%"} noWrap>
                 {product.name}
               </Typography>

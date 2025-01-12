@@ -6,7 +6,7 @@ import { SelectChangeEvent } from "@mui/material";
 export interface AddToCartForm {
   variant: VariantNames;
   quantity: number;
-  color: Product["colors"][number];
+  color?: Product["colors"][number];
   size: ShoeSize["EU"];
   unitPrice: number;
 }
@@ -14,7 +14,7 @@ export interface AddToCartForm {
 export default function useAddToCartForm({
   product,
   defaultVariant = product.variants[0].name,
-  defaultColor = product.colors[0],
+  defaultColor,
   defaultUnitPrice = product.defaultPrice,
   defaultQuantity = 1,
   defaultSize = product.sizes[0],

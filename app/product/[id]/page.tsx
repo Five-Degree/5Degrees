@@ -39,7 +39,10 @@ export default async function Page({ params }: Props) {
 
   if (product)
     return (
-      <ProductMain product={JSON.parse(JSON.stringify(product)) as Product} />
+      <ProductMain
+        // Warning: Only plain objects can be passed to Client Components from Server Components. Objects with toJSON methods are not supported. Convert it manually to a simple value before passing it to props.
+        product={JSON.parse(JSON.stringify(product)) as Product}
+      />
     );
   else
     return (

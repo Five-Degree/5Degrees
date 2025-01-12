@@ -4,9 +4,7 @@ import { orderBy } from "firebase/firestore/lite";
 import CollectionController from "../Products/Product/CollectionController";
 import Product, { ProductSearchHitProps } from "@/shared/interfaces/Products";
 import SearchContextProvider from "../Custom/SearchContext";
-import ProductSearchHit from "../Products/ProductSearchHit";
 import { Hit } from "algoliasearch/lite";
-import { useRouter } from "next/navigation";
 import InstantSearchProvider from "../Utility/InstantSearchProvider";
 
 export type ProductConstraints = {
