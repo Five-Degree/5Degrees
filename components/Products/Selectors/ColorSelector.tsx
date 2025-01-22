@@ -58,6 +58,9 @@ function ColorButtonFactory({ color }: { color: Product["colors"][number] }) {
           border: "none",
           paddingBlock: "0.5em",
           paddingInline: "0.5em",
+          "&.Mui-selected": {
+            backgroundColor: "var(--accentalpha2)",
+          },
         }}
       >
         <Grow in={showEnlarged}>

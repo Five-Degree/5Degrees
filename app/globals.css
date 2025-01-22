@@ -7,6 +7,7 @@
   --accent: hsl(0, 61%, 48%);
   --accentlight: hsl(0, 61%, 70%);
   --accentalpha: hsla(0, 61%, 48%, 0.1);
+  --accentalpha2: hsla(0, 61%, 48%, 0.3);
   --primarydark: hsl(0, 31%, 5%);
   --primary: hsl(0, 31%, 12%);
   --primarylight: hsl(0, 31%, 30%);
