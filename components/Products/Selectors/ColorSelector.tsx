@@ -4,9 +4,7 @@ import {
   Stack,
   ToggleButton,
   ToggleButtonGroup,
-  useTheme,
   Tooltip,
-  useMediaQuery,
 } from "@mui/material";
 import { CldImage } from "next-cloudinary";
 import React, { useState } from "react";
@@ -22,40 +20,39 @@ export interface ColorSelectorProps {
 
 function ColorBox({ color }: { color: Product["colors"][number] }) {
   return (
-    <span
-      style={{
-        minWidth: "2em",
-        aspectRatio: "1 / 1",
-        background: "none",
-        borderRadius: "var(--border-radius-small)",
-        border: "1px solid var(--border-color)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        position: "relative",
-      }}
-    >
-      {color.imageURL && (
-        <CldImage
-          src={color.imageURL}
-          alt={color.colorName}
-          width={32}
-          height={32}
-          style={{ position: "absolute", width: "100%", height: "100%" }}
-        />
-      )}
-    </span>
+    <Tooltip key={color.colorName} title={color.colorName}>
+      <span
+        style={{
+          minWidth: "2em",
+          aspectRatio: "1 / 1",
+          background: "none",
+          borderRadius: "var(--border-radius-small)",
+          border: "1px solid var(--border-color)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "relative",
+        }}
+      >
+        {color.imageURL && (
+          <CldImage
+            src={color.imageURL}
+            alt={color.colorName}
+            width={32}
+            height={32}
+            style={{ position: "absolute", width: "100%", height: "100%" }}
+          />
+        )}
+      </span>
+    </Tooltip>
   );
 }
 function ColorButtonFactory({ color }: { color: Product["colors"][number] }) {
   const [showEnlarged, setShowEnlarged] = useState(false);
-  const theme = useTheme();
-  const matchesDesktop = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <ToggleButton
-      id={color.colorName}
-      onMouseEnter={matchesDesktop ? () => setShowEnlarged(true) : undefined}
-      onMouseLeave={matchesDesktop ? () => setShowEnlarged(false) : undefined}
+      onMouseEnter={() => setShowEnlarged(true)}
+      onMouseLeave={() => setShowEnlarged(false)}
       value={color}
       aria-label={color.colorName}
       sx={{
@@ -84,12 +81,11 @@ function ColorButtonFactory({ color }: { color: Product["colors"][number] }) {
           />
         </Stack>
       </Grow>
-      <Tooltip key={color.colorName} title={color.colorName}>
-        <ColorBox color={color} />
-      </Tooltip>
+      <ColorBox color={color} />
     </ToggleButton>
   );
 }
+
 export default function ColorSelector({
   selectedColor,
   handleColorChange,
