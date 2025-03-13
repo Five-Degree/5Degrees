@@ -4,6 +4,7 @@ import {
   Stack,
   ToggleButton,
   ToggleButtonGroup,
+  useTheme,
   Tooltip,
   useMediaQuery,
 } from "@mui/material";
@@ -48,42 +49,44 @@ function ColorBox({ color }: { color: Product["colors"][number] }) {
 }
 function ColorButtonFactory({ color }: { color: Product["colors"][number] }) {
   const [showEnlarged, setShowEnlarged] = useState(false);
+  const theme = useTheme();
+  const matchesDesktop = useMediaQuery(theme.breakpoints.up("md"));
   return (
-    // <Tooltip key={color.colorName} title={color.colorName}>
-    <ToggleButton
-      onMouseEnter={() => setShowEnlarged(true)}
-      onMouseLeave={() => setShowEnlarged(false)}
-      value={color}
-      aria-label={color.colorName}
-      sx={{
-        border: "none",
-        paddingBlock: "0.5em",
-        paddingInline: "0.5em",
-        "&.Mui-selected": {
-          backgroundColor: "var(--accentalpha2)",
-        },
-      }}
-    >
-      <Grow in={showEnlarged}>
-        <Stack
-          position={"absolute"}
-          bottom={"100%"}
-          // visibility={showEnlarged ? "visible" : "hidden"}
-          zIndex={999}
-          borderRadius={"var(--border-radius)"}
-          overflow={"hidden"}
-        >
-          <CldImage
-            src={color.imageURL}
-            alt={color.colorName}
-            width={100}
-            height={100}
-          />
-        </Stack>
-      </Grow>
-      <ColorBox color={color} />
-    </ToggleButton>
-    // </Tooltip>
+    <Tooltip key={color.colorName} title={color.colorName}>
+      <ToggleButton
+        onMouseEnter={matchesDesktop ? () => setShowEnlarged(true) : undefined}
+        onMouseLeave={matchesDesktop ? () => setShowEnlarged(false) : undefined}
+        value={color}
+        aria-label={color.colorName}
+        sx={{
+          border: "none",
+          paddingBlock: "0.5em",
+          paddingInline: "0.5em",
+          "&.Mui-selected": {
+            backgroundColor: "var(--accentalpha2)",
+          },
+        }}
+      >
+        <Grow in={showEnlarged}>
+          <Stack
+            position={"absolute"}
+            bottom={"100%"}
+            // visibility={showEnlarged ? "visible" : "hidden"}
+            zIndex={999}
+            borderRadius={"var(--border-radius)"}
+            overflow={"hidden"}
+          >
+            <CldImage
+              src={color.imageURL}
+              alt={color.colorName}
+              width={100}
+              height={100}
+            />
+          </Stack>
+        </Grow>
+        <ColorBox color={color} />
+      </ToggleButton>
+    </Tooltip>
   );
 }
 export default function ColorSelector({
