@@ -44,6 +44,12 @@ export default function Featured() {
     coll: "products",
     initialQueryConstraint: [where("featuredImage", "!=", null)],
     initialOrderByField: "createdAt",
+    queryLimit: 20,
+  });
+  console.log({
+    featProducts: featProducts.map(({ name, id, featuredImage }) => {
+      return { name, id, featuredImage };
+    }),
   });
   return (
     <>
